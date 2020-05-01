@@ -12,119 +12,8 @@ import NavBar from "./sign_up_nav_bar.js";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import { css } from "@emotion/core";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import TextField from "@material-ui/core/TextField";
-
-const radioButtonStyle = {
-  color: "#616771",
-};
-
-const demoStyle = {
-  display: "flex",
-  flexDirection: "row",
-  alignItems: "flex-start",
-  backgroundColor: "#ffffff",
-  color: "#273654",
-  borderBottom: "3px solid #eeeeee",
-  borderLeft: "2px solid #eee",
-  borderRight: "2px solid #eee",
-  borderRadius: "0.5rem",
-  paddingTop: "30px",
-  paddingBottom: "60px",
-  textAlign: "left",
-};
-
-const check = {
-  display: "flex",
-  flexDirection: "row",
-};
-
-const textStyle = {
-  color: "secondary",
-};
-
-const DemographicsCard = (props) => {
-  const [value, setValue] = React.useState("female");
-
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
-  return (
-    <Container style={demoStyle} maxWidth="sm">
-      <Container style={check} maxWidth="sm">
-        <Container maxWidth="sm">
-          <TextField
-            required
-            id="outlined-required"
-            label="Name/Alias"
-            variant="outlined"
-            className="spacing"
-            margin="normal"
-            autoFocus
-          />
-          <div className="spacing">Gender:</div>
-
-          <FormControl component="fieldset">
-            <RadioGroup
-              aria-label="gender"
-              name="gender1"
-              value={value}
-              onChange={handleChange}
-            >
-              <FormControlLabel
-                value="female"
-                control={<Radio style={radioButtonStyle} />}
-                label="Female"
-              />
-              <FormControlLabel
-                value="male"
-                control={<Radio style={radioButtonStyle} />}
-                label="Male"
-              />
-              <FormControlLabel
-                value="other"
-                control={<Radio style={radioButtonStyle} />}
-                label="Other"
-              />
-            </RadioGroup>
-          </FormControl>
-        </Container>
-        <Container>
-          <TextField
-            required
-            id="outlined-required"
-            label="Email"
-            variant="outlined"
-            className="spacing2"
-            margin="normal"
-          />
-          <TextField
-            required
-            id="outlined-password-input"
-            label="Password"
-            type="password"
-            autoComplete="current-password"
-            variant="outlined"
-            margin="normal"
-          />
-          <TextField
-            required
-            id="outlined-password-input"
-            label="Confirm Password"
-            type="password"
-            autoComplete="current-password"
-            variant="outlined"
-            margin="normal"
-          />
-        </Container>
-      </Container>
-    </Container>
-  );
-};
+import DemographicsCard from "./make_profile_card.js";
+import CaseCard from "./case_info_card.js";
 
 const themeA = createMuiTheme({
   root: {
@@ -199,12 +88,9 @@ function getStepContent(step) {
     case 1:
       return <DemographicsCard />;
     case 2:
-      return `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval isues.`;
+      return <CaseCard />;
     default:
-      return "Unknown se";
+      return "Error";
   }
 }
 
