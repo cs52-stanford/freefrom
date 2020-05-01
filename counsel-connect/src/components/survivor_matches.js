@@ -14,6 +14,9 @@ const useStyles = makeStyles((theme) => ({
   menuButton: {
     marginRight: theme.spacing(2),
   },
+  middleButton: {
+    marginRight: theme.spacing(0.5),
+  },
   title: {
     flexGrow: 1,
   },
@@ -23,7 +26,7 @@ export default function ButtonAppBar() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <container className={classes.root}>
       <AppBar position="static">
         <Toolbar>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
@@ -32,9 +35,24 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             Civil Seeker
           </Typography>
+          <IconButton className={classes.middleButton} color="inherit">
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            Matches
+            </Typography>
+            <IconButton className={classes.middleButton} color="inherit">
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            Resources
+            </Typography>
+            <IconButton className={classes.middleButton} color="inherit">
+          </IconButton>
+          <Typography variant="h6" className={classes.title}>
+            Settings
+            </Typography>
           <Button color="inherit">Logout</Button>
         </Toolbar>
       </AppBar>
-    </div>
+    </container>
   );
 }
