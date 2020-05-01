@@ -26,6 +26,10 @@ function Copyright() {
   );
 }
 
+const LogIn = (props) => {
+
+}
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -92,6 +96,9 @@ export default function SignIn(props) {
             variant="contained"
             color="primary"
             className={classes.submit}
+            onClick={function () {
+                props.setIsLogIn(true);
+            }}
           >
             Sign In
           </Button>
