@@ -33,7 +33,7 @@ export default function ButtonAppBar(props) {
   const classes = useStyles();
 
   return (
-    <Container className={classes.root} maxWidth="false">
+    <Container className={classes.root} maxWidth="false" disableGutters="true">
       <ThemeProvider theme={themeA}>
         <AppBar color="primary" position="static">
           <Toolbar>

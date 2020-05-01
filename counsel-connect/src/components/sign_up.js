@@ -4,6 +4,7 @@ import "./sign_up.css";
 import NavBar from "./sign_up_nav_bar.js";
 import SurvivorForm from "./sign_up_form_survivor.js";
 import LawyerForm from "./sign_up_form_lawyer.js";
+import { css } from "@emotion/core";
 
 const TypeCard = (props) => {
   return (
@@ -57,8 +58,8 @@ export default function SignUp(props) {
   }
 
   if (isLawyer) {
-    return <LawyerForm />;
+    return <LawyerForm setIsSignIn={props.setIsSignIn} />;
   }
 
-  return <SurvivorForm />;
+  return <SurvivorForm setIsSignIn={props.setIsSignIn} />;
 }
