@@ -156,10 +156,41 @@ const CaseCard = (props) => {
   const weapons = ["Yes", "No", "Not sure"];
   const email = ["Yes", "No"];
   const [questionNumber, setQuestionNumber] = React.useState(1);
-  const [county, setCounty] = React.useState("County");
 
-  const handleChange = (event) => {
-    setCounty(event.target.value);
+  const [currentCounty, setCurrentCounty] = React.useState("County");
+  const [financialCapability, setFinancialCapability] = React.useState(
+    "Amount"
+  );
+  const [lastOccurred, setLastOccurred] = React.useState("Choose time range");
+  const [abuseCounty, setAbuseCounty] = React.useState("County");
+  const [weaponsInvolved, setWeaponsInvolved] = React.useState(
+    "Select an option"
+  );
+  const [emailNotifications, setEmailNotifications] = React.useState(
+    "Select an option"
+  );
+  const [extraInfo, setExtraInfo] = React.useState(" ");
+
+  const handleCurrentCountyChange = (event) => {
+    setCurrentCounty(event.target.value);
+  };
+  const handleFinancialChange = (event) => {
+    setFinancialCapability(event.target.value);
+  };
+  const handleLastOccurredChange = (event) => {
+    setLastOccurred(event.target.value);
+  };
+  const handleAbuseCountyChange = (event) => {
+    setAbuseCounty(event.target.value);
+  };
+  const handleWeaponsChange = (event) => {
+    setWeaponsInvolved(event.target.value);
+  };
+  const handleEmailChange = (event) => {
+    setEmailNotifications(event.target.value);
+  };
+  const handleInfoChange = (event) => {
+    setExtraInfo(event.target.value);
   };
 
   if (questionNumber === 1) {
@@ -173,10 +204,8 @@ const CaseCard = (props) => {
                 Where do you currently live?
               </InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={county}
-                onChange={handleChange}
+                value={currentCounty}
+                onChange={handleCurrentCountyChange}
               >
                 {counties.map((label, index) => (
                   <MenuItem value={counties[index]}>{label}</MenuItem>
@@ -216,10 +245,8 @@ const CaseCard = (props) => {
                 How much money are you willing/able to spend on compensation?
               </InputLabel>
               <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={county}
-                onChange={handleChange}
+                value={financialCapability}
+                onChange={handleFinancialChange}
               >
                 {amounts.map((label, index) => (
                   <MenuItem value={amounts[index]}>{label}</MenuItem>
@@ -258,14 +285,9 @@ const CaseCard = (props) => {
               <InputLabel id="demo-simple-select-label">
                 How long ago did the abuse last occur?
               </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={county}
-                onChange={handleChange}
-              >
+              <Select value={lastOccurred} onChange={handleLastOccurredChange}>
                 {times.map((label, index) => (
-                  <MenuItem times={amounts[index]}>{label}</MenuItem>
+                  <MenuItem value={times[index]}>{label}</MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -301,12 +323,7 @@ const CaseCard = (props) => {
               <InputLabel id="demo-simple-select-label">
                 Where did the abuse take place?
               </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={county}
-                onChange={handleChange}
-              >
+              <Select value={abuseCounty} onChange={handleAbuseCountyChange}>
                 {counties.map((label, index) => (
                   <MenuItem value={counties[index]}>{label}</MenuItem>
                 ))}
@@ -344,12 +361,7 @@ const CaseCard = (props) => {
               <InputLabel id="demo-simple-select-label">
                 Were there weapons involved?
               </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={county}
-                onChange={handleChange}
-              >
+              <Select value={weaponsInvolved} onChange={handleWeaponsChange}>
                 {weapons.map((label, index) => (
                   <MenuItem value={weapons[index]}>{label}</MenuItem>
                 ))}
@@ -387,12 +399,7 @@ const CaseCard = (props) => {
               <InputLabel id="demo-simple-select-label">
                 Do you wish to recieve email notifications about new matches?
               </InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={county}
-                onChange={handleChange}
-              >
+              <Select value={emailNotifications} onChange={handleEmailChange}>
                 {email.map((label, index) => (
                   <MenuItem value={email[index]}>{label}</MenuItem>
                 ))}
@@ -423,7 +430,7 @@ const CaseCard = (props) => {
                 setQuestionNumber(6);
               }}
             >
-              {"<"} last question
+              {"<"} LAST QUESTION
             </Button>
             <h5>Question {questionNumber} of 7 </h5>
             <p>
@@ -436,6 +443,7 @@ const CaseCard = (props) => {
               rows={4}
               variant="outlined"
               fullWidth={true}
+              onChange={handleInfoChange}
             />
           </Container>
         </Container>
