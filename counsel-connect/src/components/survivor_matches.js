@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import {Container} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,16 +20,28 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 1,
+    color: '#ff5722'
   },
+  mid_title: {
+    flexGrow: 1,
+    color: '#424242'
+  },
+  tool: {
+      backgroundColor: '#e1f5fe'
+  },
+  logout: {
+      color: '#ff5722'
+  }
 }));
 
 export default function ButtonAppBar() {
   const classes = useStyles();
 
   return (
-    <container className={classes.root}>
+    <Container component="main" maxWidth="xs">
+    <div className={classes.root}>
       <AppBar position="static">
-        <Toolbar>
+        <Toolbar className={classes.tool}>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
             <MenuIcon />
           </IconButton>
@@ -37,22 +50,23 @@ export default function ButtonAppBar() {
           </Typography>
           <IconButton className={classes.middleButton} color="inherit">
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.mid_title}>
             Matches
             </Typography>
             <IconButton className={classes.middleButton} color="inherit">
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.mid_title}>
             Resources
             </Typography>
             <IconButton className={classes.middleButton} color="inherit">
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
+          <Typography variant="h6" className={classes.mid_title}>
             Settings
             </Typography>
-          <Button color="inherit">Logout</Button>
+          <Button className={classes.logout} color='#ff5722'>Logout</Button>
         </Toolbar>
       </AppBar>
-    </container>
+    </div>
+    </Container>
   );
 }
