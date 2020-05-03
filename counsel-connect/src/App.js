@@ -9,8 +9,8 @@ import "./App.css";
 function App() {
   const [isSignIn, setIsSignIn] = useState(true);
   const [isLogIn, setIsLogIn] = useState(false);
-  const [isLawyer, setIsLawyer] = useState(false);
-  const [isSurvivor, setIsSurvivor] = useState(true);
+  const [isLawyer, setIsLawyer] = useState(true);
+  const [isSurvivor, setIsSurvivor] = useState(false);
 
   if (isLogIn === true && isSurvivor === true) {
     return <SurvivorMatches />;
