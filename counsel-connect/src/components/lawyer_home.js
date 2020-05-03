@@ -5,7 +5,7 @@ const LawyerHome = (props) => {
   return (
     <LawyerHeader
       setIsHomeScreen={props.setIsHomeScreen}
-      setisResourceScreen={props.setisResourceScreen}
+      setIsResourceScreen={props.setIsResourceScreen}
     />
   );
 };
