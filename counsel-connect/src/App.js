@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import logo from "./logo.svg";
 import SignIn from "./components/sign_in.js";
 import SignUp from "./components/sign_up.js";
-import LawyerHome from "./components/lawyer_home";
-import SurvivorMatches from "./components/survivor_matches";
+import LawyerHome from "./components/lawyer_home.js";
+import SurvivorMatches from "./components/survivor_matches.js";
 import "./App.css";
 
 function App() {

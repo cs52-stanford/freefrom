@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import LawyerHome from "./lawyer_home";
-import LawyerResource from "./lawyer_resource";
+import LawyerHome from "./lawyer_home.js";
+import LawyerResource from "./lawyer_resource.js";
 
 const LawyerMatches = () => {
   const [isHomeScreen, setIsHomeScreen] = useState(true);
