@@ -45,6 +45,15 @@ const check = {
 const DemographicsCard = (props) => {
   const [value, setValue] = React.useState("female");
 
+  // potentially use to make sure required fields have been filled out?
+  const checkFieldsFilled = (value) => {
+    if (value === "") {
+      props.setCannotContinue(true);
+    } else {
+      props.setCannotContinue(false);
+    }
+  };
+
   const handleChange = (event) => {
     setValue(event.target.value);
   };
