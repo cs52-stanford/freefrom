@@ -2,12 +2,23 @@ import React, { useState } from "react";
 import LawyerHome from "./lawyer_home";
 import LawyerResource from "./lawyer_resource";
 
-const LawyerMatches = (props) => {
+const LawyerMatches = () => {
   const [isHomeScreen, setIsHomeScreen] = useState(true);
 
   if (isHomeScreen == true)
-    return <LawyerHome setIsHomeScreen={setIsHomeScreen} />;
-  else return <LawyerResource setIsHomeScreen={setIsHomeScreen} />;
+    return (
+      <LawyerHome
+        setIsHomeScreen={setIsHomeScreen}
+        isHomeScreen={isHomeScreen}
+      />
+    );
+  else
+    return (
+      <LawyerResource
+        setIsHomeScreen={setIsHomeScreen}
+        isHomeScreen={isHomeScreen}
+      />
+    );
 };
 
 export default LawyerMatches;
