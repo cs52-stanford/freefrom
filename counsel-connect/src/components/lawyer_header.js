@@ -67,7 +67,7 @@ export default function LawyerHeader() {
           <Button
             className={classes.home}
             id="home"
-            onClick={() => {
+            onClick={function () {
               props.setIsHomeScreen(true);
               props.setIsResourceScreen(false);
             }}
@@ -81,7 +81,7 @@ export default function LawyerHeader() {
           <Button
             className={classes.resources}
             id="resources"
-            onClick={() => {
+            onClick={function () {
               props.setIsResourceScreen(true);
               props.setIsHomeScreen(false);
             }}
