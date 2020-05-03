@@ -2,11 +2,6 @@ import React from "react";
 import LawyerHeader from "./lawyer_header.js";
 
 const LawyerHome = (props) => {
-  return (
-    <LawyerHeader
-      setIsHomeScreen={props.setIsHomeScreen}
-      setIsResourceScreen={props.setIsResourceScreen}
-    />
-  );
+  return <LawyerHeader setIsHomeScreen={props.setIsHomeScreen} />;
 };
 export default LawyerHome;
