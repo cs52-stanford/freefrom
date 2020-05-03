@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import LawyerHeader from "./lawyer_header.js";
 
 const LawyerHome = (props) => {

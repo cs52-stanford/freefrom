@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import LawyerHome from "./lawyer_home.js";
 import LawyerResource from "./lawyer_resource.js";
 
