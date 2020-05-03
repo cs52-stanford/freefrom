@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SurvivorHeader() {
+export default function LawyerHeader() {
   const classes = useStyles();
 
   return (
