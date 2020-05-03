@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import logo from "./logo.svg";
 import SignIn from "./components/sign_in.js";
 import SignUp from "./components/sign_up.js";
-import LawyerMatches from "./components/lawyer_matches";
+import LawyerHome from "./components/lawyer_home";
 import SurvivorMatches from "./components/survivor_matches";
 import "./App.css";
 
@@ -18,7 +18,7 @@ function App() {
 
   //if is lawyer, display lawyer homepage
   if (isLogIn == true && isLawyer == true) {
-    return <LawyerMatches />;
+    return <LawyerHome />;
   }
 
   // if isSignIn is true, display sign in page

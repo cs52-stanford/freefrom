@@ -64,16 +64,30 @@ export default function LawyerHeader() {
             className={classes.middleButton}
             color="inherit"
           ></IconButton>
-          <Typography variant="h6" className={classes.matches}>
-            Matches
-          </Typography>
+          <Button
+            className={classes.home}
+            id="home"
+            onClick={() => {
+              props.setIsHomeScreen(true);
+              props.setIsResourceScreen(false);
+            }}
+          >
+            Home
+          </Button>
           <IconButton
             className={classes.middleButton}
             color="inherit"
           ></IconButton>
-          <Typography variant="h6" className={classes.resources}>
+          <Button
+            className={classes.resources}
+            id="resources"
+            onClick={() => {
+              props.setIsResourceScreen(true);
+              props.setIsHomeScreen(false);
+            }}
+          >
             Resources
-          </Typography>
+          </Button>
           <IconButton
             className={classes.middleButton}
             color="inherit"
