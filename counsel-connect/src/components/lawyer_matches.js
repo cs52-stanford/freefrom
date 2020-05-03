@@ -2,15 +2,17 @@ import React, { Component } from "react";
 import LawyerHome from "./lawyer_home.js";
 import LawyerResource from "./lawyer_resource.js";
 
-const [isHomeScreen, setIsHomeScreen] = useState(true);
-const [isResourceScreen, setIsResourceScreen] = useState(false);
+const LawyerMatches = (props) => {
+  const [isHomeScreen, setIsHomeScreen] = useState(true);
+  const [isResourceScreen, setIsResourceScreen] = useState(false);
 
-if (isHomeScreen == true) {
-  <LawyerHome setIsHomeScreen={setIsHomeScreen} />;
-}
+  if (isHomeScreen == true) {
+    return <LawyerHome setIsHomeScreen={setIsHomeScreen} />;
+  }
 
-if (isResourceScreen == true) {
-  <LawyerResource setIsResourceScreen={setIsResourceScreen} />;
-}
+  if (isResourceScreen == true) {
+    return <LawyerResource setIsResourceScreen={setIsResourceScreen} />;
+  }
+};
 
 export default LawyerMatches;
