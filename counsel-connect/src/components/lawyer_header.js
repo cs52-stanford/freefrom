@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LawyerHeader() {
+export default function LawyerHeader(props) {
   const classes = useStyles();
 
   return (
