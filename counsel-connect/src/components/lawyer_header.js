@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function LawyerHeader() {
+const LawyerHeader = (props) => {
   const classes = useStyles();
 
   return (
@@ -100,4 +100,6 @@ export default function LawyerHeader() {
       </AppBar>
     </div>
   );
-}
+};
+
+export default LawyerHeader;
