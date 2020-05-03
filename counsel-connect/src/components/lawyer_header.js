@@ -69,7 +69,6 @@ export default function LawyerHeader() {
             id="home"
             onClick={function () {
               props.setIsHomeScreen(true);
-              props.setIsResourceScreen(false);
             }}
           >
             Home
@@ -83,7 +82,6 @@ export default function LawyerHeader() {
             id="resources"
             onClick={function () {
               props.setIsResourceScreen(true);
-              props.setIsHomeScreen(false);
             }}
           >
             Resources
