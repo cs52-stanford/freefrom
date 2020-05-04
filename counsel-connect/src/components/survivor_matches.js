@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import SurvivorHeader from "./survivor_header.js";
+import React from "react";
 
 const SurvivorMatches = (props) => {
     return (
-        <SurvivorHeader></SurvivorHeader>
-        
-    )
+    <p>
+        matches
+    </p>
+    );
 }
-
+ 
 export default SurvivorMatches;

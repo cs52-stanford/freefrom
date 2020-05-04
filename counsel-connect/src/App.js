@@ -3,7 +3,7 @@ import logo from "./logo.svg";
 import SignIn from "./components/sign_in.js";
 import SignUp from "./components/sign_up.js";
 import LawyerHome from "./components/lawyer_home.js";
-import SurvivorMatches from "./components/survivor_matches.js";
+import SurvivorHome from "./components/survivor_home.js"
 import "./App.css";
 
 function App() {
@@ -13,11 +13,11 @@ function App() {
   const [isSurvivor, setIsSurvivor] = useState(true);
 
   if (isLogIn === true && isSurvivor === true) {
-    return <SurvivorMatches />;
+    return <SurvivorHome />;
   }
 
   //if is lawyer, display lawyer homepage
-  if (isLogIn == true && isLawyer == true) {
+  if (isLogIn === true && isLawyer === true) {
     return <LawyerHome />;
   }
 

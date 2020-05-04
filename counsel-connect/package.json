@@ -12,6 +12,8 @@
     "mdbreact": "^4.26.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-elastic-carousel": "^0.4.1",
+    "react-material-ui-carousel": "^1.4.3",
     "react-scripts": "3.4.1"
   },
   "scripts": {
