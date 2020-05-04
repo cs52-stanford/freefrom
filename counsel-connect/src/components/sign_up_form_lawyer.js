@@ -1,12 +1,49 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import "./sign_up.css";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
+import Container from "@material-ui/core/Container";
 import StepContent from "@material-ui/core/StepContent";
 import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
+import NavBar from "./sign_up_nav_bar.js";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+import DemographicsCard from "./make_profile_card.js";
+import ProfileCard from "./profile_info_card.js";
+
+// potentially use to make sure required fields have been filled out?
+var cannotContinue = false;
+
+function setCannotContinue(setting) {
+  cannotContinue = setting;
+}
+
+const themeA = createMuiTheme({
+  root: {
+    backgroundColor: "#e06d4f",
+  },
+
+  palette: {
+    primary: {
+      main: "#e06d4f",
+    },
+    secondary: {
+      main: "#f7fff7",
+    },
+  },
+});
+
+const backgroundStyle = {
+  backgroundColor: "#f7fff7",
+};
+
+const contentStyle = {
+  fontSize: 18,
+  fontFamily: "roboto",
+};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,28 +62,45 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function getSteps() {
-  return ["Select campaign settings", "Create an ad group", "Create an ad"];
+  return ["Disclaimer", "Account Information", "Profile Information"];
 }
 
 function getStepContent(step) {
   switch (step) {
     case 0:
-      return `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`;
+      return (
+        <Container maxWidth="md">
+          <p>
+            Thank you for signing up for Civil Seeker! By joining our platform,
+            you are helping to grant survivors of domestic abuse financial
+            independence from their harmdoers.
+          </p>
+          <p>
+            This is an educational and informational tool and the information
+            contained within it does in no way constitute legal advice. Any
+            person who intends to use the information contained herein in any
+            way is solely responsible for independently verifying the
+            information and obtaining independent legal or other expert advice
+            if necessary.
+          </p>
+          <p>
+            By clicking next, you acknowledge that you have read and agree to
+            the terms and conditions provided.
+          </p>
+        </Container>
+      );
     case 1:
-      return "An ad group contains one or more ads which target a shared set of keywords.";
+      setCannotContinue(false);
+      return <DemographicsCard setCannotContinue={setCannotContinue} />;
     case 2:
-      return `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`;
+      setCannotContinue(true);
+      return <ProfileCard setCannotContinue={setCannotContinue} />;
     default:
-      return "Unknown step";
+      return "Error";
   }
 }
 
-export default function VerticalLinearStepper() {
+export default function VerticalLinearStepper(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const steps = getSteps();
@@ -64,44 +118,53 @@ export default function VerticalLinearStepper() {
   };
 
   return (
-    <div className={classes.root}>
-      <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map((label, index) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-            <StepContent>
-              <Typography>{getStepContent(index)}</Typography>
-              <div className={classes.actionsContainer}>
-                <div>
-                  <Button
-                    disabled={activeStep === 0}
-                    onClick={handleBack}
-                    className={classes.button}
-                  >
-                    Back
-                  </Button>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                  </Button>
+    <ThemeProvider theme={themeA} className="backgroundColor">
+      <div>
+        <NavBar setIsSignIn={props.setIsSignIn} />
+        <Stepper
+          activeStep={activeStep}
+          orientation="vertical"
+          style={backgroundStyle}
+        >
+          {steps.map((label, index) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+              <StepContent>
+                <Typography style={contentStyle}>
+                  {getStepContent(index)}
+                </Typography>
+                <div className={classes.actionsContainer}>
+                  <div>
+                    <Button
+                      disabled={activeStep === 0}
+                      onClick={handleBack}
+                      className={classes.button}
+                    >
+                      Back
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleNext}
+                      className={classes.button}
+                    >
+                      {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
-      {activeStep === steps.length && (
-        <Paper square elevation={0} className={classes.resetContainer}>
-          <Typography>All steps completed - you&apos;re finished</Typography>
-          <Button onClick={handleReset} className={classes.button}>
-            Reset
-          </Button>
-        </Paper>
-      )}
-    </div>
+              </StepContent>
+            </Step>
+          ))}
+        </Stepper>
+        {activeStep === steps.length && (
+          <div>
+            <Typography>All steps completed - you&apos;re finished</Typography>
+            <Button onClick={handleReset} className={classes.button}>
+              Reset
+            </Button>
+          </div>
+        )}
+      </div>
+    </ThemeProvider>
   );
 }

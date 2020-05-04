@@ -11,9 +11,15 @@ import Typography from "@material-ui/core/Typography";
 import NavBar from "./sign_up_nav_bar.js";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-import { css } from "@emotion/core";
 import DemographicsCard from "./make_profile_card.js";
 import CaseCard from "./case_info_card.js";
+
+// potentially use to make sure required fields have been filled out?
+var cannotContinue = false;
+
+function setCannotContinue(setting) {
+  cannotContinue = setting;
+}
 
 const themeA = createMuiTheme({
   root: {
@@ -86,9 +92,11 @@ function getStepContent(step) {
         </Container>
       );
     case 1:
-      return <DemographicsCard />;
+      setCannotContinue(false);
+      return <DemographicsCard setCannotContinue={setCannotContinue} />;
     case 2:
-      return <CaseCard />;
+      setCannotContinue(true);
+      return <CaseCard setCannotContinue={setCannotContinue} />;
     default:
       return "Error";
   }
