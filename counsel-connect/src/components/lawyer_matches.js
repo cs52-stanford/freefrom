@@ -3,7 +3,7 @@ import LawyerHome from "./lawyer_home";
 import LawyerResource from "./lawyer_resource";
 
 const LawyerMatches = () => {
-  const [isHomeScreen, setIsHomeScreen] = React.useState(true);
+  const [isHomeScreen, setIsHomeScreen] = useState(true);
 
   if (isHomeScreen == true)
     return (
