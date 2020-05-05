@@ -2,15 +2,15 @@ import React, { useState } from "react";
 import logo from "./logo.svg";
 import SignIn from "./components/sign_in.js";
 import SignUp from "./components/sign_up.js";
-import LawyerHome from "./components/lawyer_home.js";
-import SurvivorHome from "./components/survivor_home.js"
+import LawyerMatches from "./components/lawyer_matches.js";
+import SurvivorHome from "./components/survivor_home.js";
 import "./App.css";
 
 function App() {
   const [isSignIn, setIsSignIn] = useState(true);
   const [isLogIn, setIsLogIn] = useState(false);
-  const [isLawyer, setIsLawyer] = useState(true);
-  const [isSurvivor, setIsSurvivor] = useState(false);
+  const [isLawyer, setIsLawyer] = useState(false);
+  const [isSurvivor, setIsSurvivor] = useState(true);
 
   if (isLogIn === true && isSurvivor === true) {
     return <SurvivorHome />;
@@ -18,7 +18,7 @@ function App() {
 
   //if is lawyer, display lawyer homepage
   if (isLogIn === true && isLawyer === true) {
-    return <LawyerHome />;
+    return <LawyerMatches />;
   }
 
   // if isSignIn is true, display sign in page

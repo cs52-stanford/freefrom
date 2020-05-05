@@ -1,24 +1,52 @@
 import React, { useState } from "react";
 import LawyerHome from "./lawyer_home.js";
 import LawyerResource from "./lawyer_resource.js";
+import LawyerHeader from "./lawyer_header.js";
+import LawyerSettings from "./lawyer_settings.js";
 
-const LawyerMatches = () => {
+const LawyerMatches = (props) => {
   const [isHomeScreen, setIsHomeScreen] = useState(true);
+  const [isResourceScreen, setIsResourceScreen] = useState(false);
+  const [isSettingsScreen, setIsSettingsScreen] = useState(false);
 
-  if (isHomeScreen == true)
+  if (isHomeScreen === true) {
     return (
-      <LawyerHome
-        setIsHomeScreen={setIsHomeScreen}
-        isHomeScreen={isHomeScreen}
-      />
+      <div className="lawyerhome">
+        <LawyerHeader
+          setIsHomeScreen={setIsHomeScreen}
+          setIsResourceScreen={setIsResourceScreen}
+          setIsSettingsScreen={setIsSettingsScreen}
+        />
+        <LawyerHome />
+      </div>
     );
-  else
+  }
+
+  if (isResourceScreen === true) {
     return (
-      <LawyerResource
-        setIsHomeScreen={setIsHomeScreen}
-        isHomeScreen={isHomeScreen}
-      />
+      <div className="lawyerresource">
+        <LawyerHeader
+          setIsHomeScreen={setIsHomeScreen}
+          setIsResourceScreen={setIsResourceScreen}
+          setIsSettingsScreen={setIsSettingsScreen}
+        />
+        <LawyerResource />
+      </div>
     );
+  }
+
+  if (isSettingsScreen === true) {
+    return (
+      <div className="lawyersettings">
+        <LawyerHeader
+          setIsHomeScreen={setIsHomeScreen}
+          setIsResourceScreen={setIsResourceScreen}
+          setIsSettingsScreen={setIsSettingsScreen}
+        />
+        <LawyerSettings />
+      </div>
+    );
+  }
 };
 
 export default LawyerMatches;
