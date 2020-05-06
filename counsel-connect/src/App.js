@@ -9,16 +9,20 @@ import "./App.css";
 function App() {
   const [isSignIn, setIsSignIn] = useState(true);
   const [isLogIn, setIsLogIn] = useState(false);
-  const [isLawyer, setIsLawyer] = useState(true);
-  const [isSurvivor, setIsSurvivor] = useState(false);
+  const [isLawyer, setIsLawyer] = useState(false);
+  const [isSurvivor, setIsSurvivor] = useState(true);
 
   if (isLogIn === true && isSurvivor === true) {
-    return <SurvivorHome />;
+    return <SurvivorHome 
+        setIsLogIn={setIsLogIn}
+    />;
   }
 
   //if is lawyer, display lawyer homepage
   if (isLogIn === true && isLawyer === true) {
-    return <LawyerHome />;
+    return <LawyerHome 
+        setIsLogIn={setIsLogIn}
+    />;
   }
 
   // if isSignIn is true, display sign in page

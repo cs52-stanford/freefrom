@@ -17,6 +17,7 @@ const SurvivorHome = (props) => {
                 setIsSurvivorMatches={setIsSurvivorMatches}
                 setIsSurvivorResources={setIsSurvivorResources}
                 setIsSurvivorSettings={setIsSurvivorSettings}
+                setIsLogIn={props.setIsLogIn}
                 />
                 <SurvivorMatches></SurvivorMatches>
             </div>
@@ -29,6 +30,7 @@ const SurvivorHome = (props) => {
                 setIsSurvivorMatches={setIsSurvivorMatches}
                 setIsSurvivorResources={setIsSurvivorResources}
                 setIsSurvivorSettings={setIsSurvivorSettings}
+                setIsLogIn={props.setIsLogIn}
                 />
                 <SurvivorResources></SurvivorResources>
             </div>
@@ -41,6 +43,7 @@ const SurvivorHome = (props) => {
                 setIsSurvivorMatches={setIsSurvivorMatches}
                 setIsSurvivorResources={setIsSurvivorResources}
                 setIsSurvivorSettings={setIsSurvivorSettings}
+                setIsLogIn={props.setIsLogIn}
                 />
                 <SurvivorSettings></SurvivorSettings>
             </div>

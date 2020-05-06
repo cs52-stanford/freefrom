@@ -97,6 +97,9 @@ export default function SurvivorHeader(props) {
           <IconButton 
             className={classes.logout} 
             color={"inherit"}
+            onClick={() => {
+                props.setIsLogIn(false);
+            }}
             >
             Logout
         </IconButton>
