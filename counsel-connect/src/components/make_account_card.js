@@ -1,17 +1,6 @@
 import React from "react";
 import "./sign_up.css";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
 import Container from "@material-ui/core/Container";
-import StepContent from "@material-ui/core/StepContent";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
-import NavBar from "./sign_up_nav_bar.js";
-import { createMuiTheme } from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/styles";
-import { css } from "@emotion/core";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
@@ -43,19 +32,38 @@ const check = {
 };
 
 const DemographicsCard = (props) => {
-  const [value, setValue] = React.useState("female");
+  const [name, setName] = React.useState("name");
+  const [gender, setGender] = React.useState("");
+  const [email, setEmail] = React.useState("email");
+  const [password, setPassword] = React.useState("");
 
   // potentially use to make sure required fields have been filled out?
-  const checkFieldsFilled = (value) => {
-    if (value === "") {
+  /*
+  const isFinished = () => {
+    if (
+      gender !== "" &&
+      name !== "name" &&
+      email !== "email" &&
+      password !== ""
+    ) {
       props.setCannotContinue(true);
     } else {
       props.setCannotContinue(false);
     }
   };
+  */
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
+  const handleGenderChange = (event) => {
+    setGender(event.target.value);
+  };
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+  };
+  const handleNameChange = (event) => {
+    setName(event.target.value);
+  };
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
   };
 
   return (
@@ -69,6 +77,7 @@ const DemographicsCard = (props) => {
             variant="outlined"
             className="spacing"
             margin="normal"
+            onChange={handleNameChange}
             autoFocus
           />
           <div className="spacing">Gender:</div>
@@ -77,8 +86,8 @@ const DemographicsCard = (props) => {
             <RadioGroup
               aria-label="gender"
               name="gender1"
-              value={value}
-              onChange={handleChange}
+              value={gender}
+              onChange={handleGenderChange}
             >
               <FormControlLabel
                 value="female"
@@ -106,6 +115,7 @@ const DemographicsCard = (props) => {
             variant="outlined"
             className="spacing2"
             margin="normal"
+            onChange={handleEmailChange}
           />
           <TextField
             required
@@ -115,6 +125,7 @@ const DemographicsCard = (props) => {
             autoComplete="current-password"
             variant="outlined"
             margin="normal"
+            onChange={handlePasswordChange}
           />
           <TextField
             required
