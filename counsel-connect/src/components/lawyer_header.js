@@ -19,22 +19,20 @@ const useStyles = makeStyles((theme) => ({
     color: "#757575",
   },
   middleButton: {
+    flexGrow: 3,
     marginRight: theme.spacing(0.5),
   },
   title: {
-    flexGrow: 1,
+    flexGrow: 0.5,
     color: "#ff6f00",
   },
   matches: {
-    flexGrow: 1,
     color: "#757575",
   },
   resources: {
-    flexGrow: 1,
     color: "#757575",
   },
   settings: {
-    flexGrow: 1,
     color: "#757575",
   },
   logout: {
@@ -69,9 +67,13 @@ export default function LawyerHeader(props) {
             id="home"
             onClick={function () {
               props.setIsHomeScreen(true);
+              props.setIsResourceScreen(false);
+              props.setIsSettingsScreen(false);
             }}
           >
-            Home
+            <Typography variant="h6" className={classes.matchestext}>
+              Matches
+            </Typography>
           </Button>
           <IconButton
             className={classes.middleButton}
@@ -82,17 +84,31 @@ export default function LawyerHeader(props) {
             id="resources"
             onClick={function () {
               props.setIsHomeScreen(false);
+              props.setIsResourceScreen(true);
+              props.setIsSettingsScreen(false);
             }}
           >
-            Resources
+            <Typography variant="h6" className={classes.resourcestext}>
+              Resurces
+            </Typography>
           </Button>
           <IconButton
             className={classes.middleButton}
             color="inherit"
           ></IconButton>
-          <Typography variant="h6" className={classes.settings}>
-            Settings
-          </Typography>
+          <Button
+            className={classes.settings}
+            id="settings"
+            onClick={function () {
+              props.setIsHomeScreen(false);
+              props.setIsResourceScreen(false);
+              props.setIsSettingsScreen(true);
+            }}
+          >
+            <Typography variant="h6" className={classes.settingstext}>
+              Settings
+            </Typography>
+          </Button>
           <Button className={classes.logout} color={"inherit"}>
             Logout
           </Button>

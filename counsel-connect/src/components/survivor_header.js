@@ -1,22 +1,22 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
   tool: {
-    backgroundColor: '#e1f5fe'
+    backgroundColor: "#e1f5fe",
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    color: '#757575'
+    color: "#757575",
   },
   middleButton: {
     flexGrow: 3,
@@ -24,20 +24,20 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 0.5,
-    color: '#ff6f00'
+    color: "#ff6f00",
   },
   matchestext: {
-    color: '#757575'
+    color: "#757575",
   },
   resourcestext: {
-    color: '#757575'
+    color: "#757575",
   },
   settingstext: {
-    color: '#757575'
+    color: "#757575",
   },
   logout: {
-    color:'#ff6f00'
-  }
+    color: "#ff6f00",
+  },
 }));
 
 export default function SurvivorHeader(props) {
@@ -47,52 +47,55 @@ export default function SurvivorHeader(props) {
     <div className={classes.root}>
       <AppBar className={classes.appbar} position="static">
         <Toolbar className={classes.tool}>
-          <IconButton edge="start" 
-            className={classes.menuButton} 
-            color="inherit" aria-label="menu">
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
             <MenuIcon />
           </IconButton>
           <Typography variant="h4" className={classes.title}>
             Civil Seeker
           </Typography>
-          <Button 
-            className={classes.middleButton} 
+          <Button
+            className={classes.middleButton}
             color="inherit"
             onClick={() => {
-                props.setIsSurvivorMatches(true);
-                props.setIsSurvivorSettings(false);
-                props.setIsSurvivorResources(false);
+              props.setIsSurvivorMatches(true);
+              props.setIsSurvivorSettings(false);
+              props.setIsSurvivorResources(false);
             }}
-            >
+          >
             <Typography variant="h6" className={classes.matchestext}>
-            Matches
+              Matches
             </Typography>
           </Button>
-            <Button 
-                className={classes.middleButton} 
-                color="inherit"
-                onClick={() => {
-                    props.setIsSurvivorMatches(false);
-                    props.setIsSurvivorSettings(false);
-                    props.setIsSurvivorResources(true);
-                }}
-                >
-                <Typography variant="h6" className={classes.resourcestext}>
-                Resources
-                </Typography>
+          <Button
+            className={classes.middleButton}
+            color="inherit"
+            onClick={() => {
+              props.setIsSurvivorMatches(false);
+              props.setIsSurvivorSettings(false);
+              props.setIsSurvivorResources(true);
+            }}
+          >
+            <Typography variant="h6" className={classes.resourcestext}>
+              Resources
+            </Typography>
           </Button>
-            <Button 
-                className={classes.middleButton} 
-                color="inherit"
-                onClick={() => {
-                    props.setIsSurvivorMatches(false);
-                    props.setIsSurvivorSettings(true);
-                    props.setIsSurvivorResources(false);
-                }}
-                >
-                <Typography variant="h6" className={classes.settingstext}>
-                Settings
-                </Typography>
+          <Button
+            className={classes.middleButton}
+            color="inherit"
+            onClick={() => {
+              props.setIsSurvivorMatches(false);
+              props.setIsSurvivorSettings(true);
+              props.setIsSurvivorResources(false);
+            }}
+          >
+            <Typography variant="h6" className={classes.settingstext}>
+              Settings
+            </Typography>
           </Button>
           <IconButton 
             className={classes.logout} 
@@ -102,7 +105,7 @@ export default function SurvivorHeader(props) {
             }}
             >
             Logout
-        </IconButton>
+          </IconButton>
         </Toolbar>
       </AppBar>
     </div>
