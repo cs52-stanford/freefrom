@@ -8,6 +8,7 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import PhotoCamera from "@material-ui/icons/PhotoCamera";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -103,7 +104,7 @@ const q3Style = {
   alignSelf: "center",
   marginLeft: "7px",
   paddingtop: "2rem",
-  marginTop: "13rem",
+  marginTop: "9rem",
 };
 
 const backStyle = {
@@ -199,45 +200,55 @@ const ProfileCard = (props) => {
   const email = ["Yes", "No"];
   const [questionNumber, setQuestionNumber] = React.useState(1);
 
-  const [practiceCounty, setPracticeCounty] = React.useState("County");
-  const [experience, setExperience] = React.useState("Experience");
-  const [compensationRequest, setCompensationRequest] = React.useState(
-    "Amount"
-  );
-  const [bio, setBio] = React.useState("Bio");
-  const [numNotifications, setNumNotifications] = React.useState(
-    "Select an option"
-  );
-  const [emailNotifications, setEmailNotifications] = React.useState(
-    "Select an option"
-  );
+  const [practiceCounty, setPracticeCounty] = React.useState("-");
+  const [experience, setExperience] = React.useState("-");
+  const [compensationRequest, setCompensationRequest] = React.useState("-");
+  const [photo, setPhoto] = React.useState("-");
+  const [numNotifications, setNumNotifications] = React.useState(-1);
+  const [emailNotifications, setEmailNotifications] = React.useState("-");
 
   const handlePracticeCountyChange = (event) => {
     setPracticeCounty(event.target.value);
+    //isFinished();
   };
   const handleExperienceChange = (event) => {
     setExperience(event.target.value);
+    //isFinished();
   };
   const handleCompensationRequestChange = (event) => {
     setCompensationRequest(event.target.value);
+    //isFinished();
   };
 
-  const handleBioChange = (event) => {
-    setBio(event.target.value);
+  const handlePhotoChange = (event) => {
+    setPhoto(event.target.value);
+    //isFinished();
   };
   const handleNumNotificationsChange = (event) => {
     setNumNotifications(event.target.value);
+    //isFinished();
   };
-  const handleEmailChange = (event) => {
-    setEmailNotifications(event.target.value);
+
+  /*
+  const isFinished = () => {
+    if (
+      practiceCounty !== "-" &&
+      experience !== "-" &&
+      compensationRequest !== "-" &&
+      photo !== "-" &&
+      numNotifications !== -1
+    ) {
+      props.setCannotContinue(false);
+    }
   };
+  */
 
   if (questionNumber === 1) {
     return (
       <Container style={demoStyle} maxWidth="sm">
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
-            <h5>Question {questionNumber} of 6 </h5>
+            <h5>Question {questionNumber} of 5 </h5>
             <FormControl className={classes.formControl} fullWidth={true}>
               <InputLabel id="demo-simple-select-label">
                 Where do you practice?
@@ -278,7 +289,7 @@ const ProfileCard = (props) => {
             >
               {"<"} last question
             </Button>
-            <h5>Question {questionNumber} of 6 </h5>
+            <h5>Question {questionNumber} of 5 </h5>
             <p>Brief description of legal history/experience:</p>
             <TextField
               id="outlined-multiline-static"
@@ -322,16 +333,18 @@ const ProfileCard = (props) => {
             >
               {"<"} last question
             </Button>
-            <h5>Question {questionNumber} of 6 </h5>
-            <p>Bio:</p>
-            <TextField
-              id="outlined-multiline-static"
-              multiline
-              rows={4}
-              variant="outlined"
-              fullWidth={true}
-              onChange={handleBioChange}
-            />
+            <h5>Question {questionNumber} of 5 </h5>
+            <p>Upload a profile picture:</p>
+            <Button variant="contained" color="primary" component="span">
+              <input
+                accept="image/*"
+                className={classes.input}
+                id="contained-button-file"
+                type="file"
+                onChange={handlePhotoChange}
+              />
+              <PhotoCamera />
+            </Button>
           </Container>
           <Button
             style={q3Style}
@@ -359,7 +372,7 @@ const ProfileCard = (props) => {
             >
               {"<"} last question
             </Button>
-            <h5>Question {questionNumber} of 6 </h5>
+            <h5>Question {questionNumber} of 5 </h5>
             <FormControl className={classes.formControl} fullWidth={true}>
               <InputLabel id="demo-simple-select-label">
                 I am willing to work:
@@ -400,7 +413,7 @@ const ProfileCard = (props) => {
             >
               {"<"} last question
             </Button>
-            <h5>Question {questionNumber} of 6 </h5>
+            <h5>Question {questionNumber} of 5 </h5>
             <FormControl className={classes.formControl} fullWidth={true}>
               <InputLabel id="demo-simple-select-label">
                 Up to how many notifications would you like to receive about
@@ -412,45 +425,6 @@ const ProfileCard = (props) => {
               >
                 {numbers.map((label, index) => (
                   <MenuItem value={numbers[index]}>{label}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Container>
-          <Button
-            style={nextStyle}
-            onClick={function () {
-              setQuestionNumber(6);
-            }}
-          >
-            NEXT
-          </Button>
-        </Container>
-      </Container>
-    );
-  }
-
-  if (questionNumber === 6) {
-    return (
-      <Container style={demoStyle} maxWidth="sm">
-        <Container style={check} maxWidth="sm">
-          <Container maxWidth="sm" fixed={true}>
-            <Button
-              style={backStyle}
-              onClick={function () {
-                setQuestionNumber(5);
-              }}
-            >
-              {"<"} last question
-            </Button>
-            <h5>Question {questionNumber} of 6 </h5>
-            <FormControl className={classes.formControl} fullWidth={true}>
-              <InputLabel id="demo-simple-select-label">
-                Do you wish to recieve email notifications about potential
-                cases?
-              </InputLabel>
-              <Select value={emailNotifications} onChange={handleEmailChange}>
-                {email.map((label, index) => (
-                  <MenuItem value={email[index]}>{label}</MenuItem>
                 ))}
               </Select>
             </FormControl>

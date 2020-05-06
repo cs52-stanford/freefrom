@@ -11,15 +11,8 @@ import Typography from "@material-ui/core/Typography";
 import NavBar from "./sign_up_nav_bar.js";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-import DemographicsCard from "./make_profile_card.js";
-import ProfileCard from "./profile_info_card.js";
-
-// potentially use to make sure required fields have been filled out?
-var cannotContinue = false;
-
-function setCannotContinue(setting) {
-  cannotContinue = setting;
-}
+import DemographicsCard from "./make_account_card.js";
+import ProfileCard from "./lawyer_profile_info_card.js";
 
 const themeA = createMuiTheme({
   root: {
@@ -90,11 +83,10 @@ function getStepContent(step) {
         </Container>
       );
     case 1:
-      setCannotContinue(false);
-      return <DemographicsCard setCannotContinue={setCannotContinue} />;
+      return <DemographicsCard />;
     case 2:
-      setCannotContinue(true);
-      return <ProfileCard setCannotContinue={setCannotContinue} />;
+      //setCannotContinue(true);
+      return <ProfileCard />;
     default:
       return "Error";
   }
@@ -103,6 +95,7 @@ function getStepContent(step) {
 export default function VerticalLinearStepper(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+  //const [cannotContinue, setCannotContinue] = React.useState(false);
   const steps = getSteps();
 
   const handleNext = () => {
