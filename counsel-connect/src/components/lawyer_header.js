@@ -89,7 +89,7 @@ export default function LawyerHeader(props) {
             }}
           >
             <Typography variant="h6" className={classes.resourcestext}>
-              Resurces
+              Resources
             </Typography>
           </Button>
           <IconButton

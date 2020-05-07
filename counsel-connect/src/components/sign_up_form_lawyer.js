@@ -94,7 +94,7 @@ export default function VerticalLinearStepper(props) {
                   <p>
                     Thank you for signing up for Civil Seeker! By joining our
                     platform, you are helping to grant survivors of domestic
-                    abuse financial independence from their harmdoers.
+                    abuse financial freedom from their harmdoers.
                   </p>
                   <p>
                     This is an educational and informational tool and the
