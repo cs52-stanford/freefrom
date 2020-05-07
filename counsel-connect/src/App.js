@@ -81,6 +81,9 @@ function App() {
           setIsCurrentCounty={setCurrentCounty}
           financialCapability={financialCapability}
           setfinancialCapability={setFinancialCapability}
+          setCurrentCounty={setCurrentCounty}
+          financialCapability={financialCapability}
+          setFinancialCapability={setFinancialCapability}
           lastOccurred={lastOccurred}
           setLastOccurred={setLastOccurred}
           abuseCounty={abuseCounty}

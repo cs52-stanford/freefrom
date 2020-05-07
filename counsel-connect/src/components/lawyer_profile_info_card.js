@@ -197,51 +197,46 @@ const ProfileCard = (props) => {
 
   const compensations = ["Pro bono", "Sliding scale", "Contingency agreement"];
   const numbers = [1, 2, 3, 4, 5];
-  const email = ["Yes", "No"];
   const [questionNumber, setQuestionNumber] = React.useState(1);
 
-  const [practiceCounty, setPracticeCounty] = React.useState("-");
-  const [experience, setExperience] = React.useState("-");
-  const [compensationRequest, setCompensationRequest] = React.useState("-");
-  const [photo, setPhoto] = React.useState("-");
-  const [numNotifications, setNumNotifications] = React.useState(-1);
-  const [emailNotifications, setEmailNotifications] = React.useState("-");
-
   const handlePracticeCountyChange = (event) => {
-    setPracticeCounty(event.target.value);
-    //isFinished();
+    props.setPracticeCounty(event.target.value);
+    isFinished();
   };
   const handleExperienceChange = (event) => {
-    setExperience(event.target.value);
-    //isFinished();
+    props.setExperience(event.target.value);
+    isFinished();
   };
   const handleCompensationRequestChange = (event) => {
-    setCompensationRequest(event.target.value);
-    //isFinished();
+    props.setCompensationRequest(event.target.value);
+    if (props.numNotifications !== -1) {
+      isFinished();
+    }
   };
 
   const handlePhotoChange = (event) => {
-    setPhoto(event.target.value);
-    //isFinished();
+    props.setPhoto(event.target.value);
+    isFinished();
   };
   const handleNumNotificationsChange = (event) => {
-    setNumNotifications(event.target.value);
-    //isFinished();
+    props.setNumNotifications(event.target.value);
+    if (event.target.value !== -1) {
+      props.setCannotContinue(false);
+      isFinished();
+    }
   };
 
-  /*
+  // checks to see if they have filled out every question
   const isFinished = () => {
     if (
-      practiceCounty !== "-" &&
-      experience !== "-" &&
-      compensationRequest !== "-" &&
-      photo !== "-" &&
-      numNotifications !== -1
+      props.practiceCounty !== "-" &&
+      props.experience !== "-" &&
+      props.compensationRequest !== "-" &&
+      props.photo !== "-"
     ) {
       props.setCannotContinue(false);
     }
   };
-  */
 
   if (questionNumber === 1) {
     return (
@@ -254,7 +249,7 @@ const ProfileCard = (props) => {
                 Where do you practice?
               </InputLabel>
               <Select
-                value={practiceCounty}
+                value={props.practiceCounty}
                 onChange={handlePracticeCountyChange}
               >
                 {counties.map((label, index) => (
@@ -378,7 +373,7 @@ const ProfileCard = (props) => {
                 I am willing to work:
               </InputLabel>
               <Select
-                value={compensationRequest}
+                value={props.compensationRequest}
                 onChange={handleCompensationRequestChange}
               >
                 {compensations.map((label, index) => (
@@ -420,7 +415,7 @@ const ProfileCard = (props) => {
                 potential cases each week?
               </InputLabel>
               <Select
-                value={numNotifications}
+                value={props.numNotifications}
                 onChange={handleNumNotificationsChange}
               >
                 {numbers.map((label, index) => (

@@ -32,38 +32,45 @@ const check = {
 };
 
 const DemographicsCard = (props) => {
-  const [name, setName] = React.useState("name");
-  const [gender, setGender] = React.useState("");
-  const [email, setEmail] = React.useState("email");
-  const [password, setPassword] = React.useState("");
+  const [passwordConfirm, setPasswordConfirm] = React.useState("");
 
-  // potentially use to make sure required fields have been filled out?
-  /*
+  // checks to see if they have filled out every question
   const isFinished = () => {
     if (
-      gender !== "" &&
-      name !== "name" &&
-      email !== "email" &&
-      password !== ""
+      props.gender === "" ||
+      props.name === "name" ||
+      props.email === "email" ||
+      props.password === ""
     ) {
       props.setCannotContinue(true);
     } else {
       props.setCannotContinue(false);
     }
   };
-  */
 
   const handleGenderChange = (event) => {
-    setGender(event.target.value);
+    props.setGender(event.target.value);
+    isFinished();
   };
   const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+    props.setEmail(event.target.value);
+    isFinished();
   };
   const handleNameChange = (event) => {
-    setName(event.target.value);
+    props.setName(event.target.value);
+    isFinished();
   };
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+    props.setPassword(event.target.value);
+  };
+  const checkPasswordsMatch = (event) => {
+    if (event.target.value !== props.password) {
+      setPasswordConfirm("Passwords do not match");
+      props.setCannotContinue(true);
+    } else {
+      setPasswordConfirm(" ");
+      isFinished();
+    }
   };
 
   return (
@@ -80,13 +87,14 @@ const DemographicsCard = (props) => {
             onChange={handleNameChange}
             autoFocus
           />
+
           <div className="spacing">Gender:</div>
 
           <FormControl component="fieldset">
             <RadioGroup
               aria-label="gender"
               name="gender1"
-              value={gender}
+              value={props.gender}
               onChange={handleGenderChange}
             >
               <FormControlLabel
@@ -129,12 +137,14 @@ const DemographicsCard = (props) => {
           />
           <TextField
             required
+            helperText={passwordConfirm}
             id="outlined-password-input"
             label="Confirm Password"
             type="password"
             autoComplete="current-password"
             variant="outlined"
             margin="normal"
+            onChange={checkPasswordsMatch}
           />
         </Container>
       </Container>
