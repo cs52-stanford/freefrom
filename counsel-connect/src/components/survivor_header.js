@@ -65,6 +65,7 @@ export default function SurvivorHeader(props) {
               props.setIsSurvivorMatches(true);
               props.setIsSurvivorSettings(false);
               props.setIsSurvivorResources(false);
+              props.setViewProfile(false)
             }}
           >
             <Typography variant="h6" className={classes.matchestext}>
@@ -78,6 +79,7 @@ export default function SurvivorHeader(props) {
               props.setIsSurvivorMatches(false);
               props.setIsSurvivorSettings(false);
               props.setIsSurvivorResources(true);
+              props.setViewProfile(false)
             }}
           >
             <Typography variant="h6" className={classes.resourcestext}>
@@ -91,6 +93,7 @@ export default function SurvivorHeader(props) {
               props.setIsSurvivorMatches(false);
               props.setIsSurvivorSettings(true);
               props.setIsSurvivorResources(false);
+              props.setViewProfile(false)
             }}
           >
             <Typography variant="h6" className={classes.settingstext}>
@@ -102,6 +105,7 @@ export default function SurvivorHeader(props) {
             color={"inherit"}
             onClick={() => {
                 props.setIsLogIn(false);
+                props.setViewProfile(false)
             }}
             >
             Logout
