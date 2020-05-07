@@ -10,6 +10,7 @@ import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import { amber } from '@material-ui/core/colors';
 import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import "./survivor.css"
 
 
 const useStyles = makeStyles({
@@ -43,10 +44,6 @@ const useStyles = makeStyles({
         marginTop: 80,
         backgroundColor: "#e1f5fe",
     },
-    DraftEmail: {
-        marginTop: 20,
-        marginRight: 100,
-    },
     cardcontent: {
         alignItems: "center",
     },
@@ -72,7 +69,7 @@ const SurvivorReachOut = (props) => {
                     </Typography>
                     <Avatar img className={classes.profilepic} src={props.lawyerImage}></Avatar>
                     <div className="BottomRow">
-                        <ColorButton variant="contained" className={classes.DraftEmail}>
+                        <ColorButton variant="contained" className="DraftEmail">
                             <Typography>
                                 Draft Email
                             </Typography>

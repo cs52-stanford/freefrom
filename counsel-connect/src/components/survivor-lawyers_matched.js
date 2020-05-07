@@ -8,25 +8,10 @@ import { amber } from '@material-ui/core/colors';
 
 import { Card, CardContent, CardMedia, Typography, Grid, Button, Checkbox, FormControlLabel, Radio, RadioGroup, FormLabel, Slider } from '@material-ui/core';
 import {useState} from "react";
-
-const useStyles = makeStyles((theme) => ({
-    Media: {
-      width: "100%",
-      height: "150%",
-      flexGrow: 5,
-    },
-    image: {
-        height: 10,
-    },
-    ViewProfile: {
-        marginRight: theme.spacing(0.5),
-    }
-    
-  }));
+import "./survivor.css"
 
 function Banner(props)
 {
-    const classes = useStyles();
     if (props.newProp) console.log(props.newProp)
     const contentPosition = props.contentPosition ? props.contentPosition : "left"
     const totalItems = props.length ? props.length : 3;
@@ -42,7 +27,7 @@ function Banner(props)
             <Grid item xs={12 / totalItems} key={item.Name}>
                 {/* <Link href={`/item/${item.Id}`} className="Link"> */}
                         <CardMedia
-                            className={classes.Media}
+                            className="Media"
                             image={item.Image}
                             title={item.Name}
                             >
