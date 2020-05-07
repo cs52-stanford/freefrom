@@ -41,7 +41,9 @@ function App() {
 
   //if is lawyer, display lawyer homepage
   if (isLogIn === true && isLawyer === true) {
-    return <LawyerMatches setIsLogIn={setIsLogIn} />;
+    return <LawyerMatches 
+        setIsLogIn={setIsLogIn}
+    />;
   }
 
   // if isSignIn is true, display sign in page

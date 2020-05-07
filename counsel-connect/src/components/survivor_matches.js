@@ -1,10 +1,9 @@
 import React from "react";
+import LawyerRotatingCarousel from "./survivor-lawyers_matched.js"
 
 const SurvivorMatches = (props) => {
     return (
-    <p>
-        matches
-    </p>
+    <LawyerRotatingCarousel></LawyerRotatingCarousel>
     );
 }
  
