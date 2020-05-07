@@ -6,6 +6,10 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
+import Logo from "../logo-test.png";
+import Avatar from "@material-ui/core/Avatar";
+
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,14 +51,7 @@ export default function SurvivorHeader(props) {
     <div className={classes.root}>
       <AppBar className={classes.appbar} position="static">
         <Toolbar className={classes.tool}>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
+        <Avatar className={classes.menuButton} src={Logo}></Avatar>
           <Typography variant="h4" className={classes.title}>
             Civil Seeker
           </Typography>
