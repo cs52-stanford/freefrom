@@ -3,51 +3,65 @@ import Carousel from "react-material-ui-carousel"
 import autoBind from "auto-bind"
 import './LawyerCarousel.css'
 import { css } from "@emotion/core";
+import { createMuiTheme, withStyles, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { amber } from '@material-ui/core/colors';
 
 import { Card, CardContent, CardMedia, Typography, Grid, Button, Checkbox, FormControlLabel, Radio, RadioGroup, FormLabel, Slider } from '@material-ui/core';
+import {useState} from "react";
+
+const useStyles = makeStyles((theme) => ({
+    Media: {
+      width: "100%",
+      height: "150%",
+      flexGrow: 5,
+    },
+    image: {
+        height: 10,
+    },
+    ViewProfile: {
+        marginRight: theme.spacing(0.5),
+    }
+    
+  }));
 
 function Banner(props)
 {
+    const classes = useStyles();
     if (props.newProp) console.log(props.newProp)
     const contentPosition = props.contentPosition ? props.contentPosition : "left"
     const totalItems = props.length ? props.length : 3;
     const mediaLength = totalItems - 1;
 
     let items = [];
-    const content = (
-        <Grid item xs={12 / totalItems} key="content">
-            <CardContent className="Content">
-                <Typography className="Title">
-                    {props.item.Name}
-                </Typography>
-
-                <Typography className="Caption">
-                    {props.item.Caption}
-                </Typography>
-
-                <Button variant="outlined" className="ViewButton">
-                    View Now
-                </Button>
-            </CardContent>
-        </Grid>
-    )
-
     
-    for (let i = 0; i < mediaLength; i++)
+    for (let i = 0; i < totalItems; i++)
     {
         const item = props.item.Items[i];
 
         const media = (
             <Grid item xs={12 / totalItems} key={item.Name}>
                 {/* <Link href={`/item/${item.Id}`} className="Link"> */}
-                    <CardMedia
-                        className="Media"
-                        image={item.Image}
-                        title={item.Name}
-                    >
-                        <Typography className="MediaCaption">
+                        <CardMedia
+                            className={classes.Media}
+                            image={item.Image}
+                            title={item.Name}
+                            >
+                        <Typography className="MediaCaption" variant="h5">
                             {item.Name}
                         </Typography>
+
+                        <ColorButton 
+                            variant="contained" 
+                            color="primary" 
+                            className="ViewProfile"
+                            onClick={() => {
+                                props.setLawyerName(item.Name);
+                                props.setLawyerImage(item.Image);
+                                props.setViewProfile(true);
+                            }}
+                            >
+                            View Profile
+                        </ColorButton>
                     </CardMedia>
                 {/* </Link> */}
                 
@@ -55,19 +69,6 @@ function Banner(props)
         )
 
         items.push(media);
-    }
-
-    if (contentPosition === "left")
-    {
-        items.unshift(content);
-    }
-    else if (contentPosition === "right")
-    {
-        items.push(content);
-    }
-    else if (contentPosition === "middle")
-    {
-        items.splice(items.length / 2, 0, content);
     }
 
     return (
@@ -80,55 +81,61 @@ function Banner(props)
 }
 
 const items = [
-  {
-      Name: "Electronics",
-      Caption: "Electrify your friends!",
-      contentPosition: "left",
-      Items: [
+    {Items: [
+            {
+        Name: "RBG",
+        Image: "https://api.oyez.org/sites/default/files/images/people/ruth_bader_ginsburg/ruth_bader_ginsburg.jpg",
+        contentPosition: "left",
+            },
+        {
+              Name: "Amy",
+              Image: "https://images.squarespace-cdn.com/content/v1/56a24df4d8af10a5072bed7c/1563939557942-M33YY0ZL2ZN7Y0RR14Q7/ke17ZwdGBToddI8pDm48kBelsVAev15nrlBAFMzKsdEUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tU2ReFwpVgSm7x-SgOFtAmJMoyi-Ta5HHhO2BVXHKKXdZR9z9mxWb0yLUToVqwSd/UNADJUSTEDNONRAW_thumb_23b.jpg",
+              contentPosition: "middle",
+        },
           {
-              Name: "Macbook Pro",
-              Image: "https://source.unsplash.com/featured/?macbook"
-          },
-          {
-              Name: "iPhone",
-              Image: "https://source.unsplash.com/featured/?iphone"
+              Name: "Drew",
+              Image: "https://www.callahan-law.com/wp-content/uploads/2020/01/att-bio-harbur.jpg"
           }
       ]
   },
-  {
-      Name: "Home Appliances",
-      Caption: "Say no to manual home labour!",
+  {Items: [
+    {
+    Name: "Drew",
+      Image: "https://www.callahan-law.com/wp-content/uploads/2020/01/att-bio-harbur.jpg",
       contentPosition: "middle",
-      Items: [
-          {
-              Name: "Washing Machine WX9102",
-              Image: "https://source.unsplash.com/featured/?washingmachine"
-          },
-          {
-              Name: "Learus Vacuum Cleaner",
-              Image: "https://source.unsplash.com/featured/?vacuum,cleaner"
-          }
-      ]
-  },
-  {
-      Name: "Decoratives",
-      Caption: "Give style and color to your living room!",
+    },
+    {
+    Name: "RBG",
+    Image: "https://api.oyez.org/sites/default/files/images/people/ruth_bader_ginsburg/ruth_bader_ginsburg.jpg",
+    },
+    {
+    Name: "Amy",
+    Image: "https://images.squarespace-cdn.com/content/v1/56a24df4d8af10a5072bed7c/1563939557942-M33YY0ZL2ZN7Y0RR14Q7/ke17ZwdGBToddI8pDm48kBelsVAev15nrlBAFMzKsdEUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tU2ReFwpVgSm7x-SgOFtAmJMoyi-Ta5HHhO2BVXHKKXdZR9z9mxWb0yLUToVqwSd/UNADJUSTEDNONRAW_thumb_23b.jpg"
+    },
+]
+},
+  {Items: [
+      {
+      Name: "RBG",
+      Image: "https://api.oyez.org/sites/default/files/images/people/ruth_bader_ginsburg/ruth_bader_ginsburg.jpg",
       contentPosition: "right",
-      Items: [
+      },
+      {
+        Name: "Drew",
+        Image: "https://www.callahan-law.com/wp-content/uploads/2020/01/att-bio-harbur.jpg"
+        },
           {
-              Name: "Living Room Lamp",
-              Image: "https://source.unsplash.com/featured/?lamp"
-          },
-          {
-              Name: "Floral Vase",
-              Image: "https://source.unsplash.com/featured/?vase"
-          }
+        Name: "Amy",
+        Image: "https://images.squarespace-cdn.com/content/v1/56a24df4d8af10a5072bed7c/1563939557942-M33YY0ZL2ZN7Y0RR14Q7/ke17ZwdGBToddI8pDm48kBelsVAev15nrlBAFMzKsdEUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tU2ReFwpVgSm7x-SgOFtAmJMoyi-Ta5HHhO2BVXHKKXdZR9z9mxWb0yLUToVqwSd/UNADJUSTEDNONRAW_thumb_23b.jpg"
+        }
       ]
   }
 ]
 
 class LawyersCarousel extends React.Component
 {
+
+
     constructor(props)
     {
         super(props);
@@ -136,10 +143,11 @@ class LawyersCarousel extends React.Component
         this.state = {
             autoPlay: false,
             timer: 500,
-        }
+        };
 
         autoBind(this);
     }
+
 
 
     changeTimeout(event, value)
@@ -163,7 +171,15 @@ class LawyersCarousel extends React.Component
                 >
                     {
                         items.map( (item, index) => {
-                            return <Banner item={item} key={index} contentPosition={item.contentPosition}/>
+                            return <Banner 
+                                item={item} 
+                                key={index} 
+                                contentPosition={item.contentPosition}
+                                viewProfile={this.props.viewProfile}
+                                setViewProfile={this.props.setViewProfile}
+                                setLawyerImage={this.props.setLawyerImage}
+                                setLawyerName={this.props.setLawyerName}
+                                />
                         })
                     }
                 </Carousel>
@@ -173,5 +189,16 @@ class LawyersCarousel extends React.Component
         )
     }
 }
+
+
+const ColorButton = withStyles((theme) => ({
+    root: {
+      color: theme.palette.getContrastText(amber[900]),
+      backgroundColor: amber[900],
+      '&:hover': {
+        backgroundColor: amber[900],
+      },
+    },
+  }))(Button);
 
 export default LawyersCarousel;
