@@ -58,8 +58,56 @@ export default function SignUp(props) {
   }
 
   if (isLawyer) {
-    return <LawyerForm setIsSignIn={props.setIsSignIn} />;
+    return (
+      <LawyerForm
+        setIsSignIn={props.setIsSignIn}
+        name={props.name}
+        setName={props.setName}
+        gender={props.gender}
+        setGender={props.setGender}
+        email={props.email}
+        setEmail={props.setEmail}
+        password={props.password}
+        setPassword={props.setPassword}
+        practiceCounty={props.practiceCounty}
+        setPracticeCounty={props.setPracticeCounty}
+        experience={props.experience}
+        setExperience={props.setExperience}
+        compensationRequest={props.compensationRequest}
+        setCompensationRequest={props.setCompensationRequest}
+        photo={props.photo}
+        setPhoto={props.setPhoto}
+        numNotifications={props.numNotifications}
+        setNumNotifications={props.setNumNotifications}
+      />
+    );
   }
 
-  return <SurvivorForm setIsSignIn={props.setIsSignIn} />;
+  return (
+    <SurvivorForm
+      setIsSignIn={props.setIsSignIn}
+      name={props.name}
+      setName={props.setName}
+      gender={props.gender}
+      setGender={props.setGender}
+      email={props.email}
+      setEmail={props.setEmail}
+      password={props.password}
+      setPassword={props.setPassword}
+      currentCounty={props.currentCounty}
+      setCurrentCounty={props.setCurrentCounty}
+      financialCapability={props.financialCapability}
+      setFinancialCapability={props.setFinancialCapability}
+      lastOccurred={props.lastOccurred}
+      setLastOccurred={props.setLastOccurred}
+      abuseCounty={props.abuseCounty}
+      setAbuseCounty={props.setAbuseCounty}
+      weaponsInvolved={props.weaponsInvolved}
+      setWeaponsInvolved={props.setWeaponsInvolved}
+      emailNotifications={props.emailNotifications}
+      setEmailNotifications={props.setEmailNotifications}
+      extraInfo={props.extraInfo}
+      setExtraInfo={props.setExtraInfo}
+    />
+  );
 }

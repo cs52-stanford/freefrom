@@ -58,47 +58,14 @@ function getSteps() {
   return ["Disclaimer", "Account Information", "Profile Information"];
 }
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return (
-        <Container maxWidth="md">
-          <p>
-            Thank you for signing up for Civil Seeker! By joining our platform,
-            you are helping to grant survivors of domestic abuse financial
-            independence from their harmdoers.
-          </p>
-          <p>
-            This is an educational and informational tool and the information
-            contained within it does in no way constitute legal advice. Any
-            person who intends to use the information contained herein in any
-            way is solely responsible for independently verifying the
-            information and obtaining independent legal or other expert advice
-            if necessary.
-          </p>
-          <p>
-            By clicking next, you acknowledge that you have read and agree to
-            the terms and conditions provided.
-          </p>
-        </Container>
-      );
-    case 1:
-      return <DemographicsCard />;
-    case 2:
-      //setCannotContinue(true);
-      return <ProfileCard />;
-    default:
-      return "Error";
-  }
-}
-
 export default function VerticalLinearStepper(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-  //const [cannotContinue, setCannotContinue] = React.useState(false);
+  const [cannotContinue, setCannotContinue] = React.useState(true);
   const steps = getSteps();
 
   const handleNext = () => {
+    setCannotContinue(true);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
@@ -119,35 +86,133 @@ export default function VerticalLinearStepper(props) {
           orientation="vertical"
           style={backgroundStyle}
         >
-          {steps.map((label, index) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-              <StepContent>
-                <Typography style={contentStyle}>
-                  {getStepContent(index)}
-                </Typography>
-                <div className={classes.actionsContainer}>
-                  <div>
-                    <Button
-                      disabled={activeStep === 0}
-                      onClick={handleBack}
-                      className={classes.button}
-                    >
-                      Back
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleNext}
-                      className={classes.button}
-                    >
-                      {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                    </Button>
-                  </div>
+          <Step key={steps[0]}>
+            <StepLabel>{steps[0]}</StepLabel>
+            <StepContent>
+              <Typography style={contentStyle}>
+                <Container maxWidth="md">
+                  <p>
+                    Thank you for signing up for Civil Seeker! By joining our
+                    platform, you are helping to grant survivors of domestic
+                    abuse financial independence from their harmdoers.
+                  </p>
+                  <p>
+                    This is an educational and informational tool and the
+                    information contained within it does in no way constitute
+                    legal advice. Any person who intends to use the information
+                    contained herein in any way is solely responsible for
+                    independently verifying the information and obtaining
+                    independent legal or other expert advice if necessary.
+                  </p>
+                  <p>
+                    By clicking next, you acknowledge that you have read and
+                    agree to the terms and conditions provided.
+                  </p>
+                </Container>
+              </Typography>
+              <div className={classes.actionsContainer}>
+                <div>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    className={classes.button}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleNext}
+                    className={classes.button}
+                  >
+                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  </Button>
                 </div>
-              </StepContent>
-            </Step>
-          ))}
+              </div>
+            </StepContent>
+          </Step>
+
+          <Step key={steps[1]}>
+            <StepLabel>{steps[1]}</StepLabel>
+            <StepContent>
+              <Typography style={contentStyle}>
+                <DemographicsCard
+                  name={props.name}
+                  setName={props.setName}
+                  gender={props.gender}
+                  setGender={props.setGender}
+                  email={props.email}
+                  setEmail={props.setEmail}
+                  password={props.password}
+                  setPassword={props.setPassword}
+                  cannotContinue={cannotContinue}
+                  setCannotContinue={setCannotContinue}
+                />
+              </Typography>
+              <div className={classes.actionsContainer}>
+                <div>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    className={classes.button}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleNext}
+                    className={classes.button}
+                    disabled={cannotContinue}
+                  >
+                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  </Button>
+                </div>
+              </div>
+            </StepContent>
+          </Step>
+
+          <Step key={steps[2]}>
+            <StepLabel>{steps[2]}</StepLabel>
+            <StepContent>
+              <Typography style={contentStyle}>
+                <ProfileCard
+                  practiceCounty={props.practiceCounty}
+                  setPracticeCounty={props.setPracticeCounty}
+                  experience={props.experience}
+                  setExperience={props.setExperience}
+                  compensationRequest={props.compensationRequest}
+                  setCompensationRequest={props.setCompensationRequest}
+                  photo={props.photo}
+                  setPhoto={props.setPhoto}
+                  numNotifications={props.numNotifications}
+                  setNumNotifications={props.setNumNotifications}
+                  cannotContinue={cannotContinue}
+                  setCannotContinue={setCannotContinue}
+                />
+              </Typography>
+              <div className={classes.actionsContainer}>
+                <div>
+                  <Button
+                    disabled={activeStep === 0}
+                    onClick={handleBack}
+                    className={classes.button}
+                  >
+                    Back
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={handleNext}
+                    className={classes.button}
+                    disabled={cannotContinue}
+                  >
+                    {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  </Button>
+                </div>
+              </div>
+            </StepContent>
+          </Step>
         </Stepper>
         {activeStep === steps.length && (
           <div>
