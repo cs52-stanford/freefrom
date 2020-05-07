@@ -10,8 +10,10 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, withTheme } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Logo from "../logo-test.png"
+
 
 function Copyright() {
   return (
@@ -37,9 +39,12 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-  avatar: {
+  box: {
+    display: "flex",
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: "inherit", 
+    width: '65%',
+    height: '65%',
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -57,8 +62,7 @@ export default function SignIn(props) {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
+        <Avatar className={classes.box} src={Logo}>
         </Avatar>
         <Typography component="h1" variant="h5">
           Sign in

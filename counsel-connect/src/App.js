@@ -20,7 +20,7 @@ function App() {
 
   //if is lawyer, display lawyer homepage
   if (isLogIn === true && isLawyer === true) {
-    return <LawyerHome 
+    return <LawyerMatches 
         setIsLogIn={setIsLogIn}
     />;
   }
