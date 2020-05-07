@@ -12,8 +12,24 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, withTheme } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Logo from "../logo-test.png"
+import Logo from "../logo-test.png";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
 
+const themeA = createMuiTheme({
+  root: {
+    backgroundColor: "#e06d4f",
+  },
+
+  palette: {
+    primary: {
+      main: "#e06d4f",
+    },
+    secondary: {
+      main: "#f7fff7",
+    },
+  },
+});
 
 function Copyright() {
   return (
@@ -28,9 +44,7 @@ function Copyright() {
   );
 }
 
-const LogIn = (props) => {
-
-}
+const LogIn = (props) => {};
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,9 +56,9 @@ const useStyles = makeStyles((theme) => ({
   box: {
     display: "flex",
     margin: theme.spacing(1),
-    backgroundColor: "inherit", 
-    width: '65%',
-    height: '65%',
+    backgroundColor: "inherit",
+    width: "65%",
+    height: "65%",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -59,76 +73,77 @@ export default function SignIn(props) {
   const classes = useStyles();
 
   return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.box} src={Logo}>
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
-            onClick={function () {
+    <ThemeProvider theme={themeA} className="backgroundColor">
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <div className={classes.paper}>
+          <Avatar className={classes.box} src={Logo}></Avatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <form className={classes.form} noValidate>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <FormControlLabel
+              control={<Checkbox value="remember" color="primary" />}
+              label="Remember me"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+              onClick={function () {
                 props.setIsLogIn(true);
-            }}
-          >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
+              }}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link
+                  href="#"
+                  variant="body2"
+                  onClick={function () {
+                    props.setIsSignIn(false);
+                  }}
+                >
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Link
-                href="#"
-                variant="body2"
-                onClick={function () {
-                  props.setIsSignIn(false);
-                }}
-              >
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
+          </form>
+        </div>
+        <Box mt={8}>
+          <Copyright />
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
 }

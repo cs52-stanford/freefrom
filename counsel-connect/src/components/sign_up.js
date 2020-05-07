@@ -4,39 +4,58 @@ import "./sign_up.css";
 import NavBar from "./sign_up_nav_bar.js";
 import SurvivorForm from "./sign_up_form_survivor.js";
 import LawyerForm from "./sign_up_form_lawyer.js";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
 import { css } from "@emotion/core";
+
+const themeA = createMuiTheme({
+  root: {
+    backgroundColor: "#e06d4f",
+  },
+
+  palette: {
+    primary: {
+      main: "#e06d4f",
+    },
+    secondary: {
+      main: "#f7fff7",
+    },
+  },
+});
 
 const TypeCard = (props) => {
   return (
-    <Container className="one" maxWidth="sm">
-      <Container className="three" maxWidth="sm"></Container>
-      <Container className="four" maxWidth="sm">
-        <Container className="five" maxWidth="sm">
-          <div>I am a:</div>
+    <ThemeProvider theme={themeA} className="backgroundColor">
+      <Container className="one" maxWidth="sm">
+        <Container className="three" maxWidth="sm"></Container>
+        <Container className="four" maxWidth="sm">
+          <Container className="five" maxWidth="sm">
+            <div>I am a:</div>
 
-          <div className="seven">
-            <div
-              className="lawyerButton"
-              onClick={function () {
-                props.setIsFirstScreen(false);
-                props.setIsLawyer(true);
-              }}
-            >
-              LAWYER
+            <div className="seven">
+              <div
+                className="lawyerButton"
+                onClick={function () {
+                  props.setIsFirstScreen(false);
+                  props.setIsLawyer(true);
+                }}
+              >
+                LAWYER
+              </div>
+              <div
+                className="survivorButton"
+                onClick={function () {
+                  props.setIsFirstScreen(false);
+                  props.setIsLawyer(false);
+                }}
+              >
+                SURVIVOR
+              </div>
             </div>
-            <div
-              className="survivorButton"
-              onClick={function () {
-                props.setIsFirstScreen(false);
-                props.setIsLawyer(false);
-              }}
-            >
-              SURVIVOR
-            </div>
-          </div>
+          </Container>
         </Container>
       </Container>
-    </Container>
+    </ThemeProvider>
   );
 };
 
