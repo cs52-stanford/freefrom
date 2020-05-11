@@ -5,7 +5,6 @@ import SurvivorSettings from "./survivor_settings.js";
 import SurvivorHeader from "./survivor_header.js";
 
 
-
 const SurvivorHome = (props) => {
     const [isSurvivorMatches, setIsSurvivorMatches] = useState(true);
     const [isSurvivorResources, setIsSurvivorResources] = useState(false);
