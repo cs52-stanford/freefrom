@@ -47,14 +47,6 @@ export default function LawyerHeader(props) {
     <div className={classes.root}>
       <AppBar className={classes.appbar} position="static">
         <Toolbar className={classes.tool}>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
           <Typography variant="h4" className={classes.title}>
             Civil Seeker
           </Typography>
