@@ -105,7 +105,6 @@ const SurvivorReachOut = (props) => {
                   className="DraftEmail"
                   onClick={() => {
                     setIsDisplayingProfile(false);
-                    props.setLawyerName(props.lawyerName);
                   }}
                 >
                   <Typography>REQUEST SERVICES</Typography>
@@ -144,6 +143,7 @@ const SurvivorReachOut = (props) => {
                     className={classes.confirmButton}
                     onClick={() => {
                       props.setViewProfile(false);
+                      props.setStatus(props.lawyerIndex, "profile sent!");
                     }}
                   >
                     <Typography>CONFIRM</Typography>
