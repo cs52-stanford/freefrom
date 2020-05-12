@@ -61,6 +61,7 @@ export default function LawyerHeader(props) {
               props.setIsHomeScreen(true);
               props.setIsResourceScreen(false);
               props.setIsSettingsScreen(false);
+              props.setViewProfile(false);
             }}
           >
             <Typography variant="h6" className={classes.matchestext}>
@@ -78,6 +79,7 @@ export default function LawyerHeader(props) {
               props.setIsHomeScreen(false);
               props.setIsResourceScreen(true);
               props.setIsSettingsScreen(false);
+              props.setViewProfile(false);
             }}
           >
             <Typography variant="h6" className={classes.resourcestext}>
@@ -95,13 +97,21 @@ export default function LawyerHeader(props) {
               props.setIsHomeScreen(false);
               props.setIsResourceScreen(false);
               props.setIsSettingsScreen(true);
+              props.setViewProfile(false);
             }}
           >
             <Typography variant="h6" className={classes.settingstext}>
               Settings
             </Typography>
           </Button>
-          <Button className={classes.logout} color={"inherit"}>
+          <Button
+            className={classes.logout}
+            color={"inherit"}
+            onClick={() => {
+              props.setIsLogIn(false);
+              props.setViewProfile(false);
+            }}
+          >
             Logout
           </Button>
         </Toolbar>

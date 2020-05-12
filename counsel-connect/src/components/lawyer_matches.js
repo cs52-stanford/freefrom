@@ -8,6 +8,10 @@ const LawyerMatches = (props) => {
   const [isHomeScreen, setIsHomeScreen] = useState(true);
   const [isResourceScreen, setIsResourceScreen] = useState(false);
   const [isSettingsScreen, setIsSettingsScreen] = useState(false);
+  const [viewProfile, setViewProfile] = useState(false);
+  const [survivorProfile, setSurvivorProfile] = useState([]);
+  const [survivorName, setSurvivorName] = useState("name");
+  const [survivorImage, setSurvivorImage] = useState("image");
 
   if (isHomeScreen === true) {
     return (
@@ -16,8 +20,20 @@ const LawyerMatches = (props) => {
           setIsHomeScreen={setIsHomeScreen}
           setIsResourceScreen={setIsResourceScreen}
           setIsSettingsScreen={setIsSettingsScreen}
+          setIsLogIn={props.setIsLogIn}
+          viewProfile={viewProfile}
+          setViewProfile={setViewProfile}
         />
-        <LawyerHome />
+        <LawyerHome
+          viewProfile={viewProfile}
+          setViewProfile={setViewProfile}
+          setSurvivorImage={setSurvivorImage}
+          setSurvivorName={setSurvivorName}
+          setSurvivorProfile={setSurvivorProfile}
+          survivorName={survivorName}
+          survivorImage={survivorImage}
+          survivorProfile={survivorProfile}
+        />
       </div>
     );
   }
@@ -29,6 +45,9 @@ const LawyerMatches = (props) => {
           setIsHomeScreen={setIsHomeScreen}
           setIsResourceScreen={setIsResourceScreen}
           setIsSettingsScreen={setIsSettingsScreen}
+          setIsLogIn={props.setIsLogIn}
+          viewProfile={viewProfile}
+          setViewProfile={setViewProfile}
         />
         <LawyerResource />
       </div>
@@ -42,30 +61,33 @@ const LawyerMatches = (props) => {
           setIsHomeScreen={setIsHomeScreen}
           setIsResourceScreen={setIsResourceScreen}
           setIsSettingsScreen={setIsSettingsScreen}
+          setIsLogIn={props.setIsLogIn}
+          viewProfile={viewProfile}
+          setViewProfile={setViewProfile}
         />
-        <LawyerSettings>
-                setName={props.setName}
-                setGender={props.setGender}
-                setEmail={props.setEmail}
-                setPassword={props.setPassword}
-                name={props.name}
-                gender={props.gender}
-                email={props.email}
-                password={props.password}
-                setPracticeCounty={props.setPracticeCounty}
-                practiceCounty={props.practiceCounty}
-                experience={props.experience}
-                setExperience={props.setExperience}
-                setCompensationRequest={props.setCompensationRequest}
-                compensationRequest={props.compensationRequest}
-                setPhoto={props.setPhoto}
-                photo={props.photo}
-                setNumNotifications={props.setNumNotifications}
-                numNotifications={props.numNotifications}
-            </LawyerSettings>
+        <LawyerSettings
+          setName={props.setName}
+          setGender={props.setGender}
+          setEmail={props.setEmail}
+          setPassword={props.setPassword}
+          name={props.name}
+          gender={props.gender}
+          email={props.email}
+          password={props.password}
+          setPracticeCounty={props.setPracticeCounty}
+          practiceCounty={props.practiceCounty}
+          experience={props.experience}
+          setExperience={props.setExperience}
+          setCompensationRequest={props.setCompensationRequest}
+          compensationRequest={props.compensationRequest}
+          setPhoto={props.setPhoto}
+          photo={props.photo}
+          setNumNotifications={props.setNumNotifications}
+          numNotifications={props.numNotifications}
+        />
       </div>
     );
   }
-}
+};
 
 export default LawyerMatches;

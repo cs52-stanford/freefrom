@@ -13,6 +13,23 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+
+const themeA = createMuiTheme({
+  root: {
+    backgroundColor: "#e06d4f",
+  },
+
+  palette: {
+    primary: {
+      main: "#e06d4f",
+    },
+    secondary: {
+      main: "#73CEC5",
+    },
+  },
+});
 
 function Copyright() {
   return (
@@ -61,73 +78,87 @@ const useStyles = makeStyles((theme) => ({
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-export default function Album() {
+export default function Album(props) {
   const classes = useStyles();
 
   return (
-    <React.Fragment>
-      <CssBaseline />
-      <main>
-        {/* Hero unit */}
-        <div className={classes.heroContent}>
-          <Container maxWidth="md">
-            <Typography
-              variant="h5"
-              align="center"
-              color="textSecondary"
-              paragraph
-            >
-              Welcome to your lawyer home page! As you match with survivors,
-              their profiles will appear below. Click "reach out" to email a
-              survivor and set up a call.
-            </Typography>
+    <ThemeProvider theme={themeA} className="backgroundColor">
+      <React.Fragment>
+        <CssBaseline />
+        <main>
+          {/* Hero unit */}
+          <div className={classes.heroContent}>
+            <Container maxWidth="md">
+              <Typography
+                variant="h5"
+                align="center"
+                color="textSecondary"
+                paragraph
+              >
+                Welcome! As you match with survivors, their profiles will appear
+                below. Click "reach out" to email a survivor and set up a call.
+              </Typography>
+            </Container>
+          </div>
+          <Container className={classes.cardGrid} maxWidth="md">
+            {/* End hero unit */}
+            <Grid container spacing={4}>
+              {props.cards.map((card, index) => (
+                <Grid item key={card} xs={12} sm={6} md={4}>
+                  <Card className={classes.card}>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      image={props.survivorPhotos[index]}
+                      title="Image title"
+                    />
+                    <CardContent className={classes.cardContent}>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {props.survivorNames[index]}
+                      </Typography>
+                      <Typography color="secondary" align="center" gutterBottom>
+                        Status: {props.statuses[index]}
+                      </Typography>
+                      <Typography>
+                        County, California. Abuse last occured: Date.
+                      </Typography>
+                      <Typography>Cannot afford legal fees.</Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button
+                        size="small"
+                        color="primary"
+                        onClick={function () {
+                          props.setViewProfile(true);
+                          props.setSurvivorName(props.survivorNames[index]);
+                          props.setSurvivorImage(props.survivorPhotos[index]);
+                          props.setSurvivorIndex(index);
+                          props.setStatus(index, "viewed");
+                        }}
+                      >
+                        View Profile
+                      </Button>
+                      <Button size="small" color="primary">
+                        Reach Out
+                      </Button>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
           </Container>
-        </div>
-        <Container className={classes.cardGrid} maxWidth="md">
-          {/* End hero unit */}
-          <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image="https://lh3.googleusercontent.com/proxy/e8ehQwqivV5ffrkdwj_xiag0p6PXJvs9oYYfyrug0AbDsNevf4d8H-HpS3yCrfp0-kkfBL1NH1kpyX23mzO00T2wKlmYFYPgdBD32tCEDAGGFJ11uo3D5ConkjMoMdeR"
-                    title="Image title"
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Survivor Name/Alias
-                    </Typography>
-                    <Typography>
-                      County, California. Abuse Last Occured: Date. Cannot
-                      afford legal fees.
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" color="primary">
-                      View Profile
-                    </Button>
-                    <Button size="small" color="primary">
-                      Reach Out
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
-          </Grid>
-        </Container>
-      </main>
-      {/* Footer */}
-      <footer className={classes.footer}>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="textSecondary"
-          component="p"
-        ></Typography>
-        <Copyright />
-      </footer>
-      {/* End footer */}
-    </React.Fragment>
+        </main>
+        {/* Footer */}
+        <footer className={classes.footer}>
+          <Typography
+            variant="subtitle1"
+            align="center"
+            color="textSecondary"
+            component="p"
+          ></Typography>
+          <Copyright />
+        </footer>
+        {/* End footer */}
+      </React.Fragment>
+    </ThemeProvider>
   );
 }
