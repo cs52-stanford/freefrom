@@ -77,25 +77,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const cards = [1, 2, 3, 4, 5, 6];
-const lawyerNames = [
-  "RBG",
-  "Amy",
-  "Drew",
-  "Elle Woods",
-  "Mr. Generic",
-  "Mrs. Generic",
-];
-const lawyerPhotos = [
-  "https://upload.wikimedia.org/wikipedia/commons/7/76/Ruth_Bader_Ginsburg_2016_portrait.jpg",
-  "https://images.squarespace-cdn.com/content/v1/56a24df4d8af10a5072bed7c/1563939557942-M33YY0ZL2ZN7Y0RR14Q7/ke17ZwdGBToddI8pDm48kBelsVAev15nrlBAFMzKsdEUqsxRUqqbr1mOJYKfIPR7LoDQ9mXPOjoJoqy81S2I8PaoYXhp6HxIwZIk7-Mi3Tsic-L2IOPH3Dwrhl-Ne3Z2tU2ReFwpVgSm7x-SgOFtAmJMoyi-Ta5HHhO2BVXHKKXdZR9z9mxWb0yLUToVqwSd/UNADJUSTEDNONRAW_thumb_23b.jpg",
-  "https://www.callahan-law.com/wp-content/uploads/2020/01/att-bio-harbur.jpg",
-  "https://i.insider.com/5c40e230524147386364af33?width=750&format=jpeg&auto=webp",
-  "https://media.gettyimages.com/photos/smiling-lawyer-sitting-at-desk-in-office-picture-id104821116?s=612x612",
-  "https://www.thebalance.com/thmb/jCOulTG9w5WGoY6lZIHKqOQlY64=/3633x3633/smart/filters:no_upscale()/Gettywomanlawyer-5955ab903df78cdc296e8f7e.jpg",
-];
-const statuses = ["new!", "new!", "new!", "new!", "new!", "new!"];
-
 export default function Album(props) {
   const classes = useStyles();
 
@@ -122,20 +103,20 @@ export default function Album(props) {
           <Container className={classes.cardGrid} maxWidth="md">
             {/* End hero unit */}
             <Grid container spacing={4}>
-              {cards.map((card, index) => (
+              {props.cards.map((card, index) => (
                 <Grid item key={card} xs={12} sm={6} md={4}>
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.cardMedia}
-                      image={lawyerPhotos[index]}
+                      image={props.lawyerPhotos[index]}
                       title="Image title"
                     />
                     <CardContent className={classes.cardContent}>
                       <Typography gutterBottom variant="h5" component="h2">
-                        {lawyerNames[index]}
+                        {props.lawyerNames[index]}
                       </Typography>
                       <Typography color="secondary" align="center" gutterBottom>
-                        Status: {statuses[index]}
+                        Status: {props.statuses[index]}
                       </Typography>
                       <Typography align="center">
                         Practice county: placeholder
@@ -150,9 +131,10 @@ export default function Album(props) {
                         color="primary"
                         onClick={function () {
                           props.setViewProfile(true);
-                          props.setLawyerName(lawyerNames[index]);
-                          props.setLawyerImage(lawyerPhotos[index]);
-                          statuses[index] = "viewed";
+                          props.setLawyerName(props.lawyerNames[index]);
+                          props.setLawyerImage(props.lawyerPhotos[index]);
+                          props.setLawyerIndex(index);
+                          props.setStatus(index, "viewed");
                         }}
                       >
                         View Full Profile
