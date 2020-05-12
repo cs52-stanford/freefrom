@@ -22,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(1),
   },
 }));
-// test comment
 
 const demoStyle = {
   display: "flex",
@@ -278,12 +277,12 @@ const ProfileCard = (props) => {
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
             <Button
-              style={backStyle}
+              variant="outlined"
               onClick={function () {
                 setQuestionNumber(1);
               }}
             >
-              {"<"} last question
+              last question
             </Button>
             <h5>Question {questionNumber} of 5 </h5>
             <p>Brief description of legal history/experience:</p>
@@ -322,12 +321,12 @@ const ProfileCard = (props) => {
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
             <Button
-              style={backStyle}
+              variant="outlined"
               onClick={function () {
                 setQuestionNumber(2);
               }}
             >
-              {"<"} last question
+              last question
             </Button>
             <h5>Question {questionNumber} of 5 </h5>
             <p>Upload a profile picture:</p>
@@ -361,12 +360,12 @@ const ProfileCard = (props) => {
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
             <Button
-              style={backStyle}
+              variant="outlined"
               onClick={function () {
                 setQuestionNumber(3);
               }}
             >
-              {"<"} last question
+              last question
             </Button>
             <h5>Question {questionNumber} of 5 </h5>
             <FormControl className={classes.formControl} fullWidth={true}>
@@ -402,12 +401,12 @@ const ProfileCard = (props) => {
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
             <Button
-              style={backStyle}
+              variant="outlined"
               onClick={function () {
                 setQuestionNumber(4);
               }}
             >
-              {"<"} last question
+              last question
             </Button>
             <h5>Question {questionNumber} of 5 </h5>
             <FormControl className={classes.formControl} fullWidth={true}>

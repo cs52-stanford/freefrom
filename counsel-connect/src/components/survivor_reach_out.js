@@ -100,15 +100,16 @@ const SurvivorReachOut = (props) => {
                   Bio: This will eventually have the lawyer's bio but for now
                   this is just placeholder text.
                 </p>
-                <ColorButton
-                  variant="contained"
+                <Button
+                  variant="outlinedPrimary"
                   className="DraftEmail"
                   onClick={() => {
                     setIsDisplayingProfile(false);
+                    props.setLawyerName(props.lawyerName);
                   }}
                 >
                   <Typography>REQUEST SERVICES</Typography>
-                </ColorButton>
+                </Button>
               </div>
             </CardContent>
           </Card>
@@ -141,6 +142,9 @@ const SurvivorReachOut = (props) => {
                   <ColorButton
                     variant="contained"
                     className={classes.confirmButton}
+                    onClick={() => {
+                      props.setViewProfile(false);
+                    }}
                   >
                     <Typography>CONFIRM</Typography>
                   </ColorButton>

@@ -238,12 +238,12 @@ const CaseCard = (props) => {
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
             <Button
-              style={backStyle}
+              variant="outlined"
               onClick={function () {
                 setQuestionNumber(1);
               }}
             >
-              {"<"} last question
+              last question
             </Button>
             <h5>Question {questionNumber} of 7 </h5>
             <FormControl className={classes.formControl} fullWidth={true}>
@@ -279,12 +279,12 @@ const CaseCard = (props) => {
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
             <Button
-              style={backStyle}
+              variant="outlined"
               onClick={function () {
                 setQuestionNumber(2);
               }}
             >
-              {"<"} last question
+              last question
             </Button>
             <h5>Question {questionNumber} of 7 </h5>
             <FormControl className={classes.formControl} fullWidth={true}>
@@ -320,12 +320,12 @@ const CaseCard = (props) => {
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
             <Button
-              style={backStyle}
+              variant="outlined"
               onClick={function () {
                 setQuestionNumber(3);
               }}
             >
-              {"<"} last question
+              last question
             </Button>
             <h5>Question {questionNumber} of 7 </h5>
             <FormControl className={classes.formControl} fullWidth={true}>
@@ -361,12 +361,12 @@ const CaseCard = (props) => {
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
             <Button
-              style={backStyle}
+              variant="outlined"
               onClick={function () {
                 setQuestionNumber(4);
               }}
             >
-              {"<"} last question
+              last question
             </Button>
             <h5>Question {questionNumber} of 7 </h5>
             <FormControl className={classes.formControl} fullWidth={true}>
@@ -402,12 +402,12 @@ const CaseCard = (props) => {
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
             <Button
-              style={backStyle}
+              variant="outlined"
               onClick={function () {
                 setQuestionNumber(5);
               }}
             >
-              {"<"} last question
+              last question
             </Button>
             <h5>Question {questionNumber} of 7 </h5>
             <FormControl className={classes.formControl} fullWidth={true}>
@@ -443,12 +443,12 @@ const CaseCard = (props) => {
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
             <Button
-              style={backStyle}
+              variant="outlined"
               onClick={function () {
                 setQuestionNumber(6);
               }}
             >
-              {"<"} LAST QUESTION
+              LAST QUESTION
             </Button>
             <h5>Question {questionNumber} of 7 </h5>
             <p>
