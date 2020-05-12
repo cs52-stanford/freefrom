@@ -4,10 +4,7 @@ import LawyerSettingsPanel from "./lawyer_settings_panel";
 
 const LawyerSettings = (props) => {
   return (
-      <div>
-      <p>settings</p>
       <LawyerSettingsPanel
-                setIsLogIn={props.setIsLogIn} 
                 setName={props.setName}
                 setGender={props.setGender}
                 setEmail={props.setEmail}
@@ -27,7 +24,6 @@ const LawyerSettings = (props) => {
                 setNumNotifications={props.setNumNotifications}
                 numNotifications={props.numNotifications}
          ></LawyerSettingsPanel>
-         </div>
   );
 };
 export default LawyerSettings;

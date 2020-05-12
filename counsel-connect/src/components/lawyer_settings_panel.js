@@ -332,9 +332,9 @@ const LawyerSettingsPanel = (props) => {
                             Where do you practice?
                         </InputLabel>
                         <Select
-                            value={props.currentCounty}
+                            value={props.practice}
                             onChange={(event) => {
-                                props.setCurrentCounty(event.target.value)
+                                props.setPracticeCounty(event.target.value)
                             }}
                         >
                                 {counties.map((label, index) => (

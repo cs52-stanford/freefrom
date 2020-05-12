@@ -16,6 +16,7 @@ const LawyerMatches = (props) => {
           setIsHomeScreen={setIsHomeScreen}
           setIsResourceScreen={setIsResourceScreen}
           setIsSettingsScreen={setIsSettingsScreen}
+          setIsLogIn={props.setIsLogIn}
         />
         <LawyerHome />
       </div>
@@ -29,6 +30,7 @@ const LawyerMatches = (props) => {
           setIsHomeScreen={setIsHomeScreen}
           setIsResourceScreen={setIsResourceScreen}
           setIsSettingsScreen={setIsSettingsScreen}
+          setIsLogIn={props.setIsLogIn}
         />
         <LawyerResource />
       </div>
@@ -45,25 +47,23 @@ const LawyerMatches = (props) => {
           setIsLogIn={props.setIsLogIn}
         />
         <LawyerSettings
-                setName={props.setName}
-                setGender={props.setGender}
-                setEmail={props.setEmail}
-                setPassword={props.setPassword}
-                name={props.name}
-                gender={props.gender}
-                email={props.email}
-                password={props.password}
-                setPracticeCounty={props.setPracticeCounty}
-                practiceCounty={props.practiceCounty}
-                experience={props.experience}
-                setExperience={props.setExperience}
-                setCompensationRequest={props.setCompensationRequest}
-                compensationRequest={props.compensationRequest}
-                setPhoto={props.setPhoto}
-                photo={props.photo}
-                setNumNotifications={props.setNumNotifications}
-                numNotifications={props.numNotifications}
-            ></LawyerSettings>
+            setName={props.setName}
+            setGender={props.setGender}
+            setEmail={props.setEmail}
+            setPassword={props.setPassword}
+            name={props.name}
+            gender={props.gender}
+            email={props.email}
+            password={props.password}
+            setPracticeCounty={props.setPracticeCounty}
+            practiceCounty={props.practiceCounty}
+            experience={props.experience}
+            setExperience={props.setExperience}
+            setCompensationRequest={props.setCompensationRequest}
+            compensationRequest={props.compensationRequest}
+            setNumNotifications={props.setNumNotifications}
+            numNotifications={props.numNotifications}
+            />
       </div>
     );
   }
