@@ -55,7 +55,7 @@ const SurvivorHome = (props) => {
     }
     if (isSurvivorSettings === true) {
         return (
-            <div className="lawyerhome">
+            <div className="survivorhome">
                 <SurvivorHeader
                 setIsSurvivorMatches={setIsSurvivorMatches}
                 setIsSurvivorResources={setIsSurvivorResources}
@@ -65,7 +65,29 @@ const SurvivorHome = (props) => {
                 setViewProfile={setViewProfile}
                 />
                 <SurvivorSettings
-                ></SurvivorSettings>
+                    setName={props.setName}
+                    setGender={props.setGender}
+                    setEmail={props.setEmail}
+                    setPassword={props.setPassword}
+                    setCurrentCounty={props.setCurrentCounty}
+                    setFinancialCapability={props.setFinancialCapability}
+                    setLastOccurred={props.setLastOccurred}
+                    setAbuseCounty={props.setAbuseCounty}
+                    setWeaponsInvolved={props.setWeaponsInvolved}
+                    setEmailNotifications={props.setEmailNotifications}
+                    setExtraInfo={props.setExtraInfo}
+                    name={props.name}
+                    gender={props.gender}
+                    email={props.email}
+                    password={props.password}
+                    currentCounty={props.currentCounty}
+                    financialCapability={props.financialCapability}
+                    lastOccurred={props.lastOccurred}
+                    abuseCounty={props.abuseCounty}
+                    weaponsInvolved={props.weaponsInvolved}
+                    emailNotifications={props.emailNotifications}
+                    extraInfo={props.extraInfo}
+                />
             </div>
         );
     }
