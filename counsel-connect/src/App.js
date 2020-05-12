@@ -76,10 +76,6 @@ function App() {
         email={email}
         password={password}
         setPracticeCounty={setPracticeCounty}
-        setExperience={setExperience}
-        setPhoto={setPhoto}
-        setNumNotifications={setNumNotifications}
-        setPracticeCounty={setPracticeCounty}
         practiceCounty={practiceCounty}
         experience={experience}
         setExperience={setExperience}

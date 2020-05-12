@@ -42,6 +42,7 @@ const LawyerMatches = (props) => {
           setIsHomeScreen={setIsHomeScreen}
           setIsResourceScreen={setIsResourceScreen}
           setIsSettingsScreen={setIsSettingsScreen}
+          setIsLogIn={props.setIsLogIn}
         />
         <LawyerSettings
                 setName={props.setName}
