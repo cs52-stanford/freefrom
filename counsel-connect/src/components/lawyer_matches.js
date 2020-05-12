@@ -43,7 +43,7 @@ const LawyerMatches = (props) => {
           setIsResourceScreen={setIsResourceScreen}
           setIsSettingsScreen={setIsSettingsScreen}
         />
-        <LawyerSettings>
+        <LawyerSettings
                 setName={props.setName}
                 setGender={props.setGender}
                 setEmail={props.setEmail}
@@ -62,7 +62,7 @@ const LawyerMatches = (props) => {
                 photo={props.photo}
                 setNumNotifications={props.setNumNotifications}
                 numNotifications={props.numNotifications}
-            </LawyerSettings>
+            ></LawyerSettings>
       </div>
     );
   }
