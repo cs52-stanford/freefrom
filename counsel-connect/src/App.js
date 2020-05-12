@@ -36,8 +36,9 @@ function App() {
   const [numNotifications, setNumNotifications] = React.useState(-1);
 
   if (isLogIn === true && isSurvivor === true) {
-    return <SurvivorHome 
-        setIsLogIn={setIsLogIn} 
+    return (
+      <SurvivorHome
+        setIsLogIn={setIsLogIn}
         setName={setName}
         setGender={setGender}
         setEmail={setEmail}
@@ -60,13 +61,15 @@ function App() {
         weaponsInvolved={weaponsInvolved}
         emailNotifications={emailNotifications}
         extraInfo={extraInfo}
-    />;
+      />
+    );
   }
 
   //if is lawyer, display lawyer homepage
   if (isLogIn === true && isLawyer === true) {
-    return <LawyerMatches 
-        setIsLogIn={setIsLogIn} 
+    return (
+      <LawyerMatches
+        setIsLogIn={setIsLogIn}
         setName={setName}
         setGender={setGender}
         setEmail={setEmail}
@@ -85,7 +88,8 @@ function App() {
         photo={photo}
         setNumNotifications={setNumNotifications}
         numNotifications={numNotifications}
-    />;
+      />
+    );
   }
 
   // if isSignIn is true, display sign in page
