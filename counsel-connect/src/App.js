@@ -7,6 +7,17 @@ import SurvivorHome from "./components/survivor_home.js";
 
 import "./App.css";
 
+var firebaseConfig = {
+  apiKey: "api-key",
+  authDomain: "project-id.firebaseapp.com",
+  databaseURL: "https://project-id.firebaseio.com",
+  projectId: "project-id",
+  storageBucket: "project-id.appspot.com",
+  messagingSenderId: "sender-id",
+  appId: "app-id",
+  measurementId: "G-measurement-id",
+};
+
 function App() {
   const [isSignIn, setIsSignIn] = useState(true);
   const [isLogIn, setIsLogIn] = useState(false);
@@ -36,8 +47,9 @@ function App() {
   const [numNotifications, setNumNotifications] = React.useState(-1);
 
   if (isLogIn === true && isSurvivor === true) {
-    return <SurvivorHome 
-        setIsLogIn={setIsLogIn} 
+    return (
+      <SurvivorHome
+        setIsLogIn={setIsLogIn}
         setName={setName}
         setGender={setGender}
         setEmail={setEmail}
@@ -60,13 +72,15 @@ function App() {
         weaponsInvolved={weaponsInvolved}
         emailNotifications={emailNotifications}
         extraInfo={extraInfo}
-    />;
+      />
+    );
   }
 
   //if is lawyer, display lawyer homepage
   if (isLogIn === true && isLawyer === true) {
-    return <LawyerMatches 
-        setIsLogIn={setIsLogIn} 
+    return (
+      <LawyerMatches
+        setIsLogIn={setIsLogIn}
         setName={setName}
         setGender={setGender}
         setEmail={setEmail}
@@ -85,7 +99,8 @@ function App() {
         photo={photo}
         setNumNotifications={setNumNotifications}
         numNotifications={numNotifications}
-    />;
+      />
+    );
   }
 
   // if isSignIn is true, display sign in page

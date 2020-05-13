@@ -1,15 +1,15 @@
 {
   "hosting": {
     "public": "public",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ]
+    "rewrites": [
+      {
+        "source": "/timestamp",
+        "function": "app"
+      }
+    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"]
   },
   "functions": {
-    "predeploy": [
-      "npm --prefix \"$RESOURCE_DIR\" run lint"
-    ]
+    "predeploy": ["npm --prefix \"$RESOURCE_DIR\" run lint"]
   }
 }
