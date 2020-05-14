@@ -94,7 +94,7 @@ const counties = [
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '90%',
+    width: '80%',
     height: 100,
     marginTop: 20,
     padding: '30px 30px'
