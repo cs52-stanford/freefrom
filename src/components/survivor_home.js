@@ -38,21 +38,21 @@ const SurvivorHome = (props) => {
             </div>
         );
     }
-    ///if (isSurvivorResources === true) {
-        ///return (
-            ///<div className="lawyerhome">
-                ///<SurvivorHeader
-                ///setIsSurvivorMatches={setIsSurvivorMatches}
-                ///setIsSurvivorResources={setIsSurvivorResources}
-                ///setIsSurvivorSettings={setIsSurvivorSettings}
-                ///setIsLogIn={props.setIsLogIn}
-                ///viewProfile={viewProfile}
-                ///setViewProfile={setViewProfile}
-                ////>
-                ///<SurvivorResources></SurvivorResources>
-            ///</div>
-        ///);
-    ///}
+    if (isSurvivorResources === true) {
+        return (
+            <div className="lawyerhome">
+                <SurvivorHeader
+                setIsSurvivorMatches={setIsSurvivorMatches}
+                setIsSurvivorResources={setIsSurvivorResources}
+                setIsSurvivorSettings={setIsSurvivorSettings}
+                setIsLogIn={props.setIsLogIn}
+                viewProfile={viewProfile}
+                setViewProfile={setViewProfile}
+                />
+                <SurvivorResources></SurvivorResources>
+            </div>
+        );
+    }
     if (isSurvivorSettings === true) {
         return (
             <div className="survivorhome">
