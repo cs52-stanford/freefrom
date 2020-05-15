@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "auto",
   },
   container: {
-    width: "50%",
+    width: "70%",
   },
   root: {
     marginLeft: "auto",
@@ -50,6 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardcontent: {
     alignItems: "center",
+    width: "100%",
   },
   BottomRow: {
     display: "flex",
@@ -59,7 +60,25 @@ const useStyles = makeStyles((theme) => ({
   confirmButton: {
     alignSelf: "flex-end",
   },
+  pText: {
+    alignSelf: "",
+  },
 }));
+
+const themeA = createMuiTheme({
+  root: {
+    backgroundColor: "#e06d4f",
+  },
+
+  palette: {
+    primary: {
+      main: "#e06d4f",
+    },
+    secondary: {
+      main: "#f7fff7",
+    },
+  },
+});
 
 const SurvivorReachOut = (props) => {
   const classes = useStyles();
@@ -70,7 +89,7 @@ const SurvivorReachOut = (props) => {
     return (
       <React.Fragment>
         <CssBaseline />
-        <Container fixed className={classes.container}>
+        <Container fixed className={classes.container} maxWidth="md">
           <Card className={classes.root}>
             <CardContent className={classes.cardcontent}>
               <Button
@@ -96,10 +115,10 @@ const SurvivorReachOut = (props) => {
                 src={props.lawyerImage}
               ></Avatar>
               <div className="BottomRow">
-                <p>
+                <Typography variant="p" align="center" paragraph="true">
                   Bio: This will eventually have the lawyer's bio but for now
                   this is just placeholder text.
-                </p>
+                </Typography>
                 <Button
                   variant="outlinedPrimary"
                   className="DraftEmail"
@@ -123,7 +142,7 @@ const SurvivorReachOut = (props) => {
           <Card className={classes.root}>
             <CardContent className={classes.cardcontent}>
               <div className="BottomRow">
-                <p className="p">
+                <p className={classes.pText}>
                   By clicking confirm you agree to send your profile
                   information, including any details you included about your
                   case, to {props.lawyerName}.
