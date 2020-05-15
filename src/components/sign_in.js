@@ -8,17 +8,17 @@ import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, withTheme } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Logo from "../logo-test.png";
+import Logo from "./counselCompassLogo.png";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 
 const backgroundStyle = {
   height: "100%",
   backgroundColor: "#f7fff7",
+  paddingTop: "4rem",
 
   header: {
     backgroundColor: "#f7fff7",
@@ -64,8 +64,8 @@ const useStyles = makeStyles((theme) => ({
   box: {
     display: "flex",
     backgroundColor: "inherit",
-    width: "65%",
-    height: "65%",
+    width: "85%",
+    height: "85%",
   },
   form: {
     width: "100%", // Fix IE 11 issue.
@@ -88,10 +88,11 @@ export default function SignIn(props) {
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <div className={classes.paper}>
-            <Avatar className={classes.box} src={Logo}></Avatar>
-            <Typography component="h1" variant="h5">
-              Sign in
-            </Typography>
+            <Avatar
+              className={classes.box}
+              src={Logo}
+              variant="square"
+            ></Avatar>
             <form className={classes.form} noValidate>
               <TextField
                 variant="outlined"

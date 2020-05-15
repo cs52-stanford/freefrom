@@ -41,7 +41,12 @@ const contentStyle = {
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
+    textAlign: "center",
   },
+  center: {
+    textAlign: "center",
+  },
+
   button: {
     marginTop: theme.spacing(1),
     marginRight: theme.spacing(1),
@@ -85,6 +90,7 @@ export default function VerticalLinearStepper(props) {
           activeStep={activeStep}
           orientation="vertical"
           style={backgroundStyle}
+          className={classes.center}
         >
           <Step key={steps[0]}>
             <StepLabel>{steps[0]}</StepLabel>

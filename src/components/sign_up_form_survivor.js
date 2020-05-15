@@ -52,6 +52,10 @@ const useStyles = makeStyles((theme) => ({
   resetContainer: {
     padding: theme.spacing(3),
   },
+
+  center: {
+    textAlign: "center",
+  },
 }));
 
 function getSteps() {
@@ -85,6 +89,7 @@ export default function VerticalLinearStepper(props) {
           activeStep={activeStep}
           orientation="vertical"
           style={backgroundStyle}
+          className={classes.center}
         >
           <Step key={steps[0]}>
             <StepLabel>{steps[0]}</StepLabel>

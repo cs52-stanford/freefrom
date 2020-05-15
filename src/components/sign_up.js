@@ -26,39 +26,37 @@ const themeA = createMuiTheme({
 
 const TypeCard = (props) => {
   return (
-    <ThemeProvider theme={themeA} className="backgroundColor">
-      <Container className="one" maxWidth="sm">
-        <Container className="three" maxWidth="sm"></Container>
-        <Container className="four" maxWidth="sm">
-          <Container className="five" maxWidth="sm">
-            <Typography align="center" variant="h5">
-              I am a:
-            </Typography>
+    <Container className="one" maxWidth="sm">
+      <Container className="three" maxWidth="sm"></Container>
+      <Container className="four" maxWidth="sm">
+        <Container className="five" maxWidth="sm">
+          <Typography align="center" variant="h5">
+            I am a:
+          </Typography>
 
-            <div className="seven">
-              <div
-                className="lawyerButton"
-                onClick={function () {
-                  props.setIsFirstScreen(false);
-                  props.setIsLawyer(true);
-                }}
-              >
-                LAWYER
-              </div>
-              <div
-                className="survivorButton"
-                onClick={function () {
-                  props.setIsFirstScreen(false);
-                  props.setIsLawyer(false);
-                }}
-              >
-                SURVIVOR
-              </div>
+          <div className="seven">
+            <div
+              className="lawyerButton"
+              onClick={function () {
+                props.setIsFirstScreen(false);
+                props.setIsLawyer(true);
+              }}
+            >
+              LAWYER
             </div>
-          </Container>
+            <div
+              className="survivorButton"
+              onClick={function () {
+                props.setIsFirstScreen(false);
+                props.setIsLawyer(false);
+              }}
+            >
+              SURVIVOR
+            </div>
+          </div>
         </Container>
       </Container>
-    </ThemeProvider>
+    </Container>
   );
 };
 
@@ -68,14 +66,16 @@ export default function SignUp(props) {
 
   if (isFirstScreen) {
     return (
-      <div className="screen">
-        <NavBar setIsSignIn={props.setIsSignIn} />
-        <TypeCard
-          setIsFirstScreen={setIsFirstScreen}
-          setIsLawyer={setIsLawyer}
-        />
-        <div className="footer"></div>
-      </div>
+      <ThemeProvider theme={themeA} className="backgroundColor">
+        <div className="screen">
+          <NavBar setIsSignIn={props.setIsSignIn} />
+          <TypeCard
+            setIsFirstScreen={setIsFirstScreen}
+            setIsLawyer={setIsLawyer}
+          />
+          <div className="footer"></div>
+        </div>
+      </ThemeProvider>
     );
   }
 
