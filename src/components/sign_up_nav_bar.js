@@ -7,6 +7,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
+import logo from "./counselCompassLogo.png";
+import "./sign_up.css";
 
 const themeA = createMuiTheme({
   palette: {
@@ -22,10 +24,9 @@ const themeA = createMuiTheme({
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    textAlign: "left",
   },
-  menuButton: {
-    marginRight: theme.spacing(),
+  exitButton: {
+    marginRight: theme.spacing(2),
   },
 }));
 
@@ -37,15 +38,16 @@ export default function ButtonAppBar(props) {
       <ThemeProvider theme={themeA}>
         <AppBar color="primary" position="static">
           <Toolbar>
-            <Typography color="secondary" className={classes.root}>
-              Civil Seeker
-            </Typography>
+            <Container>
+              <img src={logo} className="logoImage"></img>
+            </Container>
+
             <Button
               onClick={function () {
                 props.setIsSignIn(true);
               }}
               color="secondary"
-              alignSelf="flex-end"
+              className={classes.exitButton}
             >
               Exit
             </Button>

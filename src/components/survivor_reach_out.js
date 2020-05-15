@@ -1,171 +1,200 @@
 import React, { useState } from "react";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
+import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
-import Grid from "@material-ui/core/Grid";
-import { amber } from "@material-ui/core/colors";
-import {
-  createMuiTheme,
-  withStyles,
-  makeStyles,
-  ThemeProvider,
-} from "@material-ui/core/styles";
-import "./survivor.css";
+import Container from "@material-ui/core/Container";
+import TextField from "@material-ui/core/TextField";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+
+const themeA = createMuiTheme({
+  root: {
+    backgroundColor: "#e06d4f",
+  },
+
+  palette: {
+    primary: {
+      main: "#e06d4f",
+    },
+    secondary: {
+      main: "#f7fff7",
+    },
+  },
+});
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    minWidth: 100,
-    marginTop: 80,
+    maxWidth: 600,
   },
-  bullet: {
-    display: "inline-block",
-    margin: "0 2px",
-    transform: "scale(0.8)",
+  media: {
+    height: 140,
   },
-  title: {
-    fontSize: 40,
-  },
-  pos: {
-    marginBottom: 12,
-  },
-  profilepic: {
+
+  large: {
     width: theme.spacing(14),
     height: theme.spacing(14),
     marginLeft: "auto",
     marginRight: "auto",
+    marginBottom: "1rem",
   },
-  container: {
-    width: "50%",
-  },
-  root: {
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: 80,
-    backgroundColor: "#e1f5fe",
-  },
-  cardcontent: {
-    alignItems: "center",
-  },
-  BottomRow: {
+
+  contain: {
     display: "flex",
-    alignItems: "center",
     justifyContent: "center",
+    paddingTop: "2rem",
   },
-  confirmButton: {
-    alignSelf: "flex-end",
+
+  cardContentBox: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
   },
 }));
 
-const SurvivorReachOut = (props) => {
+export default function MediaCard(props) {
+  const [isConfirmScreen, setIsConfirmScreen] = useState(false);
   const classes = useStyles();
-  const bull = <span className={classes.bullet}>•</span>;
-  const [isDisplayingProfile, setIsDisplayingProfile] = useState(true);
 
-  if (isDisplayingProfile) {
+  const CHARACTER_LIMIT = 300;
+  const [message, setMessage] = React.useState({
+    note: "",
+  });
+
+  const handleChange = (note) => (event) => {
+    setMessage({ ...message, [note]: event.target.value });
+  };
+
+  if (isConfirmScreen) {
     return (
-      <React.Fragment>
-        <CssBaseline />
-        <Container fixed className={classes.container}>
+      <ThemeProvider theme={themeA}>
+        <Container className={classes.contain} maxWidth="lg">
           <Card className={classes.root}>
-            <CardContent className={classes.cardcontent}>
+            <CardContent className={classes.cardContentBox}>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="h2"
+                align="center"
+              >
+                Almost done!
+              </Typography>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                variant="subtitle1"
+                align="center"
+                paragraph
+              >
+                By clicking 'confirm', you agree to have your profile
+                information (including any details about your case) sent to{" "}
+                {props.lawyerName}. You may also add an optional message, if
+                you'd like:
+              </Typography>
+              <TextField
+                autoFocus
+                multiline
+                rows="3"
+                color="primary"
+                variant="outlined"
+                size="medium"
+                inputProps={{
+                  maxlength: CHARACTER_LIMIT,
+                }}
+                value={message.note}
+                helperText={`character limit: ${message.note.length}/${CHARACTER_LIMIT}`}
+                onChange={handleChange("note")}
+              />
+            </CardContent>
+            <CardActions>
               <Button
-                className="DraftEmail"
-                onClick={() => {
-                  props.setViewProfile(false);
+                size="small"
+                color="primary"
+                onClick={function () {
+                  setIsConfirmScreen(false);
                 }}
               >
-                <Typography>GO BACK</Typography>
+                Go back
               </Button>
-              <Typography
-                className={classes.title}
-                color="textSecondary"
-                gutterBottom
-                align="center"
-                variant="h3"
+              <Button
+                size="small"
+                color="primary"
+                onClick={function () {
+                  props.setViewProfile(false);
+                  setIsConfirmScreen(false);
+                }}
               >
-                {props.lawyerName}
-              </Typography>
-              <Avatar
-                img
-                className={classes.profilepic}
-                src={props.lawyerImage}
-              ></Avatar>
-              <div className="BottomRow">
-                <p>
-                  Bio: This will eventually have the lawyer's bio but for now
-                  this is just placeholder text.
-                </p>
-                <Button
-                  variant="outlinedPrimary"
-                  className="DraftEmail"
-                  onClick={() => {
-                    setIsDisplayingProfile(false);
-                  }}
-                >
-                  <Typography>REQUEST SERVICES</Typography>
-                </Button>
-              </div>
-            </CardContent>
+                Confirm
+              </Button>
+            </CardActions>
           </Card>
         </Container>
-      </React.Fragment>
+      </ThemeProvider>
     );
   } else {
     return (
-      <React.Fragment>
-        <CssBaseline />
-        <Container fixed className={classes.container}>
+      <ThemeProvider theme={themeA}>
+        <Container className={classes.contain} maxWidth="lg">
           <Card className={classes.root}>
-            <CardContent className={classes.cardcontent}>
-              <div className="BottomRow">
-                <p className="p">
-                  By clicking confirm you agree to send your profile
-                  information, including any details you included about your
-                  case, to {props.lawyerName}.
-                </p>
-                <div className="buttonRow">
-                  <ColorButton
-                    variant="contained"
-                    className="confirmationButtons"
-                    onClick={() => {
-                      setIsDisplayingProfile(true);
-                    }}
-                  >
-                    <Typography>GO BACK</Typography>
-                  </ColorButton>
-                  <ColorButton
-                    variant="contained"
-                    className={classes.confirmButton}
-                    onClick={() => {
-                      props.setViewProfile(false);
-                      props.setStatus(props.lawyerIndex, "profile sent!");
-                    }}
-                  >
-                    <Typography>CONFIRM</Typography>
-                  </ColorButton>
-                </div>
-              </div>
+            <CardContent>
+              <Typography
+                gutterBottom
+                variant="h5"
+                component="h2"
+                align="center"
+              >
+                {props.lawyerName}
+              </Typography>
+              <Avatar src={props.lawyerImage} className={classes.large} />
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                variant="subtitle1"
+                align="center"
+                paragraph
+              >
+                Practice Counties: placeholder county1, placeholder county2
+              </Typography>
+              <Typography variant="body2" color="textSecondary" component="p">
+                Bio: Eventually this will have the lawyer's full bio and profile
+                information but for now here is some placeholder text. Lorem
+                ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              </Typography>
             </CardContent>
+            <CardActions>
+              <Button
+                size="small"
+                color="primary"
+                onClick={function () {
+                  props.setViewProfile(false);
+                }}
+              >
+                Go back
+              </Button>
+              <Button
+                size="small"
+                color="primary"
+                onClick={function () {
+                  setIsConfirmScreen(true);
+                }}
+              >
+                Request Services
+              </Button>
+            </CardActions>
           </Card>
         </Container>
-      </React.Fragment>
+      </ThemeProvider>
     );
   }
-};
-
-const ColorButton = withStyles((theme) => ({
-  root: {
-    color: theme.palette.getContrastText(amber[900]),
-    backgroundColor: amber[900],
-    "&:hover": {
-      backgroundColor: amber[900],
-    },
-  },
-}))(Button);
-
-export default SurvivorReachOut;
+}

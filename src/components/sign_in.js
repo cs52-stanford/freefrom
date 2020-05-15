@@ -74,6 +74,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  check: {
+    justifyContent: "center",
+  },
 }));
 
 export default function SignIn(props) {
@@ -112,10 +115,15 @@ export default function SignIn(props) {
                 id="password"
                 autoComplete="current-password"
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
+              <Grid container className={classes.check}>
+                <Grid item>
+                  <FormControlLabel
+                    control={<Checkbox value="remember" color="primary" />}
+                    label="Remember me"
+                  />
+                </Grid>
+              </Grid>
+
               <Button
                 type="submit"
                 fullWidth

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Container from "@material-ui/core/Container";
+import Typography from "@material-ui/core/Typography";
 import "./sign_up.css";
 import NavBar from "./sign_up_nav_bar.js";
 import SurvivorForm from "./sign_up_form_survivor.js";
@@ -30,7 +31,9 @@ const TypeCard = (props) => {
         <Container className="three" maxWidth="sm"></Container>
         <Container className="four" maxWidth="sm">
           <Container className="five" maxWidth="sm">
-            <div>I am a:</div>
+            <Typography align="center" variant="h5">
+              I am a:
+            </Typography>
 
             <div className="seven">
               <div

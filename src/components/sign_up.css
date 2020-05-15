@@ -174,3 +174,9 @@
 .spacing2 {
   padding-bottom: 2rem;
 }
+
+.logoImage {
+  width: 10%;
+  height: 10%;
+  text-align: left;
+}
