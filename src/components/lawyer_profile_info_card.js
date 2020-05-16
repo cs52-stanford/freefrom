@@ -246,7 +246,7 @@ const ProfileCard = (props) => {
             <h5>Question {questionNumber} of 5 </h5>
             <FormControl className={classes.formControl} fullWidth={true}>
               <InputLabel id="demo-simple-select-label">
-                Where do you practice?
+                In which California county/counties do you practice?
               </InputLabel>
               <Select
                 value={props.practiceCounty}

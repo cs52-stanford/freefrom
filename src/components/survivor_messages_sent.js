@@ -72,11 +72,14 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
   },
+  root: {
+    alignSelf: "center",
+  },
 }));
 
 export default function Album(props) {
   const classes = useStyles();
-  console.log(props.sentLawyers);
+
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
       <React.Fragment>
@@ -91,16 +94,15 @@ export default function Album(props) {
                 color="textSecondary"
                 paragraph
               >
-                Welcome! Here are a list of lawyers who may be willing to take
-                your case. Click "reach out" to send them your profile
-                information and request legal help!
+                Here are the lawyers you have reached out to - make sure to
+                check back to see if they've responded!
               </Typography>
             </Container>
           </div>
           <Container className={classes.cardGrid} maxWidth="md">
             {/* End hero unit */}
             <Grid container spacing={4}>
-              {props.unsentLawyers.map((card, index) => (
+              {props.sentLawyers.map((card, index) => (
                 <Grid item key={card} xs={12} sm={6} md={4}>
                   <Card className={classes.card}>
                     <CardMedia
@@ -122,7 +124,7 @@ export default function Album(props) {
                         Bio: here is some placeholder text
                       </Typography>
                     </CardContent>
-                    <CardActions>
+                    <CardActions className={classes.root}>
                       <Button
                         size="small"
                         color="primary"
@@ -130,25 +132,11 @@ export default function Album(props) {
                           props.setViewProfile(true);
                           props.setLawyerName(props.lawyerNames[card]);
                           props.setLawyerImage(props.lawyerPhotos[card]);
-                          props.setLawyerIndex(index);
+                          props.setLawyerIndex(card);
                           props.setStatus(card, "viewed");
                         }}
                       >
                         View Full Profile
-                      </Button>
-                      <Button
-                        size="small"
-                        color="primary"
-                        onClick={function () {
-                          props.setViewProfile(true);
-                          props.setIsConfirmScreen(true);
-                          props.setLawyerName(props.lawyerNames[card]);
-                          props.setLawyerImage(props.lawyerPhotos[card]);
-                          props.setLawyerIndex(index);
-                          props.setStatus(card, "viewed");
-                        }}
-                      >
-                        Reach Out
                       </Button>
                     </CardActions>
                   </Card>

@@ -9,8 +9,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import Logo from "../logo-test.png";
 import Avatar from "@material-ui/core/Avatar";
 
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -51,7 +49,7 @@ export default function SurvivorHeader(props) {
     <div className={classes.root}>
       <AppBar className={classes.appbar} position="static">
         <Toolbar className={classes.tool}>
-        <Avatar className={classes.menuButton} src={Logo}></Avatar>
+          <Avatar className={classes.menuButton} src={Logo}></Avatar>
           <Typography variant="h4" className={classes.title}>
             Civil Seeker
           </Typography>
@@ -62,11 +60,11 @@ export default function SurvivorHeader(props) {
               props.setIsSurvivorMatches(true);
               props.setIsSurvivorSettings(false);
               props.setIsSurvivorResources(false);
-              props.setViewProfile(false)
+              props.setViewProfile(false);
             }}
           >
             <Typography variant="h6" className={classes.matchestext}>
-              Matches
+              Home
             </Typography>
           </Button>
           <Button
@@ -76,11 +74,11 @@ export default function SurvivorHeader(props) {
               props.setIsSurvivorMatches(false);
               props.setIsSurvivorSettings(false);
               props.setIsSurvivorResources(true);
-              props.setViewProfile(false)
+              props.setViewProfile(false);
             }}
           >
             <Typography variant="h6" className={classes.resourcestext}>
-              Resources
+              Connections
             </Typography>
           </Button>
           <Button
@@ -90,21 +88,21 @@ export default function SurvivorHeader(props) {
               props.setIsSurvivorMatches(false);
               props.setIsSurvivorSettings(true);
               props.setIsSurvivorResources(false);
-              props.setViewProfile(false)
+              props.setViewProfile(false);
             }}
           >
             <Typography variant="h6" className={classes.settingstext}>
               Settings
             </Typography>
           </Button>
-          <IconButton 
-            className={classes.logout} 
+          <IconButton
+            className={classes.logout}
             color={"inherit"}
             onClick={() => {
-                props.setIsLogIn(false);
-                props.setViewProfile(false)
+              props.setIsLogIn(false);
+              props.setViewProfile(false);
             }}
-            >
+          >
             Logout
           </IconButton>
         </Toolbar>

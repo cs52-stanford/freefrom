@@ -18,10 +18,10 @@ const themeA = createMuiTheme({
 
   palette: {
     primary: {
-      main: "#e06d4f",
+      main: "#EB6548",
     },
     secondary: {
-      main: "#f7fff7",
+      main: "#00cdcd",
     },
   },
 });
@@ -56,7 +56,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function MediaCard(props) {
-  const [isConfirmScreen, setIsConfirmScreen] = useState(false);
   const classes = useStyles();
 
   const CHARACTER_LIMIT = 300;
@@ -68,7 +67,7 @@ export default function MediaCard(props) {
     setMessage({ ...message, [note]: event.target.value });
   };
 
-  if (isConfirmScreen) {
+  if (props.isConfirmScreen) {
     return (
       <ThemeProvider theme={themeA}>
         <Container className={classes.contain} maxWidth="lg">
@@ -115,7 +114,7 @@ export default function MediaCard(props) {
                 size="small"
                 color="primary"
                 onClick={function () {
-                  setIsConfirmScreen(false);
+                  props.setIsConfirmScreen(false);
                 }}
               >
                 Go back
@@ -125,7 +124,21 @@ export default function MediaCard(props) {
                 color="primary"
                 onClick={function () {
                   props.setViewProfile(false);
-                  setIsConfirmScreen(false);
+                  props.setIsConfirmScreen(false);
+                  props.setStatus(
+                    props.lawyerIndex,
+                    "profile sent! awaiting response"
+                  );
+                  props.setSentLawyers(
+                    [props.unsentLawyers[props.lawyerIndex]].concat(
+                      props.sentLawyers
+                    )
+                  );
+                  props.setUnsentLawyers(
+                    props.unsentLawyers
+                      .slice(0, props.lawyerIndex)
+                      .concat(props.unsentLawyers.slice(props.lawyerIndex + 1))
+                  );
                 }}
               >
                 Confirm
@@ -186,7 +199,7 @@ export default function MediaCard(props) {
                 size="small"
                 color="primary"
                 onClick={function () {
-                  setIsConfirmScreen(true);
+                  props.setIsConfirmScreen(true);
                 }}
               >
                 Request Services
