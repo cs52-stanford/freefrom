@@ -14,6 +14,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
+import Button from "@material-ui/core/Button";
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Avatar from "@material-ui/core/Avatar";
@@ -44,6 +45,8 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: drawerWidth,
       backgroundColor: "#e1f5fe",
     },
+    backgroundColor: "#e1f5fe",
+    color: "#000000",
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -157,7 +160,7 @@ function SurvivorHeader(props) {
     <Grid justify="flex-end" className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar justify="center">
+        <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
