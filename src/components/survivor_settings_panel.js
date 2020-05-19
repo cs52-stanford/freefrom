@@ -13,8 +13,28 @@ import FormControl from "@material-ui/core/FormControl";
 import Radio from "@material-ui/core/Radio";
 import InputLabel from "@material-ui/core/InputLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
 import "./survivor.css"
 import { css } from "@emotion/core";
+
+
+const themeA = createMuiTheme({
+    root: {
+      backgroundColor: "#e06d4f",
+    },
+  
+    palette: {
+      primary: {
+        main: "#EB6548",
+      },
+      secondary: {
+        main: "#00cdcd",
+      },
+    },
+  });
 
   const radioButtonStyle = {
     color: "#616771",
@@ -128,7 +148,15 @@ const useStyles = makeStyles((theme) => ({
       InputLabel: {
         color: "#ff6f00",
         fontSize: 20,
-      }
+      },
+      cardGrid: {
+        paddingTop: theme.spacing(3),
+        paddingBottom: theme.spacing(8),
+      },
+      heroContent: {
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(4, 0, 2),
+      },
 }));
 
 const SurvivorSettingsPanel = (props) => {
@@ -140,7 +168,23 @@ const SurvivorSettingsPanel = (props) => {
   };
 
   return (
-    <div className={classes.root}>
+    <ThemeProvider theme={themeA} className="backgroundColor">
+    <React.Fragment>
+      <CssBaseline />
+      <main>
+      <div className={classes.heroContent}>
+            <Container maxWidth="md">
+              <Typography
+                variant="h5"
+                align="center"
+                color="textSecondary"
+                paragraph
+              >
+                Welcome to your Settings! Be sure to keep your account and case information up to date.
+              </Typography>
+            </Container>
+          </div>
+    <Container className={classes.cardGrid} maxWidth="md">
       <ExpansionPanel className={classes.AccountInfoPanel} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
@@ -416,7 +460,10 @@ const SurvivorSettingsPanel = (props) => {
             </Grid>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-    </div>
+      </Container>
+      </main>
+      </React.Fragment>
+    </ThemeProvider>
   );
 }
 
