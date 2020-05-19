@@ -13,16 +13,36 @@ import FormControl from "@material-ui/core/FormControl";
 import Radio from "@material-ui/core/Radio";
 import InputLabel from "@material-ui/core/InputLabel";
 import RadioGroup from "@material-ui/core/RadioGroup";
+import Container from "@material-ui/core/Container";
 import "./survivor.css"
 import TextField from "@material-ui/core/TextField";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
 import Avatar from "@material-ui/core/Avatar";
 import { css } from "@emotion/core";
 
   const radioButtonStyle = {
     color: "#616771",
   };
+
+
+const themeA = createMuiTheme({
+    root: {
+      backgroundColor: "#e06d4f",
+    },
+  
+    palette: {
+      primary: {
+        main: "#EB6548",
+      },
+      secondary: {
+        main: "#00cdcd",
+      },
+    },
+  });
 
 
 const counties = [
@@ -117,6 +137,10 @@ const useStyles = makeStyles((theme) => ({
     SubSettingsText: {
         color: "#000000",
     },
+    heroContent: {
+        backgroundColor: theme.palette.background.paper,
+        padding: theme.spacing(5, 0, 3),
+      },
     formControl: {
         margin: theme.spacing(1),
         minWidth: 120,
@@ -144,7 +168,23 @@ const LawyerSettingsPanel = (props) => {
   };
 
   return (
-    <div className={classes.root}>
+    <ThemeProvider theme={themeA} className="backgroundColor">
+    <React.Fragment>
+      <CssBaseline />
+      <main>
+      <div className={classes.heroContent}>
+            <Container maxWidth="md">
+              <Typography
+                variant="h5"
+                align="center"
+                color="textSecondary"
+                paragraph
+              >
+                Welcome to your Settings! Be sure to keep your account and case information up to date.
+              </Typography>
+            </Container>
+          </div>
+    <Container className={classes.cardGrid} maxWidth="md">
       <ExpansionPanel className={classes.AccountInfoPanel} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
         <ExpansionPanelSummary
           expandIcon={<ExpandMoreIcon />}
@@ -423,7 +463,10 @@ const LawyerSettingsPanel = (props) => {
             </Grid>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-    </div>
+      </Container>
+      </main>
+      </React.Fragment>
+    </ThemeProvider>
   );
 }
 
