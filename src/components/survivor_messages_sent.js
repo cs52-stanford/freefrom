@@ -133,7 +133,6 @@ export default function Album(props) {
                           props.setLawyerName(props.lawyerNames[card]);
                           props.setLawyerImage(props.lawyerPhotos[card]);
                           props.setLawyerIndex(card);
-                          props.setStatus(card, "viewed");
                         }}
                       >
                         View Full Profile

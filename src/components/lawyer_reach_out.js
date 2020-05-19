@@ -7,9 +7,10 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import Container from "@material-ui/core/Container";
-import TextField from "@material-ui/core/TextField";
+import CardHeader from "@material-ui/core/CardHeader";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
+import { css } from "@emotion/core";
 
 const themeA = createMuiTheme({
   root: {
@@ -29,6 +30,7 @@ const themeA = createMuiTheme({
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 600,
+    paddingTop: "5px",
   },
   media: {
     height: 140,
@@ -58,15 +60,6 @@ const useStyles = makeStyles((theme) => ({
 export default function MediaCard(props) {
   const classes = useStyles();
 
-  const CHARACTER_LIMIT = 300;
-  const [message, setMessage] = React.useState({
-    note: "",
-  });
-
-  const handleChange = (note) => (event) => {
-    setMessage({ ...message, [note]: event.target.value });
-  };
-
   if (props.isConfirmScreen) {
     return (
       <ThemeProvider theme={themeA}>
@@ -89,25 +82,9 @@ export default function MediaCard(props) {
                 align="center"
                 paragraph
               >
-                By clicking 'confirm', you agree to have your profile
-                information (including any details about your case) sent to{" "}
-                {props.lawyerName}. You may also add an optional message, if
-                you'd like:
+                By clicking 'confirm', you agree to give your contact
+                information to {props.survivorName}.
               </Typography>
-              <TextField
-                autoFocus
-                multiline
-                rows="3"
-                color="primary"
-                variant="outlined"
-                size="medium"
-                inputProps={{
-                  maxlength: CHARACTER_LIMIT,
-                }}
-                value={message.note}
-                helperText={`character limit: ${message.note.length}/${CHARACTER_LIMIT}`}
-                onChange={handleChange("note")}
-              />
             </CardContent>
             <CardActions>
               <Button
@@ -126,18 +103,20 @@ export default function MediaCard(props) {
                   props.setViewProfile(false);
                   props.setIsConfirmScreen(false);
                   props.setStatus(
-                    props.unsentLawyers[props.lawyerIndex],
-                    "profile sent! awaiting response"
+                    props.survivorIndex,
+                    "awaiting survivor response!"
                   );
-                  props.setSentLawyers(
-                    [props.unsentLawyers[props.lawyerIndex]].concat(
-                      props.sentLawyers
+                  props.setSentSurvivors(
+                    [props.unsentSurvivors[props.survivorIndex]].concat(
+                      props.sentSurvivors
                     )
                   );
-                  props.setUnsentLawyers(
-                    props.unsentLawyers
-                      .slice(0, props.lawyerIndex)
-                      .concat(props.unsentLawyers.slice(props.lawyerIndex + 1))
+                  props.setUnsentSurvivors(
+                    props.unsentSurvivors
+                      .slice(0, props.survivorIndex)
+                      .concat(
+                        props.unsentSurvivors.slice(props.survivorIndex + 1)
+                      )
                   );
                 }}
               >
@@ -154,15 +133,24 @@ export default function MediaCard(props) {
         <Container className={classes.contain} maxWidth="lg">
           <Card className={classes.root}>
             <CardContent>
+              <Button
+                size="small"
+                color="primary"
+                onClick={function () {
+                  props.setViewProfile(false);
+                }}
+              >
+                Go Back
+              </Button>
               <Typography
                 gutterBottom
                 variant="h5"
                 component="h2"
                 align="center"
               >
-                {props.lawyerName}
+                {props.survivorName}
               </Typography>
-              <Avatar src={props.lawyerImage} className={classes.large} />
+
               <Typography
                 variant="body2"
                 color="textSecondary"
@@ -171,10 +159,10 @@ export default function MediaCard(props) {
                 align="center"
                 paragraph
               >
-                Practice Counties: placeholder county1, placeholder county2
+                Location: placeholder
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                Bio: Eventually this will have the lawyer's full bio and profile
+                Case Info: Eventually this will have the survivor's case
                 information but for now here is some placeholder text. Lorem
                 ipsum dolor sit amet, consectetur adipiscing elit, sed do
                 eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -190,10 +178,17 @@ export default function MediaCard(props) {
                 size="small"
                 color="primary"
                 onClick={function () {
+                  props.setUnsentSurvivors(
+                    props.unsentSurvivors
+                      .slice(0, props.survivorIndex)
+                      .concat(
+                        props.unsentSurvivors.slice(props.survivorIndex + 1)
+                      )
+                  );
                   props.setViewProfile(false);
                 }}
               >
-                Go back
+                Decline Meeting
               </Button>
               <Button
                 size="small"
@@ -202,7 +197,7 @@ export default function MediaCard(props) {
                   props.setIsConfirmScreen(true);
                 }}
               >
-                Request Services
+                Accept Meeting
               </Button>
             </CardActions>
           </Card>

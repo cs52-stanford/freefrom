@@ -74,6 +74,9 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
   },
+  root: {
+    alignSelf: "center",
+  },
 }));
 
 const cards = [0, 1, 2, 3, 4, 5];
@@ -95,16 +98,14 @@ export default function Album(props) {
                 color="textSecondary"
                 paragraph
               >
-                Welcome to your lawyer home page! As you match with survivors,
-                their profiles will appear below. Click "reach out" to email a
-                survivor and set up a call.
+                Below are the cases you have agreed to take meetings about:
               </Typography>
             </Container>
           </div>
           <Container className={classes.cardGrid} maxWidth="md">
             {/* End hero unit */}
             <Grid container spacing={4}>
-              {props.unsentSurvivors.map((card, index) => (
+              {props.sentSurvivors.map((card, index) => (
                 <Grid item key={card} xs={12} sm={6} md={4}>
                   <Card className={classes.card}>
                     <CardMedia
@@ -126,33 +127,17 @@ export default function Album(props) {
                         Case: here is some placeholder text
                       </Typography>
                     </CardContent>
-                    <CardActions>
+                    <CardActions className={classes.root}>
                       <Button
                         size="small"
                         color="primary"
                         onClick={function () {
-                          props.setViewProfile(true);
                           props.setSurvivorName(props.survivorNames[card]);
                           props.setSurvivorImage(props.survivorPhotos[card]);
                           props.setSurvivorIndex(index);
-                          props.setStatus(card, "viewed");
                         }}
                       >
                         View Case
-                      </Button>
-                      <Button
-                        size="small"
-                        color="primary"
-                        onClick={function () {
-                          props.setViewProfile(true);
-                          props.setIsConfirmScreen(true);
-                          props.setSurvivorName(props.survivorNames[card]);
-                          props.setSurvivorImage(props.survivorPhotos[card]);
-                          props.setSurvivorIndex(index);
-                          props.setStatus(card, "viewed");
-                        }}
-                      >
-                        Accept Meeting
                       </Button>
                     </CardActions>
                   </Card>

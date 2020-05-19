@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SurvivorMatches from "./survivor_matches.js";
-import SurvivorResources from "./survivor_messages_sent.js";
+import SurvivorConnections from "./survivor_messages_sent.js";
 import SurvivorSettings from "./survivor_settings.js";
 import SurvivorHeader from "./survivor_header.js";
 
@@ -9,7 +9,7 @@ const statuses = ["new!", "new!", "new!", "new!", "new!", "new!"];
 const SurvivorHome = (props) => {
   const [isSurvivorMatches, setIsSurvivorMatches] = useState(true);
   const [isConfirmScreen, setIsConfirmScreen] = useState(false);
-  const [isSurvivorResources, setIsSurvivorResources] = useState(false);
+  const [isSurvivorConnections, setIsSurvivorConnections] = useState(false);
   const [isSurvivorSettings, setIsSurvivorSettings] = useState(false);
   const [viewProfile, setViewProfile] = useState(false);
   const [lawyerProfile, setLawyerProfile] = useState([]);
@@ -46,7 +46,7 @@ const SurvivorHome = (props) => {
       <div className="lawyerhome">
         <SurvivorHeader
           setIsSurvivorMatches={setIsSurvivorMatches}
-          setIsSurvivorResources={setIsSurvivorResources}
+          setIsSurvivorConnections={setIsSurvivorConnections}
           setIsSurvivorSettings={setIsSurvivorSettings}
           setIsLogIn={props.setIsLogIn}
           viewProfile={viewProfile}
@@ -79,18 +79,18 @@ const SurvivorHome = (props) => {
       </div>
     );
   }
-  if (isSurvivorResources === true) {
+  if (isSurvivorConnections === true) {
     return (
       <div className="lawyerhome">
         <SurvivorHeader
           setIsSurvivorMatches={setIsSurvivorMatches}
-          setIsSurvivorResources={setIsSurvivorResources}
+          setIsSurvivorConnections={setIsSurvivorConnections}
           setIsSurvivorSettings={setIsSurvivorSettings}
           setIsLogIn={props.setIsLogIn}
           viewProfile={viewProfile}
           setViewProfile={setViewProfile}
         />
-        <SurvivorResources
+        <SurvivorConnections
           viewProfile={viewProfile}
           setViewProfile={setViewProfile}
           setLawyerImage={setLawyerImage}
@@ -113,7 +113,7 @@ const SurvivorHome = (props) => {
           sentLawyers={sentLawyers}
           lawyerIndex={lawyerIndex}
           setLawyerIndex={setLawyerIndex}
-        ></SurvivorResources>
+        ></SurvivorConnections>
       </div>
     );
   }
@@ -122,7 +122,7 @@ const SurvivorHome = (props) => {
       <div className="survivorhome">
         <SurvivorHeader
           setIsSurvivorMatches={setIsSurvivorMatches}
-          setIsSurvivorResources={setIsSurvivorResources}
+          setIsSurvivorConnections={setIsSurvivorConnections}
           setIsSurvivorSettings={setIsSurvivorSettings}
           setIsLogIn={props.setIsLogIn}
           viewProfile={viewProfile}

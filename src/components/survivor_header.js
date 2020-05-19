@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
   matchestext: {
     color: "#757575",
   },
-  resourcestext: {
+  connectionstext: {
     color: "#757575",
   },
   settingstext: {
@@ -59,7 +59,7 @@ export default function SurvivorHeader(props) {
             onClick={() => {
               props.setIsSurvivorMatches(true);
               props.setIsSurvivorSettings(false);
-              props.setIsSurvivorResources(false);
+              props.setIsSurvivorConnections(false);
               props.setViewProfile(false);
             }}
           >
@@ -73,11 +73,11 @@ export default function SurvivorHeader(props) {
             onClick={() => {
               props.setIsSurvivorMatches(false);
               props.setIsSurvivorSettings(false);
-              props.setIsSurvivorResources(true);
+              props.setIsSurvivorConnections(true);
               props.setViewProfile(false);
             }}
           >
-            <Typography variant="h6" className={classes.resourcestext}>
+            <Typography variant="h6" className={classes.connectionstext}>
               Connections
             </Typography>
           </Button>
@@ -87,7 +87,7 @@ export default function SurvivorHeader(props) {
             onClick={() => {
               props.setIsSurvivorMatches(false);
               props.setIsSurvivorSettings(true);
-              props.setIsSurvivorResources(false);
+              props.setIsSurvivorConnections(false);
               props.setViewProfile(false);
             }}
           >

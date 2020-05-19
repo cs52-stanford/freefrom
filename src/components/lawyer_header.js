@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   matches: {
     color: "#757575",
   },
-  resources: {
+  Connections: {
     color: "#757575",
   },
   settings: {
@@ -59,7 +59,7 @@ export default function LawyerHeader(props) {
             id="home"
             onClick={function () {
               props.setIsHomeScreen(true);
-              props.setIsResourceScreen(false);
+              props.setIsConnectionsScreen(false);
               props.setIsSettingsScreen(false);
             }}
           >
@@ -72,16 +72,16 @@ export default function LawyerHeader(props) {
             color="inherit"
           ></IconButton>
           <Button
-            className={classes.resources}
-            id="resources"
+            className={classes.Connections}
+            id="Connections"
             onClick={function () {
               props.setIsHomeScreen(false);
-              props.setIsResourceScreen(true);
+              props.setIsConnectionsScreen(true);
               props.setIsSettingsScreen(false);
             }}
           >
-            <Typography variant="h6" className={classes.resourcestext}>
-              Resources
+            <Typography variant="h6" className={classes.Connectionstext}>
+              Connections
             </Typography>
           </Button>
           <IconButton
@@ -93,7 +93,7 @@ export default function LawyerHeader(props) {
             id="settings"
             onClick={function () {
               props.setIsHomeScreen(false);
-              props.setIsResourceScreen(false);
+              props.setIsConnectionsScreen(false);
               props.setIsSettingsScreen(true);
             }}
           >
