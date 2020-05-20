@@ -104,6 +104,9 @@ export default function SignIn(props) {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                onChange={(event) => {
+                    props.setName(event.target.value)
+                }}
               />
               <TextField
                 variant="outlined"
