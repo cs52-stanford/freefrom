@@ -1,3 +1,4 @@
+.DS_Store
 # Logs
 logs
 *.log
@@ -63,3 +64,22 @@ node_modules/
 
 # dotenv environment variables file
 .env
+firebase.json
+functions/.eslintrc.json
+functions/index.js
+functions/package-lock.json
+functions/package.json
+public/404.html
+public/index.html
+firebase.json
+functions/.eslintrc.json
+functions/index.js
+functions/package-lock.json
+functions/package.json
+public/404.html
+public/index.html
+node_modules
+node_modules
+node_modules
+node_modules
+node_modules
