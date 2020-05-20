@@ -3,6 +3,8 @@ import SurvivorMatches from "./survivor_matches.js";
 import SurvivorConnections from "./survivor_messages_sent.js";
 import SurvivorSettings from "./survivor_settings.js";
 import SurvivorHeader from "./survivor_header.js";
+import { Grid } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core/styles";
 
 const statuses = ["new!", "new!", "new!", "new!", "new!", "new!"];
 
@@ -43,7 +45,7 @@ const SurvivorHome = (props) => {
 
   if (isSurvivorMatches === true) {
     return (
-      <div className="lawyerhome">
+      <Grid justify="flex-end" alignContent="space-between" className="lawyerhome">
         <SurvivorHeader
           setIsSurvivorMatches={setIsSurvivorMatches}
           setIsSurvivorConnections={setIsSurvivorConnections}
@@ -76,12 +78,12 @@ const SurvivorHome = (props) => {
           lawyerIndex={lawyerIndex}
           setLawyerIndex={setLawyerIndex}
         ></SurvivorMatches>
-      </div>
+      </Grid>
     );
   }
   if (isSurvivorConnections === true) {
     return (
-      <div className="lawyerhome">
+        <Grid justify="flex-end" alignContent="space-between" className="lawyerhome">
         <SurvivorHeader
           setIsSurvivorMatches={setIsSurvivorMatches}
           setIsSurvivorConnections={setIsSurvivorConnections}
@@ -114,12 +116,12 @@ const SurvivorHome = (props) => {
           lawyerIndex={lawyerIndex}
           setLawyerIndex={setLawyerIndex}
         ></SurvivorConnections>
-      </div>
+      </Grid>
     );
   }
   if (isSurvivorSettings === true) {
     return (
-      <div className="survivorhome">
+        <Grid justify="flex-end" alignContent="space-between" className="lawyerhome">
         <SurvivorHeader
           setIsSurvivorMatches={setIsSurvivorMatches}
           setIsSurvivorConnections={setIsSurvivorConnections}
@@ -152,7 +154,7 @@ const SurvivorHome = (props) => {
           emailNotifications={props.emailNotifications}
           extraInfo={props.extraInfo}
         />
-      </div>
+      </Grid>
     );
   }
 };
