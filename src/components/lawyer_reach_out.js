@@ -1,208 +1,171 @@
 import React, { useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
-import Container from "@material-ui/core/Container";
-import CardHeader from "@material-ui/core/CardHeader";
-import { createMuiTheme } from "@material-ui/core/styles";
-import { ThemeProvider } from "@material-ui/styles";
-import { css } from "@emotion/core";
-
-const themeA = createMuiTheme({
-  root: {
-    backgroundColor: "#e06d4f",
-  },
-
-  palette: {
-    primary: {
-      main: "#EB6548",
-    },
-    secondary: {
-      main: "#00cdcd",
-    },
-  },
-});
+import Grid from "@material-ui/core/Grid";
+import { amber } from "@material-ui/core/colors";
+import {
+  createMuiTheme,
+  withStyles,
+  makeStyles,
+  ThemeProvider,
+} from "@material-ui/core/styles";
+import "./survivor.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 600,
-    paddingTop: "5px",
+    minWidth: 100,
+    marginTop: 80,
   },
-  media: {
-    height: 140,
+  bullet: {
+    display: "inline-block",
+    margin: "0 2px",
+    transform: "scale(0.8)",
   },
-
-  large: {
+  title: {
+    fontSize: 40,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+  profilepic: {
     width: theme.spacing(14),
     height: theme.spacing(14),
     marginLeft: "auto",
     marginRight: "auto",
-    marginBottom: "1rem",
   },
-
-  contain: {
-    display: "flex",
-    justifyContent: "center",
-    paddingTop: "2rem",
+  container: {
+    width: "50%",
   },
-
-  cardContentBox: {
+  root: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    marginTop: 80,
+    backgroundColor: "#e1f5fe",
+  },
+  cardcontent: {
+    alignItems: "center",
+  },
+  BottomRow: {
     display: "flex",
-    flexDirection: "column",
+    alignItems: "center",
     justifyContent: "center",
+  },
+  confirmButton: {
+    alignSelf: "flex-end",
   },
 }));
 
-export default function MediaCard(props) {
+const LawyerReachOut = (props) => {
   const classes = useStyles();
+  const bull = <span className={classes.bullet}>•</span>;
+  const [isDisplayingProfile, setIsDisplayingProfile] = useState(true);
 
-  if (props.isConfirmScreen) {
+  if (isDisplayingProfile) {
     return (
-      <ThemeProvider theme={themeA}>
-        <Container className={classes.contain} maxWidth="lg">
+      <React.Fragment>
+        <CssBaseline />
+        <Container fixed className={classes.container}>
           <Card className={classes.root}>
-            <CardContent className={classes.cardContentBox}>
-              <Typography
-                gutterBottom
-                variant="h5"
-                component="h2"
-                align="center"
+            <CardContent className={classes.cardcontent}>
+              <Button
+                className="DraftEmail"
+                onClick={() => {
+                  props.setViewProfile(false);
+                }}
               >
-                Almost done!
-              </Typography>
+                <Typography>GO BACK</Typography>
+              </Button>
               <Typography
-                variant="body2"
+                className={classes.title}
                 color="textSecondary"
-                component="p"
-                variant="subtitle1"
-                align="center"
-                paragraph
-              >
-                By clicking 'confirm', you agree to give your contact
-                information to {props.survivorName}.
-              </Typography>
-            </CardContent>
-            <CardActions>
-              <Button
-                size="small"
-                color="primary"
-                onClick={function () {
-                  props.setIsConfirmScreen(false);
-                }}
-              >
-                Go back
-              </Button>
-              <Button
-                size="small"
-                color="primary"
-                onClick={function () {
-                  props.setViewProfile(false);
-                  props.setIsConfirmScreen(false);
-                  props.setStatus(
-                    props.survivorIndex,
-                    "awaiting survivor response!"
-                  );
-                  props.setSentSurvivors(
-                    [props.unsentSurvivors[props.survivorIndex]].concat(
-                      props.sentSurvivors
-                    )
-                  );
-                  props.setUnsentSurvivors(
-                    props.unsentSurvivors
-                      .slice(0, props.survivorIndex)
-                      .concat(
-                        props.unsentSurvivors.slice(props.survivorIndex + 1)
-                      )
-                  );
-                }}
-              >
-                Confirm
-              </Button>
-            </CardActions>
-          </Card>
-        </Container>
-      </ThemeProvider>
-    );
-  } else {
-    return (
-      <ThemeProvider theme={themeA}>
-        <Container className={classes.contain} maxWidth="lg">
-          <Card className={classes.root}>
-            <CardContent>
-              <Button
-                size="small"
-                color="primary"
-                onClick={function () {
-                  props.setViewProfile(false);
-                }}
-              >
-                Go Back
-              </Button>
-              <Typography
                 gutterBottom
-                variant="h5"
-                component="h2"
                 align="center"
+                variant="h3"
               >
                 {props.survivorName}
               </Typography>
-
-              <Typography
-                variant="body2"
-                color="textSecondary"
-                component="p"
-                variant="subtitle1"
-                align="center"
-                paragraph
-              >
-                Location: placeholder
-              </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Case Info: Eventually this will have the survivor's case
-                information but for now here is some placeholder text. Lorem
-                ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
-              </Typography>
+              <Avatar
+                img
+                className={classes.profilepic}
+                src={props.survivorImage}
+              ></Avatar>
+              <div className="BottomRow">
+                <p>
+                  Bio: This will eventually have the survivors extra info but
+                  for now this is just placeholder text.
+                </p>
+                <Button
+                  variant="outlinedPrimary"
+                  className="DraftEmail"
+                  onClick={() => {
+                    setIsDisplayingProfile(false);
+                  }}
+                >
+                  <Typography>SEND EMAIL</Typography>
+                </Button>
+              </div>
             </CardContent>
-            <CardActions>
-              <Button
-                size="small"
-                color="primary"
-                onClick={function () {
-                  props.setUnsentSurvivors(
-                    props.unsentSurvivors
-                      .slice(0, props.survivorIndex)
-                      .concat(
-                        props.unsentSurvivors.slice(props.survivorIndex + 1)
-                      )
-                  );
-                  props.setViewProfile(false);
-                }}
-              >
-                Decline Meeting
-              </Button>
-              <Button
-                size="small"
-                color="primary"
-                onClick={function () {
-                  props.setIsConfirmScreen(true);
-                }}
-              >
-                Accept Meeting
-              </Button>
-            </CardActions>
           </Card>
         </Container>
-      </ThemeProvider>
+      </React.Fragment>
+    );
+  } else {
+    return (
+      <React.Fragment>
+        <CssBaseline />
+        <Container fixed className={classes.container}>
+          <Card className={classes.root}>
+            <CardContent className={classes.cardcontent}>
+              <div className="BottomRow">
+                <p className="p">
+                  By clicking confirm you agree to send your profile
+                  information, including any details you included about your
+                  case, to {props.survivorName}.
+                </p>
+                <div className="buttonRow">
+                  <ColorButton
+                    variant="contained"
+                    className="confirmationButtons"
+                    onClick={() => {
+                      setIsDisplayingProfile(true);
+                    }}
+                  >
+                    <Typography>GO BACK</Typography>
+                  </ColorButton>
+                  <ColorButton
+                    variant="contained"
+                    className={classes.confirmButton}
+                    onClick={() => {
+                      props.setViewProfile(false);
+                      props.setStatus(props.survivorIndex, "profile sent!");
+                    }}
+                  >
+                    <Typography>CONFIRM</Typography>
+                  </ColorButton>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </Container>
+      </React.Fragment>
     );
   }
-}
+};
+
+const ColorButton = withStyles((theme) => ({
+  root: {
+    color: theme.palette.getContrastText(amber[900]),
+    backgroundColor: amber[900],
+    "&:hover": {
+      backgroundColor: amber[900],
+    },
+  },
+}))(Button);
+
+export default LawyerReachOut;
