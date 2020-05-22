@@ -163,6 +163,7 @@ export default function PersistentDrawerLeft(props) {
               props.setIsHomeScreen(true);
               props.setIsConnectionsScreen(false);
               props.setIsSettingsScreen(false);
+              props.setIsResourceScreen(false);
             }}
           >
             <ListItemAvatar>
@@ -178,6 +179,7 @@ export default function PersistentDrawerLeft(props) {
               props.setIsHomeScreen(false);
               props.setIsConnectionsScreen(true);
               props.setIsSettingsScreen(false);
+              props.setIsResourceScreen(false);
             }}
           >
             <ListItemAvatar>
@@ -193,12 +195,13 @@ export default function PersistentDrawerLeft(props) {
               props.setIsHomeScreen(false);
               props.setIsConnectionsScreen(false);
               props.setIsSettingsScreen(true);
+              props.setIsResourceScreen(false);
             }}
           >
             <ListItemAvatar>
-              <Avatar src={ConnectionsIcon} variant="square"></Avatar>
+              <Avatar src={ListItemIcon} variant="square"></Avatar>
             </ListItemAvatar>
-            <ListItemText primary="Connections"></ListItemText>
+            <ListItemText primary="Settings"></ListItemText>
           </ListItem>
           <ListItem
             button
@@ -214,7 +217,7 @@ export default function PersistentDrawerLeft(props) {
             <ListItemAvatar>
               <Avatar src={SettingsIcon} variant="square"></Avatar>
             </ListItemAvatar>
-            <ListItemText primary="Settings"></ListItemText>
+            <ListItemText primary="Resources"></ListItemText>
           </ListItem>
           <ListItem
             button

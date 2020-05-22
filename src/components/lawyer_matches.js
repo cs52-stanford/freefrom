@@ -17,7 +17,7 @@ const LawyerMatches = (props) => {
   const [survivorProfile, setSurvivorProfile] = useState([]);
   const [survivorName, setSurvivorName] = useState("name");
   const [survivorImage, setSurvivorImage] = useState("image");
-  const [lawyerResource, setLawyerResource] = useState(false);
+  const [isLawyerResource, setIsLawyerResource] = useState(false);
 
   const [unsentSurvivors, setUnsentSurvivors] = useState([0, 1, 2, 3, 4, 5]);
   const [sentSurvivors, setSentSurvivors] = useState([]);
@@ -128,6 +128,7 @@ const LawyerMatches = (props) => {
           setIsConnectionsScreen={setIsConnectionsScreen}
           setIsSettingsScreen={setIsSettingsScreen}
           setIsLogIn={props.setIsLogIn}
+          setIsLawyerResource={setIsLawyerResource}
         />
         <LawyerConnections
           viewProfile={viewProfile}
@@ -157,6 +158,21 @@ const LawyerMatches = (props) => {
     );
   }
 
+  if (isLawyerResource === true) {
+    return (
+      <div className="lawyerresources">
+        <LawyerHeader
+          setIsHomeScreen={setIsHomeScreen}
+          setIsConnectionsScreen={setIsConnectionsScreen}
+          setIsSettingsScreen={setIsSettingsScreen}
+          setIsLogIn={props.setIsLogIn}
+          setIsLawyerResource={setIsLawyerResource}
+        />
+        <LawyerResource />
+      </div>
+    );
+  }
+
   if (isSettingsScreen === true) {
     return (
       <div className="lawyersettings">
@@ -165,6 +181,7 @@ const LawyerMatches = (props) => {
           setIsConnectionsScreen={setIsConnectionsScreen}
           setIsSettingsScreen={setIsSettingsScreen}
           setIsLogIn={props.setIsLogIn}
+          setIsLawyerResource={setIsLawyerResource}
         />
         <LawyerSettings
           setName={props.setName}
