@@ -46,7 +46,8 @@ function App() {
   const [photo, setPhoto] = useState("-");
   const [numNotifications, setNumNotifications] = useState(-1);
 
-  if (isLogIn === true && isSurvivor === true) {
+  //if (isLogIn === true && isSurvivor === true) {
+    if (isLogIn === true && name === "survivor") {
     return (
       <SurvivorHome
         setIsLogIn={setIsLogIn}
@@ -79,7 +80,8 @@ function App() {
   }
 
   //if is lawyer, display lawyer homepage
-  if (isLogIn === true && isLawyer === true) {
+  //if (isLogIn === true && isLawyer === true) {
+    if (isLogIn === true && name === "lawyer") {
     return (
       <LawyerMatches
         setIsLogIn={setIsLogIn}
@@ -118,6 +120,8 @@ function App() {
             isLogin={isLogIn}
             isLawyer={isLawyer}
             isSurvivor={isSurvivor}
+            name={name}
+            setName={setName}
           />
         </div>
       </div>
