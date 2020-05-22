@@ -46,7 +46,10 @@ const useStyles = makeStyles((theme) => ({
   center: {
     textAlign: "center",
   },
-
+  pText: {
+    textDecoration: "underline",
+    fontStyle: "oblique",
+  },
   button: {
     marginTop: theme.spacing(1),
     marginRight: theme.spacing(1),
@@ -78,13 +81,9 @@ export default function VerticalLinearStepper(props) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
-      <div>
+      <div className="background">
         <NavBar setIsSignIn={props.setIsSignIn} />
         <Stepper
           activeStep={activeStep}
@@ -97,23 +96,27 @@ export default function VerticalLinearStepper(props) {
             <StepContent>
               <Typography style={contentStyle}>
                 <Container maxWidth="md">
-                  <p>
+                  <Typography paragraph>
                     Thank you for signing up for Civil Seeker! By joining our
                     platform, you are helping to grant survivors of domestic
                     abuse financial freedom from their harmdoers.
-                  </p>
-                  <p>
+                  </Typography>
+                  <Typography paragraph className={classes.pText}>
+                    Please note that this platform is currently only for
+                    California residents.
+                  </Typography>
+                  <Typography paragraph>
                     This is an educational and informational tool and the
                     information contained within it does in no way constitute
                     legal advice. Any person who intends to use the information
                     contained herein in any way is solely responsible for
                     independently verifying the information and obtaining
                     independent legal or other expert advice if necessary.
-                  </p>
-                  <p>
+                  </Typography>
+                  <Typography paragraph>
                     By clicking next, you acknowledge that you have read and
                     agree to the terms and conditions provided.
-                  </p>
+                  </Typography>
                 </Container>
               </Typography>
               <div className={classes.actionsContainer}>
@@ -222,10 +225,9 @@ export default function VerticalLinearStepper(props) {
         </Stepper>
         {activeStep === steps.length && (
           <div>
-            <Typography>All steps completed - you&apos;re finished</Typography>
-            <Button onClick={handleReset} className={classes.button}>
-              Reset
-            </Button>
+            <Typography align="center">
+              Sign up complete! Return to the home page to sign in.
+            </Typography>
           </div>
         )}
       </div>

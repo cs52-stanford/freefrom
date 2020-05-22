@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import logo from "./logo.svg";
 import SignIn from "./components/sign_in.js";
 import SignUp from "./components/sign_up.js";
 import LawyerMatches from "./components/lawyer_matches.js";
@@ -25,26 +24,27 @@ function App() {
   const [isSurvivor, setIsSurvivor] = useState(true);
 
   // account information
-  const [name, setName] = React.useState("name");
-  const [gender, setGender] = React.useState("");
-  const [email, setEmail] = React.useState("email");
-  const [password, setPassword] = React.useState("");
+  const [name, setName] = useState("name");
+  const [gender, setGender] = useState([]);
+  const [email, setEmail] = useState("email");
+  const [password, setPassword] = useState("");
 
   // survivor profile information
-  const [currentCounty, setCurrentCounty] = React.useState("-");
-  const [financialCapability, setFinancialCapability] = React.useState("-");
-  const [lastOccurred, setLastOccurred] = React.useState("-");
-  const [abuseCounty, setAbuseCounty] = React.useState("-");
-  const [weaponsInvolved, setWeaponsInvolved] = React.useState("-");
-  const [emailNotifications, setEmailNotifications] = React.useState("-");
-  const [extraInfo, setExtraInfo] = React.useState("-");
+  const [currentCounty, setCurrentCounty] = useState("-");
+  const [financialCapability, setFinancialCapability] = useState("-");
+  const [lastOccurred, setLastOccurred] = useState("-");
+  const [abuseCounty, setAbuseCounty] = useState("-");
+  const [weaponsInvolved, setWeaponsInvolved] = useState("-");
+  const [emailNotifications, setEmailNotifications] = useState("-");
+  const [extraInfo, setExtraInfo] = useState("-");
+  const [color, setColor] = useState("-");
 
   // lawyer profile infomation
-  const [practiceCounty, setPracticeCounty] = React.useState("-");
-  const [experience, setExperience] = React.useState("-");
-  const [compensationRequest, setCompensationRequest] = React.useState("-");
-  const [photo, setPhoto] = React.useState("-");
-  const [numNotifications, setNumNotifications] = React.useState(-1);
+  const [practiceCounty, setPracticeCounty] = useState([]);
+  const [experience, setExperience] = useState("-");
+  const [compensationRequest, setCompensationRequest] = useState([]);
+  const [photo, setPhoto] = useState("-");
+  const [numNotifications, setNumNotifications] = useState(-1);
 
   if (isLogIn === true && isSurvivor === true) {
     return (
@@ -61,6 +61,7 @@ function App() {
         setWeaponsInvolved={setWeaponsInvolved}
         setEmailNotifications={setEmailNotifications}
         setExtraInfo={setExtraInfo}
+        setColor={setColor}
         name={name}
         gender={gender}
         email={email}
@@ -72,6 +73,7 @@ function App() {
         weaponsInvolved={weaponsInvolved}
         emailNotifications={emailNotifications}
         extraInfo={extraInfo}
+        color={color}
       />
     );
   }
@@ -163,6 +165,8 @@ function App() {
           setPhoto={setPhoto}
           numNotifications={numNotifications}
           setNumNotifications={setNumNotifications}
+          color={color}
+          setColor={setColor}
         />
       </div>
     </div>

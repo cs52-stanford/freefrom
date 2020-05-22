@@ -176,7 +176,25 @@
 }
 
 .logoImage {
-  width: 10%;
-  height: 10%;
+  width: 15%;
+  height: 15%;
   text-align: left;
+}
+
+.formSize {
+  max-width: 13rem;
+  width: 13rem;
+}
+
+.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.backStyle {
+  margin-bottom: 1rem;
+}
+
+.MuiTypography-root.bottomText.MuiTypography-body1 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.MuiSelect-root.MuiSelect-select.MuiSelect-selectMenu.MuiInputBase-input.MuiInput-input {
+  max-width: 22rem;
 }

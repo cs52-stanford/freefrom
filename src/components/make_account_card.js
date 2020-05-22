@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./sign_up.css";
 import Container from "@material-ui/core/Container";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Select from "@material-ui/core/Select";
+import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import TextField from "@material-ui/core/TextField";
 
@@ -31,34 +30,47 @@ const check = {
   flexDirection: "row",
 };
 
+const genderOptions = [
+  "Transgender",
+  "Genderqueer/Gender fluid",
+  "Gender non-conforming/Non-binary",
+  "Intersex",
+  "Agender",
+  "Two-spirit",
+  "Cisgender",
+  "Female/Femme",
+  "Male/Masculine",
+  "I prefer not to say",
+  "I prefer to self-describe",
+];
+
 const DemographicsCard = (props) => {
-  const [passwordConfirm, setPasswordConfirm] = React.useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState("");
 
   // checks to see if they have filled out every question
-  const isFinished = () => {
+  useEffect(() => {
     if (
-      props.gender === "" ||
+      props.gender.length === 0 ||
       props.name === "name" ||
       props.email === "email" ||
-      props.password === ""
+      props.password === "" ||
+      passwordConfirm === "Passwords do not match" ||
+      passwordConfirm === ""
     ) {
       props.setCannotContinue(true);
     } else {
       props.setCannotContinue(false);
     }
-  };
+  });
 
   const handleGenderChange = (event) => {
     props.setGender(event.target.value);
-    isFinished();
   };
   const handleEmailChange = (event) => {
     props.setEmail(event.target.value);
-    isFinished();
   };
   const handleNameChange = (event) => {
     props.setName(event.target.value);
-    isFinished();
   };
   const handlePasswordChange = (event) => {
     props.setPassword(event.target.value);
@@ -69,7 +81,6 @@ const DemographicsCard = (props) => {
       props.setCannotContinue(true);
     } else {
       setPasswordConfirm(" ");
-      isFinished();
     }
   };
 
@@ -88,31 +99,14 @@ const DemographicsCard = (props) => {
             autoFocus
           />
 
-          <div className="spacing">Gender:</div>
+          <div className="spacing">Gender(s):</div>
 
-          <FormControl component="fieldset">
-            <RadioGroup
-              aria-label="gender"
-              name="gender1"
-              value={props.gender}
-              onChange={handleGenderChange}
-            >
-              <FormControlLabel
-                value="female"
-                control={<Radio style={radioButtonStyle} />}
-                label="Female"
-              />
-              <FormControlLabel
-                value="male"
-                control={<Radio style={radioButtonStyle} />}
-                label="Male"
-              />
-              <FormControlLabel
-                value="other"
-                control={<Radio style={radioButtonStyle} />}
-                label="Other"
-              />
-            </RadioGroup>
+          <FormControl className="formSize">
+            <Select value={props.gender} onChange={handleGenderChange} multiple>
+              {genderOptions.map((label, index) => (
+                <MenuItem value={genderOptions[index]}>{label}</MenuItem>
+              ))}
+            </Select>
           </FormControl>
         </Container>
         <Container>

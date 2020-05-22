@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./sign_up.css";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
@@ -52,9 +52,12 @@ const useStyles = makeStyles((theme) => ({
   resetContainer: {
     padding: theme.spacing(3),
   },
-
   center: {
     textAlign: "center",
+  },
+  pText: {
+    textDecoration: "underline",
+    fontStyle: "oblique",
   },
 }));
 
@@ -64,8 +67,8 @@ function getSteps() {
 
 export default function VerticalLinearStepper(props) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [cannotContinue, setCannotContinue] = React.useState(true);
+  const [activeStep, setActiveStep] = useState(0);
+  const [cannotContinue, setCannotContinue] = useState(true);
   const steps = getSteps();
 
   const handleNext = () => {
@@ -77,13 +80,9 @@ export default function VerticalLinearStepper(props) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
-  };
-
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
-      <div>
+      <div className="background">
         <NavBar setIsSignIn={props.setIsSignIn} />
         <Stepper
           activeStep={activeStep}
@@ -96,26 +95,30 @@ export default function VerticalLinearStepper(props) {
             <StepContent>
               <Typography style={contentStyle}>
                 <Container maxWidth="md">
-                  <p>
+                  <Typography paragraph>
                     As a survivor of domestic violence, you could be eligible
                     for money to cover some of the costs of the harm you
                     experienced. This platform is designed to match you with an
                     attorney best suited to help you. But first, answer a few
                     short questions to better understand your situation and
                     decide what lawyer is best for you.
-                  </p>
-                  <p>
+                  </Typography>
+                  <Typography paragraph className={classes.pText}>
+                    Please note that this platform is currently only for
+                    California residents.
+                  </Typography>
+                  <Typography paragraph>
                     This is an educational and informational tool and the
                     information contained within it does in no way constitute
                     legal advice. Any person who intends to use the information
                     contained herein in any way is solely responsible for
                     independently verifying the information and obtaining
                     independent legal or other expert advice if necessary.
-                  </p>
-                  <p>
+                  </Typography>
+                  <Typography paragraph>
                     By clicking next, you acknowledge that you have read and
                     agree to the terms and conditions provided.
-                  </p>
+                  </Typography>
                 </Container>
               </Typography>
               <div className={classes.actionsContainer}>
@@ -169,7 +172,9 @@ export default function VerticalLinearStepper(props) {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={handleNext}
+                    onClick={function () {
+                      handleNext();
+                    }}
                     className={classes.button}
                     disabled={cannotContinue}
                   >
@@ -201,6 +206,8 @@ export default function VerticalLinearStepper(props) {
                   setEmailNotifications={props.setEmailNotifications}
                   extraInfo={props.extraInfo}
                   setExtraInfo={props.setExtraInfo}
+                  color={props.color}
+                  setColor={props.setColor}
                 />
               </Typography>
               <div className={classes.actionsContainer}>
@@ -227,11 +234,10 @@ export default function VerticalLinearStepper(props) {
           </Step>
         </Stepper>
         {activeStep === steps.length && (
-          <div>
-            <Typography>All steps completed - you&apos;re finished</Typography>
-            <Button onClick={handleReset} className={classes.button}>
-              Reset
-            </Button>
+          <div style={backgroundStyle}>
+            <Typography align="center">
+              Sign up complete! Return to the home page to sign in.
+            </Typography>
           </div>
         )}
       </div>

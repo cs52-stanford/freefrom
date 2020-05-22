@@ -130,6 +130,8 @@ export default function SignUp(props) {
       setEmailNotifications={props.setEmailNotifications}
       extraInfo={props.extraInfo}
       setExtraInfo={props.setExtraInfo}
+      color={props.color}
+      setColor={props.setColor}
     />
   );
 }

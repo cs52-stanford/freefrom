@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./sign_up.css";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import InputLabel from "@material-ui/core/InputLabel";
+import Typography from "@material-ui/core/Typography";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
@@ -13,7 +13,8 @@ import PhotoCamera from "@material-ui/icons/PhotoCamera";
 const useStyles = makeStyles((theme) => ({
   formControl: {
     margin: theme.spacing(1),
-    minWidth: 120,
+    maxWidth: "8rem",
+    width: "8rem",
   },
   selectEmpty: {
     marginTop: theme.spacing(2),
@@ -39,8 +40,6 @@ const demoStyle = {
 };
 
 const nextStyle = {
-  backgroundColor: "#e06d4f",
-  color: "#fff",
   lineHeight: 1,
   cursor: "pointer",
   fontSize: "0.85rem",
@@ -62,8 +61,6 @@ const nextStyle = {
 };
 
 const q2Style = {
-  backgroundColor: "#e06d4f",
-  color: "#fff",
   lineHeight: 1,
   cursor: "pointer",
   fontSize: "0.85rem",
@@ -85,8 +82,6 @@ const q2Style = {
 };
 
 const q3Style = {
-  backgroundColor: "#e06d4f",
-  color: "#fff",
   lineHeight: 1,
   cursor: "pointer",
   fontSize: "0.85rem",
@@ -201,42 +196,39 @@ const ProfileCard = (props) => {
 
   const handlePracticeCountyChange = (event) => {
     props.setPracticeCounty(event.target.value);
-    isFinished();
+    console.log(props.practiceCounty);
   };
   const handleExperienceChange = (event) => {
     props.setExperience(event.target.value);
-    isFinished();
   };
   const handleCompensationRequestChange = (event) => {
     props.setCompensationRequest(event.target.value);
-    if (props.numNotifications !== -1) {
-      isFinished();
-    }
   };
 
   const handlePhotoChange = (event) => {
     props.setPhoto(event.target.value);
-    isFinished();
   };
   const handleNumNotificationsChange = (event) => {
     props.setNumNotifications(event.target.value);
     if (event.target.value !== -1) {
       props.setCannotContinue(false);
-      isFinished();
     }
   };
 
   // checks to see if they have filled out every question
-  const isFinished = () => {
+  useEffect(() => {
     if (
-      props.practiceCounty !== "-" &&
+      props.practiceCounty.length !== 0 &&
       props.experience !== "-" &&
-      props.compensationRequest !== "-" &&
-      props.photo !== "-"
+      props.compensationRequest.length !== 0 &&
+      props.photo !== "-" &&
+      props.numNotifications !== -1
     ) {
       props.setCannotContinue(false);
+    } else {
+      props.setCannotContinue(true);
     }
-  };
+  });
 
   if (questionNumber === 1) {
     return (
@@ -244,13 +236,14 @@ const ProfileCard = (props) => {
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
             <h5>Question {questionNumber} of 5 </h5>
-            <FormControl className={classes.formControl} fullWidth={true}>
-              <InputLabel id="demo-simple-select-label">
+            <FormControl className={classes.formControl}>
+              <Typography>
                 In which California county/counties do you practice?
-              </InputLabel>
+              </Typography>
               <Select
                 value={props.practiceCounty}
                 onChange={handlePracticeCountyChange}
+                multiple
               >
                 {counties.map((label, index) => (
                   <MenuItem value={counties[index]}>{label}</MenuItem>
@@ -259,7 +252,10 @@ const ProfileCard = (props) => {
             </FormControl>
           </Container>
           <Button
+            variant="contained"
             style={nextStyle}
+            color="primary"
+            disabled={props.practiceCounty.length === 0}
             onClick={function () {
               setQuestionNumber(2);
             }}
@@ -303,7 +299,10 @@ const ProfileCard = (props) => {
             />
           </Container>
           <Button
+            variant="contained"
             style={q2Style}
+            color="primary"
+            disabled={props.experience === "-"}
             onClick={function () {
               setQuestionNumber(3);
             }}
@@ -329,7 +328,7 @@ const ProfileCard = (props) => {
               last question
             </Button>
             <h5>Question {questionNumber} of 5 </h5>
-            <p>Upload a profile picture:</p>
+            <Typography>Upload a profile picture:</Typography>
             <Button variant="contained" color="primary" component="span">
               <input
                 accept="image/*"
@@ -342,7 +341,10 @@ const ProfileCard = (props) => {
             </Button>
           </Container>
           <Button
+            variant="contained"
             style={q3Style}
+            color="primary"
+            disabled={props.photo === "-"}
             onClick={function () {
               setQuestionNumber(4);
             }}
@@ -368,12 +370,11 @@ const ProfileCard = (props) => {
               last question
             </Button>
             <h5>Question {questionNumber} of 5 </h5>
-            <FormControl className={classes.formControl} fullWidth={true}>
-              <InputLabel id="demo-simple-select-label">
-                I am willing to work:
-              </InputLabel>
+            <FormControl className={classes.formControl}>
+              <Typography>I am willing to work:</Typography>
               <Select
                 value={props.compensationRequest}
+                multiple
                 onChange={handleCompensationRequestChange}
               >
                 {compensations.map((label, index) => (
@@ -383,7 +384,10 @@ const ProfileCard = (props) => {
             </FormControl>
           </Container>
           <Button
+            variant="contained"
             style={nextStyle}
+            color="primary"
+            disabled={props.compensationRequest.length === 0}
             onClick={function () {
               setQuestionNumber(5);
             }}
@@ -410,10 +414,10 @@ const ProfileCard = (props) => {
             </Button>
             <h5>Question {questionNumber} of 5 </h5>
             <FormControl className={classes.formControl} fullWidth={true}>
-              <InputLabel id="demo-simple-select-label">
+              <Typography>
                 Up to how many notifications would you like to receive about
                 potential cases each week?
-              </InputLabel>
+              </Typography>
               <Select
                 value={props.numNotifications}
                 onChange={handleNumNotificationsChange}

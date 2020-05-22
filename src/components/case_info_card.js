@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./sign_up.css";
+import { CirclePicker } from "react-color";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -19,6 +20,11 @@ const useStyles = makeStyles((theme) => ({
   },
   formControl: {
     margin: theme.spacing(1),
+  },
+  button: {
+    ":disabled": {
+      backgroundColor: "purple",
+    },
   },
 }));
 
@@ -38,8 +44,6 @@ const demoStyle = {
 };
 
 const nextStyle = {
-  backgroundColor: "#e06d4f",
-  color: "#fff",
   lineHeight: 1,
   cursor: "pointer",
   fontSize: "0.85rem",
@@ -61,23 +65,7 @@ const nextStyle = {
 };
 
 const backStyle = {
-  backgroundColor: "#f5f5f5",
-  color: "#d4d4d4",
-  lineHeight: 1,
-  cursor: "pointer",
-  fontSize: "0.85rem",
-  fontWeight: 300,
-  textAlign: "center",
-  fontFamily: "Montserrat, sans-serif",
-  borderWidth: "initial",
-  borderStyle: "none",
-  borderColor: "initial",
-  borderImage: "initial",
-  borderRadius: "0.5rem",
-  overflow: "visible",
-  padding: "0.5rem",
-  width: "9rem",
-  alignSelf: "center",
+  padding: "1rem",
 };
 
 const check = {
@@ -158,45 +146,45 @@ const CaseCard = (props) => {
   const [questionNumber, setQuestionNumber] = React.useState(1);
 
   // checks to see if they have filled out every question
-  const isFinished = () => {
+  useEffect(() => {
     if (
       props.currentCounty !== "-" &&
       props.financialCapability !== "-" &&
       props.lastOccurred !== "-" &&
       props.abuseCounty !== "-" &&
-      props.weaponsInvolved !== "-"
+      props.weaponsInvolved !== "-" &&
+      props.emailNotifications !== "-" &&
+      props.color != "-"
     ) {
       props.setCannotContinue(false);
+    } else {
+      props.setCannotContinue(true);
     }
-  };
+  });
 
   const handleCurrentCountyChange = (event) => {
     props.setCurrentCounty(event.target.value);
-    isFinished();
   };
   const handleFinancialChange = (event) => {
     props.setFinancialCapability(event.target.value);
-    isFinished();
   };
   const handleLastOccurredChange = (event) => {
     props.setLastOccurred(event.target.value);
-    isFinished();
   };
   const handleAbuseCountyChange = (event) => {
     props.setAbuseCounty(event.target.value);
-    isFinished();
   };
   const handleWeaponsChange = (event) => {
     props.setWeaponsInvolved(event.target.value);
-    isFinished();
   };
   const handleEmailChange = (event) => {
     props.setEmailNotifications(event.target.value);
-    isFinished();
   };
   const handleInfoChange = (event) => {
     props.setExtraInfo(event.target.value);
-    isFinished();
+  };
+  const handleColorChange = (color, event) => {
+    props.setColor(color.hex);
   };
 
   if (questionNumber === 1) {
@@ -204,26 +192,27 @@ const CaseCard = (props) => {
       <Container style={demoStyle} maxWidth="sm">
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
-            <h5>Question {questionNumber} of 7 </h5>
+            <Typography>Question {questionNumber} of 7 </Typography>
             <FormControl className={classes.formControl} fullWidth={true}>
-              <InputLabel id="demo-simple-select-label">
-                Where do you currently live?
-              </InputLabel>
+              <Typography>Where do you currently live?</Typography>
               <Select
                 value={props.currentCounty}
                 onChange={handleCurrentCountyChange}
               >
                 {counties.map((label, index) => (
-                  <MenuItem value={counties[index]}>{label}</MenuItem>
+                  <MenuItem value={counties[index]}>{label} County</MenuItem>
                 ))}
               </Select>
             </FormControl>
           </Container>
           <Button
+            variant="contained"
             style={nextStyle}
+            color="primary"
             onClick={function () {
               setQuestionNumber(2);
             }}
+            disabled={props.currentCounty === "-"}
           >
             NEXT
           </Button>
@@ -238,6 +227,7 @@ const CaseCard = (props) => {
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
             <Button
+              className="backStyle"
               variant="outlined"
               onClick={function () {
                 setQuestionNumber(1);
@@ -245,11 +235,11 @@ const CaseCard = (props) => {
             >
               last question
             </Button>
-            <h5>Question {questionNumber} of 7 </h5>
+            <Typography>Question {questionNumber} of 7 </Typography>
             <FormControl className={classes.formControl} fullWidth={true}>
-              <InputLabel id="demo-simple-select-label">
+              <Typography>
                 How much money are you willing/able to spend on compensation?
-              </InputLabel>
+              </Typography>
               <Select
                 value={props.financialCapability}
                 onChange={handleFinancialChange}
@@ -261,10 +251,13 @@ const CaseCard = (props) => {
             </FormControl>
           </Container>
           <Button
+            variant="contained"
             style={nextStyle}
+            color="primary"
             onClick={function () {
               setQuestionNumber(3);
             }}
+            disabled={props.financialCapability === "-"}
           >
             NEXT
           </Button>
@@ -279,6 +272,7 @@ const CaseCard = (props) => {
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
             <Button
+              className="backStyle"
               variant="outlined"
               onClick={function () {
                 setQuestionNumber(2);
@@ -286,11 +280,9 @@ const CaseCard = (props) => {
             >
               last question
             </Button>
-            <h5>Question {questionNumber} of 7 </h5>
+            <Typography>Question {questionNumber} of 7 </Typography>
             <FormControl className={classes.formControl} fullWidth={true}>
-              <InputLabel id="demo-simple-select-label">
-                How long ago did the abuse last occur?
-              </InputLabel>
+              <Typography>When was the last incidence of abuse?</Typography>
               <Select
                 value={props.lastOccurred}
                 onChange={handleLastOccurredChange}
@@ -302,10 +294,13 @@ const CaseCard = (props) => {
             </FormControl>
           </Container>
           <Button
+            variant="contained"
             style={nextStyle}
+            color="primary"
             onClick={function () {
               setQuestionNumber(4);
             }}
+            disabled={props.lastOccurred === "-"}
           >
             NEXT
           </Button>
@@ -320,6 +315,7 @@ const CaseCard = (props) => {
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
             <Button
+              className="backStyle"
               variant="outlined"
               onClick={function () {
                 setQuestionNumber(3);
@@ -327,23 +323,24 @@ const CaseCard = (props) => {
             >
               last question
             </Button>
-            <h5>Question {questionNumber} of 7 </h5>
+            <Typography>Question {questionNumber} of 7 </Typography>
             <FormControl className={classes.formControl} fullWidth={true}>
-              <InputLabel id="demo-simple-select-label">
-                Where did the abuse take place?
-              </InputLabel>
+              <Typography>Where did the abuse take place?</Typography>
               <Select
                 value={props.abuseCounty}
                 onChange={handleAbuseCountyChange}
               >
                 {counties.map((label, index) => (
-                  <MenuItem value={counties[index]}>{label}</MenuItem>
+                  <MenuItem value={counties[index]}>{label} County</MenuItem>
                 ))}
               </Select>
             </FormControl>
           </Container>
           <Button
+            variant="contained"
             style={nextStyle}
+            color="primary"
+            disabled={props.abuseCounty === "-"}
             onClick={function () {
               setQuestionNumber(5);
             }}
@@ -361,6 +358,7 @@ const CaseCard = (props) => {
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
             <Button
+              className="backStyle"
               variant="outlined"
               onClick={function () {
                 setQuestionNumber(4);
@@ -368,11 +366,9 @@ const CaseCard = (props) => {
             >
               last question
             </Button>
-            <h5>Question {questionNumber} of 7 </h5>
+            <Typography>Question {questionNumber} of 7 </Typography>
             <FormControl className={classes.formControl} fullWidth={true}>
-              <InputLabel id="demo-simple-select-label">
-                Were there weapons involved?
-              </InputLabel>
+              <Typography>Were there weapons involved?</Typography>
               <Select
                 value={props.weaponsInvolved}
                 onChange={handleWeaponsChange}
@@ -384,7 +380,10 @@ const CaseCard = (props) => {
             </FormControl>
           </Container>
           <Button
+            variant="contained"
             style={nextStyle}
+            color="primary"
+            disabled={props.weaponsInvolved === "-"}
             onClick={function () {
               setQuestionNumber(6);
             }}
@@ -402,6 +401,7 @@ const CaseCard = (props) => {
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
             <Button
+              className="backStyle"
               variant="outlined"
               onClick={function () {
                 setQuestionNumber(5);
@@ -409,11 +409,11 @@ const CaseCard = (props) => {
             >
               last question
             </Button>
-            <h5>Question {questionNumber} of 7 </h5>
+            <Typography>Question {questionNumber} of 7 </Typography>
             <FormControl className={classes.formControl} fullWidth={true}>
-              <InputLabel id="demo-simple-select-label">
+              <Typography>
                 Do you wish to recieve email notifications about new matches?
-              </InputLabel>
+              </Typography>
               <Select
                 value={props.emailNotifications}
                 onChange={handleEmailChange}
@@ -425,7 +425,10 @@ const CaseCard = (props) => {
             </FormControl>
           </Container>
           <Button
+            variant="contained"
             style={nextStyle}
+            color="primary"
+            disabled={props.emailNotifications === "-"}
             onClick={function () {
               setQuestionNumber(7);
             }}
@@ -443,6 +446,7 @@ const CaseCard = (props) => {
         <Container style={check} maxWidth="sm">
           <Container maxWidth="sm" fixed={true}>
             <Button
+              className="backStyle"
               variant="outlined"
               onClick={function () {
                 setQuestionNumber(6);
@@ -450,11 +454,15 @@ const CaseCard = (props) => {
             >
               LAST QUESTION
             </Button>
-            <h5>Question {questionNumber} of 7 </h5>
-            <p>
-              If you'd like, you may use this space to share any more
+            <Typography paragraph>Question {questionNumber} of 7 </Typography>
+            <Typography paragraph>
+              Choose a color to customize your profile:{" "}
+            </Typography>
+            <CirclePicker onChange={handleColorChange}></CirclePicker>
+            <Typography className="bottomText">
+              If you'd like, you may use this space to share any additional
               information about your situation.
-            </p>
+            </Typography>
             <TextField
               id="outlined-multiline-static"
               multiline
