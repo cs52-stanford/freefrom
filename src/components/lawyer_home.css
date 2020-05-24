@@ -57,3 +57,7 @@
   letter-spacing: 0em;
   font-size: 2rem;
 }
+
+.MuiDrawer-root.MuiDrawer-docked.makeStyles-drawer-306 {
+  padding: 0;
+}

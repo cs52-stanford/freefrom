@@ -20,6 +20,11 @@
   color: white;
 }
 
+html {
+  background-color: #f7fff7;
+  height: 100%;
+}
+
 .App-link {
   color: #61dafb;
 }

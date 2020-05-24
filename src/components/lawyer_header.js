@@ -29,14 +29,14 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
-    padding: theme.spacing(0, 0, 4),
+    padding: theme.spacing(0, 0, 0),
   },
   appBar: {
     transition: theme.transitions.create(["margin", "width"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    backgroundColor: "#e1f5fe",
+    backgroundColor: "#f7fff7",
     color: "#000000",
   },
   appBarShift: {
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    backgroundColor: "#e1f5fe",
+    backgroundColor: "#f7fff7",
   },
   drawerHeader: {
     display: "flex",
@@ -89,8 +89,12 @@ const useStyles = makeStyles((theme) => ({
   box: {
     display: "flex",
     backgroundColor: "inherit",
-    width: "30%",
-    height: "30%",
+    width: "25%",
+    height: "25%",
+  },
+  flex: {
+    display: "flex",
+    justifyContent: "space-between",
   },
 }));
 
@@ -116,7 +120,7 @@ export default function PersistentDrawerLeft(props) {
           [classes.appBarShift]: open,
         })}
       >
-        <Toolbar>
+        <Toolbar className={classes.flex}>
           <IconButton
             color="inherit"
             aria-label="open drawer"
@@ -126,13 +130,9 @@ export default function PersistentDrawerLeft(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Button>
-            <Avatar
-              className={classes.box}
-              src={Logo}
-              variant="square"
-            ></Avatar>
-          </Button>
+
+          <Avatar className={classes.box} src={Logo} variant="square"></Avatar>
+          <Typography> </Typography>
         </Toolbar>
       </AppBar>
       <Drawer

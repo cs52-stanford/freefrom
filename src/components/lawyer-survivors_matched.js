@@ -45,12 +45,16 @@ function Copyright() {
 }
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: "0px",
+  },
   icon: {
     marginRight: theme.spacing(2),
   },
   heroContent: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(5, 0, 3),
+    margin: 0,
+    padding: theme.spacing(4, 0, 3),
   },
   heroButtons: {
     marginTop: theme.spacing(4),
