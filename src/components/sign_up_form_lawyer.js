@@ -93,7 +93,17 @@ export default function VerticalLinearStepper() {
     event.preventDefault();
     this.setState({ error: "" });
     try {
-      await signup(this.state.email, this.state.password);
+      await signup(
+        this.state.name,
+        this.state.gender,
+        this.state.email,
+        this.state.password,
+        this.state.practiceCounty,
+        this.state.experience,
+        this.state.compensationRequest,
+        this.state.photo,
+        this.state.numNotifications
+      );
     } catch (error) {
       this.setState({ error: error.message });
     }
