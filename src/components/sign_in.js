@@ -1,11 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
+/* import Link from "@material-ui/core/Link";*/
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -14,6 +14,17 @@ import Container from "@material-ui/core/Container";
 import Logo from "./counselCompassLogo.png";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
+/*import { withTheme } from "styled-components";*/
+import {
+  Route,
+  BrowserRouter as Router,
+  Link,
+  Redirect,
+  Switch,
+} from "react-router-dom";
+import { signin } from "../services/auth";
+import { LawyerSignUp } from "./sign_up_form_lawyer.js";
+import SignUp from "./sign_up.js";
 
 const backgroundStyle = {
   height: "100%",
@@ -53,8 +64,6 @@ function Copyright() {
   );
 }
 
-const LogIn = (props) => {};
-
 const useStyles = makeStyles((theme) => ({
   paper: {
     display: "flex",
@@ -80,7 +89,27 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignIn(props) {
+  const [error, setError] = React.useState(null);
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+
   const classes = useStyles();
+
+  const handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setError("");
+    try {
+      await signin(this.state.email, this.state.password);
+    } catch (error) {
+      setError("");
+    }
+  };
 
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
@@ -104,6 +133,8 @@ export default function SignIn(props) {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 variant="outlined"
@@ -115,6 +146,8 @@ export default function SignIn(props) {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
               <Grid container className={classes.check}>
                 <Grid item>
@@ -131,31 +164,23 @@ export default function SignIn(props) {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
-                onClick={function () {
-                  props.setIsLogIn(true);
-                }}
+                onClick={handleSubmit}
               >
                 Sign In
               </Button>
-              <Grid container>
-                <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <Link
-                    href="#"
-                    variant="body2"
-                    onClick={function () {
-                      props.setIsSignIn(false);
-                    }}
-                  >
-                    {"Don't have an account? Sign Up"}
-                  </Link>
-                </Grid>
-              </Grid>
             </form>
+            <Grid container>
+              <Grid item xs>
+                <Link href="#" variant="body2">
+                  Forgot password?
+                </Link>
+              </Grid>
+              <Grid item>
+                <Link href="#" variant="body2" to="/sign_up">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
           </div>
           <Box mt={8}>
             <Copyright />

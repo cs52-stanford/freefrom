@@ -13,6 +13,8 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import DemographicsCard from "./make_account_card.js";
 import ProfileCard from "./lawyer_profile_info_card.js";
+import { Link, Redirect } from "react-router-dom";
+import { signup } from "../services/auth";
 
 const themeA = createMuiTheme({
   root: {
@@ -46,7 +48,10 @@ const useStyles = makeStyles((theme) => ({
   center: {
     textAlign: "center",
   },
-
+  pText: {
+    textDecoration: "underline",
+    fontStyle: "oblique",
+  },
   button: {
     marginTop: theme.spacing(1),
     marginRight: theme.spacing(1),
@@ -63,29 +68,52 @@ function getSteps() {
   return ["Disclaimer", "Account Information", "Profile Information"];
 }
 
-export default function VerticalLinearStepper(props) {
+export default function VerticalLinearStepper() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [cannotContinue, setCannotContinue] = React.useState(true);
+  const activeStep = React.useState(0);
+  const cannotContinue = React.useState(true);
   const steps = getSteps();
+  this.handleSubmit = this.handleSubmit.bind(this);
+  this.handleNext = this.handleNext.bind(this);
+  this.handleBack = this.handleBack.bind(this);
 
   const handleNext = () => {
-    setCannotContinue(true);
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    cannotContinue = true;
+    if (activeStep === steps.length - 1) {
+      //return <Redirect to="/lawyer_home" />;
+    }
+    activeStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    activeStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleReset = () => {
-    setActiveStep(0);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    this.setState({ error: "" });
+    try {
+      await signup(this.state.email, this.state.password);
+    } catch (error) {
+      this.setState({ error: error.message });
+    }
   };
+
+  const {
+    name,
+    gender,
+    email,
+    password,
+    practiceCounty,
+    experience,
+    compensationRequest,
+    photo,
+    numNotifications,
+  } = this.state;
 
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
-      <div>
-        <NavBar setIsSignIn={props.setIsSignIn} />
+      <div className="background">
         <Stepper
           activeStep={activeStep}
           orientation="vertical"
@@ -97,23 +125,27 @@ export default function VerticalLinearStepper(props) {
             <StepContent>
               <Typography style={contentStyle}>
                 <Container maxWidth="md">
-                  <p>
+                  <Typography paragraph>
                     Thank you for signing up for Civil Seeker! By joining our
                     platform, you are helping to grant survivors of domestic
                     abuse financial freedom from their harmdoers.
-                  </p>
-                  <p>
+                  </Typography>
+                  <Typography paragraph className={classes.pText}>
+                    Please note that this platform is currently only for
+                    California residents.
+                  </Typography>
+                  <Typography paragraph>
                     This is an educational and informational tool and the
                     information contained within it does in no way constitute
                     legal advice. Any person who intends to use the information
                     contained herein in any way is solely responsible for
                     independently verifying the information and obtaining
                     independent legal or other expert advice if necessary.
-                  </p>
-                  <p>
+                  </Typography>
+                  <Typography paragraph>
                     By clicking next, you acknowledge that you have read and
                     agree to the terms and conditions provided.
-                  </p>
+                  </Typography>
                 </Container>
               </Typography>
               <div className={classes.actionsContainer}>
@@ -143,16 +175,11 @@ export default function VerticalLinearStepper(props) {
             <StepContent>
               <Typography style={contentStyle}>
                 <DemographicsCard
-                  name={props.name}
-                  setName={props.setName}
-                  gender={props.gender}
-                  setGender={props.setGender}
-                  email={props.email}
-                  setEmail={props.setEmail}
-                  password={props.password}
-                  setPassword={props.setPassword}
+                  name={this.state.name}
+                  gender={this.state.gender}
+                  email={this.state.email}
+                  password={this.state.password}
                   cannotContinue={cannotContinue}
-                  setCannotContinue={setCannotContinue}
                 />
               </Typography>
               <div className={classes.actionsContainer}>
@@ -183,18 +210,12 @@ export default function VerticalLinearStepper(props) {
             <StepContent>
               <Typography style={contentStyle}>
                 <ProfileCard
-                  practiceCounty={props.practiceCounty}
-                  setPracticeCounty={props.setPracticeCounty}
-                  experience={props.experience}
-                  setExperience={props.setExperience}
-                  compensationRequest={props.compensationRequest}
-                  setCompensationRequest={props.setCompensationRequest}
-                  photo={props.photo}
-                  setPhoto={props.setPhoto}
-                  numNotifications={props.numNotifications}
-                  setNumNotifications={props.setNumNotifications}
+                  practiceCounty={this.state.practiceCounty}
+                  experience={this.state.experience}
+                  compensationRequest={this.state.compensationRequest}
+                  photo={this.state.photo}
+                  numNotifications={this.state.numNotifications}
                   cannotContinue={cannotContinue}
-                  setCannotContinue={setCannotContinue}
                 />
               </Typography>
               <div className={classes.actionsContainer}>
@@ -222,10 +243,9 @@ export default function VerticalLinearStepper(props) {
         </Stepper>
         {activeStep === steps.length && (
           <div>
-            <Typography>All steps completed - you&apos;re finished</Typography>
-            <Button onClick={handleReset} className={classes.button}>
-              Reset
-            </Button>
+            <Typography align="center">
+              Sign up complete! Return to the home page to sign in.
+            </Typography>
           </div>
         )}
       </div>
