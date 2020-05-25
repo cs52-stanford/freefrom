@@ -71,7 +71,7 @@ function getSteps() {
 export default function VerticalLinearStepper() {
   const classes = useStyles();
   const activeStep = React.useState(0);
-  const cannotContinue = React.useState(true);
+  const cannotContinue = React.useState(false);
   const steps = getSteps();
   this.handleSubmit = this.handleSubmit.bind(this);
   this.handleNext = this.handleNext.bind(this);
@@ -82,11 +82,15 @@ export default function VerticalLinearStepper() {
     if (activeStep === steps.length - 1) {
       //return <Redirect to="/lawyer_home" />;
     }
-    activeStep((prevActiveStep) => prevActiveStep + 1);
+    activeStep++;
   };
 
   const handleBack = () => {
-    activeStep((prevActiveStep) => prevActiveStep - 1);
+    activeStep--;
+  };
+
+  const handleReset = () => {
+    activeStep.setState(0);
   };
 
   const handleSubmit = async (event) => {

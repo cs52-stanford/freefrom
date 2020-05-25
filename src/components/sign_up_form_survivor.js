@@ -13,6 +13,7 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import DemographicsCard from "./make_account_card.js";
 import CaseCard from "./case_info_card.js";
+import { Link, Redirect } from "react-router-dom";
 import { signup } from "../services/auth";
 
 const themeA = createMuiTheme({
@@ -65,7 +66,7 @@ function getSteps() {
 
 export default function VerticalLinearStepper(props) {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
+  const activeStep = React.useState(0);
   const cannotContinue = React.useState(true);
   const steps = getSteps();
   this.handleSubmit = this.handleSubmit.bind(this);
@@ -74,26 +75,55 @@ export default function VerticalLinearStepper(props) {
 
   const handleNext = () => {
     cannotContinue = true;
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    if (activeStep === steps.length - 1) {
+      //return <Redirect to="/survivor_home" />;
+    }
+    activeStep++;
   };
 
   const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+    activeStep--;
   };
 
   const handleReset = () => {
-    setActiveStep(0);
+    activeStep.setState(0);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     this.setState({ error: "" });
     try {
-      await signup(this.state.email, this.state.password);
+      await signup(
+        this.state.name,
+        this.state.gender,
+        this.state.email,
+        this.state.password,
+        this.state.currentCounty,
+        this.state.financialCapability,
+        this.state.lastOccurred,
+        this.state.abuseCounty,
+        this.state.weaponsInvolved,
+        this.state.emailNotifications,
+        this.state.extraInfo
+      );
     } catch (error) {
       this.setState({ error: error.message });
     }
   };
+
+  const {
+    name,
+    gender,
+    email,
+    password,
+    currentCounty,
+    financialCapability,
+    lastOccurred,
+    abuseCounty,
+    weaponsInvolved,
+    emailNotifications,
+    extraInfo,
+  } = this.state;
 
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
