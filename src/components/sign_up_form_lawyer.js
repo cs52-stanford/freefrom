@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./sign_up.css";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
@@ -13,6 +13,8 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import DemographicsCard from "./make_account_card.js";
 import ProfileCard from "./lawyer_profile_info_card.js";
+import { Link, Redirect } from "react-router-dom";
+import { signup } from "../services/auth";
 
 const themeA = createMuiTheme({
   root: {
@@ -66,10 +68,10 @@ function getSteps() {
   return ["Disclaimer", "Account Information", "Profile Information"];
 }
 
-export default function VerticalLinearStepper(props) {
+export default function LawyerSignUpStepper() {
   const classes = useStyles();
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [cannotContinue, setCannotContinue] = React.useState(true);
+  const [activeStep, setActiveStep] = useState(0);
+  const [cannotContinue, setCannotContinue] = useState(true);
   const steps = getSteps();
 
   const handleNext = () => {
@@ -81,10 +83,19 @@ export default function VerticalLinearStepper(props) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const [name, setName] = React.useState("name");
+  const [email, setEmail] = React.useState("email");
+  const [gender, setGender] = React.useState([]);
+  const [password, setPassword] = React.useState("");
+  const [practiceCounty, setPracticeCounty] = React.useState([]);
+  const [experience, setExperience] = React.useState("");
+  const [compensationRequest, setCompensationRequest] = React.useState([]);
+  const [photo, setPhoto] = React.useState("");
+  const [numNotifications, setNumNotifications] = React.useState("");
+
   return (
-    <ThemeProvider theme={themeA} className="backgroundColor">
-      <div className="background">
-        <NavBar setIsSignIn={props.setIsSignIn} />
+    <ThemeProvider theme={themeA}>
+      <div>
         <Stepper
           activeStep={activeStep}
           orientation="vertical"
@@ -146,14 +157,14 @@ export default function VerticalLinearStepper(props) {
             <StepContent>
               <Typography style={contentStyle}>
                 <DemographicsCard
-                  name={props.name}
-                  setName={props.setName}
-                  gender={props.gender}
-                  setGender={props.setGender}
-                  email={props.email}
-                  setEmail={props.setEmail}
-                  password={props.password}
-                  setPassword={props.setPassword}
+                  name={name}
+                  setName={setName}
+                  gender={gender}
+                  setGender={setGender}
+                  email={email}
+                  setEmail={setEmail}
+                  password={password}
+                  setPassword={setPassword}
                   cannotContinue={cannotContinue}
                   setCannotContinue={setCannotContinue}
                 />
@@ -186,16 +197,16 @@ export default function VerticalLinearStepper(props) {
             <StepContent>
               <Typography style={contentStyle}>
                 <ProfileCard
-                  practiceCounty={props.practiceCounty}
-                  setPracticeCounty={props.setPracticeCounty}
-                  experience={props.experience}
-                  setExperience={props.setExperience}
-                  compensationRequest={props.compensationRequest}
-                  setCompensationRequest={props.setCompensationRequest}
-                  photo={props.photo}
-                  setPhoto={props.setPhoto}
-                  numNotifications={props.numNotifications}
-                  setNumNotifications={props.setNumNotifications}
+                  practiceCounty={practiceCounty}
+                  setPracticeCounty={setPracticeCounty}
+                  experience={experience}
+                  setExperience={setExperience}
+                  compensationRequest={compensationRequest}
+                  setCompensationRequest={setCompensationRequest}
+                  photo={photo}
+                  setPhoto={setPhoto}
+                  numNotifications={numNotifications}
+                  setNumNotifications={setNumNotifications}
                   cannotContinue={cannotContinue}
                   setCannotContinue={setCannotContinue}
                 />

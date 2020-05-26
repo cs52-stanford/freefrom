@@ -13,6 +13,8 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import DemographicsCard from "./make_account_card.js";
 import CaseCard from "./case_info_card.js";
+import { Link, Redirect } from "react-router-dom";
+import { signup } from "../services/auth";
 
 const themeA = createMuiTheme({
   root: {
@@ -65,7 +67,7 @@ function getSteps() {
   return ["Disclaimer", "Account Information", "Case Information"];
 }
 
-export default function VerticalLinearStepper(props) {
+export default function SurvivorSignUpStepper() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [cannotContinue, setCannotContinue] = useState(true);
@@ -80,10 +82,21 @@ export default function VerticalLinearStepper(props) {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [gender, setGender] = React.useState([]);
+  const [password, setPassword] = React.useState("");
+  const [currentCounty, setCurrentCounty] = React.useState("");
+  const [financialCapability, setFinancialCapability] = React.useState("");
+  const [lastOccurred, setLastOccurred] = React.useState("");
+  const [abuseCounty, setAbuseCounty] = React.useState("");
+  const [weaponsInvolved, setWeaponsInvolved] = React.useState("");
+  const [emailNotifications, setEmailNotifications] = React.useState("");
+  const [extraInfo, setExtraInfo] = React.useState("");
+
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
       <div className="background">
-        <NavBar setIsSignIn={props.setIsSignIn} />
         <Stepper
           activeStep={activeStep}
           orientation="vertical"
@@ -150,14 +163,14 @@ export default function VerticalLinearStepper(props) {
                 <DemographicsCard
                   cannotContinue={cannotContinue}
                   setCannotContinue={setCannotContinue}
-                  name={props.name}
-                  setName={props.setName}
-                  gender={props.gender}
-                  setGender={props.setGender}
-                  email={props.email}
-                  setEmail={props.setEmail}
-                  password={props.password}
-                  setPassword={props.setPassword}
+                  name={name}
+                  setName={setName}
+                  gender={gender}
+                  setGender={setGender}
+                  email={email}
+                  setEmail={setEmail}
+                  password={password}
+                  setPassword={setPassword}
                 />
               </Typography>
               <div className={classes.actionsContainer}>
@@ -192,22 +205,20 @@ export default function VerticalLinearStepper(props) {
                 <CaseCard
                   cannotContinue={cannotContinue}
                   setCannotContinue={setCannotContinue}
-                  currentCounty={props.currentCounty}
-                  setCurrentCounty={props.setCurrentCounty}
-                  financialCapability={props.financialCapability}
-                  setFinancialCapability={props.setFinancialCapability}
-                  lastOccurred={props.lastOccurred}
-                  setLastOccurred={props.setLastOccurred}
-                  abuseCounty={props.abuseCounty}
-                  setAbuseCounty={props.setAbuseCounty}
-                  weaponsInvolved={props.weaponsInvolved}
-                  setWeaponsInvolved={props.setWeaponsInvolved}
-                  emailNotifications={props.emailNotifications}
-                  setEmailNotifications={props.setEmailNotifications}
-                  extraInfo={props.extraInfo}
-                  setExtraInfo={props.setExtraInfo}
-                  color={props.color}
-                  setColor={props.setColor}
+                  currentCounty={currentCounty}
+                  setCurrentCounty={setCurrentCounty}
+                  financialCapability={financialCapability}
+                  setFinancialCapability={setFinancialCapability}
+                  lastOccurred={lastOccurred}
+                  setLastOccurred={setLastOccurred}
+                  abuseCounty={abuseCounty}
+                  setAbuseCounty={setAbuseCounty}
+                  weaponsInvolved={weaponsInvolved}
+                  setWeaponsInvolved={setWeaponsInvolved}
+                  emailNotifications={emailNotifications}
+                  setEmailNotifications={setEmailNotifications}
+                  extraInfo={extraInfo}
+                  setExtraInfo={setExtraInfo}
                 />
               </Typography>
               <div className={classes.actionsContainer}>

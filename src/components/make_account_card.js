@@ -47,7 +47,6 @@ const genderOptions = [
 const DemographicsCard = (props) => {
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
-  // checks to see if they have filled out every question
   useEffect(() => {
     if (
       props.gender.length === 0 ||
@@ -84,6 +83,7 @@ const DemographicsCard = (props) => {
     }
   };
 
+  console.log("big error!!!!!!!");
   return (
     <Container style={demoStyle} maxWidth="sm">
       <Container style={check} maxWidth="sm">

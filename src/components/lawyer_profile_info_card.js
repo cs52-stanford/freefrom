@@ -196,13 +196,15 @@ const ProfileCard = (props) => {
 
   const handlePracticeCountyChange = (event) => {
     props.setPracticeCounty(event.target.value);
-    console.log(props.practiceCounty);
   };
   const handleExperienceChange = (event) => {
     props.setExperience(event.target.value);
   };
   const handleCompensationRequestChange = (event) => {
     props.setCompensationRequest(event.target.value);
+    if (props.numNotifications !== -1) {
+      props.setCannotContinue(false);
+    }
   };
 
   const handlePhotoChange = (event) => {
@@ -215,13 +217,12 @@ const ProfileCard = (props) => {
     }
   };
 
-  // checks to see if they have filled out every question
   useEffect(() => {
     if (
       props.practiceCounty.length !== 0 &&
-      props.experience !== "-" &&
+      props.experience !== "" &&
       props.compensationRequest.length !== 0 &&
-      props.photo !== "-" &&
+      props.photo !== "" &&
       props.numNotifications !== -1
     ) {
       props.setCannotContinue(false);
