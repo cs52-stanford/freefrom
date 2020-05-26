@@ -55,7 +55,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" to="/">
         CounselCompass
       </Link>{" "}
       {new Date().getFullYear()}
@@ -112,7 +112,7 @@ export default function SignIn(props) {
   };
 
   return (
-    <ThemeProvider theme={themeA} className="backgroundColor">
+    <ThemeProvider theme={themeA}>
       <Container style={backgroundStyle}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
@@ -171,7 +171,7 @@ export default function SignIn(props) {
             </form>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="body2" to="/">
                   Forgot password?
                 </Link>
               </Grid>

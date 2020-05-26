@@ -15,6 +15,7 @@ import DemographicsCard from "./make_account_card.js";
 import ProfileCard from "./lawyer_profile_info_card.js";
 import { Link, Redirect } from "react-router-dom";
 import { signup } from "../services/auth";
+import { render } from "react-dom";
 
 const themeA = createMuiTheme({
   root: {
@@ -68,71 +69,52 @@ function getSteps() {
   return ["Disclaimer", "Account Information", "Profile Information"];
 }
 
-export default function VerticalLinearStepper() {
+export default function LawyerSignUpStepper() {
   const classes = useStyles();
-  const activeStep = React.useState(0);
+  var [activeStep, setActiveStep] = React.useState(0);
   const cannotContinue = React.useState(false);
   const steps = getSteps();
-  this.handleSubmit = this.handleSubmit.bind(this);
-  this.handleNext = this.handleNext.bind(this);
-  this.handleBack = this.handleBack.bind(this);
 
   const handleNext = () => {
-    cannotContinue = true;
-    if (activeStep === steps.length - 1) {
-      //return <Redirect to="/lawyer_home" />;
-    }
-    activeStep++;
+    setActiveStep(activeStep++);
   };
 
   const handleBack = () => {
-    activeStep--;
+    setActiveStep(activeStep--);
   };
 
   const handleReset = () => {
-    activeStep.setState(0);
+    activeStep.React.useState(0);
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
-    this.setState({ error: "" });
-    try {
-      await signup(
-        this.state.name,
-        this.state.gender,
-        this.state.email,
-        this.state.password,
-        this.state.practiceCounty,
-        this.state.experience,
-        this.state.compensationRequest,
-        this.state.photo,
-        this.state.numNotifications
-      );
-    } catch (error) {
-      this.setState({ error: error.message });
-    }
+    // event.preventDefault();
+    // this.setState({ error: "" });
+    // try {
+    //   await signup(name, email);
+    // } catch (error) {
+    //   this.setState({ error: error.message });
+    // }
   };
 
-  const {
-    name,
-    gender,
-    email,
-    password,
-    practiceCounty,
-    experience,
-    compensationRequest,
-    photo,
-    numNotifications,
-  } = this.state;
+  const [error, setError] = React.useState(null);
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [gender, setGender] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [practiceCounty, setPracticeCounty] = React.useState("");
+  const [experience, setExperience] = React.useState("");
+  const [compensationRequest, setCompensationRequest] = React.useState("");
+  const [photo, setPhoto] = React.useState("");
+  const [numNotifications, setNumNotifications] = React.useState("");
 
   return (
-    <ThemeProvider theme={themeA} className="backgroundColor">
-      <div className="background">
+    <ThemeProvider theme={themeA}>
+      <div>
         <Stepper
           activeStep={activeStep}
           orientation="vertical"
           style={backgroundStyle}
-          className={classes.center}
         >
           <Step key={steps[0]}>
             <StepLabel>{steps[0]}</StepLabel>
@@ -189,11 +171,10 @@ export default function VerticalLinearStepper() {
             <StepContent>
               <Typography style={contentStyle}>
                 <DemographicsCard
-                  name={this.state.name}
-                  gender={this.state.gender}
-                  email={this.state.email}
-                  password={this.state.password}
-                  cannotContinue={cannotContinue}
+                  name={name}
+                  gender={gender}
+                  email={email}
+                  password={password}
                 />
               </Typography>
               <div className={classes.actionsContainer}>
@@ -202,9 +183,7 @@ export default function VerticalLinearStepper() {
                     disabled={activeStep === 0}
                     onClick={handleBack}
                     className={classes.button}
-                  >
-                    Back
-                  </Button>
+                  ></Button>
                   <Button
                     variant="contained"
                     color="primary"
@@ -224,11 +203,11 @@ export default function VerticalLinearStepper() {
             <StepContent>
               <Typography style={contentStyle}>
                 <ProfileCard
-                  practiceCounty={this.state.practiceCounty}
-                  experience={this.state.experience}
-                  compensationRequest={this.state.compensationRequest}
-                  photo={this.state.photo}
-                  numNotifications={this.state.numNotifications}
+                  practiceCounty={practiceCounty}
+                  experience={experience}
+                  compensationRequest={compensationRequest}
+                  photo={photo}
+                  numNotifications={numNotifications}
                   cannotContinue={cannotContinue}
                 />
               </Typography>

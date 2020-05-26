@@ -32,41 +32,47 @@ const check = {
 };
 
 const DemographicsCard = (props) => {
+  const [error, setError] = React.useState(null);
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [gender, setGender] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [cannotContinue, setCannotContinue] = React.useState(true);
   const [passwordConfirm, setPasswordConfirm] = React.useState("");
 
   // checks to see if they have filled out every question
   const isFinished = () => {
     if (
-      props.gender === "" ||
-      props.name === "name" ||
-      props.email === "email" ||
-      props.password === ""
+      gender === "" ||
+      name === "name" ||
+      email === "email" ||
+      password === ""
     ) {
-      props.setCannotContinue(true);
+      setCannotContinue(true);
     } else {
-      props.setCannotContinue(false);
+      setCannotContinue(false);
     }
   };
 
   const handleGenderChange = (event) => {
-    props.setGender(event.target.value);
+    setGender(event.target.value);
     isFinished();
   };
   const handleEmailChange = (event) => {
-    props.setEmail(event.target.value);
+    setEmail(event.target.value);
     isFinished();
   };
   const handleNameChange = (event) => {
-    props.setName(event.target.value);
+    setName(event.target.value);
     isFinished();
   };
   const handlePasswordChange = (event) => {
-    props.setPassword(event.target.value);
+    setPassword(event.target.value);
   };
   const checkPasswordsMatch = (event) => {
-    if (event.target.value !== props.password) {
+    if (event.target.value !== password) {
       setPasswordConfirm("Passwords do not match");
-      props.setCannotContinue(true);
+      setCannotContinue(true);
     } else {
       setPasswordConfirm(" ");
       isFinished();
@@ -94,7 +100,7 @@ const DemographicsCard = (props) => {
             <RadioGroup
               aria-label="gender"
               name="gender1"
-              value={props.gender}
+              value={gender}
               onChange={handleGenderChange}
             >
               <FormControlLabel

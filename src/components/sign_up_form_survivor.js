@@ -64,70 +64,37 @@ function getSteps() {
   return ["Disclaimer", "Account Information", "Case Information"];
 }
 
-export default function VerticalLinearStepper(props) {
+export default function VerticalLinearStepper() {
   const classes = useStyles();
-  const activeStep = React.useState(0);
-  const cannotContinue = React.useState(true);
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [cannotContinue, setCannotContinue] = React.useState(true);
   const steps = getSteps();
-  this.handleSubmit = this.handleSubmit.bind(this);
-  this.handleNext = this.handleNext.bind(this);
-  this.handleBack = this.handleBack.bind(this);
 
   const handleNext = () => {
-    cannotContinue = true;
-    if (activeStep === steps.length - 1) {
-      //return <Redirect to="/survivor_home" />;
-    }
-    activeStep++;
+    setCannotContinue(true);
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
-    activeStep--;
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const handleReset = () => {
-    activeStep.setState(0);
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    this.setState({ error: "" });
-    try {
-      await signup(
-        this.state.name,
-        this.state.gender,
-        this.state.email,
-        this.state.password,
-        this.state.currentCounty,
-        this.state.financialCapability,
-        this.state.lastOccurred,
-        this.state.abuseCounty,
-        this.state.weaponsInvolved,
-        this.state.emailNotifications,
-        this.state.extraInfo
-      );
-    } catch (error) {
-      this.setState({ error: error.message });
-    }
-  };
-
-  const {
-    name,
-    gender,
-    email,
-    password,
-    currentCounty,
-    financialCapability,
-    lastOccurred,
-    abuseCounty,
-    weaponsInvolved,
-    emailNotifications,
-    extraInfo,
-  } = this.state;
+  const [error, setError] = React.useState(null);
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [gender, setGender] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [currentCounty, setCurrentCounty] = React.useState("");
+  const [financialCapability, setFinancialCapability] = React.useState("");
+  const [lastOccurred, setLastOccurred] = React.useState("");
+  const [abuseCounty, setAbuseCounty] = React.useState("");
+  const [weaponsInvolved, setWeaponsInvolved] = React.useState("");
+  const [emailNotifications, setEmailNotifications] = React.useState("");
+  const [extraInfo, setExtraInfo] = React.useState("");
 
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
-      <div>
+      <div className="background">
         <Stepper
           activeStep={activeStep}
           orientation="vertical"
@@ -139,26 +106,30 @@ export default function VerticalLinearStepper(props) {
             <StepContent>
               <Typography style={contentStyle}>
                 <Container maxWidth="md">
-                  <p>
+                  <Typography paragraph>
                     As a survivor of domestic violence, you could be eligible
                     for money to cover some of the costs of the harm you
                     experienced. This platform is designed to match you with an
                     attorney best suited to help you. But first, answer a few
                     short questions to better understand your situation and
                     decide what lawyer is best for you.
-                  </p>
-                  <p>
+                  </Typography>
+                  <Typography paragraph className={classes.pText}>
+                    Please note that this platform is currently only for
+                    California residents.
+                  </Typography>
+                  <Typography paragraph>
                     This is an educational and informational tool and the
                     information contained within it does in no way constitute
                     legal advice. Any person who intends to use the information
                     contained herein in any way is solely responsible for
                     independently verifying the information and obtaining
                     independent legal or other expert advice if necessary.
-                  </p>
-                  <p>
+                  </Typography>
+                  <Typography paragraph>
                     By clicking next, you acknowledge that you have read and
                     agree to the terms and conditions provided.
-                  </p>
+                  </Typography>
                 </Container>
               </Typography>
               <div className={classes.actionsContainer}>
@@ -189,10 +160,15 @@ export default function VerticalLinearStepper(props) {
               <Typography style={contentStyle}>
                 <DemographicsCard
                   cannotContinue={cannotContinue}
-                  name={props.name}
-                  gender={props.gender}
-                  email={props.email}
-                  password={props.password}
+                  setCannotContinue={setCannotContinue}
+                  name={name}
+                  setName={setName}
+                  gender={gender}
+                  setGender={setGender}
+                  email={email}
+                  setEmail={setEmail}
+                  password={password}
+                  setPassword={setPassword}
                 />
               </Typography>
               <div className={classes.actionsContainer}>
@@ -207,7 +183,9 @@ export default function VerticalLinearStepper(props) {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={handleNext}
+                    onClick={function () {
+                      handleNext();
+                    }}
                     className={classes.button}
                     disabled={cannotContinue}
                   >
@@ -224,13 +202,21 @@ export default function VerticalLinearStepper(props) {
               <Typography style={contentStyle}>
                 <CaseCard
                   cannotContinue={cannotContinue}
-                  currentCounty={props.currentCounty}
-                  financialCapability={props.financialCapability}
-                  lastOccurred={props.lastOccurred}
-                  abuseCounty={props.abuseCounty}
-                  weaponsInvolved={props.weaponsInvolved}
-                  emailNotifications={props.emailNotifications}
-                  extraInfo={props.extraInfo}
+                  setCannotContinue={setCannotContinue}
+                  currentCounty={currentCounty}
+                  setCurrentCounty={setCurrentCounty}
+                  financialCapability={financialCapability}
+                  setFinancialCapability={setFinancialCapability}
+                  lastOccurred={lastOccurred}
+                  setLastOccurred={setLastOccurred}
+                  abuseCounty={abuseCounty}
+                  setAbuseCounty={setAbuseCounty}
+                  weaponsInvolved={weaponsInvolved}
+                  setWeaponsInvolved={setWeaponsInvolved}
+                  emailNotifications={emailNotifications}
+                  setEmailNotifications={setEmailNotifications}
+                  extraInfo={extraInfo}
+                  setExtraInfo={setExtraInfo}
                 />
               </Typography>
               <div className={classes.actionsContainer}>
@@ -257,11 +243,10 @@ export default function VerticalLinearStepper(props) {
           </Step>
         </Stepper>
         {activeStep === steps.length && (
-          <div>
-            <Typography>All steps completed - you&apos;re finished</Typography>
-            <Button onClick={handleReset} className={classes.button}>
-              Reset
-            </Button>
+          <div style={backgroundStyle}>
+            <Typography align="center">
+              Sign up complete! Return to the home page to sign in.
+            </Typography>
           </div>
         )}
       </div>

@@ -11,7 +11,6 @@ import { css } from "@emotion/core";
 import { render } from "react-dom";
 import { Link, withRouter, Redirect } from "react-router-dom";
 import { signup } from "../services/auth";
-import VerticalLinearStepper from "./sign_up_form_survivor";
 
 const themeA = createMuiTheme({
   root: {
@@ -28,7 +27,7 @@ const themeA = createMuiTheme({
   },
 });
 
-export default function SignUp(props) {
+export default function SignUp() {
   return (
     <Container className="one" maxWidth="sm">
       <Container className="three" maxWidth="sm"></Container>

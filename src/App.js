@@ -12,10 +12,11 @@ import {
   Redirect,
 } from "react-router-dom";
 import { auth } from "./services/firebase";
+import LawyerSignUpStepper from "./components/sign_up_form_lawyer.js";
+import SurvivorSignUpStepper from "./components/sign_up_form_survivor.js";
 
 import "./App.css";
 import LawyerHome from "./components/lawyer_home";
-import LawyerSignUp from "./components/sign_up_form_lawyer";
 
 function PrivateRoute({ component: Component, authenticated, ...rest }) {
   return (
@@ -42,7 +43,7 @@ function PublicRoute({ component: Component, authenticated, ...rest }) {
         authenticated === false ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/sign_up_form_lawyer" />
+          <Redirect to="/sign_up" />
         )
       }
     />
@@ -95,6 +96,16 @@ class App extends Component {
             path="/sign_up"
             authenticated={this.state.authenticated}
             component={SignUp}
+          />
+          <PublicRoute
+            path="/sign_up_form_lawyer"
+            authenticated={this.state.authenticated}
+            component={LawyerSignUpStepper}
+          />
+          <PublicRoute
+            path="/sign_up_form_survivor"
+            authenticated={this.state.authenticated}
+            component={LawyerSignUpStepper}
           />
         </Switch>
       </Router>
