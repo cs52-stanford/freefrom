@@ -9,7 +9,13 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import { css } from "@emotion/core";
 import { render } from "react-dom";
-import { BrowserRouter, Link, withRouter, Redirect } from "react-router-dom";
+import {
+  BrowserRouter,
+  Switch,
+  Link,
+  withRouter,
+  Redirect,
+} from "react-router-dom";
 import { signup } from "../services/auth";
 
 const themeA = createMuiTheme({
@@ -36,14 +42,16 @@ export default function SignUp() {
           <Typography align="center" variant="h5">
             I am a:
           </Typography>
-          <div className="seven">
-            <Link to="/sign_up_form_lawyer">
-              <div className="lawyerButton">{"LAWYER"}</div>
-            </Link>
-            <Link to="/sign_up_form_survivor">
-              <div className="survivorButton">{"SURVIVOR"}</div>
-            </Link>
-          </div>
+          <Switch>
+            <div className="seven">
+              <Link to="/sign_up_form_lawyer">
+                <div className="lawyerButton">{"LAWYER"}</div>
+              </Link>
+              <Link to="/sign_up_form_survivor">
+                <div className="survivorButton">{"SURVIVOR"}</div>
+              </Link>
+            </div>
+          </Switch>
         </Container>
       </Container>
     </Container>

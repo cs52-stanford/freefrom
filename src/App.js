@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, Component } from "react";
 import SignIn from "./components/sign_in.js";
 import SignUp from "./components/sign_up.js";
 import LawyerHome from "./components/lawyer_matches.js";

@@ -74,6 +74,13 @@ export default function SurvivorSignUpStepper() {
   const steps = getSteps();
 
   const handleNext = () => {
+    if (activeStep === steps.length - 1) {
+      const user = {
+        DemographicsCard,
+        CaseCard,
+      };
+      signup(email, password, user);
+    }
     setCannotContinue(true);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -93,6 +100,7 @@ export default function SurvivorSignUpStepper() {
   const [weaponsInvolved, setWeaponsInvolved] = React.useState("");
   const [emailNotifications, setEmailNotifications] = React.useState("");
   const [extraInfo, setExtraInfo] = React.useState("");
+  const [color, setColor] = React.useState("");
 
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
@@ -219,6 +227,8 @@ export default function SurvivorSignUpStepper() {
                   setEmailNotifications={setEmailNotifications}
                   extraInfo={extraInfo}
                   setExtraInfo={setExtraInfo}
+                  color={color}
+                  setColor={setColor}
                 />
               </Typography>
               <div className={classes.actionsContainer}>
