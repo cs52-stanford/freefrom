@@ -105,7 +105,7 @@ class App extends Component {
           <PublicRoute
             path="/sign_up_form_survivor"
             authenticated={this.state.authenticated}
-            component={LawyerSignUpStepper}
+            component={SurvivorSignUpStepper}
           />
         </Switch>
       </Router>

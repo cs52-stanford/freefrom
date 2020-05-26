@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./sign_up.css";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
@@ -15,7 +15,6 @@ import DemographicsCard from "./make_account_card.js";
 import ProfileCard from "./lawyer_profile_info_card.js";
 import { Link, Redirect } from "react-router-dom";
 import { signup } from "../services/auth";
-import { render } from "react-dom";
 
 const themeA = createMuiTheme({
   root: {
@@ -71,8 +70,8 @@ function getSteps() {
 
 export default function LawyerSignUpStepper() {
   const classes = useStyles();
-  var [activeStep, setActiveStep] = React.useState(0);
-  const [cannotContinue, setCannotContinue] = React.useState(true);
+  const [activeStep, setActiveStep] = useState(0);
+  const [cannotContinue, setCannotContinue] = useState(true);
   const steps = getSteps();
 
   const handleNext = () => {
@@ -84,14 +83,13 @@ export default function LawyerSignUpStepper() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const [error, setError] = React.useState(null);
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [gender, setGender] = React.useState("");
+  const [name, setName] = React.useState("name");
+  const [email, setEmail] = React.useState("email");
+  const [gender, setGender] = React.useState([]);
   const [password, setPassword] = React.useState("");
-  const [practiceCounty, setPracticeCounty] = React.useState("");
+  const [practiceCounty, setPracticeCounty] = React.useState([]);
   const [experience, setExperience] = React.useState("");
-  const [compensationRequest, setCompensationRequest] = React.useState("");
+  const [compensationRequest, setCompensationRequest] = React.useState([]);
   const [photo, setPhoto] = React.useState("");
   const [numNotifications, setNumNotifications] = React.useState("");
 
@@ -102,6 +100,7 @@ export default function LawyerSignUpStepper() {
           activeStep={activeStep}
           orientation="vertical"
           style={backgroundStyle}
+          className={classes.center}
         >
           <Step key={steps[0]}>
             <StepLabel>{steps[0]}</StepLabel>
@@ -159,9 +158,15 @@ export default function LawyerSignUpStepper() {
               <Typography style={contentStyle}>
                 <DemographicsCard
                   name={name}
+                  setName={setName}
                   gender={gender}
+                  setGender={setGender}
                   email={email}
+                  setEmail={setEmail}
                   password={password}
+                  setPassword={setPassword}
+                  cannotContinue={cannotContinue}
+                  setCannotContinue={setCannotContinue}
                 />
               </Typography>
               <div className={classes.actionsContainer}>
@@ -170,7 +175,9 @@ export default function LawyerSignUpStepper() {
                     disabled={activeStep === 0}
                     onClick={handleBack}
                     className={classes.button}
-                  ></Button>
+                  >
+                    Back
+                  </Button>
                   <Button
                     variant="contained"
                     color="primary"
@@ -191,11 +198,17 @@ export default function LawyerSignUpStepper() {
               <Typography style={contentStyle}>
                 <ProfileCard
                   practiceCounty={practiceCounty}
+                  setPracticeCounty={setPracticeCounty}
                   experience={experience}
+                  setExperience={setExperience}
                   compensationRequest={compensationRequest}
+                  setCompensationRequest={setCompensationRequest}
                   photo={photo}
+                  setPhoto={setPhoto}
                   numNotifications={numNotifications}
+                  setNumNotifications={setNumNotifications}
                   cannotContinue={cannotContinue}
+                  setCannotContinue={setCannotContinue}
                 />
               </Typography>
               <div className={classes.actionsContainer}>

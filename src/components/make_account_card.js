@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./sign_up.css";
 import Container from "@material-ui/core/Container";
 import Select from "@material-ui/core/Select";
@@ -44,52 +44,46 @@ const genderOptions = [
   "I prefer to self-describe",
 ];
 
-const DemographicsCard = () => {
-  const [error, setError] = React.useState(null);
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [gender, setGender] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [cannotContinue, setCannotContinue] = React.useState(true);
-  const [passwordConfirm, setPasswordConfirm] = React.useState("");
+const DemographicsCard = (props) => {
+  const [passwordConfirm, setPasswordConfirm] = useState("");
 
-  // checks to see if they have filled out every question
-  React.useEffect(() => {
+  useEffect(() => {
     if (
-      gender.length === 0 ||
-      name === "name" ||
-      email === "email" ||
-      password === "" ||
+      props.gender.length === 0 ||
+      props.name === "name" ||
+      props.email === "email" ||
+      props.password === "" ||
       passwordConfirm === "Passwords do not match" ||
       passwordConfirm === ""
     ) {
-      setCannotContinue(true);
+      props.setCannotContinue(true);
     } else {
-      setCannotContinue(false);
+      props.setCannotContinue(false);
     }
   });
 
   const handleGenderChange = (event) => {
-    setGender(event.target.value);
+    props.setGender(event.target.value);
   };
   const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+    props.setEmail(event.target.value);
   };
   const handleNameChange = (event) => {
-    setName(event.target.value);
+    props.setName(event.target.value);
   };
   const handlePasswordChange = (event) => {
-    setPassword(event.target.value);
+    props.setPassword(event.target.value);
   };
   const checkPasswordsMatch = (event) => {
-    if (event.target.value !== password) {
+    if (event.target.value !== props.password) {
       setPasswordConfirm("Passwords do not match");
-      setCannotContinue(true);
+      props.setCannotContinue(true);
     } else {
       setPasswordConfirm(" ");
     }
   };
 
+  console.log("big error!!!!!!!");
   return (
     <Container style={demoStyle} maxWidth="sm">
       <Container style={check} maxWidth="sm">
@@ -108,7 +102,7 @@ const DemographicsCard = () => {
           <div className="spacing">Gender(s):</div>
 
           <FormControl className="formSize">
-            <Select value={gender} onChange={handleGenderChange} multiple>
+            <Select value={props.gender} onChange={handleGenderChange} multiple>
               {genderOptions.map((label, index) => (
                 <MenuItem value={genderOptions[index]}>{label}</MenuItem>
               ))}

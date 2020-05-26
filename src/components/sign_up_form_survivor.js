@@ -64,7 +64,7 @@ function getSteps() {
   return ["Disclaimer", "Account Information", "Case Information"];
 }
 
-export default function VerticalLinearStepper() {
+export default function SurvivorSignUpStepper() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [cannotContinue, setCannotContinue] = React.useState(true);
@@ -79,10 +79,9 @@ export default function VerticalLinearStepper() {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
-  const [error, setError] = React.useState(null);
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
-  const [gender, setGender] = React.useState("");
+  const [gender, setGender] = React.useState([]);
   const [password, setPassword] = React.useState("");
   const [currentCounty, setCurrentCounty] = React.useState("");
   const [financialCapability, setFinancialCapability] = React.useState("");
