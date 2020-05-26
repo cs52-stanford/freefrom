@@ -72,29 +72,16 @@ function getSteps() {
 export default function LawyerSignUpStepper() {
   const classes = useStyles();
   var [activeStep, setActiveStep] = React.useState(0);
-  const cannotContinue = React.useState(false);
+  const [cannotContinue, setCannotContinue] = React.useState(true);
   const steps = getSteps();
 
   const handleNext = () => {
-    setActiveStep(activeStep++);
+    setCannotContinue(true);
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
-    setActiveStep(activeStep--);
-  };
-
-  const handleReset = () => {
-    activeStep.React.useState(0);
-  };
-
-  const handleSubmit = async (event) => {
-    // event.preventDefault();
-    // this.setState({ error: "" });
-    // try {
-    //   await signup(name, email);
-    // } catch (error) {
-    //   this.setState({ error: error.message });
-    // }
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
 
   const [error, setError] = React.useState(null);
