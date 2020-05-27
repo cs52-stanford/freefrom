@@ -75,6 +75,9 @@ export default function LawyerSignUpStepper() {
   const steps = getSteps();
 
   const handleNext = () => {
+    if (activeStep === steps.length - 1) {
+      signup(email, password, DemographicsCard, ProfileCard, null);
+    }
     setCannotContinue(true);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };

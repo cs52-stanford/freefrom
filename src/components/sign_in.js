@@ -22,7 +22,7 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-import { signin } from "../services/auth";
+import { signin, signup } from "../services/auth";
 import { LawyerSignUp } from "./sign_up_form_lawyer.js";
 import SignUp from "./sign_up.js";
 
@@ -105,7 +105,8 @@ export default function SignIn(props) {
     event.preventDefault();
     setError("");
     try {
-      await signin(this.state.email, this.state.password);
+      signup(email, password);
+      //   await signin(this.state.email, this.state.password);
     } catch (error) {
       setError("");
     }
