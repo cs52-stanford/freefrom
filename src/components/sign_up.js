@@ -9,13 +9,7 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import { css } from "@emotion/core";
 import { render } from "react-dom";
-import {
-  BrowserRouter,
-  Switch,
-  Link,
-  withRouter,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter, Switch, Link } from "react-router-dom";
 import { signup } from "../services/auth";
 
 const themeA = createMuiTheme({

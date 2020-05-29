@@ -12,6 +12,7 @@ import {
 import { auth } from "./services/firebase";
 import LawyerSignUpStepper from "./components/sign_up_form_lawyer.js";
 import SurvivorSignUpStepper from "./components/sign_up_form_survivor.js";
+import ButtonAppBar from "./components/sign_up_nav_bar";
 
 import "./App.css";
 

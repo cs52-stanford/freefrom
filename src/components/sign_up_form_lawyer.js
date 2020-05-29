@@ -14,7 +14,8 @@ import { ThemeProvider } from "@material-ui/styles";
 import DemographicsCard from "./make_account_card.js";
 import ProfileCard from "./lawyer_profile_info_card.js";
 import { Link, Redirect } from "react-router-dom";
-import { signup } from "../services/auth";
+import { signup, signin } from "../services/auth";
+import { auth, db } from "../services/firebase";
 
 const themeA = createMuiTheme({
   root: {
@@ -76,7 +77,27 @@ export default function LawyerSignUpStepper() {
 
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
-      signup(email, password, DemographicsCard, ProfileCard, null);
+      signup(email, password);
+      signin(email, password);
+      auth().onAuthStateChanged(function (user) {
+        var user = auth().currentUser;
+        if (user) {
+          user
+            .updateProfile({
+              name: "Jane Q. User",
+              photoURL: "https://example.com/jane-q-user/profile.jpg",
+            })
+            .then(function () {
+              // Update successful.
+            })
+            .catch(function (error) {
+              // An error happened.
+            });
+        } else {
+          // No user is signed in.
+        }
+      });
+      var user = auth().currentUser;
     }
     setCannotContinue(true);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
