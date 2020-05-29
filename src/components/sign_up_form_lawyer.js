@@ -75,32 +75,29 @@ export default function LawyerSignUpStepper() {
   const [cannotContinue, setCannotContinue] = useState(true);
   const steps = getSteps();
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (activeStep === steps.length - 1) {
-      signup(email, password);
-      signin(email, password);
-      auth().onAuthStateChanged(function (user) {
-        var user = auth().currentUser;
-        if (user) {
-          user
-            .updateProfile({
-              name: "Jane Q. User",
-              photoURL: "https://example.com/jane-q-user/profile.jpg",
-            })
-            .then(function () {
-              // Update successful.
-            })
-            .catch(function (error) {
-              // An error happened.
-            });
-        } else {
-          // No user is signed in.
+      signup(email, password).then(() => {
+        db.ref('users/'+ auth().currentUser.uid).set({
+            gender: gender,
+            name: name,
+            email: email,
+            practiceCounty: practiceCounty,
+            experience: experience,
+            compensationRequest: compensationRequest,
+            numNotifications: numNotifications,
+            isLawyer: true,
+            isSurvivor: false
+          });
+        // figure out photo
         }
+      ).catch(function(error){
+        console.error(error)
       });
-      var user = auth().currentUser;
+    } else {
+      setCannotContinue(true);
+      setActiveStep((prevActiveStep) => prevActiveStep + 1);
     }
-    setCannotContinue(true);
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
