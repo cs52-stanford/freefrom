@@ -77,8 +77,9 @@ export default function LawyerSignUpStepper() {
 
   const handleNext = async () => {
     if (activeStep === steps.length - 1) {
-      signup(email, password).then(() => {
-        db.ref('users/'+ auth().currentUser.uid).set({
+      signup(email, password)
+        .then(() => {
+          db.ref("users/" + auth().currentUser.uid).set({
             gender: gender,
             name: name,
             email: email,
@@ -87,13 +88,13 @@ export default function LawyerSignUpStepper() {
             compensationRequest: compensationRequest,
             numNotifications: numNotifications,
             isLawyer: true,
-            isSurvivor: false
+            isSurvivor: false,
           });
-        // figure out photo
-        }
-      ).catch(function(error){
-        console.error(error)
-      });
+          // figure out photo
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
     } else {
       setCannotContinue(true);
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
