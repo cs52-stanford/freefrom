@@ -77,8 +77,6 @@ export default function LawyerSignUpStepper() {
 
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
-<<<<<<< HEAD
-<<<<<<< HEAD
       signup(email, password)
         .then(() => {
           db.ref("users/" + auth().currentUser.uid).set({
@@ -100,34 +98,7 @@ export default function LawyerSignUpStepper() {
     } else {
       setCannotContinue(true);
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
-=======
->>>>>>> parent of 0f45dd0... Signup working and adding auxiliary user information
-=======
->>>>>>> parent of 0f45dd0... Signup working and adding auxiliary user information
-      signup(email, password);
-      signin(email, password);
-      auth().onAuthStateChanged(function (user) {
-        var user = auth().currentUser;
-        if (user) {
-          user
-            .updateProfile({
-              name: "Jane Q. User",
-              photoURL: "https://example.com/jane-q-user/profile.jpg",
-            })
-            .then(function () {
-              // Update successful.
-            })
-            .catch(function (error) {
-              // An error happened.
-            });
-        } else {
-          // No user is signed in.
-        }
-      });
-      var user = auth().currentUser;
     }
-    setCannotContinue(true);
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
 
   const handleBack = () => {
