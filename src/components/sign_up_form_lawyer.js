@@ -77,6 +77,7 @@ export default function LawyerSignUpStepper() {
 
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
+<<<<<<< HEAD
       signup(email, password)
         .then(() => {
           db.ref("users/" + auth().currentUser.uid).set({
@@ -98,6 +99,8 @@ export default function LawyerSignUpStepper() {
     } else {
       setCannotContinue(true);
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
+=======
+>>>>>>> parent of 0f45dd0... Signup working and adding auxiliary user information
       signup(email, password);
       signin(email, password);
       auth().onAuthStateChanged(function (user) {
