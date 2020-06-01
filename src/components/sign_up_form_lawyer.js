@@ -82,7 +82,7 @@ export default function LawyerSignUpStepper() {
           db.ref("users/" + auth().currentUser.uid).set({
             gender: gender,
             name: name,
-            email: email,
+            // email: email,
             practiceCounty: practiceCounty,
             experience: experience,
             compensationRequest: compensationRequest,
