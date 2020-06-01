@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./sign_up.css";
 import { CirclePicker } from "react-color";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
@@ -143,6 +143,7 @@ const CaseCard = (props) => {
   const times = ["Within 6 months", "Within 1 year", "Over 1 year ago"];
   const weapons = ["Yes", "No", "Not sure"];
   const email = ["Yes", "No"];
+  const [color, setColor] = useState("");
   const [questionNumber, setQuestionNumber] = React.useState(1);
 
   // checks to see if they have filled out every question
@@ -183,7 +184,7 @@ const CaseCard = (props) => {
   const handleInfoChange = (event) => {
     props.setExtraInfo(event.target.value);
   };
-  const handleColorChange = (color, event) => {
+  const handleColorChange = (color) => {
     props.setColor(color.hex);
   };
 

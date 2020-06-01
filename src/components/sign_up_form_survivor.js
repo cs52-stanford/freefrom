@@ -13,8 +13,8 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import DemographicsCard from "./make_account_card.js";
 import CaseCard from "./case_info_card.js";
-import { Link, Redirect } from "react-router-dom";
-import { signup } from "../services/auth";
+import { signup, signin } from "../services/auth";
+import { auth, db } from "../services/firebase";
 
 const themeA = createMuiTheme({
   root: {
@@ -74,6 +74,19 @@ export default function SurvivorSignUpStepper() {
   const steps = getSteps();
 
   const handleNext = () => {
+    if (activeStep === steps.length - 1) {
+      signup(email, password);
+      signin(email, password);
+      var user = auth().currentUser;
+      user.updateProfile({
+        name: "name",
+        email: "email",
+      });
+      db.ref("users").push({
+        name: name,
+        password: password,
+      });
+    }
     setCannotContinue(true);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
   };
@@ -93,6 +106,7 @@ export default function SurvivorSignUpStepper() {
   const [weaponsInvolved, setWeaponsInvolved] = React.useState("");
   const [emailNotifications, setEmailNotifications] = React.useState("");
   const [extraInfo, setExtraInfo] = React.useState("");
+  const [color, setColor] = React.useState("");
 
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
@@ -219,6 +233,8 @@ export default function SurvivorSignUpStepper() {
                   setEmailNotifications={setEmailNotifications}
                   extraInfo={extraInfo}
                   setExtraInfo={setExtraInfo}
+                  color={color}
+                  setColor={setColor}
                 />
               </Typography>
               <div className={classes.actionsContainer}>

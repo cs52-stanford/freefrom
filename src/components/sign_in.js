@@ -22,8 +22,8 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-import { signin } from "../services/auth";
-import { LawyerSignUp } from "./sign_up_form_lawyer.js";
+import { signin, signup } from "../services/auth";
+import { auth, db } from "../services/firebase";
 import SignUp from "./sign_up.js";
 
 const backgroundStyle = {
@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn(props) {
+export default function SignIn() {
   const [error, setError] = React.useState(null);
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -105,7 +105,8 @@ export default function SignIn(props) {
     event.preventDefault();
     setError("");
     try {
-      await signin(this.state.email, this.state.password);
+      signup(email, password);
+      var user = auth().currentUser;
     } catch (error) {
       setError("");
     }

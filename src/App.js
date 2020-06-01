@@ -9,7 +9,7 @@ import {
   Switch,
   Redirect,
 } from "react-router-dom";
-import { auth } from "./services/firebase";
+import { auth, db } from "./services/firebase";
 import LawyerSignUpStepper from "./components/sign_up_form_lawyer.js";
 import SurvivorSignUpStepper from "./components/sign_up_form_survivor.js";
 import "./App.css";
@@ -20,7 +20,7 @@ function PrivateRoute({ component: Component, authenticated, ...rest }) {
       {...rest}
       render={(props) =>
         authenticated === true ? (
-          <Component {...props} />
+          <Component {...props} userDetails={this.state.userDetails} />
         ) : (
           <Redirect
             to={{ pathname: "/sign_in", state: { from: props.location } }}
@@ -52,21 +52,27 @@ class App extends Component {
     this.state = {
       authenticated: false,
       loading: true,
+      userDetails: undefined,
     };
   }
 
   componentDidMount() {
     auth().onAuthStateChanged((user) => {
       if (user) {
-        this.setState({
-          authenticated: true,
-          loading: false,
+        db.ref("users/" + user.uid).on("value", (snapshot) => {
+          this.setState({
+            authenticated: true,
+            loading: false,
+            userDetails: snapshot.val(),
+          });
         });
       } else {
         this.setState({
           authenticated: false,
           loading: false,
+          userDetails: undefined,
         });
+        db.ref().off();
       }
     });
   }
