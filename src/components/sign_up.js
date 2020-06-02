@@ -36,16 +36,14 @@ export default function SignUp() {
           <Typography align="center" variant="h5">
             I am a:
           </Typography>
-          <Switch>
-            <div className="seven">
-              <Link to="/sign_up_form_lawyer">
-                <div className="lawyerButton">{"LAWYER"}</div>
-              </Link>
-              <Link to="/sign_up_form_survivor">
-                <div className="survivorButton">{"SURVIVOR"}</div>
-              </Link>
-            </div>
-          </Switch>
+          <div className="seven">
+            <Link to="/sign_up_form_lawyer">
+              <div className="lawyerButton">{"LAWYER"}</div>
+            </Link>
+            <Link to="/sign_up_form_survivor">
+              <div className="survivorButton">{"SURVIVOR"}</div>
+            </Link>
+          </div>
         </Container>
       </Container>
     </Container>
