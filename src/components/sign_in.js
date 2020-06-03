@@ -106,9 +106,8 @@ export default function SignIn() {
     setError("");
     try {
       signup(email, password);
-      var user = auth().currentUser;
     } catch (error) {
-      setError("");
+      setError("user ISSUE");
     }
   };
 

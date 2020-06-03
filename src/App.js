@@ -13,6 +13,8 @@ import { auth, db } from "./services/firebase";
 import LawyerSignUpStepper from "./components/sign_up_form_lawyer.js";
 import SurvivorSignUpStepper from "./components/sign_up_form_survivor.js";
 import "./App.css";
+import { signout } from "./services/auth.js";
+import LawyerMatches from "./components/lawyer_matches.js";
 
 function PrivateRoute({ component: Component, authenticated, ...rest }) {
   return (
@@ -57,6 +59,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    signout();
     auth().onAuthStateChanged((user) => {
       if (user) {
         db.ref("users/" + user.uid).on("value", (snapshot) => {
@@ -87,7 +90,7 @@ class App extends Component {
           <PrivateRoute
             path="/lawyer_home"
             authenticated={this.state.authenticated}
-            component={LawyerHome}
+            component={LawyerMatches}
           />
           <PrivateRoute
             path="/survivor_home"
