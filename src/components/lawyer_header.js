@@ -23,6 +23,7 @@ import ConnectionsIcon from "./connections.png";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
+import { auth } from "../services/firebase";
 
 const drawerWidth = 240;
 
@@ -205,7 +206,7 @@ export default function PersistentDrawerLeft(props) {
             key="logout"
             alignItems="center"
             onClick={() => {
-              props.setIsLogIn(false);
+              auth().signOut();
             }}
           >
             <ListItemAvatar>
