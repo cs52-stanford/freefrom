@@ -75,17 +75,28 @@ export default function SurvivorSignUpStepper() {
 
   const handleNext = () => {
     if (activeStep === steps.length - 1) {
-      signup(email, password);
-      signin(email, password);
-      var user = auth().currentUser;
-      user.updateProfile({
-        name: "name",
-        email: "email",
-      });
-      db.ref("users").push({
-        name: name,
-        password: password,
-      });
+      signup(email, password)
+        .then(() => {
+          db.ref("users/" + auth().currentUser.uid).set({
+            gender: gender,
+            name: name,
+            email: email,
+            currentCounty: currentCounty,
+            financialCapability: financialCapability,
+            lastOccurred: lastOccurred,
+            abuseCounty: abuseCounty,
+            weaponsInvolved: weaponsInvolved,
+            emailNotifications: emailNotifications,
+            extraInfo: extraInfo,
+            color: color,
+            isLawyer: false,
+            isSurvivor: true,
+          });
+          // figure out photo
+        })
+        .catch(function (error) {
+          console.error(error);
+        });
     }
     setCannotContinue(true);
     setActiveStep((prevActiveStep) => prevActiveStep + 1);

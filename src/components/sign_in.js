@@ -22,7 +22,7 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-import { signin, signup } from "../services/auth";
+import { signin } from "../services/auth";
 import { auth, db } from "../services/firebase";
 import SignUp from "./sign_up.js";
 
@@ -105,8 +105,7 @@ export default function SignIn() {
     event.preventDefault();
     setError("");
     try {
-      signup(email, password);
-      var user = auth().currentUser;
+      signin(email, password);
     } catch (error) {
       setError("");
     }

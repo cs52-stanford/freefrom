@@ -75,14 +75,14 @@ export default function LawyerSignUpStepper() {
   const [cannotContinue, setCannotContinue] = useState(true);
   const steps = getSteps();
 
-  const handleNext = async () => {
+  const handleNext = () => {
     if (activeStep === steps.length - 1) {
       signup(email, password)
         .then(() => {
           db.ref("users/" + auth().currentUser.uid).set({
             gender: gender,
             name: name,
-            // email: email,
+            email: email,
             practiceCounty: practiceCounty,
             experience: experience,
             compensationRequest: compensationRequest,
