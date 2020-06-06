@@ -14,6 +14,8 @@ import SurvivorSignUpStepper from "./components/sign_up_form_survivor.js";
 import ButtonAppBar from "./components/sign_up_nav_bar";
 
 import "./App.css";
+import { signout } from "./services/auth.js";
+import LawyerMatches from "./components/lawyer_matches.js";
 
 function PrivateRoute({
   component: Component,

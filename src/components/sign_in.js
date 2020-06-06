@@ -107,7 +107,7 @@ export default function SignIn() {
     try {
       signin(email, password);
     } catch (error) {
-      setError("");
+      setError("user ISSUE");
     }
   };
 

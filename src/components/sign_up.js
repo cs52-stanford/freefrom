@@ -10,7 +10,7 @@ import { ThemeProvider } from "@material-ui/styles";
 import { css } from "@emotion/core";
 import { render } from "react-dom";
 import { BrowserRouter, Switch, Link } from "react-router-dom";
-import { signup } from "../services/auth";
+import { signout } from "../services/auth.js";
 
 const themeA = createMuiTheme({
   root: {
@@ -28,6 +28,7 @@ const themeA = createMuiTheme({
 });
 
 export default function SignUp() {
+  signout();
   return (
     <Container className="one" maxWidth="sm">
       <Container className="three" maxWidth="sm"></Container>
