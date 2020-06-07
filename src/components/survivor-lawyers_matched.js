@@ -76,7 +76,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Album(props) {
   const classes = useStyles();
-  console.log(props.sentLawyers);
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
       <React.Fragment>

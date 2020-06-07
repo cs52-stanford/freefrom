@@ -48,9 +48,14 @@ const LawyerMatches = (props) => {
         <div className="lawyerhome">
           <LawyerHeader
             setIsHomeScreen={setIsHomeScreen}
+            isHomeScreen={isHomeScreen}
             setIsConnectionsScreen={setIsConnectionsScreen}
+            isConnectionsScreen={isConnectionsScreen}
             setIsSettingsScreen={setIsSettingsScreen}
+            isSettingsScreen={isSettingsScreen}
             setIsLogIn={props.setIsLogIn}
+            viewProfile={viewProfile}
+            setViewProfile={setViewProfile}
           />
           <LawyerHome
             viewProfile={viewProfile}
@@ -83,9 +88,14 @@ const LawyerMatches = (props) => {
         <div className="lawyerhome">
           <LawyerHeader
             setIsHomeScreen={setIsHomeScreen}
+            isHomeScreen={isHomeScreen}
             setIsConnectionsScreen={setIsConnectionsScreen}
+            isConnectionsScreen={isConnectionsScreen}
             setIsSettingsScreen={setIsSettingsScreen}
+            isSettingsScreen={isSettingsScreen}
             setIsLogIn={props.setIsLogIn}
+            viewProfile={viewProfile}
+            setViewProfile={setViewProfile}
           />
           <ReachOut
             viewProfile={viewProfile}
@@ -121,9 +131,14 @@ const LawyerMatches = (props) => {
       <div className="lawyerconnections">
         <LawyerHeader
           setIsHomeScreen={setIsHomeScreen}
+          isHomeScreen={isHomeScreen}
           setIsConnectionsScreen={setIsConnectionsScreen}
+          isConnectionsScreen={isConnectionsScreen}
           setIsSettingsScreen={setIsSettingsScreen}
+          isSettingsScreen={isSettingsScreen}
           setIsLogIn={props.setIsLogIn}
+          viewProfile={viewProfile}
+          setViewProfile={setViewProfile}
         />
         <LawyerConnections
           viewProfile={viewProfile}
@@ -158,9 +173,14 @@ const LawyerMatches = (props) => {
       <div className="lawyersettings">
         <LawyerHeader
           setIsHomeScreen={setIsHomeScreen}
+          isHomeScreen={isHomeScreen}
           setIsConnectionsScreen={setIsConnectionsScreen}
+          isConnectionsScreen={isConnectionsScreen}
           setIsSettingsScreen={setIsSettingsScreen}
+          isSettingsScreen={isSettingsScreen}
           setIsLogIn={props.setIsLogIn}
+          viewProfile={viewProfile}
+          setViewProfile={setViewProfile}
         />
         <LawyerSettings
           setName={props.setName}

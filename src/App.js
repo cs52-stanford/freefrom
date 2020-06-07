@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import SignIn from "./components/sign_in.js";
 import SignUp from "./components/sign_up.js";
 import Home from "./components/home.js";
+import Connections from "./components/connections.js";
+import Settings from "./components/settings.js";
 import {
   Route,
   BrowserRouter as Router,
@@ -20,7 +22,14 @@ import LawyerMatches from "./components/lawyer_matches.js";
 function PrivateRoute({
   component: Component,
   authenticated,
+  // next 3 lines for demo
+  unsentLawyers,
+  sentLawyers,
+  lawyerIndex,
   userDetails,
+  setLawyerIndex,
+  setUnsentLawyers,
+  setSentLawyers,
   ...rest
 }) {
   return (
@@ -28,7 +37,16 @@ function PrivateRoute({
       {...rest}
       render={(props) =>
         authenticated === true ? (
-          <Component {...props} userDetails={userDetails} />
+          <Component
+            {...props}
+            userDetails={userDetails}
+            unsentLawyers={unsentLawyers}
+            sentLawyers={sentLawyers}
+            lawyerIndex={lawyerIndex}
+            setLawyerIndex={setLawyerIndex}
+            setUnsentLawyers={setUnsentLawyers}
+            setSentLawyers={setSentLawyers}
+          />
         ) : (
           <Redirect
             to={{ pathname: "/sign_in", state: { from: props.location } }}
@@ -61,7 +79,33 @@ class App extends Component {
       authenticated: false,
       loading: true,
       userDetails: undefined,
+      unsentLawyers: [0, 1, 2, 3, 4, 5],
+      sentLawyers: [],
+      lawyerIndex: 0,
     };
+
+    // this might not work
+    this.setLawyerIndex = this.setLawyerIndex.bind(this);
+    this.setUnsentLawyers = this.setUnsentLawyers.bind(this);
+    this.setSentLawyers = this.setSentLawyers.bind(this);
+  }
+
+  setLawyerIndex(num) {
+    this.setState((state) => {
+      return { lawyerIndex: num };
+    });
+  }
+
+  setUnsentLawyers(arr) {
+    this.setState((state) => {
+      return { unsentLawyers: arr };
+    });
+  }
+
+  setSentLawyers(arr) {
+    this.setState((state) => {
+      return { sentLawyers: arr };
+    });
   }
 
   componentDidMount() {
@@ -117,6 +161,30 @@ class App extends Component {
             path="/home"
             authenticated={this.state.authenticated}
             component={Home}
+            userDetails={this.state.userDetails}
+            unsentLawyers={this.state.unsentLawyers}
+            sentLawyers={this.state.sentLawyers}
+            lawyerIndex={this.state.lawyerIndex}
+            setLawyerIndex={this.setLawyerIndex}
+            setUnsentLawyers={this.setUnsentLawyers}
+            setSentLawyers={this.setSentLawyers}
+          />
+          <PrivateRoute
+            path="/connections"
+            authenticated={this.state.authenticated}
+            component={Connections}
+            userDetails={this.state.userDetails}
+            unsentLawyers={this.state.unsentLawyers}
+            sentLawyers={this.state.sentLawyers}
+            lawyerIndex={this.state.lawyerIndex}
+            setLawyerIndex={this.setLawyerIndex}
+            setUnsentLawyers={this.setUnsentLawyers}
+            setSentLawyers={this.setSentLawyers}
+          />
+          <PrivateRoute
+            path="/settings"
+            authenticated={this.state.authenticated}
+            component={Settings}
             userDetails={this.state.userDetails}
           />
           <PublicRoute

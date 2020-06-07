@@ -13,19 +13,26 @@ const SurvivorMatches = (props) => {
         setLawyerName={props.setLawyerName}
         setLawyerProfile={props.setLawyerProfile}
         statuses={props.statuses}
-        unsentLawyers={props.unsentLawyers}
-        sentLawyers={props.sentLawyers}
+        // unsentLawyers={props.unsentLawyers}
+        // sentLawyers={props.sentLawyers}
         lawyerNames={props.lawyerNames}
         lawyerPhotos={props.lawyerPhotos}
         setStatus={props.setStatus}
-        lawyerIndex={props.lawyerIndex}
-        setLawyerIndex={props.setLawyerIndex}
+        // lawyerIndex={props.lawyerIndex}
+        // setLawyerIndex={props.setLawyerIndex}
         isConfirmScreen={props.isConfirmScreen}
         setIsConfirmScreen={props.setIsConfirmScreen}
-        setUnsentLawyers={props.setUnsentLawyers}
+        // setUnsentLawyers={props.setUnsentLawyers}
+        // unsentLawyers={props.unsentLawyers}
+        // setSentLawyers={props.setSentLawyers}
+        // sentLawyers={props.sentLawyers}
         unsentLawyers={props.unsentLawyers}
-        setSentLawyers={props.setSentLawyers}
         sentLawyers={props.sentLawyers}
+        lawyerIndex={props.lawyerIndex}
+        setLawyerIndex={props.setLawyerIndex}
+        setUnsentLawyers={props.setUnsentLawyers}
+        setSentLawyers={props.setSentLawyers}
+        {...props}
       ></GridOfLawyers>
     );
   } else {
@@ -54,18 +61,25 @@ const SurvivorMatches = (props) => {
             lawyerImage={props.lawyerImage}
             lawyerProfile={props.lawyerProfile}
             statuses={props.statuses}
-            unsentLawyers={props.unsentLawyers}
-            sentLawyers={props.sentLawyers}
+            // unsentLawyers={props.unsentLawyers}
+            // sentLawyers={props.sentLawyers}
             lawyerNames={props.lawyerNames}
             lawyerPhotos={props.lawyerPhotos}
             setStatus={props.setStatus}
-            lawyerIndex={props.lawyerIndex}
+            // lawyerIndex={props.lawyerIndex}
             isConfirmScreen={props.isConfirmScreen}
             setIsConfirmScreen={props.setIsConfirmScreen}
-            setUnsentLawyers={props.setUnsentLawyers}
+            // setUnsentLawyers={props.setUnsentLawyers}
+            // unsentLawyers={props.unsentLawyers}
+            // setSentLawyers={props.setSentLawyers}
+            // sentLawyers={props.sentLawyers}
             unsentLawyers={props.unsentLawyers}
-            setSentLawyers={props.setSentLawyers}
             sentLawyers={props.sentLawyers}
+            lawyerIndex={props.lawyerIndex}
+            setLawyerIndex={props.setLawyerIndex}
+            setUnsentLawyers={props.setUnsentLawyers}
+            setSentLawyers={props.setSentLawyers}
+            {...props}
           ></SurvivorReachOut>
         </div>
         <div

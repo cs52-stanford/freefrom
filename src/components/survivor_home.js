@@ -3,24 +3,21 @@ import SurvivorMatches from "./survivor_matches.js";
 import SurvivorConnections from "./survivor_messages_sent.js";
 import SurvivorSettings from "./survivor_settings.js";
 import SurvivorHeader from "./survivor_header.js";
-import { Grid } from '@material-ui/core';
+import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const statuses = ["new!", "new!", "new!", "new!", "new!", "new!"];
 
 const SurvivorHome = (props) => {
-  const [isSurvivorMatches, setIsSurvivorMatches] = useState(true);
   const [isConfirmScreen, setIsConfirmScreen] = useState(false);
-  const [isSurvivorConnections, setIsSurvivorConnections] = useState(false);
-  const [isSurvivorSettings, setIsSurvivorSettings] = useState(false);
   const [viewProfile, setViewProfile] = useState(false);
   const [lawyerProfile, setLawyerProfile] = useState([]);
   const [lawyerName, setLawyerName] = useState("name");
   const [lawyerImage, setLawyerImage] = useState("image");
 
-  const [unsentLawyers, setUnsentLawyers] = useState([0, 1, 2, 3, 4, 5]);
-  const [sentLawyers, setSentLawyers] = useState([]);
-  const [lawyerIndex, setLawyerIndex] = useState(0);
+  //const [unsentLawyers, setUnsentLawyers] = useState([0, 1, 2, 3, 4, 5]);
+  // const [sentLawyers, setSentLawyers] = useState([]);
+  // const [lawyerIndex, setLawyerIndex] = useState(0);
 
   const lawyerNames = [
     "RBG",
@@ -43,120 +40,50 @@ const SurvivorHome = (props) => {
     statuses[index] = message;
   }
 
-  if (isSurvivorMatches === true) {
-    return (
-      <Grid justify="flex-end" alignContent="space-between" className="lawyerhome">
-        <SurvivorHeader
-          setIsSurvivorMatches={setIsSurvivorMatches}
-          setIsSurvivorConnections={setIsSurvivorConnections}
-          setIsSurvivorSettings={setIsSurvivorSettings}
-          setIsLogIn={props.setIsLogIn}
-          viewProfile={viewProfile}
-          setViewProfile={setViewProfile}
-        />
-        <SurvivorMatches
-          viewProfile={viewProfile}
-          setViewProfile={setViewProfile}
-          setLawyerImage={setLawyerImage}
-          setLawyerName={setLawyerName}
-          setLawyerProfile={setLawyerProfile}
-          lawyerName={lawyerName}
-          lawyerImage={lawyerImage}
-          lawyerProfile={lawyerProfile}
-          isConfirmScreen={isConfirmScreen}
-          setIsConfirmScreen={setIsConfirmScreen}
-          lawyerPhotos={lawyerPhotos}
-          lawyerNames={lawyerNames}
-          unsentLawyers={unsentLawyers}
-          sentLawyers={sentLawyers}
-          setStatus={setStatus}
-          statuses={statuses}
-          setUnsentLawyers={setUnsentLawyers}
-          unsentLawyers={unsentLawyers}
-          setSentLawyers={setSentLawyers}
-          sentLawyers={sentLawyers}
-          lawyerIndex={lawyerIndex}
-          setLawyerIndex={setLawyerIndex}
-        ></SurvivorMatches>
-      </Grid>
-    );
-  }
-  if (isSurvivorConnections === true) {
-    return (
-        <Grid justify="flex-end" alignContent="space-between" className="lawyerhome">
-        <SurvivorHeader
-          setIsSurvivorMatches={setIsSurvivorMatches}
-          setIsSurvivorConnections={setIsSurvivorConnections}
-          setIsSurvivorSettings={setIsSurvivorSettings}
-          setIsLogIn={props.setIsLogIn}
-          viewProfile={viewProfile}
-          setViewProfile={setViewProfile}
-        />
-        <SurvivorConnections
-          viewProfile={viewProfile}
-          setViewProfile={setViewProfile}
-          setLawyerImage={setLawyerImage}
-          setLawyerName={setLawyerName}
-          setLawyerProfile={setLawyerProfile}
-          lawyerName={lawyerName}
-          lawyerImage={lawyerImage}
-          lawyerProfile={lawyerProfile}
-          isConfirmScreen={isConfirmScreen}
-          setIsConfirmScreen={setIsConfirmScreen}
-          lawyerPhotos={lawyerPhotos}
-          lawyerNames={lawyerNames}
-          unsentLawyers={unsentLawyers}
-          sentLawyers={sentLawyers}
-          setStatus={setStatus}
-          statuses={statuses}
-          setUnsentLawyers={setUnsentLawyers}
-          unsentLawyers={unsentLawyers}
-          setSentLawyers={setSentLawyers}
-          sentLawyers={sentLawyers}
-          lawyerIndex={lawyerIndex}
-          setLawyerIndex={setLawyerIndex}
-        ></SurvivorConnections>
-      </Grid>
-    );
-  }
-  if (isSurvivorSettings === true) {
-    return (
-        <Grid justify="flex-end" alignContent="space-between" className="lawyerhome">
-        <SurvivorHeader
-          setIsSurvivorMatches={setIsSurvivorMatches}
-          setIsSurvivorConnections={setIsSurvivorConnections}
-          setIsSurvivorSettings={setIsSurvivorSettings}
-          setIsLogIn={props.setIsLogIn}
-          viewProfile={viewProfile}
-          setViewProfile={setViewProfile}
-        />
-        <SurvivorSettings
-          setName={props.setName}
-          setGender={props.setGender}
-          setEmail={props.setEmail}
-          setPassword={props.setPassword}
-          setCurrentCounty={props.setCurrentCounty}
-          setFinancialCapability={props.setFinancialCapability}
-          setLastOccurred={props.setLastOccurred}
-          setAbuseCounty={props.setAbuseCounty}
-          setWeaponsInvolved={props.setWeaponsInvolved}
-          setEmailNotifications={props.setEmailNotifications}
-          setExtraInfo={props.setExtraInfo}
-          name={props.name}
-          gender={props.gender}
-          email={props.email}
-          password={props.password}
-          currentCounty={props.currentCounty}
-          financialCapability={props.financialCapability}
-          lastOccurred={props.lastOccurred}
-          abuseCounty={props.abuseCounty}
-          weaponsInvolved={props.weaponsInvolved}
-          emailNotifications={props.emailNotifications}
-          extraInfo={props.extraInfo}
-        />
-      </Grid>
-    );
-  }
+  return (
+    <Grid
+      justify="flex-end"
+      alignContent="space-between"
+      className="lawyerhome"
+    >
+      <SurvivorHeader
+        setIsLogIn={props.setIsLogIn}
+        viewProfile={viewProfile}
+        setViewProfile={setViewProfile}
+      />
+      <SurvivorMatches
+        viewProfile={viewProfile}
+        setViewProfile={setViewProfile}
+        setLawyerImage={setLawyerImage}
+        setLawyerName={setLawyerName}
+        setLawyerProfile={setLawyerProfile}
+        lawyerName={lawyerName}
+        lawyerImage={lawyerImage}
+        lawyerProfile={lawyerProfile}
+        isConfirmScreen={isConfirmScreen}
+        setIsConfirmScreen={setIsConfirmScreen}
+        lawyerPhotos={lawyerPhotos}
+        lawyerNames={lawyerNames}
+        //     unsentLawyers={unsentLawyers}
+        //     sentLawyers={sentLawyers}
+        setStatus={setStatus}
+        statuses={statuses}
+        unsentLawyers={props.unsentLawyers}
+        sentLawyers={props.sentLawyers}
+        lawyerIndex={props.lawyerIndex}
+        setLawyerIndex={props.setLawyerIndex}
+        setUnsentLawyers={props.setUnsentLawyers}
+        setSentLawyers={props.setSentLawyers}
+        {...props}
+        //      setUnsentLawyers={setUnsentLawyers}
+        //      unsentLawyers={unsentLawyers}
+        //      setSentLawyers={setSentLawyers}
+        //      sentLawyers={sentLawyers}
+        //      lawyerIndex={lawyerIndex}
+        //      setLawyerIndex={setLawyerIndex}
+      ></SurvivorMatches>
+    </Grid>
+  );
 };
 
 export default SurvivorHome;

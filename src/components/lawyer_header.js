@@ -24,6 +24,8 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
 import { auth } from "../services/firebase";
+import { BrowserRouter, Switch, Link } from "react-router-dom";
+import "./header.css";
 
 const drawerWidth = 240;
 
@@ -156,51 +158,57 @@ export default function PersistentDrawerLeft(props) {
         </div>
         <Divider />
         <List>
-          <ListItem
-            button
-            key="matches"
-            alignItems="center"
-            onClick={() => {
-              props.setIsHomeScreen(true);
-              props.setIsConnectionsScreen(false);
-              props.setIsSettingsScreen(false);
-            }}
-          >
-            <ListItemAvatar>
-              <Avatar src={MatchesIcon} variant="square"></Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Matches"></ListItemText>
-          </ListItem>
-          <ListItem
-            button
-            key="connections"
-            alignItems="center"
-            onClick={() => {
-              props.setIsHomeScreen(false);
-              props.setIsConnectionsScreen(true);
-              props.setIsSettingsScreen(false);
-            }}
-          >
-            <ListItemAvatar>
-              <Avatar src={ConnectionsIcon} variant="square"></Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Connections"></ListItemText>
-          </ListItem>
-          <ListItem
-            button
-            key="settings"
-            alignItems="center"
-            onClick={() => {
-              props.setIsHomeScreen(false);
-              props.setIsConnectionsScreen(false);
-              props.setIsSettingsScreen(true);
-            }}
-          >
-            <ListItemAvatar>
-              <Avatar src={SettingsIcon} variant="square"></Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Settings"></ListItemText>
-          </ListItem>
+          <Link to="/home">
+            <ListItem
+              button
+              key="matches"
+              alignItems="center"
+              onClick={() => {
+                //  props.setIsHomeScreen(true);
+                //  props.setIsConnectionsScreen(false);
+                //  props.setIsSettingsScreen(false);
+              }}
+            >
+              <ListItemAvatar>
+                <Avatar src={MatchesIcon} variant="square"></Avatar>
+              </ListItemAvatar>
+              <ListItemText primary="Home"></ListItemText>
+            </ListItem>
+          </Link>
+          <Link to="/connections">
+            <ListItem
+              button
+              key="connections"
+              alignItems="center"
+              onClick={() => {
+                // props.setIsHomeScreen(false);
+                // props.setIsConnectionsScreen(true);
+                // props.setIsSettingsScreen(false);
+              }}
+            >
+              <ListItemAvatar>
+                <Avatar src={ConnectionsIcon} variant="square"></Avatar>
+              </ListItemAvatar>
+              <ListItemText primary="Connections"></ListItemText>
+            </ListItem>
+          </Link>
+          <Link to="/settings">
+            <ListItem
+              button
+              key="settings"
+              alignItems="center"
+              onClick={() => {
+                // props.setIsHomeScreen(false);
+                // props.setIsConnectionsScreen(false);
+                //  props.setIsSettingsScreen(true);
+              }}
+            >
+              <ListItemAvatar>
+                <Avatar src={SettingsIcon} variant="square"></Avatar>
+              </ListItemAvatar>
+              <ListItemText primary="Settings"></ListItemText>
+            </ListItem>
+          </Link>
           <ListItem
             button
             key="logout"

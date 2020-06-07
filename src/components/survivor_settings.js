@@ -1,10 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import SurvivorSettingsPanel from "./survivor_settings_panel";
-import "./survivor.css"
+import SurvivorHeader from "./survivor_header.js";
+import { Grid } from "@material-ui/core";
+import "./survivor.css";
 
 const SurvivorSettings = (props) => {
-    return (
-    <SurvivorSettingsPanel
+  return (
+    <Grid
+      justify="flex-end"
+      alignContent="space-between"
+      className="lawyerhome"
+    >
+      <SurvivorHeader
+        setIsSurvivorMatches={props.setIsSurvivorMatches}
+        setIsSurvivorConnections={props.setIsSurvivorConnections}
+        setIsSurvivorSettings={props.setIsSurvivorSettings}
+        setIsLogIn={props.setIsLogIn}
+        viewProfile={props.viewProfile}
+        setViewProfile={props.setViewProfile}
+      />
+      <SurvivorSettingsPanel
         setName={props.setName}
         setGender={props.setGender}
         setEmail={props.setEmail}
@@ -27,9 +42,9 @@ const SurvivorSettings = (props) => {
         weaponsInvolved={props.weaponsInvolved}
         emailNotifications={props.emailNotifications}
         extraInfo={props.extraInfo}
-    ></SurvivorSettingsPanel>
-    );
-}
- 
+      ></SurvivorSettingsPanel>
+    </Grid>
+  );
+};
 
 export default SurvivorSettings;
