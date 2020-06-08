@@ -1,14 +1,18 @@
 import React, { useState } from "react";
-import LawyerSideConnections from "./lawyer-survivors_matched.js";
+import LawyerSideConnections from "./lawyers_messages_sent.js";
 import SurvivorSideConnections from "./survivor_messages_sent.js";
 import SurvivorHeader from "./survivor_header.js";
+import LawyerHeader from "./lawyer_header.js";
 import { Grid } from "@material-ui/core";
 
 export default function Connections(props) {
-  //  const [viewProfile, setViewProfile] = useState(false);
   const [lawyerProfile, setLawyerProfile] = useState([]);
   const [lawyerName, setLawyerName] = useState("name");
   const [lawyerImage, setLawyerImage] = useState("image");
+
+  const [survivorProfile, setSurvivorProfile] = useState([]);
+  const [survivorName, setSurvivorName] = useState("name");
+  const [survivorImage, setSurvivorImage] = useState("image");
 
   const statuses = ["new!", "new!", "new!", "new!", "new!", "new!"];
 
@@ -32,13 +36,65 @@ export default function Connections(props) {
     "https://media.gettyimages.com/photos/smiling-lawyer-sitting-at-desk-in-office-picture-id104821116?s=612x612",
     "https://www.thebalance.com/thmb/jCOulTG9w5WGoY6lZIHKqOQlY64=/3633x3633/smart/filters:no_upscale()/Gettywomanlawyer-5955ab903df78cdc296e8f7e.jpg",
   ];
+  const survivorNames = [
+    "Alias 1",
+    "Alias 2",
+    "Alias 3",
+    "Alias 4",
+    "Alias 5",
+    "Alias 6",
+  ];
+  const survivorPhotos = [
+    "https://i.guim.co.uk/img/media/d0105731685e5b2b3daecf2fa00c9affaba832f1/0_0_2560_1536/master/2560.jpg?width=700&quality=85&auto=format&fit=max&s=6542f6e0d27c640c50459a8cf09941c4",
+    "https://pbs.twimg.com/media/EYUEhvDXgAINxfT?format=png&name=small",
+    "https://pbs.twimg.com/media/EYT23zZWAAEyGsJ?format=png&name=small",
+    "https://pbs.twimg.com/media/EYS_8TLXsAAo8W9?format=png&name=small",
+    "https://pbs.twimg.com/media/EYSJFcdWkAA5Lmu?format=png&name=small",
+    "https://pbs.twimg.com/media/EYNa4qyXQAApT6i?format=png&name=small",
+  ];
+  const [viewProfile, setViewProfile] = useState(false);
+  const [isConfirmScreen, setIsConfirmScreen] = useState(false);
 
   function setStatus(index, message) {
     statuses[index] = message;
   }
 
   if (props.userDetails.isLawyer === true) {
-    return <LawyerSideConnections {...props} />;
+    return (
+      <Grid
+        justify="flex-end"
+        alignContent="space-between"
+        className="lawyerhome"
+      >
+        <LawyerHeader
+          viewProfile={viewProfile}
+          setViewProfile={setViewProfile}
+        />
+        <LawyerSideConnections
+          setSurvivorImage={setSurvivorImage}
+          setSurvivorName={setSurvivorName}
+          setSurvivorProfile={setSurvivorProfile}
+          survivorName={survivorName}
+          survivorImage={survivorImage}
+          survivorProfile={survivorProfile}
+          survivorPhotos={survivorPhotos}
+          survivorNames={survivorNames}
+          setStatus={setStatus}
+          statuses={statuses}
+          unsentSurvivors={props.unsentSurvivors}
+          sentSurvivors={props.sentSurvivors}
+          survivorIndex={props.survivorIndex}
+          setSurvivorIndex={props.setSurvivorIndex}
+          setUnsentSurvivors={props.setUnsentSurvivors}
+          setSentSurvivors={props.setSentSurvivors}
+          viewProfile={viewProfile}
+          setViewProfile={setViewProfile}
+          isConfirmScreen={isConfirmScreen}
+          setIsConfirmScreen={setIsConfirmScreen}
+          {...props}
+        />
+      </Grid>
+    );
   } else {
     return (
       <Grid
@@ -47,12 +103,12 @@ export default function Connections(props) {
         className="lawyerhome"
       >
         <SurvivorHeader
-          viewProfile={props.viewProfile}
-          setViewProfile={props.setViewProfile}
+          viewProfile={viewProfile}
+          setViewProfile={setViewProfile}
         />
         <SurvivorSideConnections
-          viewProfile={props.viewProfile}
-          setViewProfile={props.setViewProfile}
+          viewProfile={viewProfile}
+          setViewProfile={setViewProfile}
           setLawyerImage={setLawyerImage}
           setLawyerName={setLawyerName}
           setLawyerProfile={setLawyerProfile}
@@ -61,8 +117,8 @@ export default function Connections(props) {
           lawyerProfile={lawyerProfile}
           lawyerPhotos={lawyerPhotos}
           lawyerNames={lawyerNames}
-          unsentLawyers={unsentLawyers}
-          sentLawyers={sentLawyers}
+          //   unsentLawyers={unsentLawyers}
+          //   sentLawyers={sentLawyers}
           setStatus={setStatus}
           statuses={statuses}
           unsentLawyers={props.unsentLawyers}
@@ -71,6 +127,8 @@ export default function Connections(props) {
           setLawyerIndex={props.setLawyerIndex}
           setUnsentLawyers={props.setUnsentLawyers}
           setSentLawyers={props.setSentLawyers}
+          isConfirmScreen={isConfirmScreen}
+          setIsConfirmScreen={setIsConfirmScreen}
           {...props}
         />
       </Grid>

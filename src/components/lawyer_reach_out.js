@@ -29,7 +29,6 @@ const themeA = createMuiTheme({
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 600,
-    padding: 0,
   },
   media: {
     height: 140,

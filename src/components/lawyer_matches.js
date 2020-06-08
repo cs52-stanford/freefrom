@@ -1,25 +1,21 @@
 import React, { useState } from "react";
 import LawyerHome from "./lawyer_home.js";
-import LawyerConnections from "./lawyers_messages_sent.js";
 import LawyerHeader from "./lawyer_header.js";
-import LawyerSettings from "./lawyer_settings";
 import ReachOut from "./lawyer_reach_out";
+import { Grid } from "@material-ui/core";
 
 const statuses = ["new!", "new!", "new!", "new!", "new!", "new!"];
 
 const LawyerMatches = (props) => {
-  const [isHomeScreen, setIsHomeScreen] = useState(true);
   const [isConfirmScreen, setIsConfirmScreen] = useState(false);
-  const [isConnectionsScreen, setIsConnectionsScreen] = useState(false);
-  const [isSettingsScreen, setIsSettingsScreen] = useState(false);
   const [viewProfile, setViewProfile] = useState(false);
   const [survivorProfile, setSurvivorProfile] = useState([]);
   const [survivorName, setSurvivorName] = useState("name");
   const [survivorImage, setSurvivorImage] = useState("image");
 
-  const [unsentSurvivors, setUnsentSurvivors] = useState([0, 1, 2, 3, 4, 5]);
-  const [sentSurvivors, setSentSurvivors] = useState([]);
-  const [survivorIndex, setSurvivorIndex] = useState(0);
+  //const [unsentSurvivors, setUnsentSurvivors] = useState([0, 1, 2, 3, 4, 5]);
+  //const [sentSurvivors, setSentSurvivors] = useState([]);
+  //const [survivorIndex, setSurvivorIndex] = useState(0);
 
   const survivorNames = [
     "Alias 1",
@@ -42,105 +38,18 @@ const LawyerMatches = (props) => {
     statuses[index] = message;
   }
 
-  if (isHomeScreen === true) {
-    if (viewProfile === false) {
-      return (
-        <div className="lawyerhome">
-          <LawyerHeader
-            setIsHomeScreen={setIsHomeScreen}
-            isHomeScreen={isHomeScreen}
-            setIsConnectionsScreen={setIsConnectionsScreen}
-            isConnectionsScreen={isConnectionsScreen}
-            setIsSettingsScreen={setIsSettingsScreen}
-            isSettingsScreen={isSettingsScreen}
-            setIsLogIn={props.setIsLogIn}
-            viewProfile={viewProfile}
-            setViewProfile={setViewProfile}
-          />
-          <LawyerHome
-            viewProfile={viewProfile}
-            setViewProfile={setViewProfile}
-            setSurvivorImage={setSurvivorImage}
-            setSurvivorName={setSurvivorName}
-            setSurvivorProfile={setSurvivorProfile}
-            survivorName={survivorName}
-            survivorImage={survivorImage}
-            survivorProfile={survivorProfile}
-            isConfirmScreen={isConfirmScreen}
-            setIsConfirmScreen={setIsConfirmScreen}
-            survivorPhotos={survivorPhotos}
-            survivorNames={survivorNames}
-            unsentSurvivors={unsentSurvivors}
-            sentSurvivors={sentSurvivors}
-            setStatus={setStatus}
-            statuses={statuses}
-            setUnsentSurvivors={setUnsentSurvivors}
-            unsentSurvivors={unsentSurvivors}
-            setSentSurvivors={setSentSurvivors}
-            sentSurvivors={sentSurvivors}
-            survivorIndex={survivorIndex}
-            setSurvivorIndex={setSurvivorIndex}
-          />
-        </div>
-      );
-    } else {
-      return (
-        <div className="lawyerhome">
-          <LawyerHeader
-            setIsHomeScreen={setIsHomeScreen}
-            isHomeScreen={isHomeScreen}
-            setIsConnectionsScreen={setIsConnectionsScreen}
-            isConnectionsScreen={isConnectionsScreen}
-            setIsSettingsScreen={setIsSettingsScreen}
-            isSettingsScreen={isSettingsScreen}
-            setIsLogIn={props.setIsLogIn}
-            viewProfile={viewProfile}
-            setViewProfile={setViewProfile}
-          />
-          <ReachOut
-            viewProfile={viewProfile}
-            setViewProfile={setViewProfile}
-            setSurvivorImage={setSurvivorImage}
-            setSurvivorName={setSurvivorName}
-            setSurvivorProfile={setSurvivorProfile}
-            survivorName={survivorName}
-            survivorImage={survivorImage}
-            survivorProfile={survivorProfile}
-            isConfirmScreen={isConfirmScreen}
-            setIsConfirmScreen={setIsConfirmScreen}
-            survivorPhotos={survivorPhotos}
-            survivorNames={survivorNames}
-            unsentSurvivors={unsentSurvivors}
-            sentSurvivors={sentSurvivors}
-            setStatus={setStatus}
-            statuses={statuses}
-            setUnsentSurvivors={setUnsentSurvivors}
-            unsentSurvivors={unsentSurvivors}
-            setSentSurvivors={setSentSurvivors}
-            sentSurvivors={sentSurvivors}
-            survivorIndex={survivorIndex}
-            setSurvivorIndex={setSurvivorIndex}
-          />
-        </div>
-      );
-    }
-  }
-
-  if (isConnectionsScreen === true) {
+  if (viewProfile === false) {
     return (
-      <div className="lawyerconnections">
+      <Grid
+        justify="flex-end"
+        alignContent="space-between"
+        className="lawyerhome"
+      >
         <LawyerHeader
-          setIsHomeScreen={setIsHomeScreen}
-          isHomeScreen={isHomeScreen}
-          setIsConnectionsScreen={setIsConnectionsScreen}
-          isConnectionsScreen={isConnectionsScreen}
-          setIsSettingsScreen={setIsSettingsScreen}
-          isSettingsScreen={isSettingsScreen}
-          setIsLogIn={props.setIsLogIn}
           viewProfile={viewProfile}
           setViewProfile={setViewProfile}
         />
-        <LawyerConnections
+        <LawyerHome
           viewProfile={viewProfile}
           setViewProfile={setViewProfile}
           setSurvivorImage={setSurvivorImage}
@@ -153,54 +62,53 @@ const LawyerMatches = (props) => {
           setIsConfirmScreen={setIsConfirmScreen}
           survivorPhotos={survivorPhotos}
           survivorNames={survivorNames}
-          unsentSurvivors={unsentSurvivors}
-          sentSurvivors={sentSurvivors}
+          unsentSurvivors={props.unsentSurvivors}
+          sentSurvivors={props.sentSurvivors}
           setStatus={setStatus}
           statuses={statuses}
-          setUnsentSurvivors={setUnsentSurvivors}
-          unsentSurvivors={unsentSurvivors}
-          setSentSurvivors={setSentSurvivors}
-          sentSurvivors={sentSurvivors}
-          survivorIndex={survivorIndex}
-          setSurvivorIndex={setSurvivorIndex}
+          setUnsentSurvivors={props.setUnsentSurvivors}
+          setSentSurvivors={props.setSentSurvivors}
+          survivorIndex={props.survivorIndex}
+          setSurvivorIndex={props.setSurvivorIndex}
+          {...props}
         />
-      </div>
+      </Grid>
     );
-  }
-
-  if (isSettingsScreen === true) {
+  } else {
     return (
-      <div className="lawyersettings">
+      <Grid
+        justify="flex-end"
+        alignContent="space-between"
+        className="lawyerhome"
+      >
         <LawyerHeader
-          setIsHomeScreen={setIsHomeScreen}
-          isHomeScreen={isHomeScreen}
-          setIsConnectionsScreen={setIsConnectionsScreen}
-          isConnectionsScreen={isConnectionsScreen}
-          setIsSettingsScreen={setIsSettingsScreen}
-          isSettingsScreen={isSettingsScreen}
-          setIsLogIn={props.setIsLogIn}
           viewProfile={viewProfile}
           setViewProfile={setViewProfile}
         />
-        <LawyerSettings
-          setName={props.setName}
-          setGender={props.setGender}
-          setEmail={props.setEmail}
-          setPassword={props.setPassword}
-          name={props.name}
-          gender={props.gender}
-          email={props.email}
-          password={props.password}
-          setPracticeCounty={props.setPracticeCounty}
-          practiceCounty={props.practiceCounty}
-          experience={props.experience}
-          setExperience={props.setExperience}
-          setCompensationRequest={props.setCompensationRequest}
-          compensationRequest={props.compensationRequest}
-          setNumNotifications={props.setNumNotifications}
-          numNotifications={props.numNotifications}
+        <ReachOut
+          viewProfile={viewProfile}
+          setViewProfile={setViewProfile}
+          setSurvivorImage={setSurvivorImage}
+          setSurvivorName={setSurvivorName}
+          setSurvivorProfile={setSurvivorProfile}
+          survivorName={survivorName}
+          survivorImage={survivorImage}
+          survivorProfile={survivorProfile}
+          isConfirmScreen={isConfirmScreen}
+          setIsConfirmScreen={setIsConfirmScreen}
+          survivorPhotos={survivorPhotos}
+          survivorNames={survivorNames}
+          setStatus={setStatus}
+          statuses={statuses}
+          setUnsentSurvivors={props.setUnsentSurvivors}
+          unsentSurvivors={props.unsentSurvivors}
+          setSentSurvivors={props.setSentSurvivors}
+          sentSurvivors={props.sentSurvivors}
+          survivorIndex={props.survivorIndex}
+          setSurvivorIndex={props.setSurvivorIndex}
+          {...props}
         />
-      </div>
+      </Grid>
     );
   }
 };

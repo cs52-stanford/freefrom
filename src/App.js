@@ -24,12 +24,18 @@ function PrivateRoute({
   authenticated,
   // next 3 lines for demo
   unsentLawyers,
+  unsentSurvivors,
   sentLawyers,
+  sentSurvivors,
   lawyerIndex,
+  survivorIndex,
   userDetails,
   setLawyerIndex,
   setUnsentLawyers,
   setSentLawyers,
+  setSurvivorIndex,
+  setUnsentSurvivors,
+  setSentSurvivors,
   ...rest
 }) {
   return (
@@ -46,6 +52,12 @@ function PrivateRoute({
             setLawyerIndex={setLawyerIndex}
             setUnsentLawyers={setUnsentLawyers}
             setSentLawyers={setSentLawyers}
+            unsentSurvivors={unsentSurvivors}
+            sentSurvivors={sentSurvivors}
+            survivorIndex={survivorIndex}
+            setSurvivorIndex={setSurvivorIndex}
+            setUnsentSurvivors={setUnsentSurvivors}
+            setSentSurvivors={setSentSurvivors}
           />
         ) : (
           <Redirect
@@ -82,12 +94,18 @@ class App extends Component {
       unsentLawyers: [0, 1, 2, 3, 4, 5],
       sentLawyers: [],
       lawyerIndex: 0,
+      unsentSurvivors: [0, 1, 2, 3, 4, 5],
+      sentSurvivors: [],
+      survivorIndex: 0,
     };
 
     // this might not work
     this.setLawyerIndex = this.setLawyerIndex.bind(this);
     this.setUnsentLawyers = this.setUnsentLawyers.bind(this);
     this.setSentLawyers = this.setSentLawyers.bind(this);
+    this.setSurvivorIndex = this.setSurvivorIndex.bind(this);
+    this.setUnsentSurvivors = this.setUnsentSurvivors.bind(this);
+    this.setSentSurvivors = this.setSentSurvivors.bind(this);
   }
 
   setLawyerIndex(num) {
@@ -105,6 +123,24 @@ class App extends Component {
   setSentLawyers(arr) {
     this.setState((state) => {
       return { sentLawyers: arr };
+    });
+  }
+
+  setSurvivorIndex(num) {
+    this.setState((state) => {
+      return { survivorIndex: num };
+    });
+  }
+
+  setUnsentSurvivors(arr) {
+    this.setState((state) => {
+      return { unsentSurvivors: arr };
+    });
+  }
+
+  setSentSurvivors(arr) {
+    this.setState((state) => {
+      return { sentSurvivors: arr };
     });
   }
 
@@ -165,9 +201,15 @@ class App extends Component {
             unsentLawyers={this.state.unsentLawyers}
             sentLawyers={this.state.sentLawyers}
             lawyerIndex={this.state.lawyerIndex}
+            survivorIndex={this.state.survivorIndex}
+            unsentSurvivors={this.state.unsentSurvivors}
+            sentSurvivors={this.state.sentSurvivors}
             setLawyerIndex={this.setLawyerIndex}
             setUnsentLawyers={this.setUnsentLawyers}
             setSentLawyers={this.setSentLawyers}
+            setSurvivorIndex={this.setSurvivorIndex}
+            setUnsentSurvivors={this.setUnsentSurvivors}
+            setSentSurvivors={this.setSentSurvivors}
           />
           <PrivateRoute
             path="/connections"
@@ -177,9 +219,15 @@ class App extends Component {
             unsentLawyers={this.state.unsentLawyers}
             sentLawyers={this.state.sentLawyers}
             lawyerIndex={this.state.lawyerIndex}
+            survivorIndex={this.state.survivorIndex}
+            unsentSurvivors={this.state.unsentSurvivors}
+            sentSurvivors={this.state.sentSurvivors}
             setLawyerIndex={this.setLawyerIndex}
             setUnsentLawyers={this.setUnsentLawyers}
             setSentLawyers={this.setSentLawyers}
+            setSurvivorIndex={this.setSurvivorIndex}
+            setUnsentSurvivors={this.setUnsentSurvivors}
+            setSentSurvivors={this.setSentSurvivors}
           />
           <PrivateRoute
             path="/settings"

@@ -3,11 +3,18 @@ import LawyerHome from "./lawyer_matches.js";
 import SurvivorHome from "./survivor_home.js";
 
 export default function Home(props) {
-  console.log("rendering home1");
-  console.log(props);
-  console.log("rendering home2");
   if (props.userDetails.isLawyer === true) {
-    return <LawyerHome {...props} />;
+    return (
+      <LawyerHome
+        unsentSurvivors={props.unsentSurvivors}
+        sentSurvivors={props.sentSurvivors}
+        survivorIndex={props.survivorIndex}
+        setSurvivorIndex={props.setSurvivorIndex}
+        setUnsentSurvivors={props.setUnsentSurvivors}
+        setSentSurvivors={props.setSentSurvivors}
+        {...props}
+      />
+    );
   } else {
     return (
       <SurvivorHome

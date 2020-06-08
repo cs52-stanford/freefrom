@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import CameraIcon from "@material-ui/icons/PhotoCamera";
@@ -15,6 +15,7 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
+import ReachOut from "./lawyer_reach_out.js";
 
 const themeA = createMuiTheme({
   root: {
@@ -90,98 +91,116 @@ const cards = [0, 1, 2, 3, 4, 5];
 export default function Album(props) {
   const classes = useStyles();
 
-  return (
-    <ThemeProvider theme={themeA} className="backgroundColor">
-      <React.Fragment>
-        <CssBaseline />
-        <main>
-          {/* Hero unit */}
-          <div className={classes.heroContent}>
-            <Container maxWidth="md">
-              <Typography
-                variant="h5"
-                align="center"
-                color="textSecondary"
-                paragraph
-              >
-                Welcome to your lawyer home page! As you match with survivors,
-                their profiles will appear below. Click "reach out" to email a
-                survivor and set up a call.
-              </Typography>
+  if (!props.viewProfile) {
+    return (
+      <ThemeProvider theme={themeA} className="backgroundColor">
+        <React.Fragment>
+          <CssBaseline />
+          <main>
+            {/* Hero unit */}
+            <div className={classes.heroContent}>
+              <Container maxWidth="md">
+                <Typography
+                  variant="h5"
+                  align="center"
+                  color="textSecondary"
+                  paragraph
+                >
+                  Welcome to your lawyer home page! As you match with survivors,
+                  their profiles will appear below. Click "reach out" to email a
+                  survivor and set up a call.
+                </Typography>
+              </Container>
+            </div>
+            <Container className={classes.cardGrid} maxWidth="md">
+              {/* End hero unit */}
+              <Grid container spacing={4}>
+                {props.unsentSurvivors.map((card, index) => (
+                  <Grid item key={card} xs={12} sm={6} md={4}>
+                    <Card className={classes.card}>
+                      <CardMedia
+                        className={classes.cardMedia}
+                        image={props.survivorPhotos[card]}
+                        title="Image title"
+                      />
+                      <CardContent className={classes.cardContent}>
+                        <Typography gutterBottom variant="h5" component="h2">
+                          {props.survivorNames[card]}
+                        </Typography>
+                        <Typography
+                          color="secondary"
+                          align="center"
+                          gutterBottom
+                        >
+                          Status: {props.statuses[card]}
+                        </Typography>
+                        <Typography align="center">
+                          Location: placeholder
+                        </Typography>
+                        <Typography align="center">
+                          Case: here is some placeholder text
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <Button
+                          size="small"
+                          color="primary"
+                          onClick={function () {
+                            props.setViewProfile(true);
+                            props.setSurvivorName(props.survivorNames[card]);
+                            props.setSurvivorImage(props.survivorPhotos[card]);
+                            props.setSurvivorIndex(index);
+                            props.setStatus(card, "viewed");
+                          }}
+                        >
+                          View Case
+                        </Button>
+                        <Button
+                          size="small"
+                          color="primary"
+                          onClick={function () {
+                            props.setViewProfile(true);
+                            props.setIsConfirmScreen(true);
+                            props.setSurvivorName(props.survivorNames[card]);
+                            props.setSurvivorImage(props.survivorPhotos[card]);
+                            props.setSurvivorIndex(index);
+                            props.setStatus(card, "viewed");
+                          }}
+                        >
+                          Accept Meeting
+                        </Button>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
             </Container>
-          </div>
-          <Container className={classes.cardGrid} maxWidth="md">
-            {/* End hero unit */}
-            <Grid container spacing={4}>
-              {props.unsentSurvivors.map((card, index) => (
-                <Grid item key={card} xs={12} sm={6} md={4}>
-                  <Card className={classes.card}>
-                    <CardMedia
-                      className={classes.cardMedia}
-                      image={props.survivorPhotos[card]}
-                      title="Image title"
-                    />
-                    <CardContent className={classes.cardContent}>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {props.survivorNames[card]}
-                      </Typography>
-                      <Typography color="secondary" align="center" gutterBottom>
-                        Status: {props.statuses[card]}
-                      </Typography>
-                      <Typography align="center">
-                        Location: placeholder
-                      </Typography>
-                      <Typography align="center">
-                        Case: here is some placeholder text
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button
-                        size="small"
-                        color="primary"
-                        onClick={function () {
-                          props.setViewProfile(true);
-                          props.setSurvivorName(props.survivorNames[card]);
-                          props.setSurvivorImage(props.survivorPhotos[card]);
-                          props.setSurvivorIndex(index);
-                          props.setStatus(card, "viewed");
-                        }}
-                      >
-                        View Case
-                      </Button>
-                      <Button
-                        size="small"
-                        color="primary"
-                        onClick={function () {
-                          props.setViewProfile(true);
-                          props.setIsConfirmScreen(true);
-                          props.setSurvivorName(props.survivorNames[card]);
-                          props.setSurvivorImage(props.survivorPhotos[card]);
-                          props.setSurvivorIndex(index);
-                          props.setStatus(card, "viewed");
-                        }}
-                      >
-                        Accept Meeting
-                      </Button>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          </Container>
-        </main>
-        {/* Footer */}
-        <footer className={classes.footer}>
-          <Typography
-            variant="subtitle1"
-            align="center"
-            color="textSecondary"
-            component="p"
-          ></Typography>
-          <Copyright />
-        </footer>
-        {/* End footer */}
-      </React.Fragment>
-    </ThemeProvider>
-  );
+          </main>
+          {/* Footer */}
+          <footer className={classes.footer}>
+            <Typography
+              variant="subtitle1"
+              align="center"
+              color="textSecondary"
+              component="p"
+            ></Typography>
+            <Copyright />
+          </footer>
+          {/* End footer */}
+        </React.Fragment>
+      </ThemeProvider>
+    );
+  } else {
+    return (
+      <div>
+        <ReachOut
+          viewProfile={props.viewProfile}
+          setViewProfile={props.setViewProfile}
+          setIsConfirmScreen={props.setIsConfirmScreen}
+          isConfirmScreen={props.isConfirmScreen}
+          {...props}
+        />
+      </div>
+    );
+  }
 }
