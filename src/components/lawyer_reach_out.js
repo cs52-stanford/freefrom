@@ -80,8 +80,18 @@ export default function MediaCard(props) {
                 align="center"
                 paragraph
               >
-                By clicking 'confirm', you agree to have your contact
-                information sent to {props.survivorName}.
+                By clicking 'confirm', you agree to contact {props.survivorName}
+                .
+              </Typography>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                paragraph
+                align="center"
+              >
+                {props.survivorName}'s preferred method of contact: "I prefer to
+                be called at 856-203-1245 on Saturdays or Sundays."
               </Typography>
             </CardContent>
             <CardActions>
@@ -137,7 +147,7 @@ export default function MediaCard(props) {
                 component="h2"
                 align="center"
               >
-                {props.lawyerName}
+                {props.survivorName}
               </Typography>
 
               <Typography
@@ -146,20 +156,40 @@ export default function MediaCard(props) {
                 component="p"
                 variant="subtitle1"
                 align="center"
+              >
+                County: Marin
+              </Typography>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                variant="subtitle1"
+                align="center"
+              >
+                Last incidence of abuse occurred: Within 6 months
+              </Typography>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                variant="subtitle1"
+                align="center"
                 paragraph
               >
-                Location: placeholder county
+                Weapons involved: Yes
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                Case Info: Eventually this will have the lawyer's full bio and
-                profile information but for now here is some placeholder text.
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                paragraph
+              >
+                Case Info: My name is Raven and I am seeking compensation
+                against my ex-boyfriend. Three months ago we got into an
+                argument which escalated into physical violence. The conflict
+                left me with visible facial injuries and a fractured wrist which
+                required hospitalization. My hospital fees cost thousands of
+                dollars and as a result I need help getting compensation.
               </Typography>
             </CardContent>
             <CardActions>

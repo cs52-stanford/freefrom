@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
+import { BrowserRouter, Switch, Link } from "react-router-dom";
 import logo from "./counselCompassLogo.png";
 import "./sign_up.css";
 
@@ -42,15 +43,11 @@ export default function ButtonAppBar(props) {
               <img src={logo} className="logoImage"></img>
             </Container>
 
-            <Button
-              onClick={function () {
-                props.setIsSignIn(true);
-              }}
-              color="secondary"
-              className={classes.exitButton}
-            >
-              Exit
-            </Button>
+            <Link to="/sign_in" style={{ textDecoration: "none" }}>
+              <Button color="secondary" className={classes.exitButton}>
+                Exit
+              </Button>
+            </Link>
           </Toolbar>
         </AppBar>
       </ThemeProvider>

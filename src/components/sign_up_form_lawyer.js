@@ -118,6 +118,7 @@ export default function LawyerSignUpStepper() {
   return (
     <ThemeProvider theme={themeA}>
       <div>
+        <NavBar></NavBar>
         <Stepper
           activeStep={activeStep}
           orientation="vertical"
@@ -130,7 +131,7 @@ export default function LawyerSignUpStepper() {
               <Typography style={contentStyle}>
                 <Container maxWidth="md">
                   <Typography paragraph>
-                    Thank you for signing up for Civil Seeker! By joining our
+                    Thank you for signing up for Counsel Connect! By joining our
                     platform, you are helping to grant survivors of domestic
                     abuse financial freedom from their harmdoers.
                   </Typography>

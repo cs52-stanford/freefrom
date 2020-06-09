@@ -18,12 +18,12 @@ const LawyerMatches = (props) => {
   //const [survivorIndex, setSurvivorIndex] = useState(0);
 
   const survivorNames = [
-    "Alias 1",
-    "Alias 2",
-    "Alias 3",
-    "Alias 4",
-    "Alias 5",
-    "Alias 6",
+    "Sarah",
+    "Taylor",
+    "Julia",
+    "Raven",
+    "Cleopatra",
+    "Melissa",
   ];
   const survivorPhotos = [
     "https://i.guim.co.uk/img/media/d0105731685e5b2b3daecf2fa00c9affaba832f1/0_0_2560_1536/master/2560.jpg?width=700&quality=85&auto=format&fit=max&s=6542f6e0d27c640c50459a8cf09941c4",

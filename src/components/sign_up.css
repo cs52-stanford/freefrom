@@ -198,3 +198,11 @@
 .MuiSelect-root.MuiSelect-select.MuiSelect-selectMenu.MuiInputBase-input.MuiInput-input {
   max-width: 22rem;
 }
+
+.MuiContainer-root.one.MuiContainer-maxWidthSm {
+  background-color: #f7fff7;
+}
+
+.body {
+  background-color: #f7fff7;
+}

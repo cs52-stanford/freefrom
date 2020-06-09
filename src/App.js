@@ -91,7 +91,7 @@ class App extends Component {
       authenticated: false,
       loading: true,
       userDetails: undefined,
-      unsentLawyers: [0, 1, 2, 3, 4, 5],
+      unsentLawyers: [0, 1, 2, 3],
       sentLawyers: [],
       lawyerIndex: 0,
       unsentSurvivors: [0, 1, 2, 3, 4, 5],

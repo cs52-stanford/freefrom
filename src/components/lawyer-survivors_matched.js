@@ -90,6 +90,22 @@ const cards = [0, 1, 2, 3, 4, 5];
 
 export default function Album(props) {
   const classes = useStyles();
+  const counties = [
+    "Santa Clara",
+    "Los Angeles",
+    "El Dorado",
+    "San Francisco",
+    "Marin",
+    "Santa Clara",
+  ];
+  const cases = [
+    "I am a single mother...",
+    "I am a college student...",
+    "I need help with...",
+    "My name is...",
+    "I have been in a...",
+    "This started when I...",
+  ];
 
   if (!props.viewProfile) {
     return (
@@ -135,10 +151,10 @@ export default function Album(props) {
                           Status: {props.statuses[card]}
                         </Typography>
                         <Typography align="center">
-                          Location: placeholder
+                          County: {counties[card]}
                         </Typography>
                         <Typography align="center">
-                          Case: here is some placeholder text
+                          Case: {cases[card]}
                         </Typography>
                       </CardContent>
                       <CardActions>

@@ -193,12 +193,16 @@ const ProfileCard = (props) => {
   const compensations = ["Pro bono", "Sliding scale", "Contingency agreement"];
   const numbers = [1, 2, 3, 4, 5];
   const [questionNumber, setQuestionNumber] = React.useState(1);
+  const [bar, setBar] = React.useState("");
 
   const handlePracticeCountyChange = (event) => {
     props.setPracticeCounty(event.target.value);
   };
   const handleExperienceChange = (event) => {
     props.setExperience(event.target.value);
+  };
+  const handleBarChange = (event) => {
+    setBar(event.target.value);
   };
   const handleCompensationRequestChange = (event) => {
     props.setCompensationRequest(event.target.value);
@@ -223,7 +227,7 @@ const ProfileCard = (props) => {
       props.experience !== "" &&
       props.compensationRequest.length !== 0 &&
       props.photo !== "" &&
-      props.numNotifications !== -1
+      props.numNotifications !== ""
     ) {
       props.setCannotContinue(false);
     } else {
@@ -247,7 +251,7 @@ const ProfileCard = (props) => {
                 multiple
               >
                 {counties.map((label, index) => (
-                  <MenuItem value={counties[index]}>{label}</MenuItem>
+                  <MenuItem value={counties[index]}>{label} County</MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -297,13 +301,14 @@ const ProfileCard = (props) => {
               rows={1}
               variant="outlined"
               fullWidth={true}
+              onChange={handleBarChange}
             />
           </Container>
           <Button
             variant="contained"
             style={q2Style}
             color="primary"
-            disabled={props.experience === "-"}
+            disabled={props.experience === "" || bar === ""}
             onClick={function () {
               setQuestionNumber(3);
             }}
@@ -345,7 +350,7 @@ const ProfileCard = (props) => {
             variant="contained"
             style={q3Style}
             color="primary"
-            disabled={props.photo === "-"}
+            disabled={props.photo === ""}
             onClick={function () {
               setQuestionNumber(4);
             }}
@@ -372,7 +377,9 @@ const ProfileCard = (props) => {
             </Button>
             <h5>Question {questionNumber} of 5 </h5>
             <FormControl className={classes.formControl}>
-              <Typography>I am willing to work:</Typography>
+              <Typography>
+                I am willing to work (can select multiple):
+              </Typography>
               <Select
                 value={props.compensationRequest}
                 multiple

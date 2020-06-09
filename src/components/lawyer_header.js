@@ -92,8 +92,8 @@ const useStyles = makeStyles((theme) => ({
   box: {
     display: "flex",
     backgroundColor: "inherit",
-    width: "25%",
-    height: "25%",
+    width: "20%",
+    height: "20%",
   },
   flex: {
     display: "flex",
@@ -158,7 +158,7 @@ export default function PersistentDrawerLeft(props) {
         </div>
         <Divider />
         <List>
-          <Link to="/home">
+          <Link to="/home" style={{ textDecoration: "none" }}>
             <ListItem
               button
               key="matches"
@@ -175,7 +175,7 @@ export default function PersistentDrawerLeft(props) {
               <ListItemText primary="Home"></ListItemText>
             </ListItem>
           </Link>
-          <Link to="/connections">
+          <Link to="/connections" style={{ textDecoration: "none" }}>
             <ListItem
               button
               key="connections"
@@ -192,7 +192,7 @@ export default function PersistentDrawerLeft(props) {
               <ListItemText primary="Connections"></ListItemText>
             </ListItem>
           </Link>
-          <Link to="/settings">
+          <Link to="/settings" style={{ textDecoration: "none" }}>
             <ListItem
               button
               key="settings"

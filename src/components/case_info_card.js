@@ -137,8 +137,7 @@ const CaseCard = (props) => {
   ];
   const amounts = [
     "Nothing, I need free services",
-    "Some fees ($50-$200)",
-    "All fees (>$1000)",
+    "I am able to pay the legal fees",
   ];
   const times = ["Within 6 months", "Within 1 year", "Over 1 year ago"];
   const weapons = ["Yes", "No", "Not sure"];
@@ -149,13 +148,13 @@ const CaseCard = (props) => {
   // checks to see if they have filled out every question
   useEffect(() => {
     if (
-      props.currentCounty !== "-" &&
-      props.financialCapability !== "-" &&
-      props.lastOccurred !== "-" &&
-      props.abuseCounty !== "-" &&
-      props.weaponsInvolved !== "-" &&
-      props.emailNotifications !== "-" &&
-      props.color != "-"
+      props.currentCounty !== "" &&
+      props.financialCapability !== "" &&
+      props.lastOccurred !== "" &&
+      props.abuseCounty !== "" &&
+      props.weaponsInvolved !== "" &&
+      props.emailNotifications !== "" &&
+      props.color != ""
     ) {
       props.setCannotContinue(false);
     } else {

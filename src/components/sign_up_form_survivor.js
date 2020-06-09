@@ -122,6 +122,7 @@ export default function SurvivorSignUpStepper() {
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
       <div className="background">
+        <NavBar></NavBar>
         <Stepper
           activeStep={activeStep}
           orientation="vertical"

@@ -108,6 +108,31 @@ export default function MediaCard(props) {
                 helperText={`character limit: ${message.note.length}/${CHARACTER_LIMIT}`}
                 onChange={handleChange("note")}
               />
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                variant="subtitle1"
+                align="center"
+                paragraph
+              >
+                Please specify how {props.lawyerName} should contact you: ("I
+                can be emailed at any time at xyz@gmail.com", "You can call me
+                at 123-4567 on weekdays after 5pm but please do not leave a
+                voicemail")
+              </Typography>
+              <TextField
+                autoFocus
+                color="primary"
+                variant="outlined"
+                size="medium"
+                inputProps={{
+                  maxlength: CHARACTER_LIMIT,
+                }}
+                value={message.note}
+                helperText={`character limit: ${message.note.length}/${CHARACTER_LIMIT}`}
+                onChange={handleChange("note")}
+              />
             </CardContent>
             <CardActions>
               <Button
@@ -171,18 +196,25 @@ export default function MediaCard(props) {
                 align="center"
                 paragraph
               >
-                Practice Counties: placeholder county1, placeholder county2
+                Practice Counties: Los Angeles
               </Typography>
               <Typography variant="body2" color="textSecondary" component="p">
-                Bio: Eventually this will have the lawyer's full bio and profile
-                information but for now here is some placeholder text. Lorem
-                ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-                enim ad minim veniam, quis nostrud exercitation ullamco laboris
-                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
-                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
-                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Bio: Amy earned her J.D. from Georgetown University Law Center,
+                where she began advocating for the rights of survivors of
+                domestic violence as a student attorney in the Domestic Violence
+                Clinic. After graduating from law school, Amy continued her
+                advocacy as a lobbyist for the Georgia Coalition Against
+                Domestic Violence and Georgia Women for a Change. After clerking
+                for Fulton County Superior Court Chief Judge Gail S. Tusan in
+                Atlanta, Amy joined the prestigious boutique law firm of Fellows
+                LaBriola LLP where she litigated complex business, commercial,
+                shareholder and insurance disputes. In addition to her
+                litigation practice, Amy continued her advocacy as a Georgia
+                Women’s Policy Institute Fellow, the Policy Chair for the Junior
+                Leagues of Georgia and the founder of the Southern Center for
+                Human Rights’ Ambassador Program. Amy joined FreeFrom as the
+                Director of Law and Policy in 2019 after relocating from Atlanta
+                to Los Angeles.
               </Typography>
             </CardContent>
             <CardActions>

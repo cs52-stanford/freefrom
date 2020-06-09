@@ -76,6 +76,14 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Album(props) {
   const classes = useStyles();
+  const counties = ["Santa Clara", "Los Angeles", "El Dorado", "San Francisco"];
+  const bios = [
+    "Protima Pandey runs the ...",
+    "Amy earned her J.D. ...",
+    "Drew graduated from ...",
+    "Michele Dauber is a ...",
+  ];
+
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
       <React.Fragment>
@@ -115,11 +123,9 @@ export default function Album(props) {
                         Status: {props.statuses[card]}
                       </Typography>
                       <Typography align="center">
-                        Practice county: placeholder
+                        Practice county: {counties[card]}
                       </Typography>
-                      <Typography align="center">
-                        Bio: here is some placeholder text
-                      </Typography>
+                      <Typography align="center">Bio: {bios[card]}</Typography>
                     </CardContent>
                     <CardActions>
                       <Button
