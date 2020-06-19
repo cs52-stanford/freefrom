@@ -460,8 +460,9 @@ const CaseCard = (props) => {
             </Typography>
             <CirclePicker onChange={handleColorChange}></CirclePicker>
             <Typography className="bottomText">
+              Multiple choice questions are not able to fully capture your story.
               If you'd like, you may use this space to share any additional
-              information about your situation.
+              information about your case:
             </Typography>
             <TextField
               id="outlined-multiline-static"

@@ -118,6 +118,7 @@ export default function SurvivorSignUpStepper() {
   const [emailNotifications, setEmailNotifications] = React.useState("");
   const [extraInfo, setExtraInfo] = React.useState("");
   const [color, setColor] = React.useState("");
+  const [isLawyer, setIsLawyer] = React.useState(false);
 
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
@@ -197,6 +198,7 @@ export default function SurvivorSignUpStepper() {
                   setEmail={setEmail}
                   password={password}
                   setPassword={setPassword}
+                  isLawyer={isLawyer}
                 />
               </Typography>
               <div className={classes.actionsContainer}>

@@ -73,6 +73,7 @@ export default function LawyerSignUpStepper() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [cannotContinue, setCannotContinue] = useState(true);
+  const [isLawyer, setIsLawyer] = React.useState(true);
   const steps = getSteps();
 
   const handleNext = () => {
@@ -180,6 +181,7 @@ export default function LawyerSignUpStepper() {
             <StepContent>
               <Typography style={contentStyle}>
                 <DemographicsCard
+                  isLawyer={isLawyer}
                   name={name}
                   setName={setName}
                   gender={gender}

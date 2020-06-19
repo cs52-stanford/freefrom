@@ -83,7 +83,6 @@ const DemographicsCard = (props) => {
     }
   };
 
-  console.log("big error!!!!!!!");
   return (
     <Container style={demoStyle} maxWidth="sm">
       <Container style={check} maxWidth="sm">
@@ -91,7 +90,7 @@ const DemographicsCard = (props) => {
           <TextField
             required
             id="outlined-required"
-            label="Name/Alias"
+            label={props.isLawyer ? "Full Name" : "Name/Alias"}
             variant="outlined"
             className="spacing"
             margin="normal"
