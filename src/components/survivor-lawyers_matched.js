@@ -12,6 +12,7 @@ import Container from "@material-ui/core/Container";
 import Link from "@material-ui/core/Link";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
+import SurvivorReachOut from "./survivor_reach_out.js";
 
 const themeA = createMuiTheme({
   root: {
@@ -78,11 +79,13 @@ export default function Album(props) {
   const classes = useStyles();
   const counties = ["Santa Clara", "Los Angeles", "El Dorado", "San Francisco"];
   const bios = [
-    "Protima Pandey runs the ...",
+    "Protima has been an ...",
     "Amy earned her J.D. ...",
-    "Drew graduated from ...",
-    "Michele Dauber is a ...",
+    "Drew Harbur began ...",
+    "A law professor and ...",
   ];
+
+
 
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">

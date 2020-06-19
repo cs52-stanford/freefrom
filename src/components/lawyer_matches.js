@@ -4,7 +4,7 @@ import LawyerHeader from "./lawyer_header.js";
 import ReachOut from "./lawyer_reach_out";
 import { Grid } from "@material-ui/core";
 
-const statuses = ["new!", "new!", "new!", "new!", "new!", "new!"];
+const statuses = ["new!", "new!", "new!", "new!", "new!"];
 
 const LawyerMatches = (props) => {
   const [isConfirmScreen, setIsConfirmScreen] = useState(false);
@@ -12,10 +12,7 @@ const LawyerMatches = (props) => {
   const [survivorProfile, setSurvivorProfile] = useState([]);
   const [survivorName, setSurvivorName] = useState("name");
   const [survivorImage, setSurvivorImage] = useState("image");
-
-  //const [unsentSurvivors, setUnsentSurvivors] = useState([0, 1, 2, 3, 4, 5]);
-  //const [sentSurvivors, setSentSurvivors] = useState([]);
-  //const [survivorIndex, setSurvivorIndex] = useState(0);
+  const [alreadySent, setAlreadySent] = useState(false);
 
   const survivorNames = [
     "Sarah",
@@ -23,7 +20,6 @@ const LawyerMatches = (props) => {
     "Julia",
     "Raven",
     "Cleopatra",
-    "Melissa",
   ];
   const survivorPhotos = [
     "https://i.guim.co.uk/img/media/d0105731685e5b2b3daecf2fa00c9affaba832f1/0_0_2560_1536/master/2560.jpg?width=700&quality=85&auto=format&fit=max&s=6542f6e0d27c640c50459a8cf09941c4",
@@ -31,14 +27,13 @@ const LawyerMatches = (props) => {
     "https://pbs.twimg.com/media/EYT23zZWAAEyGsJ?format=png&name=small",
     "https://pbs.twimg.com/media/EYS_8TLXsAAo8W9?format=png&name=small",
     "https://pbs.twimg.com/media/EYSJFcdWkAA5Lmu?format=png&name=small",
-    "https://pbs.twimg.com/media/EYNa4qyXQAApT6i?format=png&name=small",
   ];
 
   function setStatus(index, message) {
     statuses[index] = message;
   }
 
-  if (viewProfile === false) {
+  if (!viewProfile) {
     return (
       <Grid
         justify="flex-end"
@@ -106,6 +101,8 @@ const LawyerMatches = (props) => {
           sentSurvivors={props.sentSurvivors}
           survivorIndex={props.survivorIndex}
           setSurvivorIndex={props.setSurvivorIndex}
+          alreadySent={alreadySent}
+          setAlreadySent={setAlreadySent}
           {...props}
         />
       </Grid>

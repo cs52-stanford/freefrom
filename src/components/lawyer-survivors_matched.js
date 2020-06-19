@@ -86,25 +86,23 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const cards = [0, 1, 2, 3, 4, 5];
-
 export default function Album(props) {
   const classes = useStyles();
   const counties = [
     "Santa Clara",
     "Los Angeles",
     "El Dorado",
-    "San Francisco",
     "Marin",
+    "San Francisco",
     "Santa Clara",
   ];
   const cases = [
-    "I am a single mother...",
-    "I am a college student...",
-    "I need help with...",
+    "My partner physically...",
     "My name is...",
-    "I have been in a...",
-    "This started when I...",
+    "I married an...",
+    "My name is...",
+    "I was married...",
+    "I am seeking legal...",
   ];
 
   if (!props.viewProfile) {

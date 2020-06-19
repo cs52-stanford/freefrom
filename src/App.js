@@ -60,10 +60,10 @@ function PrivateRoute({
             setSentSurvivors={setSentSurvivors}
           />
         ) : (
-          <Redirect
-            to={{ pathname: "/sign_in", state: { from: props.location } }}
-          />
-        )
+            <Redirect
+              to={{ pathname: "/sign_in", state: { from: props.location } }}
+            />
+          )
       }
     />
   );
@@ -77,8 +77,8 @@ function PublicRoute({ component: Component, authenticated, ...rest }) {
         authenticated === false ? (
           <Component {...props} />
         ) : (
-          <Redirect to="/home" />
-        )
+            <Redirect to="/home" />
+          )
       }
     />
   );
@@ -94,7 +94,7 @@ class App extends Component {
       unsentLawyers: [0, 1, 2, 3],
       sentLawyers: [],
       lawyerIndex: 0,
-      unsentSurvivors: [0, 1, 2, 3, 4, 5],
+      unsentSurvivors: [0, 1, 2, 3, 4],
       sentSurvivors: [],
       survivorIndex: 0,
     };
@@ -180,79 +180,79 @@ class App extends Component {
     return this.state.loading === true ? (
       <h2>Loading...</h2>
     ) : (
-      <Router>
-        <Switch>
-          <PublicRoute
-            exact
-            path="/"
-            component={SignIn}
-            authenticated={this.state.authenticated}
-          />
-          <PublicRoute
-            path="/sign_in"
-            component={SignIn}
-            authenticated={this.state.authenticated}
-          />
-          <PrivateRoute
-            path="/home"
-            authenticated={this.state.authenticated}
-            component={Home}
-            userDetails={this.state.userDetails}
-            unsentLawyers={this.state.unsentLawyers}
-            sentLawyers={this.state.sentLawyers}
-            lawyerIndex={this.state.lawyerIndex}
-            survivorIndex={this.state.survivorIndex}
-            unsentSurvivors={this.state.unsentSurvivors}
-            sentSurvivors={this.state.sentSurvivors}
-            setLawyerIndex={this.setLawyerIndex}
-            setUnsentLawyers={this.setUnsentLawyers}
-            setSentLawyers={this.setSentLawyers}
-            setSurvivorIndex={this.setSurvivorIndex}
-            setUnsentSurvivors={this.setUnsentSurvivors}
-            setSentSurvivors={this.setSentSurvivors}
-          />
-          <PrivateRoute
-            path="/connections"
-            authenticated={this.state.authenticated}
-            component={Connections}
-            userDetails={this.state.userDetails}
-            unsentLawyers={this.state.unsentLawyers}
-            sentLawyers={this.state.sentLawyers}
-            lawyerIndex={this.state.lawyerIndex}
-            survivorIndex={this.state.survivorIndex}
-            unsentSurvivors={this.state.unsentSurvivors}
-            sentSurvivors={this.state.sentSurvivors}
-            setLawyerIndex={this.setLawyerIndex}
-            setUnsentLawyers={this.setUnsentLawyers}
-            setSentLawyers={this.setSentLawyers}
-            setSurvivorIndex={this.setSurvivorIndex}
-            setUnsentSurvivors={this.setUnsentSurvivors}
-            setSentSurvivors={this.setSentSurvivors}
-          />
-          <PrivateRoute
-            path="/settings"
-            authenticated={this.state.authenticated}
-            component={Settings}
-            userDetails={this.state.userDetails}
-          />
-          <PublicRoute
-            path="/sign_up"
-            authenticated={this.state.authenticated}
-            component={SignUp}
-          />
-          <PublicRoute
-            path="/sign_up_form_lawyer"
-            authenticated={this.state.authenticated}
-            component={LawyerSignUpStepper}
-          />
-          <PublicRoute
-            path="/sign_up_form_survivor"
-            authenticated={this.state.authenticated}
-            component={SurvivorSignUpStepper}
-          />
-        </Switch>
-      </Router>
-    );
+        <Router>
+          <Switch>
+            <PublicRoute
+              exact
+              path="/"
+              component={SignIn}
+              authenticated={this.state.authenticated}
+            />
+            <PublicRoute
+              path="/sign_in"
+              component={SignIn}
+              authenticated={this.state.authenticated}
+            />
+            <PrivateRoute
+              path="/home"
+              authenticated={this.state.authenticated}
+              component={Home}
+              userDetails={this.state.userDetails}
+              unsentLawyers={this.state.unsentLawyers}
+              sentLawyers={this.state.sentLawyers}
+              lawyerIndex={this.state.lawyerIndex}
+              survivorIndex={this.state.survivorIndex}
+              unsentSurvivors={this.state.unsentSurvivors}
+              sentSurvivors={this.state.sentSurvivors}
+              setLawyerIndex={this.setLawyerIndex}
+              setUnsentLawyers={this.setUnsentLawyers}
+              setSentLawyers={this.setSentLawyers}
+              setSurvivorIndex={this.setSurvivorIndex}
+              setUnsentSurvivors={this.setUnsentSurvivors}
+              setSentSurvivors={this.setSentSurvivors}
+            />
+            <PrivateRoute
+              path="/connections"
+              authenticated={this.state.authenticated}
+              component={Connections}
+              userDetails={this.state.userDetails}
+              unsentLawyers={this.state.unsentLawyers}
+              sentLawyers={this.state.sentLawyers}
+              lawyerIndex={this.state.lawyerIndex}
+              survivorIndex={this.state.survivorIndex}
+              unsentSurvivors={this.state.unsentSurvivors}
+              sentSurvivors={this.state.sentSurvivors}
+              setLawyerIndex={this.setLawyerIndex}
+              setUnsentLawyers={this.setUnsentLawyers}
+              setSentLawyers={this.setSentLawyers}
+              setSurvivorIndex={this.setSurvivorIndex}
+              setUnsentSurvivors={this.setUnsentSurvivors}
+              setSentSurvivors={this.setSentSurvivors}
+            />
+            <PrivateRoute
+              path="/settings"
+              authenticated={this.state.authenticated}
+              component={Settings}
+              userDetails={this.state.userDetails}
+            />
+            <PublicRoute
+              path="/sign_up"
+              authenticated={this.state.authenticated}
+              component={SignUp}
+            />
+            <PublicRoute
+              path="/sign_up_form_lawyer"
+              authenticated={this.state.authenticated}
+              component={LawyerSignUpStepper}
+            />
+            <PublicRoute
+              path="/sign_up_form_survivor"
+              authenticated={this.state.authenticated}
+              component={SurvivorSignUpStepper}
+            />
+          </Switch>
+        </Router>
+      );
   }
 }
 
