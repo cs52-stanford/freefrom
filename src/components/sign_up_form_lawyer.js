@@ -16,6 +16,7 @@ import ProfileCard from "./lawyer_profile_info_card.js";
 import { Link, Redirect } from "react-router-dom";
 import { signup, signin } from "../services/auth";
 import { auth, db } from "../services/firebase";
+import matcher from "./matcher";
 
 const themeA = createMuiTheme({
   root: {
@@ -91,7 +92,9 @@ export default function LawyerSignUpStepper() {
             isLawyer: true,
             isSurvivor: false,
           });
-          // figure out photo
+          db.ref("users/" + auth().currentUser.uid).once("value").then(function (snapshot) {
+            matcher(snapshot.val(), auth().currentUser.uid);
+          });
         })
         .catch(function (error) {
           console.error(error);
