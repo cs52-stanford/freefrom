@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import LawyerHome from "./lawyer_home.js";
 import LawyerHeader from "./lawyer_header.js";
-import ReachOut from "./lawyer_reach_out";
+import ReachOut from "./survivor_profile";
 import { Grid } from "@material-ui/core";
 
 const statuses = ["new!", "new!", "new!", "new!", "new!"];
@@ -57,7 +57,7 @@ const LawyerMatches = (props) => {
           setIsConfirmScreen={setIsConfirmScreen}
           survivorPhotos={survivorPhotos}
           survivorNames={survivorNames}
-          unsentSurvivors={props.unsentSurvivors}
+          unsentRequests={props.unsentRequests}
           sentSurvivors={props.sentSurvivors}
           setStatus={setStatus}
           statuses={statuses}

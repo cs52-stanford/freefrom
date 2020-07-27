@@ -59,42 +59,30 @@ const useStyles = makeStyles((theme) => ({
 
 const CHARACTER_LIMIT = 300;
 
-async function sendRequest(lawyerId, message) {
-    await db.ref("requests/" + lawyerId + auth().currentUser.uid).update({
-        lawyerStatus: "New Match!",
-        survivorStatus: "Profile sent, awaiting response",
-        survivorMessage: message.note,
-        survivorContact: message.contact,
+async function confirmDecline(userId, message) {
+    await db.ref("requests/" + auth().currentUser.uid + userId).update({
+        lawyerStatus: "Meeting declined",
+        survivorStatus: "Meeting declined",
+        lawyerMessage: message,
     });
 }
 
 export default function MediaCard(props) {
 
-    const [message, setMessage] = React.useState({
-        note: "",
-        contact: "",
-    });
+    const [message, setMessage] = React.useState("");
 
-    const handleChange = (note) => (event) => {
-        setMessage({ ...message, [note]: event.target.value });
+    const handleChange = (event) => {
+        setMessage(event.target.value);
     };
 
     const classes = useStyles();
-    let lawyer = props.allLawyers.filter(user => user.userId === props.lawyerId)[0];
+    let survivor = props.allRequests.filter(user => user.userId === props.userId)[0];
 
     return (
         <ThemeProvider theme={themeA}>
             <Container className={classes.contain} maxWidth="lg">
                 <Card className={classes.root}>
                     <CardContent className={classes.cardContentBox}>
-                        <Typography
-                            gutterBottom
-                            variant="h5"
-                            component="h2"
-                            align="center"
-                        >
-                            Almost done!
-                        </Typography>
                         <Typography
                             variant="body2"
                             color="textSecondary"
@@ -103,10 +91,8 @@ export default function MediaCard(props) {
                             align="center"
                             paragraph
                         >
-                            By clicking 'confirm', you agree to have your profile
-                            information (including any details about your case) sent to{" "}
-                            {lawyer.name}. You may also add an optional message, if
-                            you'd like:
+                            Since this process is such a difficult one for domestic abuse suvivors, we strive to provide them with full transparency.
+                            We'd appreciate if you could write a brief explanation as to why you are unable to move forward with their case:
                         </Typography>
                         <TextField
                             autoFocus
@@ -118,41 +104,13 @@ export default function MediaCard(props) {
                             inputProps={{
                                 maxlength: CHARACTER_LIMIT,
                             }}
-                            value={message.note}
-                            helperText={`character limit: ${message.note.length}/${CHARACTER_LIMIT}`}
-                            onChange={handleChange("note")}
-                        />
-                        <Typography
-                            variant="body2"
-                            color="textSecondary"
-                            component="p"
-                            variant="subtitle1"
-                            align="center"
-                            paragraph
-                        ></Typography>
-                        <Typography
-                            variant="body2"
-                            color="textSecondary"
-                            component="p"
-                            variant="subtitle1"
-                            align="center"
-                            paragraph
-                        >
-                            Please specify how {lawyer.name} should contact you: ("I
-                            can be emailed at any time at xyz@gmail.com", "You can call me
-                            at 123-4567 on weekdays after 5pm but please do not leave a
-                            voicemail")
-                        </Typography>
-                        <TextField
-                            color="primary"
-                            variant="outlined"
-                            size="medium"
-                            value={message.contact}
-                            onChange={handleChange("contact")}
+                            value={message}
+                            helperText={`character limit: ${message.length}/${CHARACTER_LIMIT}`}
+                            onChange={handleChange}
                         />
                     </CardContent>
                     <CardActions>
-                        <Link to={`/profile/${lawyer.userId}`}>
+                        <Link to={`/profile/${survivor.userId}`}>
                             <Button
                                 size="small"
                                 color="primary"
@@ -164,7 +122,7 @@ export default function MediaCard(props) {
                             <Button
                                 size="small"
                                 color="primary"
-                                onClick={() => sendRequest(lawyer.userId, message)}
+                                onClick={() => confirmDecline(survivor.userId, message)}
                             >
                                 Confirm
                         </Button>

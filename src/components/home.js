@@ -4,9 +4,10 @@ import SurvivorHome from "./survivor_home.js";
 
 export default function Home(props) {
   if (props.userDetails.isLawyer === true) {
+    console.log("unsent requests: ", props);
     return (
       <LawyerHome
-        unsentSurvivors={props.unsentSurvivors}
+        unsentRequests={props.unsentRequests}
         sentSurvivors={props.sentSurvivors}
         survivorIndex={props.survivorIndex}
         setSurvivorIndex={props.setSurvivorIndex}
@@ -16,15 +17,15 @@ export default function Home(props) {
       />
     );
   } else {
+    console.log("unsent requests: ", props);
     return (
       <SurvivorHome
-        unsentLawyers={props.unsentLawyers}
-        sentLawyers={props.sentLawyers}
-        lawyerIndex={props.lawyerIndex}
-        setLawyerIndex={props.setLawyerIndex}
-        setUnsentLawyers={props.setUnsentLawyers}
-        setSentLawyers={props.setSentLawyers}
-        {...props}
+        unsentRequests={props.unsentRequests}
+      // sentLawyers={props.sentLawyers}
+      // lawyerIndex={props.lawyerIndex}
+      // setLawyerIndex={props.setLawyerIndex}
+      // setUnsentLawyers={props.setUnsentLawyers}
+      // setSentLawyers={props.setSentLawyers}
       />
     );
   }

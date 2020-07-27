@@ -15,6 +15,7 @@ import DemographicsCard from "./make_account_card.js";
 import CaseCard from "./case_info_card.js";
 import { signup, signin } from "../services/auth";
 import { auth, db } from "../services/firebase";
+import matcher from "./matcher.js";
 
 const themeA = createMuiTheme({
   root: {
@@ -67,7 +68,7 @@ function getSteps() {
   return ["Disclaimer", "Account Information", "Case Information"];
 }
 
-export default function SurvivorSignUpStepper() {
+export default function SurvivorSignUpStepper(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [cannotContinue, setCannotContinue] = useState(true);
@@ -93,6 +94,9 @@ export default function SurvivorSignUpStepper() {
             isSurvivor: true,
           });
           // figure out photo
+          db.ref("users/" + auth().currentUser.uid).once("value").then(function (snapshot) {
+            matcher(snapshot.val(), auth().currentUser.uid);
+          });
         })
         .catch(function (error) {
           console.error(error);

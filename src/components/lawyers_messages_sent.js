@@ -12,9 +12,9 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
+import { Link } from "react-router-dom";
 import { createMuiTheme } from "@material-ui/core/styles";
-import LawyerReachOut from "./lawyer_reach_out.js";
+import LawyerReachOut from "./survivor_profile.js";
 import { ThemeProvider } from "@material-ui/styles";
 
 const themeA = createMuiTheme({
@@ -83,129 +83,79 @@ const useStyles = makeStyles((theme) => ({
 export default function Album(props) {
   const classes = useStyles();
 
-  const [viewProfile, setViewProfile] = useState(false);
-  const [alreadySent, setAlreadySent] = useState(true);
+  const survivors = props.allRequests.filter(user => (user.status === ("Meeting declined" || "Meeting accepted")));
 
-  const counties = [
-    "Santa Clara",
-    "Los Angeles",
-    "El Dorado",
-    "Marin",
-    "San Francisco",
-    "Santa Clara",
-  ];
-  const cases = [
-    "I am a single mother...",
-    "I am a college student...",
-    "I need help with...",
-    "My name is...",
-    "I have been in a...",
-    "This started when I...",
-  ];
-
-  if (!viewProfile) {
-    return (
-      <ThemeProvider theme={themeA} className="backgroundColor">
-        <React.Fragment>
-          <CssBaseline />
-          <main>
-            {/* Hero unit */}
-            <div className={classes.heroContent}>
-              <Container maxWidth="md">
-                <Typography
-                  variant="h5"
-                  align="center"
-                  color="textSecondary"
-                  paragraph
-                >
-                  Below are the cases you have agreed to take meetings about:
+  return (
+    <ThemeProvider theme={themeA} className="backgroundColor">
+      <React.Fragment>
+        <CssBaseline />
+        <main>
+          {/* Hero unit */}
+          <div className={classes.heroContent}>
+            <Container maxWidth="md">
+              <Typography
+                variant="h5"
+                align="center"
+                color="textSecondary"
+                paragraph
+              >
+                Below are the cases you have agreed to take meetings about:
               </Typography>
-              </Container>
-            </div>
-            <Container className={classes.cardGrid} maxWidth="md">
-              {/* End hero unit */}
-              <Grid container spacing={4}>
-                {props.sentSurvivors.map((card, index) => (
-                  <Grid item key={card} xs={12} sm={6} md={4}>
-                    <Card className={classes.card}>
-                      <CardMedia
-                        className={classes.cardMedia}
-                        image={props.survivorPhotos[card]}
-                        title="Image title"
-                      />
-                      <CardContent className={classes.cardContent}>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          {props.survivorNames[card]}
-                        </Typography>
-                        <Typography color="secondary" align="center" gutterBottom>
-                          Status: meeting accepted!
-                        </Typography>
-                        <Typography align="center">
-                          Location: {counties[card]}
-                        </Typography>
-                        <Typography align="center">
-                          Case: {cases[card]}
-                        </Typography>
-                      </CardContent>
-                      <CardActions className={classes.root}>
+            </Container>
+          </div>
+          <Container className={classes.cardGrid} maxWidth="md">
+            {/* End hero unit */}
+            <Grid container spacing={4}>
+              {survivors.map((survivor, index) => (
+                <Grid item key={index} xs={12} sm={6} md={4}>
+                  <Card className={classes.card}>
+                    <CardMedia
+                      className={classes.cardMedia}
+                      // image={props.survivorPhotos[card]}
+                      title="Image title"
+                    />
+                    <CardContent className={classes.cardContent}>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {survivor.name}
+                      </Typography>
+                      <Typography color="secondary" align="center" gutterBottom>
+                        Status: {survivor.status}
+                      </Typography>
+                      <Typography align="center">
+                        Location: {survivor.currentCounty}
+                      </Typography>
+                      <Typography align="center">
+                        Case: {survivor.caseInfo.substring(0, 20).concat('...')}
+                      </Typography>
+                    </CardContent>
+                    <CardActions className={classes.root}>
+                      <Link to={`/profile/${survivor.userId}`}>
                         <Button
                           size="small"
                           color="primary"
-                          onClick={function () {
-                            props.setSurvivorName(props.survivorNames[card]);
-                            props.setSurvivorImage(props.survivorPhotos[card]);
-                            props.setSurvivorIndex(index);
-                            setViewProfile(true);
-                          }}
                         >
                           View Case
-                      </Button>
-                      </CardActions>
-                    </Card>
-                  </Grid>
-                ))}
-              </Grid>
-            </Container>
-          </main>
-          {/* Footer */}
-          <footer className={classes.footer}>
-            <Typography
-              variant="subtitle1"
-              align="center"
-              color="textSecondary"
-              component="p"
-            ></Typography>
-            <Copyright />
-          </footer>
-          {/* End footer */}
-        </React.Fragment>
-      </ThemeProvider>
-    );
-  } else {
-    return (
-      <LawyerReachOut
-        viewProfile={viewProfile}
-        setViewProfile={setViewProfile}
-        setSurvivorImage={props.setSurvivorImage}
-        setSurvivorName={props.setSurvivorName}
-        setSurvivorProfile={props.setSurvivorProfile}
-        survivorName={props.survivorName}
-        survivorImage={props.survivorImage}
-        survivorProfile={props.survivorProfile}
-        isConfirmScreen={props.isConfirmScreen}
-        setIsConfirmScreen={props.setIsConfirmScreen}
-        survivorPhotos={props.survivorPhotos}
-        survivorNames={props.survivorNames}
-        setStatus={props.setStatus}
-        statuses={props.statuses}
-        setUnsentSurvivors={props.setUnsentSurvivors}
-        unsentSurvivors={props.unsentSurvivors}
-        setSentSurvivors={props.setSentSurvivors}
-        sentSurvivors={props.sentSurvivors}
-        survivorIndex={props.survivorIndex}
-        setSurvivorIndex={props.setSurvivorIndex}
-        alreadySent={alreadySent}
-        setAlreadySent={setAlreadySent}
-      />);
-  }
+                        </Button>
+                      </Link>
+                    </CardActions>
+                  </Card>
+                </Grid>
+              ))}
+            </Grid>
+          </Container>
+        </main>
+        {/* Footer */}
+        <footer className={classes.footer}>
+          <Typography
+            variant="subtitle1"
+            align="center"
+            color="textSecondary"
+            component="p"
+          ></Typography>
+          <Copyright />
+        </footer>
+        {/* End footer */}
+      </React.Fragment>
+    </ThemeProvider>
+  );
 }

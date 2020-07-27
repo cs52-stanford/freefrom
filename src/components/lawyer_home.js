@@ -20,12 +20,11 @@ const LawyerHome = (props) => {
       setIsConfirmScreen={props.setIsConfirmScreen}
       survivorPhotos={props.survivorPhotos}
       survivorNames={props.survivorNames}
-      unsentSurvivors={props.unsentSurvivors}
       sentSurvivors={props.sentSurvivors}
       setStatus={props.setStatus}
       statuses={props.statuses}
       setUnsentSurvivors={props.setUnsentSurvivors}
-      unsentSurvivors={props.unsentSurvivors}
+      unsentRequests={props.unsentRequests}
       setSentSurvivors={props.setSentSurvivors}
       sentSurvivors={props.sentSurvivors}
       survivorIndex={props.survivorIndex}

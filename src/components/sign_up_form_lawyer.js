@@ -16,7 +16,7 @@ import ProfileCard from "./lawyer_profile_info_card.js";
 import { Link, Redirect } from "react-router-dom";
 import { signup, signin } from "../services/auth";
 import { auth, db } from "../services/firebase";
-import matcher from "./matcher";
+import matcher from "./matcher.js";
 
 const themeA = createMuiTheme({
   root: {
@@ -70,7 +70,7 @@ function getSteps() {
   return ["Disclaimer", "Account Information", "Profile Information"];
 }
 
-export default function LawyerSignUpStepper() {
+export default function LawyerSignUpStepper(props) {
   const classes = useStyles();
   const [activeStep, setActiveStep] = useState(0);
   const [cannotContinue, setCannotContinue] = useState(true);

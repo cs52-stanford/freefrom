@@ -9,10 +9,11 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import Link from "@material-ui/core/Link";
+import { Link } from "react-router-dom";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-import SurvivorReachOut from "./survivor_reach_out.js";
+import SurvivorReachOut from "./lawyer_profile.js";
+import { db, auth } from "../services/firebase";
 
 const themeA = createMuiTheme({
   root: {
@@ -75,20 +76,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+
 export default function Album(props) {
   const classes = useStyles();
-  const counties = ["Santa Clara", "Los Angeles", "El Dorado", "San Francisco"];
-  const bios = [
-    "Protima has been an ...",
-    "Amy earned her J.D. ...",
-    "Drew Harbur began ...",
-    "A law professor and ...",
-  ];
 
-
+  console.log(props.unsentRequests);
+  const lawyers = props.unsentRequests;
 
   return (
-    <ThemeProvider theme={themeA} className="backgroundColor">
+    <ThemeProvider theme={themeA}>
       <React.Fragment>
         <CssBaseline />
         <main>
@@ -110,54 +106,43 @@ export default function Album(props) {
           <Container className={classes.cardGrid} maxWidth="md">
             {/* End hero unit */}
             <Grid container spacing={4}>
-              {props.unsentLawyers.map((card, index) => (
-                <Grid item key={card} xs={12} sm={6} md={4}>
+              {lawyers.map((lawyer, index) => (
+                <Grid item key={index} xs={12} sm={6} md={4}>
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.cardMedia}
-                      image={props.lawyerPhotos[card]}
+                      // image={props.lawyerPhotos[card]}
                       title="Image title"
                     />
                     <CardContent className={classes.cardContent}>
                       <Typography gutterBottom variant="h5" component="h2">
-                        {props.lawyerNames[card]}
+                        {lawyer.name}
                       </Typography>
                       <Typography color="secondary" align="center" gutterBottom>
-                        Status: {props.statuses[card]}
+                        Status: {lawyer.status}
                       </Typography>
                       <Typography align="center">
-                        Practice county: {counties[card]}
+                        Practice county: {lawyer.counties}
                       </Typography>
-                      <Typography align="center">Bio: {bios[card]}</Typography>
+                      <Typography align="center">Bio: {lawyer.bio.substring(0, 20).concat('...')}</Typography>
                     </CardContent>
                     <CardActions>
-                      <Button
-                        size="small"
-                        color="primary"
-                        onClick={function () {
-                          props.setViewProfile(true);
-                          props.setLawyerName(props.lawyerNames[card]);
-                          props.setLawyerImage(props.lawyerPhotos[card]);
-                          props.setLawyerIndex(index);
-                          props.setStatus(card, "viewed");
-                        }}
-                      >
-                        View Full Profile
-                      </Button>
-                      <Button
-                        size="small"
-                        color="primary"
-                        onClick={function () {
-                          props.setViewProfile(true);
-                          props.setIsConfirmScreen(true);
-                          props.setLawyerName(props.lawyerNames[card]);
-                          props.setLawyerImage(props.lawyerPhotos[card]);
-                          props.setLawyerIndex(index);
-                          props.setStatus(card, "viewed");
-                        }}
-                      >
-                        Reach Out
-                      </Button>
+                      <Link to={`/profile/${lawyer.userId}`}>
+                        <Button
+                          size="small"
+                          color="primary"
+                        >
+                          View Full Profile
+                        </Button>
+                      </Link>
+                      <Link to={`/reach_out/${lawyer.userId}`}>
+                        <Button
+                          size="small"
+                          color="primary"
+                        >
+                          Reach Out
+                        </Button>
+                      </Link>
                     </CardActions>
                   </Card>
                 </Grid>
@@ -177,6 +162,6 @@ export default function Album(props) {
         </footer>
         {/* End footer */}
       </React.Fragment>
-    </ThemeProvider>
+    </ThemeProvider >
   );
 }

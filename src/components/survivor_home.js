@@ -42,41 +42,36 @@ const SurvivorHome = (props) => {
       alignContent="space-between"
       className="lawyerhome"
     >
-      <SurvivorHeader
-        setIsLogIn={props.setIsLogIn}
-        viewProfile={viewProfile}
-        setViewProfile={setViewProfile}
-      />
+      <SurvivorHeader />
       <SurvivorMatches
-        viewProfile={viewProfile}
-        setViewProfile={setViewProfile}
-        setLawyerImage={setLawyerImage}
-        setLawyerName={setLawyerName}
-        setLawyerProfile={setLawyerProfile}
-        lawyerName={lawyerName}
-        lawyerImage={lawyerImage}
-        lawyerProfile={lawyerProfile}
-        isConfirmScreen={isConfirmScreen}
-        setIsConfirmScreen={setIsConfirmScreen}
-        lawyerPhotos={lawyerPhotos}
-        lawyerNames={lawyerNames}
-        //     unsentLawyers={unsentLawyers}
-        //     sentLawyers={sentLawyers}
-        setStatus={setStatus}
-        statuses={statuses}
-        unsentLawyers={props.unsentLawyers}
-        sentLawyers={props.sentLawyers}
-        lawyerIndex={props.lawyerIndex}
-        setLawyerIndex={props.setLawyerIndex}
-        setUnsentLawyers={props.setUnsentLawyers}
-        setSentLawyers={props.setSentLawyers}
-        {...props}
-        //      setUnsentLawyers={setUnsentLawyers}
-        //      unsentLawyers={unsentLawyers}
-        //      setSentLawyers={setSentLawyers}
-        //      sentLawyers={sentLawyers}
-        //      lawyerIndex={lawyerIndex}
-        //      setLawyerIndex={setLawyerIndex}
+        // viewProfile={viewProfile}
+        // setViewProfile={setViewProfile}
+        // setLawyerImage={setLawyerImage}
+        // setLawyerName={setLawyerName}
+        // setLawyerProfile={setLawyerProfile}
+        // lawyerName={lawyerName}
+        // lawyerImage={lawyerImage}
+        // lawyerProfile={lawyerProfile}
+        // isConfirmScreen={isConfirmScreen}
+        // setIsConfirmScreen={setIsConfirmScreen}
+        // lawyerPhotos={lawyerPhotos}
+        // lawyerNames={lawyerNames}
+        // //     unsentLawyers={unsentLawyers}
+        // //     sentLawyers={sentLawyers}
+        // setStatus={setStatus}
+        // statuses={statuses}
+        unsentRequests={props.unsentRequests}
+      // sentLawyers={props.sentLawyers}
+      // lawyerIndex={props.lawyerIndex}
+      // setLawyerIndex={props.setLawyerIndex}
+      // setUnsentLawyers={props.setUnsentLawyers}
+      // setSentLawyers={props.setSentLawyers}
+      //      setUnsentLawyers={setUnsentLawyers}
+      //      unsentLawyers={unsentLawyers}
+      //      setSentLawyers={setSentLawyers}
+      //      sentLawyers={sentLawyers}
+      //      lawyerIndex={lawyerIndex}
+      //      setLawyerIndex={setLawyerIndex}
       ></SurvivorMatches>
     </Grid>
   );
