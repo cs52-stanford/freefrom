@@ -15,11 +15,11 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { ListItemAvatar } from "@material-ui/core";
 import Logo from "./counselCompassLogo.png";
-import SettingsIcon from "./settings.png";
-import LogOutIcon from "./logout.png";
-import MatchesIcon from "./matches.png";
+import SettingsIcon from "./settings.svg";
+import LogOutIcon from "./logout.svg";
+import MatchesIcon from "./home.svg";
 import ListItem from "@material-ui/core/ListItem";
-import ConnectionsIcon from "./connections.png";
+import ConnectionsIcon from "./chat.svg";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -99,6 +99,11 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     justifyContent: "space-between",
   },
+  icon: {
+    width: theme.spacing(3.5),
+    height: theme.spacing(3.5),
+    marginLeft: "0px",
+  },
 }));
 
 export default function PersistentDrawerLeft(props) {
@@ -151,8 +156,8 @@ export default function PersistentDrawerLeft(props) {
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
             ) : (
-              <ChevronRightIcon />
-            )}
+                <ChevronRightIcon />
+              )}
           </IconButton>
         </div>
         <Divider />
@@ -162,15 +167,9 @@ export default function PersistentDrawerLeft(props) {
               button
               key="matches"
               alignItems="center"
-              onClick={() => {
-                // props.setIsSurvivorMatches(true);
-                // props.setIsSurvivorConnections(false);
-                // props.setIsSurvivorSettings(false);
-                // props.setViewProfile(false);
-              }}
             >
               <ListItemAvatar>
-                <Avatar src={MatchesIcon} variant="square"></Avatar>
+                <Avatar src={MatchesIcon} variant="square" className={classes.icon}></Avatar>
               </ListItemAvatar>
               <ListItemText primary="Home"></ListItemText>
             </ListItem>
@@ -180,15 +179,9 @@ export default function PersistentDrawerLeft(props) {
               button
               key="connections"
               alignItems="center"
-              onClick={() => {
-                // props.setIsSurvivorMatches(false);
-                // props.setIsSurvivorConnections(true);
-                // props.setIsSurvivorSettings(false);
-                // props.setViewProfile(false);
-              }}
             >
               <ListItemAvatar>
-                <Avatar src={ConnectionsIcon} variant="square"></Avatar>
+                <Avatar src={ConnectionsIcon} variant="square" className={classes.icon}></Avatar>
               </ListItemAvatar>
               <ListItemText primary="Connections"></ListItemText>
             </ListItem>
@@ -199,15 +192,9 @@ export default function PersistentDrawerLeft(props) {
               button
               key="settings"
               alignItems="center"
-              onClick={() => {
-                // props.setIsSurvivorMatches(false);
-                // props.setIsSurvivorConnections(false);
-                // props.setIsSurvivorSettings(true);
-                // props.setViewProfile(false);
-              }}
             >
               <ListItemAvatar>
-                <Avatar src={SettingsIcon} variant="square"></Avatar>
+                <Avatar src={SettingsIcon} variant="square" className={classes.icon}></Avatar>
               </ListItemAvatar>
               <ListItemText primary="Settings"></ListItemText>
             </ListItem>
@@ -221,7 +208,7 @@ export default function PersistentDrawerLeft(props) {
             }}
           >
             <ListItemAvatar>
-              <Avatar src={LogOutIcon} variant="square"></Avatar>
+              <Avatar src={LogOutIcon} variant="square" className={classes.icon}></Avatar>
             </ListItemAvatar>
             <ListItemText primary="Log Out"></ListItemText>
           </ListItem>

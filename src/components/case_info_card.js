@@ -135,6 +135,67 @@ const CaseCard = (props) => {
     "Yolo",
     "Yuba",
   ];
+  const abuseCounties = [
+    "It did not take place in a California county",
+    "Alameda County",
+    "Alpine County",
+    "Amador County",
+    "Butte County",
+    "Calaveras County",
+    "Colusa County",
+    "Contra Costa County",
+    "Del Norte County",
+    "El Dorado County",
+    "Fresno County",
+    "Glenn County",
+    "Humboldt County",
+    "Imperial County",
+    "Inyo County",
+    "Kern County",
+    "Kings County",
+    "Lake County",
+    "Lassen County",
+    "Los Angeles County",
+    "Madera County",
+    "Marin County",
+    "Mariposa County",
+    "Mendocino County",
+    "Merced County",
+    "Modoc County",
+    "Mono County",
+    "Monterey County",
+    "Napa County",
+    "Nevada County",
+    "Orange County",
+    "Placer County",
+    "Plumas County",
+    "Riverside County",
+    "Sacramento County",
+    "San Benito County",
+    "San Bernardino County",
+    "San Diego County",
+    "San Francisco County",
+    "San Joaquin County",
+    "San Luis Obispo County",
+    "San Mateo County",
+    "Santa Barbara County",
+    "Santa Clara County",
+    "Santa Cruz County",
+    "Shasta County",
+    "Sierra County",
+    "Siskiyou County",
+    "Solano County",
+    "Sonoma County",
+    "Stanislaus County",
+    "Sutter County",
+    "Tehama County",
+    "Trinity County",
+    "Tulare County",
+    "Tuolumne County",
+    "Ventura County",
+    "Yolo County",
+    "Yuba County",
+  ];
   const amounts = [
     "Nothing, I need free services",
     "I am able to pay the legal fees",
@@ -212,7 +273,7 @@ const CaseCard = (props) => {
             onClick={function () {
               setQuestionNumber(2);
             }}
-            disabled={props.currentCounty === "-"}
+            disabled={props.currentCounty === ""}
           >
             NEXT
           </Button>
@@ -257,7 +318,7 @@ const CaseCard = (props) => {
             onClick={function () {
               setQuestionNumber(3);
             }}
-            disabled={props.financialCapability === "-"}
+            disabled={props.financialCapability === ""}
           >
             NEXT
           </Button>
@@ -300,7 +361,7 @@ const CaseCard = (props) => {
             onClick={function () {
               setQuestionNumber(4);
             }}
-            disabled={props.lastOccurred === "-"}
+            disabled={props.lastOccurred === ""}
           >
             NEXT
           </Button>
@@ -330,8 +391,8 @@ const CaseCard = (props) => {
                 value={props.abuseCounty}
                 onChange={handleAbuseCountyChange}
               >
-                {counties.map((label, index) => (
-                  <MenuItem value={counties[index]}>{label} County</MenuItem>
+                {abuseCounties.map((label, index) => (
+                  <MenuItem value={counties[index]}>{label}</MenuItem>
                 ))}
               </Select>
             </FormControl>
@@ -340,7 +401,7 @@ const CaseCard = (props) => {
             variant="contained"
             style={nextStyle}
             color="primary"
-            disabled={props.abuseCounty === "-"}
+            disabled={props.abuseCounty === ""}
             onClick={function () {
               setQuestionNumber(5);
             }}
@@ -383,7 +444,7 @@ const CaseCard = (props) => {
             variant="contained"
             style={nextStyle}
             color="primary"
-            disabled={props.weaponsInvolved === "-"}
+            disabled={props.weaponsInvolved === ""}
             onClick={function () {
               setQuestionNumber(6);
             }}
@@ -428,7 +489,7 @@ const CaseCard = (props) => {
             variant="contained"
             style={nextStyle}
             color="primary"
-            disabled={props.emailNotifications === "-"}
+            disabled={props.emailNotifications === ""}
             onClick={function () {
               setQuestionNumber(7);
             }}

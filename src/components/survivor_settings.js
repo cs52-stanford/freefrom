@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import SurvivorSettingsPanel from "./survivor_settings_panel";
-import SurvivorHeader from "./survivor_header.js";
+import SurvivorHeader from "./header.js";
 import { Grid } from "@material-ui/core";
 import "./survivor.css";
 

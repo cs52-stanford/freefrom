@@ -34,7 +34,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit">
         Counsel Compass
       </Link>{" "}
       {new Date().getFullYear()}
@@ -48,8 +48,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   heroContent: {
-    backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(4, 0, 2),
+    paddingTop: 0,
   },
   heroButtons: {
     marginTop: theme.spacing(4),
@@ -120,9 +120,6 @@ export default function Album(props) {
                       </Typography>
                       <Typography color="secondary" align="center" gutterBottom>
                         Status: {lawyer.status}
-                      </Typography>
-                      <Typography align="center">
-                        Practice county: {lawyer.counties}
                       </Typography>
                       <Typography align="center">Bio: {lawyer.bio.substring(0, 20).concat('...')}</Typography>
                     </CardContent>

@@ -80,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Album(props) {
   const classes = useStyles();
 
-  const lawyers = props.allRequests.filter(user => (user.status === ("Profile sent, awaiting response" || "Meeting declined" || "Meeting accepted")));
+  const lawyers = props.allRequests.filter(user => (user.status === "Profile sent, awaiting response" || user.status === "Meeting declined" || user.status === "Meeting accepted"));
 
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
@@ -117,9 +117,6 @@ export default function Album(props) {
                       </Typography>
                       <Typography color="secondary" align="center" gutterBottom>
                         Status: {lawyer.status}
-                      </Typography>
-                      <Typography align="center">
-                        Practice county: {lawyer.counties}
                       </Typography>
                       <Typography align="center">Bio: {lawyer.bio.substring(0, 20).concat('...')}</Typography>
                     </CardContent>

@@ -31,6 +31,7 @@ const themeA = createMuiTheme({
 const useStyles = makeStyles((theme) => ({
     root: {
         maxWidth: 600,
+        marginTop: "10rem",
     },
     media: {
         height: 140,
@@ -54,29 +55,27 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
+        maxWidth: "25rem",
     },
 }));
 
-const CHARACTER_LIMIT = 300;
-
-async function confirmDecline(userId, message) {
-    await db.ref("requests/" + auth().currentUser.uid + userId).update({
-        lawyerStatus: "Meeting declined",
-        survivorStatus: "Meeting declined",
-        lawyerMessage: message,
-    });
+async function confirmDelete(userId, isLawyer) {
+    if (isLawyer) {
+        await db.ref("requests/" + auth().currentUser.uid + userId).update({
+            lawyerStatus: "Card deleted",
+        });
+    } else {
+        await db.ref("requests/" + auth().currentUser.uid + userId).update({
+            survivorStatus: "Card deleted",
+        });
+    }
 }
 
 export default function MediaCard(props) {
 
-    const [message, setMessage] = React.useState("");
-
-    const handleChange = (event) => {
-        setMessage(event.target.value);
-    };
-
     const classes = useStyles();
-    let survivor = props.allRequests.filter(user => user.userId === props.userId)[0];
+    let user = props.allRequests.filter(user => user.userId === props.userId)[0];
+    const isLawyer = user.color === undefined;
 
     return (
         <ThemeProvider theme={themeA}>
@@ -91,26 +90,11 @@ export default function MediaCard(props) {
                             align="center"
                             paragraph
                         >
-                            Since this process is such a difficult one for domestic abuse suvivors, we strive to provide them with full transparency.
-                            We'd appreciate if you could write a brief explanation as to why you are unable to move forward with their case:
+                            Would you like to delete {user.name}'s profile from your page? This action cannot be undone.
                         </Typography>
-                        <TextField
-                            autoFocus
-                            multiline
-                            rows="3"
-                            color="primary"
-                            variant="outlined"
-                            size="medium"
-                            inputProps={{
-                                maxlength: CHARACTER_LIMIT,
-                            }}
-                            value={message}
-                            helperText={`character limit: ${message.length}/${CHARACTER_LIMIT}`}
-                            onChange={handleChange}
-                        />
                     </CardContent>
                     <CardActions>
-                        <Link to={`/profile/${survivor.userId}`} style={{ textDecoration: "none" }}>
+                        <Link to='/connections' style={{ textDecoration: "none" }}>
                             <Button
                                 size="small"
                                 color="primary"
@@ -118,11 +102,11 @@ export default function MediaCard(props) {
                                 Go back
                         </Button>
                         </Link>
-                        <Link to="/home" style={{ textDecoration: "none" }}>
+                        <Link to="/connections" style={{ textDecoration: "none" }}>
                             <Button
                                 size="small"
                                 color="primary"
-                                onClick={() => confirmDecline(survivor.userId, message)}
+                                onClick={() => confirmDelete(user.userId, isLawyer)}
                             >
                                 Confirm
                         </Button>

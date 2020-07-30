@@ -7,6 +7,7 @@ import ReachOut from "./components/reach_out.js";
 import Connections from "./components/connections.js";
 import ConfirmScreen from "./components/confirm_screen.js";
 import DeclineScreen from "./components/decline_screen.js";
+import DeleteScreen from "./components/delete_screen.js";
 import Settings from "./components/settings.js";
 import {
   Route,
@@ -368,6 +369,18 @@ class App extends Component {
                 userId={user.userId}
                 authenticated={this.state.authenticated}
                 component={DeclineScreen}
+                userDetails={this.state.userDetails}
+                allRequests={this.state.allRequests}
+              />
+            ))
+            }
+            {this.state.allRequests.map((user, index) => (
+              <PrivateRoute
+                key={index}
+                path={`/delete/${user.userId}`}
+                userId={user.userId}
+                authenticated={this.state.authenticated}
+                component={DeleteScreen}
                 userDetails={this.state.userDetails}
                 allRequests={this.state.allRequests}
               />

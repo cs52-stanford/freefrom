@@ -15,11 +15,11 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { ListItemAvatar } from "@material-ui/core";
 import Logo from "./counselCompassLogo.png";
-import SettingsIcon from "./settings.png";
-import LogOutIcon from "./logout.png";
-import MatchesIcon from "./matches.png";
+import SettingsIcon from "./settings.svg";
+import LogOutIcon from "./logout.svg";
+import MatchesIcon from "./home.svg";
 import ListItem from "@material-ui/core/ListItem";
-import ConnectionsIcon from "./connections.png";
+import ConnectionsIcon from "./chat.svg";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Avatar from "@material-ui/core/Avatar";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -39,8 +39,10 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    backgroundColor: "#f7fff7",
+    backgroundColor: "#fff",
     color: "#000000",
+    boxShadow: "none",
+    borderBottom: "6px solid #FB9394",
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -63,7 +65,8 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerPaper: {
     width: drawerWidth,
-    backgroundColor: "#f7fff7",
+    backgroundColor: "#fff",
+    borderRight: "6px solid #e3e3e3",
   },
   drawerHeader: {
     display: "flex",
@@ -92,13 +95,21 @@ const useStyles = makeStyles((theme) => ({
   box: {
     display: "flex",
     backgroundColor: "inherit",
-    width: "20%",
-    height: "20%",
+    width: "13rem",
+    height: "4rem",
   },
   flex: {
     display: "flex",
     justifyContent: "space-between",
   },
+  icon: {
+    width: theme.spacing(3.5),
+    height: theme.spacing(3.5),
+    marginLeft: "0px",
+  },
+  margin: {
+    marginRight: theme.spacing(5),
+  }
 }));
 
 export default function PersistentDrawerLeft(props) {
@@ -135,7 +146,7 @@ export default function PersistentDrawerLeft(props) {
           </IconButton>
 
           <Avatar className={classes.box} src={Logo} variant="square"></Avatar>
-          <Typography> </Typography>
+          <Typography className={classes.margin}> </Typography>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -152,8 +163,8 @@ export default function PersistentDrawerLeft(props) {
             {theme.direction === "ltr" ? (
               <ChevronLeftIcon />
             ) : (
-              <ChevronRightIcon />
-            )}
+                <ChevronRightIcon />
+              )}
           </IconButton>
         </div>
         <Divider />
@@ -163,16 +174,11 @@ export default function PersistentDrawerLeft(props) {
               button
               key="matches"
               alignItems="center"
-              onClick={() => {
-                //  props.setIsHomeScreen(true);
-                //  props.setIsConnectionsScreen(false);
-                //  props.setIsSettingsScreen(false);
-              }}
             >
               <ListItemAvatar>
-                <Avatar src={MatchesIcon} variant="square"></Avatar>
+                <Avatar src={MatchesIcon} variant="square" className={classes.icon}></Avatar>
               </ListItemAvatar>
-              <ListItemText primary="Home"></ListItemText>
+              <ListItemText primary="HOME"></ListItemText>
             </ListItem>
           </Link>
           <Link to="/connections" style={{ textDecoration: "none" }}>
@@ -180,16 +186,11 @@ export default function PersistentDrawerLeft(props) {
               button
               key="connections"
               alignItems="center"
-              onClick={() => {
-                // props.setIsHomeScreen(false);
-                // props.setIsConnectionsScreen(true);
-                // props.setIsSettingsScreen(false);
-              }}
             >
               <ListItemAvatar>
-                <Avatar src={ConnectionsIcon} variant="square"></Avatar>
+                <Avatar src={ConnectionsIcon} variant="square" className={classes.icon}></Avatar>
               </ListItemAvatar>
-              <ListItemText primary="Connections"></ListItemText>
+              <ListItemText primary="CONNECTIONS"></ListItemText>
             </ListItem>
           </Link>
           <Link to="/settings" style={{ textDecoration: "none" }}>
@@ -197,16 +198,11 @@ export default function PersistentDrawerLeft(props) {
               button
               key="settings"
               alignItems="center"
-              onClick={() => {
-                // props.setIsHomeScreen(false);
-                // props.setIsConnectionsScreen(false);
-                //  props.setIsSettingsScreen(true);
-              }}
             >
               <ListItemAvatar>
-                <Avatar src={SettingsIcon} variant="square"></Avatar>
+                <Avatar src={SettingsIcon} variant="square" className={classes.icon}></Avatar>
               </ListItemAvatar>
-              <ListItemText primary="Settings"></ListItemText>
+              <ListItemText primary="SETTINGS"></ListItemText>
             </ListItem>
           </Link>
           <ListItem
@@ -218,9 +214,9 @@ export default function PersistentDrawerLeft(props) {
             }}
           >
             <ListItemAvatar>
-              <Avatar src={LogOutIcon} variant="square"></Avatar>
+              <Avatar src={LogOutIcon} variant="square" className={classes.icon}></Avatar>
             </ListItemAvatar>
-            <ListItemText primary="Log Out"></ListItemText>
+            <ListItemText primary="LOG OUT"></ListItemText>
           </ListItem>
         </List>
       </Drawer>

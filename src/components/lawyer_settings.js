@@ -1,6 +1,6 @@
 import React from "react";
 import LawyerSettingsPanel from "./lawyer_settings_panel";
-import LawyerHeader from "./lawyer_header.js";
+import LawyerHeader from "./header.js";
 import { Grid } from "@material-ui/core";
 
 const LawyerSettings = (props) => {

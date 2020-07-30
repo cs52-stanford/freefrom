@@ -113,7 +113,7 @@ const backStyle = {
   fontFamily: "Montserrat, sans-serif",
   borderWidth: "initial",
   borderStyle: "none",
-  borderColor: "initial",
+  borderColor: "#e06d4f",
   borderImage: "initial",
   borderRadius: "0.5rem",
   overflow: "visible",
@@ -210,7 +210,6 @@ const ProfileCard = (props) => {
       props.setCannotContinue(false);
     }
   };
-
   const handlePhotoChange = (event) => {
     props.setPhoto(event.target.value);
   };
@@ -251,7 +250,7 @@ const ProfileCard = (props) => {
                 multiple
               >
                 {counties.map((label, index) => (
-                  <MenuItem value={counties[index]}>{label} County</MenuItem>
+                  <MenuItem value={counties[index]}>{label}</MenuItem>
                 ))}
               </Select>
             </FormControl>

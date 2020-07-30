@@ -30,11 +30,13 @@ const themeA = createMuiTheme({
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 600,
+    minWidth: "20rem",
+    padding: "1rem",
+    paddingTop: 0,
   },
   media: {
     height: 140,
   },
-
   large: {
     width: theme.spacing(14),
     height: theme.spacing(14),
@@ -42,17 +44,19 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "auto",
     marginBottom: "1rem",
   },
-
   contain: {
     display: "flex",
     justifyContent: "center",
     paddingTop: "2rem",
   },
-
   cardContentBox: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
+  },
+  backButton: {
+    marginTop: "2rem",
+    marginLeft: "16px",
   },
 }));
 
@@ -65,6 +69,15 @@ export default function MediaCard(props) {
     <ThemeProvider theme={themeA}>
       <Container className={classes.contain} maxWidth="lg">
         <Card className={classes.root}>
+          <Link to={lawyer.status === "New Match!" ? "/home" : "/connections"}>
+            <Button
+              size="small"
+              color="primary"
+              className={classes.backButton}
+            >
+              Go back
+            </Button>
+          </Link>
           <CardContent>
             <Typography
               gutterBottom
@@ -83,20 +96,17 @@ export default function MediaCard(props) {
               align="center"
               paragraph
             >
-              Practice Counties: {lawyer.counties}
-            </Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
               Bio: {lawyer.bio}
             </Typography>
           </CardContent>
           <CardActions>
-            <Link to={lawyer.status === "New Match!" ? "/home" : "/connections"}>
+            <Link to={`/delete/${lawyer.userId}`}>
               <Button
                 size="small"
                 color="primary"
               >
-                Go back
-                </Button>
+                Delete
+              </Button>
             </Link>
             {lawyer.status !== "New Match!" ?
               <div></div> :

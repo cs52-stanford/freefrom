@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
+        maxWidth: "40rem",
     },
 }));
 
@@ -81,7 +82,7 @@ export default function ConfirmScreen(props) {
                             align="center"
                         >
                             Almost done!
-        </Typography>
+                        </Typography>
                         <Typography
                             variant="body2"
                             color="textSecondary"
@@ -90,9 +91,8 @@ export default function ConfirmScreen(props) {
                             align="center"
                             paragraph
                         >
-                            By clicking 'confirm', you agree to contact {survivor.name}
-            .
-        </Typography>
+                            By clicking 'confirm', you agree to contact {survivor.name}.
+                        </Typography>
                         <Typography
                             variant="body2"
                             color="textSecondary"
@@ -101,25 +101,25 @@ export default function ConfirmScreen(props) {
                             align="center"
                         >
                             {survivor.name}'s preferred method of contact: "{survivor.contactMessage}"
-        </Typography>
+                        </Typography>
                     </CardContent>
                     <CardActions>
-                        <Link to={`/profile/${survivor.userId}`}>
+                        <Link to={`/profile/${survivor.userId}`} style={{ textDecoration: "none" }}>
                             <Button
                                 size="small"
                                 color="primary"
                             >
                                 Go back
-            </Button>
+                            </Button>
                         </Link>
-                        <Link to="/home">
+                        <Link to="/home" style={{ textDecoration: "none" }}>
                             <Button
                                 size="small"
                                 color="primary"
                                 onClick={() => handleConfirm(props.userId)}
                             >
                                 Confirm
-            </Button>
+                            </Button>
                         </Link>
                     </CardActions>
                 </Card>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import LawyerSideConnections from "./lawyers_messages_sent.js";
 import SurvivorSideConnections from "./survivor_messages_sent.js";
-import SurvivorHeader from "./survivor_header.js";
-import LawyerHeader from "./lawyer_header.js";
+import SurvivorHeader from "./header.js";
+import LawyerHeader from "./header.js";
 import { Grid } from "@material-ui/core";
 
 export default function Connections(props) {

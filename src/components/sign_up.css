@@ -4,6 +4,12 @@
   height: 100vh;
 }
 
+.baackground {
+  background-color: #f1f1f1;
+  width: 100%;
+  height: 100vh;  
+}
+
 .backgroundColor {
   background-color: #f7fff7;
 }
@@ -13,6 +19,10 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+}
+
+.MuiTypography-root.MuiTypography-body1 {
+  font-family: "Proxima Nova Rg", Roboto, Helvetica, Arial, sans-serif;
 }
 
 .one {
@@ -55,7 +65,7 @@
 
 .five {
   margin-bottom: 0.5rem;
-  font-family: Roboto, sans-serif;
+  font-family: "Proxima Nova Rg", Roboto, sans-serif;
   color: rgb(39, 54, 84);
   font-size: 200%;
   font-weight: 800;
@@ -168,7 +178,8 @@
 }
 
 .spacing {
-  padding-top: 0.8rem;
+  padding-top: 1rem;
+  padding-bottom: .25rem;
 }
 
 .spacing2 {
@@ -186,7 +197,7 @@
   width: 13rem;
 }
 
-.MuiButtonBase-root.MuiButton-root.MuiButton-outlined.backStyle {
+.MuiButtonBase-root.MuiButton-root.MuiButton-outlined {
   margin-bottom: 1rem;
 }
 

@@ -16,6 +16,8 @@ import { Link } from "react-router-dom";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import ReachOut from "./survivor_profile.js";
+import "./colors.css";
+import "./sign_up.css";
 
 const themeA = createMuiTheme({
   root: {
@@ -53,9 +55,9 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   heroContent: {
-    backgroundColor: theme.palette.background.paper,
     margin: 0,
     padding: theme.spacing(4, 0, 3),
+    paddingTop: 0,
   },
   heroButtons: {
     marginTop: theme.spacing(4),
@@ -69,8 +71,21 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
-  cardMedia: {
+  cardMediaf44336: {
     paddingTop: "30.25%", // 16:9
+    backgroundColor: "#f44336",
+  },
+  cardMediacddc39: {
+    paddingTop: "30.25%", // 16:9
+    backgroundColor: "#cddc39",
+  },
+  cardMedia8bc34a: {
+    paddingTop: "30.25%", // 16:9
+    backgroundColor: "#8bc34a",
+  },
+  cardMediae91e63: {
+    paddingTop: "30.25%", // 16:9
+    backgroundColor: "#e91e63",
   },
   cardContent: {
     flexGrow: 1,
@@ -94,95 +109,98 @@ export default function Album(props) {
 
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
-      <React.Fragment>
-        <CssBaseline />
-        <main>
-          {/* Hero unit */}
-          <div className={classes.heroContent}>
-            <Container maxWidth="md">
-              <Typography
-                variant="h5"
-                align="center"
-                color="textSecondary"
-                paragraph
-              >
-                Welcome to your lawyer home page! As you match with survivors,
-                their profiles will appear below. Click "reach out" to email a
-                survivor and set up a call.
+      <div>
+        <React.Fragment>
+          <CssBaseline />
+          <main>
+            {/* Hero unit */}
+            <div className={classes.heroContent}>
+              <Container maxWidth="md">
+                <Typography
+                  variant="h5"
+                  align="center"
+                  color="textSecondary"
+                  paragraph
+                >
+                  Welcome to your lawyer home page! As you match with survivors,
+                  their profiles will appear below. Click "reach out" to email a
+                  survivor and set up a call.
                 </Typography>
-            </Container>
-          </div>
-          <Container className={classes.cardGrid} maxWidth="md">
-            {/* End hero unit */}
-            <Grid container spacing={4}>
-              {survivors.map((survivor, index) => (
-                <Grid item key={index} xs={12} sm={6} md={4}>
-                  <Card className={classes.card}>
-                    <CardMedia
-                      className={classes.cardMedia}
-                      image={props.survivorPhotos[index]}
-                      title="Image title"
-                    />
-                    <CardContent className={classes.cardContent}>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        {survivor.name}
-                      </Typography>
-                      <Typography
-                        color="secondary"
-                        align="center"
-                        gutterBottom
-                      >
-                        Status: {survivor.status}
-                      </Typography>
-                      <Typography align="center">
-                        County: {survivor.currentCounty}
-                      </Typography>
-                      <Typography align="center">
-                        Case: {survivor.caseInfo.substring(0, 20).concat('...')}
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Link to={`/profile/${survivor.userId}`}>
-                        <Button
-                          size="small"
-                          color="primary"
+              </Container>
+            </div>
+            <Container className={classes.cardGrid} maxWidth="md">
+              {/* End hero unit */}
+              <Grid container spacing={4}>
+                {survivors.map((survivor, index) => (
+                  <Grid item key={index} xs={12} sm={6} md={4}>
+                    <Card className={classes.card}>
+                      <CardMedia
+                        className={("a").concat(survivor.color.substring(1))}
+                        title="Image title"
+                      />
+                      <CardContent className={classes.cardContent}>
+                        <Typography gutterBottom variant="h5" component="h2">
+                          {survivor.name}
+                        </Typography>
+                        <Typography
+                          color="secondary"
+                          align="center"
+                          gutterBottom
                         >
-                          View Case
+                          Status: {survivor.status}
+                        </Typography>
+                        <Typography align="center">
+                          County: {survivor.currentCounty}
+                        </Typography>
+                        <Typography align="center">
+                          Case: {survivor.caseInfo.substring(0, 20).concat('...')}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <Link to={`/profile/${survivor.userId}`} style={{ textDecoration: "none" }}>
+                          <Button
+                            size="small"
+                            color="primary"
+                          >
+                            View Case
                           </Button>
-                      </Link>
-                      <Button
-                        size="small"
-                        color="primary"
-                      // onClick={function () {
-                      //   props.setViewProfile(true);
-                      //   props.setIsConfirmScreen(true);
-                      //   props.setSurvivorName(props.survivorNames[card]);
-                      //   props.setSurvivorImage(props.survivorPhotos[card]);
-                      //   props.setSurvivorIndex(index);
-                      //   props.setStatus(card, "viewed");
-                      // }}
-                      >
-                        Accept Meeting
-                        </Button>
-                    </CardActions>
-                  </Card>
-                </Grid>
-              ))}
-            </Grid>
-          </Container>
-        </main>
-        {/* Footer */}
-        <footer className={classes.footer}>
-          <Typography
-            variant="subtitle1"
-            align="center"
-            color="textSecondary"
-            component="p"
-          ></Typography>
-          <Copyright />
-        </footer>
-        {/* End footer */}
-      </React.Fragment>
-    </ThemeProvider>
+                        </Link>
+                        <Link to={`/confirm/${survivor.userId}`} style={{ textDecoration: "none" }}>
+                          <Button
+                            size="small"
+                            color="primary"
+                          // onClick={function () {
+                          //   props.setViewProfile(true);
+                          //   props.setIsConfirmScreen(true);
+                          //   props.setSurvivorName(props.survivorNames[card]);
+                          //   props.setSurvivorImage(props.survivorPhotos[card]);
+                          //   props.setSurvivorIndex(index);
+                          //   props.setStatus(card, "viewed");
+                          // }}
+                          >
+                            Accept Meeting
+                      </Button>
+                        </Link>
+                      </CardActions>
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            </Container>
+          </main>
+          {/* Footer */}
+          <footer className={classes.footer}>
+            <Typography
+              variant="subtitle1"
+              align="center"
+              color="textSecondary"
+              component="p"
+            ></Typography>
+            <Copyright />
+          </footer>
+          {/* End footer */}
+        </React.Fragment>
+      </div>
+    </ThemeProvider >
   );
 }

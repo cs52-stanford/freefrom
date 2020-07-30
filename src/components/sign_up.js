@@ -8,36 +8,54 @@ import { css } from "@emotion/core";
 import { render } from "react-dom";
 import { BrowserRouter, Switch, Link } from "react-router-dom";
 import { signout } from "../services/auth.js";
+import { ThemeProvider } from "@material-ui/styles";
+
+const themeA = createMuiTheme({
+  root: {
+    backgroundColor: "#e06d4f",
+  },
+
+  palette: {
+    primary: {
+      main: "#e06d4f",
+    },
+    secondary: {
+      main: "#f7fff7",
+    },
+  },
+});
 
 export default function SignUp() {
   signout();
   return (
-    <div className="background">
-      <NavBar></NavBar>
-      <Container className="one" maxWidth="sm">
-        <Container className="three" maxWidth="sm"></Container>
-        <Container className="four" maxWidth="sm">
-          <Container className="five" maxWidth="sm">
-            <Typography align="center" variant="h5">
-              I am a:
+    <ThemeProvider theme={themeA}>
+      <div className="background">
+        <NavBar></NavBar>
+        <Container className="one" maxWidth="sm">
+          <Container className="three" maxWidth="sm"></Container>
+          <Container className="four" maxWidth="sm">
+            <Container className="five" maxWidth="sm">
+              <Typography align="center" variant="h5">
+                I am a:
             </Typography>
-            <div className="seven">
-              <Link
-                to="/sign_up_form_lawyer"
-                style={{ textDecoration: "none" }}
-              >
-                <div className="lawyerButton">{"LAWYER"}</div>
-              </Link>
-              <Link
-                to="/sign_up_form_survivor"
-                style={{ textDecoration: "none" }}
-              >
-                <div className="survivorButton">{"SURVIVOR"}</div>
-              </Link>
-            </div>
+              <div className="seven">
+                <Link
+                  to="/sign_up_form_lawyer"
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="lawyerButton">{"LAWYER"}</div>
+                </Link>
+                <Link
+                  to="/sign_up_form_survivor"
+                  style={{ textDecoration: "none" }}
+                >
+                  <div className="survivorButton">{"SURVIVOR"}</div>
+                </Link>
+              </div>
+            </Container>
           </Container>
         </Container>
-      </Container>
-    </div>
+      </div>
+    </ThemeProvider>
   );
 }

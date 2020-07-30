@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import LawyerHome from "./lawyer_home.js";
-import LawyerHeader from "./lawyer_header.js";
+import LawyerHeader from "./header.js";
 import ReachOut from "./survivor_profile";
 import { Grid } from "@material-ui/core";
 

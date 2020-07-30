@@ -45,7 +45,7 @@ const genderOptions = [
 ];
 
 const DemographicsCard = (props) => {
-  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [passwordConfirm, setPasswordConfirm] = useState(" ");
 
   useEffect(() => {
     if (
@@ -54,7 +54,7 @@ const DemographicsCard = (props) => {
       props.email === "email" ||
       props.password === "" ||
       passwordConfirm === "Passwords do not match" ||
-      passwordConfirm === ""
+      passwordConfirm === " "
     ) {
       props.setCannotContinue(true);
     } else {
@@ -79,7 +79,7 @@ const DemographicsCard = (props) => {
       setPasswordConfirm("Passwords do not match");
       props.setCannotContinue(true);
     } else {
-      setPasswordConfirm(" ");
+      setPasswordConfirm("  ");
     }
   };
 

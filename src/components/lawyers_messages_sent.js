@@ -16,6 +16,7 @@ import { Link } from "react-router-dom";
 import { createMuiTheme } from "@material-ui/core/styles";
 import LawyerReachOut from "./survivor_profile.js";
 import { ThemeProvider } from "@material-ui/styles";
+import "./colors.css";
 
 const themeA = createMuiTheme({
   root: {
@@ -50,8 +51,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   heroContent: {
-    backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(5, 0, 3),
+    paddingTop: 0,
   },
   heroButtons: {
     marginTop: theme.spacing(4),
@@ -75,15 +76,16 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
   },
-  root: {
-    alignSelf: "center",
-  },
+  // root: {
+  //   alignSelf: "center",
+  // },
 }));
 
 export default function Album(props) {
   const classes = useStyles();
 
-  const survivors = props.allRequests.filter(user => (user.status === ("Meeting declined" || "Meeting accepted")));
+  console.log(props.allRequests);
+  const survivors = props.allRequests.filter(user => (user.status === "Meeting declined" || user.status === "Meeting accepted"));
 
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
@@ -99,7 +101,7 @@ export default function Album(props) {
                 color="textSecondary"
                 paragraph
               >
-                Below are the cases you have agreed to take meetings about:
+                Below are the cases you have responded to:
               </Typography>
             </Container>
           </div>
@@ -110,8 +112,7 @@ export default function Album(props) {
                 <Grid item key={index} xs={12} sm={6} md={4}>
                   <Card className={classes.card}>
                     <CardMedia
-                      className={classes.cardMedia}
-                      // image={props.survivorPhotos[card]}
+                      className={("a").concat(survivor.color.substring(1))}
                       title="Image title"
                     />
                     <CardContent className={classes.cardContent}>
@@ -128,8 +129,16 @@ export default function Album(props) {
                         Case: {survivor.caseInfo.substring(0, 20).concat('...')}
                       </Typography>
                     </CardContent>
-                    <CardActions className={classes.root}>
-                      <Link to={`/profile/${survivor.userId}`}>
+                    <CardActions>
+                      <Link to={`/delete/${survivor.userId}`} style={{ textDecoration: "none" }}>
+                        <Button
+                          size="small"
+                          color="primary"
+                        >
+                          Delete
+                        </Button>
+                      </Link>
+                      <Link to={`/profile/${survivor.userId}`} style={{ textDecoration: "none" }}>
                         <Button
                           size="small"
                           color="primary"

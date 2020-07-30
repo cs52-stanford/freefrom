@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
@@ -11,6 +12,8 @@ import TextField from "@material-ui/core/TextField";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/styles";
+import "./colors.css";
+
 
 const themeA = createMuiTheme({
   root: {
@@ -29,13 +32,11 @@ const themeA = createMuiTheme({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 600,
     marginBottom: "10rem",
   },
   media: {
     height: 140,
   },
-
   large: {
     width: theme.spacing(14),
     height: theme.spacing(14),
@@ -43,17 +44,28 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "auto",
     marginBottom: "1rem",
   },
-
   contain: {
     display: "flex",
     justifyContent: "center",
     paddingTop: "2rem",
   },
-
   cardContentBox: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
+  },
+  content: {
+    paddingLeft: "3rem",
+    paddingRight: "3rem",
+    maxWidth: "40rem",
+  },
+  actions: {
+    paddingLeft: "16px",
+    paddingRight: "16px",
+  },
+  backButton: {
+    marginTop: "1.5rem",
+    marginLeft: "16px",
   },
 }));
 
@@ -65,15 +77,20 @@ export default function MediaCard(props) {
     <ThemeProvider theme={themeA}>
       <Container className={classes.contain} maxWidth="lg">
         <Card className={classes.root}>
-          <CardContent>
-            <Link to={survivor.status === "New Match!" ? "/home" : "/connections"}>
-              <Button
-                size="small"
-                color="primary"
-              >
-                Go Back
-                </Button>
-            </Link>
+          <CardMedia
+            className={("b").concat(survivor.color.substring(1))}
+            title="Image title"
+          />
+          <Link to={survivor.status === "New Match!" ? "/home" : "/connections"} style={{ textDecoration: "none" }}>
+            <Button
+              size="small"
+              color="primary"
+              className={classes.backButton}
+            >
+              Go Back
+              </Button>
+          </Link>
+          <CardContent className={classes.content}>
             <Typography
               gutterBottom
               variant="h5"
@@ -84,16 +101,14 @@ export default function MediaCard(props) {
             </Typography>
 
             <Typography
-              variant="body2"
               color="textSecondary"
               component="p"
               variant="subtitle1"
               align="center"
             >
-              Current county: {survivor.currentCounty}
+              Currently lives in: {survivor.currentCounty} County
             </Typography>
             <Typography
-              variant="body2"
               color="textSecondary"
               component="p"
               variant="subtitle1"
@@ -102,7 +117,6 @@ export default function MediaCard(props) {
               Abuse last occurred: {survivor.lastOccurred}
             </Typography>
             <Typography
-              variant="body2"
               color="textSecondary"
               component="p"
               variant="subtitle1"
@@ -111,7 +125,6 @@ export default function MediaCard(props) {
               Weapons involved: {survivor.weaponsInvolved}
             </Typography>
             <Typography
-              variant="body2"
               color="textSecondary"
               component="p"
               variant="subtitle1"
@@ -120,20 +133,44 @@ export default function MediaCard(props) {
             >
               What I can afford: {survivor.financialCapability}
             </Typography>
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              align="center"
-              paragraph
-            >
-              Additional Info: {survivor.caseInfo}
-            </Typography>
+            {survivor.caseInfo &&
+              <Typography
+                variant="subtitle1"
+                color="textSecondary"
+                component="p"
+                align="center"
+                paragraph
+              >
+                Case Info: {survivor.caseInfo}
+              </Typography>
+            }
+            {survivor.message.length > 0 &&
+              <Typography
+                variant="subtitle1"
+                color="textSecondary"
+                component="p"
+                align="center"
+                paragraph
+              >
+                Message from {survivor.name}: {survivor.message}
+              </Typography>
+            }
+            {survivor.status === "Meeting accepted" &&
+              <Typography
+                variant="subtitle1"
+                color="textPrimary"
+                component="p"
+                align="center"
+                paragraph
+              >
+                How to contact {survivor.name}: {survivor.contactMessage}
+              </Typography>
+            }
           </CardContent>
-          <CardActions>
+          <CardActions className={classes.actions}>
             {survivor.status !== "New Match!" ?
               <div></div> :
-              <Link to={`/decline/${survivor.userId}`}>
+              <Link to={`/decline/${survivor.userId}`} style={{ textDecoration: "none" }}>
                 <Button
                   size="small"
                   variant="outlined"
@@ -145,7 +182,7 @@ export default function MediaCard(props) {
             }
             {survivor.status !== "New Match!" ?
               <div></div> :
-              <Link to={`/confirm/${survivor.userId}`}>
+              <Link to={`/confirm/${survivor.userId}`} style={{ textDecoration: "none" }}>
                 <Button
                   variant="outlined"
                   size="small"
