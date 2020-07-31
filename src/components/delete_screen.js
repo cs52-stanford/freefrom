@@ -65,7 +65,7 @@ async function confirmDelete(userId, isLawyer) {
             lawyerStatus: "Card deleted",
         });
     } else {
-        await db.ref("requests/" + auth().currentUser.uid + userId).update({
+        await db.ref("requests/" + userId + auth().currentUser.uid).update({
             survivorStatus: "Card deleted",
         });
     }
@@ -90,7 +90,7 @@ export default function MediaCard(props) {
                             align="center"
                             paragraph
                         >
-                            Would you like to delete {user.name}'s profile from your page? This action cannot be undone.
+                            Are you sure you want to delete {user.name}'s profile from your page? This action cannot be undone.
                         </Typography>
                     </CardContent>
                     <CardActions>
@@ -102,7 +102,7 @@ export default function MediaCard(props) {
                                 Go back
                         </Button>
                         </Link>
-                        <Link to="/connections" style={{ textDecoration: "none" }}>
+                        <Link to={user.status === "New Match!" ? "/home" : "/connections"} style={{ textDecoration: "none" }}>
                             <Button
                                 size="small"
                                 color="primary"

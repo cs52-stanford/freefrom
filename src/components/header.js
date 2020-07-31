@@ -54,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
   },
   menuButton: {
     marginRight: theme.spacing(2),
-    color: "#757575",
+    color: "#73cec5",
   },
   hide: {
     display: "none",
@@ -175,9 +175,6 @@ export default function PersistentDrawerLeft(props) {
               key="matches"
               alignItems="center"
             >
-              <ListItemAvatar>
-                <Avatar src={MatchesIcon} variant="square" className={classes.icon}></Avatar>
-              </ListItemAvatar>
               <ListItemText primary="HOME"></ListItemText>
             </ListItem>
           </Link>
@@ -187,9 +184,6 @@ export default function PersistentDrawerLeft(props) {
               key="connections"
               alignItems="center"
             >
-              <ListItemAvatar>
-                <Avatar src={ConnectionsIcon} variant="square" className={classes.icon}></Avatar>
-              </ListItemAvatar>
               <ListItemText primary="CONNECTIONS"></ListItemText>
             </ListItem>
           </Link>
@@ -199,9 +193,6 @@ export default function PersistentDrawerLeft(props) {
               key="settings"
               alignItems="center"
             >
-              <ListItemAvatar>
-                <Avatar src={SettingsIcon} variant="square" className={classes.icon}></Avatar>
-              </ListItemAvatar>
               <ListItemText primary="SETTINGS"></ListItemText>
             </ListItem>
           </Link>
@@ -213,9 +204,6 @@ export default function PersistentDrawerLeft(props) {
               auth().signOut();
             }}
           >
-            <ListItemAvatar>
-              <Avatar src={LogOutIcon} variant="square" className={classes.icon}></Avatar>
-            </ListItemAvatar>
             <ListItemText primary="LOG OUT"></ListItemText>
           </ListItem>
         </List>

@@ -16,6 +16,8 @@ import {
   Redirect,
 } from "react-router-dom";
 import { auth, db } from "./services/firebase";
+import * as firebase from "firebase/app";
+import "firebase/storage";
 import LawyerSignUpStepper from "./components/sign_up_form_lawyer.js";
 import SurvivorSignUpStepper from "./components/sign_up_form_survivor.js";
 import ButtonAppBar from "./components/sign_up_nav_bar";
@@ -109,6 +111,7 @@ async function populateData() {
   let statuses = [];
   let contacts = [];
   let messages = [];
+  let declines = [];
   if (isLawyer) {
     for (const key in keys) {
       await db.ref("requests/" + keys[key]).once("value").then(function (snapshot) {
@@ -117,6 +120,7 @@ async function populateData() {
           statuses.push(snapshot.child("lawyerStatus").val());
           messages.push(snapshot.child("survivorMessage").val());
           contacts.push(snapshot.child("survivorContact").val());
+          declines.push(snapshot.child("lawyerMessage").val());
         }
       });
     }
@@ -128,6 +132,7 @@ async function populateData() {
           statuses.push(snapshot.child("survivorStatus").val());
           messages.push(snapshot.child("survivorMessage").val());
           contacts.push(snapshot.child("survivorContact").val());
+          declines.push(snapshot.child("lawyerMessage").val());
         }
       });
     }
@@ -144,6 +149,7 @@ async function populateData() {
   let financialCapabilities = [];
   let whenLastOccurred = [];
   let wereWeaponsInvolved = [];
+  let pictures = [];
   if (isLawyer) {
     for (const survivor in relevantIDs) {
       await db.ref("users/" + relevantIDs[survivor]).once("value").then(function (snapshot) {
@@ -158,11 +164,17 @@ async function populateData() {
       });
     }
   } else {
+    var storageRef = firebase.storage().ref();
     for (const lawyer in relevantIDs) {
       await db.ref("users/" + relevantIDs[lawyer]).once("value").then(function (snapshot) {
         names.push(snapshot.child("name").val());
         practiceCounties.push(snapshot.child("practiceCounty").val());
         bios.push(snapshot.child("experience").val());
+      });
+      await storageRef.child('photos/' + relevantIDs[lawyer]).getDownloadURL().then(function (url) {
+        pictures.push(url);
+      }).catch(function (error) {
+        // Handle any errors
       });
     }
   }
@@ -193,7 +205,9 @@ async function populateData() {
       const bio = bios[index];
       const status = statuses[index];
       const userId = relevantIDs[index];
-      return { name, counties, bio, status, userId };
+      const declineMessage = declines[index];
+      const photo = pictures[index];
+      return { name, counties, bio, status, userId, declineMessage, photo };
     })
   }
   if (isLawyer) {

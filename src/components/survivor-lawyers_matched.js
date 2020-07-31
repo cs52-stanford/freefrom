@@ -111,8 +111,8 @@ export default function Album(props) {
                   <Card className={classes.card}>
                     <CardMedia
                       className={classes.cardMedia}
-                      // image={props.lawyerPhotos[card]}
-                      title="Image title"
+                      image={lawyer.photo}
+                      title={`${lawyer.name}'s profile picture`}
                     />
                     <CardContent className={classes.cardContent}>
                       <Typography gutterBottom variant="h5" component="h2">
@@ -124,7 +124,7 @@ export default function Album(props) {
                       <Typography align="center">Bio: {lawyer.bio.substring(0, 20).concat('...')}</Typography>
                     </CardContent>
                     <CardActions>
-                      <Link to={`/profile/${lawyer.userId}`}>
+                      <Link to={`/profile/${lawyer.userId}`} style={{ textDecoration: "none" }}>
                         <Button
                           size="small"
                           color="primary"
@@ -132,7 +132,7 @@ export default function Album(props) {
                           View Full Profile
                         </Button>
                       </Link>
-                      <Link to={`/reach_out/${lawyer.userId}`}>
+                      <Link to={`/reach_out/${lawyer.userId}`} style={{ textDecoration: "none" }}>
                         <Button
                           size="small"
                           color="primary"

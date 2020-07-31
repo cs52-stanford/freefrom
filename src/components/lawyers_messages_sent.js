@@ -101,7 +101,7 @@ export default function Album(props) {
                 color="textSecondary"
                 paragraph
               >
-                Below are the cases you have responded to:
+                Below are the cases you've responded to:
               </Typography>
             </Container>
           </div>

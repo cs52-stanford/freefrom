@@ -211,7 +211,7 @@ const ProfileCard = (props) => {
     }
   };
   const handlePhotoChange = (event) => {
-    props.setPhoto(event.target.value);
+    props.setPhoto(event.target.files[0]);
   };
   const handleNumNotificationsChange = (event) => {
     props.setNumNotifications(event.target.value);
@@ -340,6 +340,7 @@ const ProfileCard = (props) => {
                 className={classes.input}
                 id="contained-button-file"
                 type="file"
+                multiple
                 onChange={handlePhotoChange}
               />
               <PhotoCamera />

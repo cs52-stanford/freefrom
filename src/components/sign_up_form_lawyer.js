@@ -14,6 +14,8 @@ import { ThemeProvider } from "@material-ui/styles";
 import DemographicsCard from "./make_account_card.js";
 import ProfileCard from "./lawyer_profile_info_card.js";
 import { Link, Redirect } from "react-router-dom";
+import * as firebase from "firebase/app";
+import "firebase/storage";
 import { signup, signin } from "../services/auth";
 import { auth, db } from "../services/firebase";
 import matcher from "./matcher.js";
@@ -81,6 +83,13 @@ export default function LawyerSignUpStepper(props) {
     if (activeStep === steps.length - 1) {
       signup(email, password)
         .then(() => {
+          var storageRef = firebase.storage().ref('photos/' + auth().currentUser.uid);
+
+          const data = new FormData();
+          data.append('file', photo);
+
+          storageRef.put(photo);
+
           db.ref("users/" + auth().currentUser.uid).set({
             gender: gender,
             name: name,

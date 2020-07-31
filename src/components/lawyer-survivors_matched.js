@@ -122,9 +122,9 @@ export default function Album(props) {
                   color="textSecondary"
                   paragraph
                 >
-                  Welcome to your lawyer home page! As you match with survivors,
-                  their profiles will appear below. Click "reach out" to email a
-                  survivor and set up a call.
+                  Welcome! Domestic abuse survivors seeking legal assistance in your area will
+                  be shown your profile and if they choose to reach out to you, their profile
+                  will be shown below. Make sure to check back to see if you have any new matches!
                 </Typography>
               </Container>
             </div>
@@ -169,14 +169,6 @@ export default function Album(props) {
                           <Button
                             size="small"
                             color="primary"
-                          // onClick={function () {
-                          //   props.setViewProfile(true);
-                          //   props.setIsConfirmScreen(true);
-                          //   props.setSurvivorName(props.survivorNames[card]);
-                          //   props.setSurvivorImage(props.survivorPhotos[card]);
-                          //   props.setSurvivorIndex(index);
-                          //   props.setStatus(card, "viewed");
-                          // }}
                           >
                             Accept Meeting
                       </Button>

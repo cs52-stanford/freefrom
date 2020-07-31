@@ -152,7 +152,7 @@ export default function MediaCard(props) {
                         />
                     </CardContent>
                     <CardActions>
-                        <Link to={`/profile/${lawyer.userId}`}>
+                        <Link to={`/profile/${lawyer.userId}`} style={{ textDecoration: "none" }}>
                             <Button
                                 size="small"
                                 color="primary"
@@ -160,7 +160,7 @@ export default function MediaCard(props) {
                                 Go back
                         </Button>
                         </Link>
-                        <Link to="/home">
+                        <Link to="/home" style={{ textDecoration: "none" }}>
                             <Button
                                 size="small"
                                 color="primary"

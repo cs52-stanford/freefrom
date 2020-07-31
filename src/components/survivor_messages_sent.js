@@ -46,8 +46,8 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   heroContent: {
-    backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(4, 0, 2),
+    paddingTop: 0,
   },
   heroButtons: {
     marginTop: theme.spacing(4),
@@ -95,7 +95,7 @@ export default function Album(props) {
                 color="textSecondary"
                 paragraph
               >
-                Here are the lawyers you have reached out to - make sure to
+                Here are the lawyers you've reached out to - make sure to
                 check back to see if they've responded!
               </Typography>
             </Container>
@@ -121,12 +121,12 @@ export default function Album(props) {
                       <Typography align="center">Bio: {lawyer.bio.substring(0, 20).concat('...')}</Typography>
                     </CardContent>
                     <CardActions className={classes.root}>
-                      <Link to={`/profile/${lawyer.userId}`}>
+                      <Link to={`/profile/${lawyer.userId}`} style={{ textDecoration: "none" }}>
                         <Button
                           size="small"
                           color="primary"
                         >
-                          View Full Profile
+                          {lawyer.status === "Meeting declined" ? "View explanation" : "View Full Profile"}
                         </Button>
                       </Link>
                     </CardActions>

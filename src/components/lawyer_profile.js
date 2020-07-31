@@ -30,9 +30,10 @@ const themeA = createMuiTheme({
 const useStyles = makeStyles((theme) => ({
   root: {
     maxWidth: 600,
-    minWidth: "20rem",
+    minWidth: "30rem",
     padding: "1rem",
     paddingTop: 0,
+    marginBottom: "40px",
   },
   media: {
     height: 140,
@@ -58,26 +59,47 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "2rem",
     marginLeft: "16px",
   },
+  deleteButton: {
+    marginTop: "2rem",
+    marginRight: "16px",
+  },
+  topButtons: {
+    display: "flex",
+    justifyContent: "space-between",
+  },
 }));
 
 export default function MediaCard(props) {
   const classes = useStyles();
 
-  let lawyer = props.allLawyers.filter(user => user.userId === props.lawyerId)[0];
+  let lawyer = props.allLawyers.find(user => user.userId === props.lawyerId);
 
   return (
     <ThemeProvider theme={themeA}>
       <Container className={classes.contain} maxWidth="lg">
         <Card className={classes.root}>
-          <Link to={lawyer.status === "New Match!" ? "/home" : "/connections"}>
-            <Button
-              size="small"
-              color="primary"
-              className={classes.backButton}
-            >
-              Go back
+          <div className={classes.topButtons}>
+            <Link to={lawyer.status === "New Match!" ? "/home" : "/connections"} style={{ textDecoration: "none" }}>
+              <Button
+                size="small"
+                color="primary"
+                className={classes.backButton}
+              >
+                Go back
             </Button>
-          </Link>
+            </Link>
+            {((lawyer.status === "Meeting accepted") || (lawyer.status === "Meeting declined")) &&
+              <Link to={`/delete/${lawyer.userId}`} style={{ textDecoration: "none" }}>
+                <Button
+                  size="small"
+                  color="primary"
+                  className={classes.deleteButton}
+                >
+                  Delete
+                </Button>
+              </Link>
+            }
+          </div>
           <CardContent>
             <Typography
               gutterBottom
@@ -87,7 +109,34 @@ export default function MediaCard(props) {
             >
               {lawyer.name}
             </Typography>
-            <Avatar src={props.lawyerImage} className={classes.large} />
+            <Avatar src={lawyer.photo} className={classes.large} />
+            {lawyer.status === "Meeting accepted" &&
+              <Typography
+                variant="subtitle1"
+                align="center"
+                paragraph
+              >
+                Meeting accepted! {lawyer.name} has received your contact information and should be reaching out shortly!
+              </Typography>
+            }
+            {lawyer.status === "Meeting declined" &&
+              <Typography
+                variant="subtitle1"
+                align="center"
+                paragraph
+              >
+                Unfortunately {lawyer.name} has chosen not to take a meeting about your case at this time. Try reaching out to other lawyers and make sure to check back often to see if you have any new matches!
+              </Typography>
+            }
+            {(lawyer.status === "Meeting declined" && lawyer.declineMessage) &&
+              <Typography
+                variant="subtitle1"
+                align="center"
+                paragraph
+              >
+                A message from {lawyer.name} as to why he/she chose to decline a meeting about your case: "{lawyer.declineMessage}"
+              </Typography>
+            }
             <Typography
               variant="body2"
               color="textSecondary"
@@ -100,17 +149,19 @@ export default function MediaCard(props) {
             </Typography>
           </CardContent>
           <CardActions>
-            <Link to={`/delete/${lawyer.userId}`}>
-              <Button
-                size="small"
-                color="primary"
-              >
-                Delete
-              </Button>
-            </Link>
+            {lawyer.status === "New Match!" &&
+              <Link to={`/delete/${lawyer.userId}`} style={{ textDecoration: "none" }}>
+                <Button
+                  size="small"
+                  color="primary"
+                >
+                  Delete
+                </Button>
+              </Link>
+            }
             {lawyer.status !== "New Match!" ?
               <div></div> :
-              <Link to={`/reach_out/${lawyer.userId}`}>
+              <Link to={`/reach_out/${lawyer.userId}`} style={{ textDecoration: "none" }}>
                 <Button
                   size="small"
                   color="primary"
