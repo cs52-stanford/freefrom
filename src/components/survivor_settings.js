@@ -18,6 +18,7 @@ const SurvivorSettings = (props) => {
         setIsLogIn={props.setIsLogIn}
         viewProfile={props.viewProfile}
         setViewProfile={props.setViewProfile}
+        userDetails={props.userDetails}
       />
       <SurvivorSettingsPanel
         setName={props.setName}

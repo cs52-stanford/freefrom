@@ -25,7 +25,7 @@ const SurvivorHome = (props) => {
       alignContent="space-between"
       className="lawyerhome"
     >
-      <SurvivorHeader />
+      <SurvivorHeader userDetails={props.userDetails} />
       <SurvivorMatches
         // viewProfile={viewProfile}
         // setViewProfile={setViewProfile}

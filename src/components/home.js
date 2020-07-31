@@ -4,7 +4,6 @@ import SurvivorHome from "./survivor_home.js";
 
 export default function Home(props) {
   if (props.userDetails.isLawyer === true) {
-    console.log("unsent requests: ", props);
     return (
       <LawyerHome
         unsentRequests={props.unsentRequests}
@@ -17,10 +16,10 @@ export default function Home(props) {
       />
     );
   } else {
-    console.log("unsent requests: ", props);
     return (
       <SurvivorHome
         unsentRequests={props.unsentRequests}
+        userDetails={props.userDetails}
       // sentLawyers={props.sentLawyers}
       // lawyerIndex={props.lawyerIndex}
       // setLawyerIndex={props.setLawyerIndex}

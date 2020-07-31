@@ -116,6 +116,10 @@ export default function PersistentDrawerLeft(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  let customBorder = '6px solid #FB9394';
+  if (props.userDetails) {
+    customBorder = '6px solid ' + props.userDetails.color;
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -130,6 +134,7 @@ export default function PersistentDrawerLeft(props) {
       <CssBaseline />
       <AppBar
         position="fixed"
+        style={{ borderBottom: customBorder }}
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}

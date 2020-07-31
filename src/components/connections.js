@@ -32,7 +32,7 @@ export default function Connections(props) {
         alignContent="space-between"
         className="lawyerhome"
       >
-        <SurvivorHeader />
+        <SurvivorHeader userDetails={props.userDetails} />
         <SurvivorSideConnections
           allRequests={props.allRequests}
         />

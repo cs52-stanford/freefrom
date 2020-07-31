@@ -274,7 +274,7 @@ export default function LawyerSignUpStepper(props) {
         {activeStep === steps.length && (
           <div>
             <Typography align="center">
-              Sign up complete! Return to the home page to sign in.
+              Sign up complete! You'll be redirected to your home page momentarily.
             </Typography>
           </div>
         )}
