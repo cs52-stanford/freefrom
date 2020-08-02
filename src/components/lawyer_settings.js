@@ -35,6 +35,9 @@ const LawyerSettings = (props) => {
         photo={props.photo}
         setNumNotifications={props.setNumNotifications}
         numNotifications={props.numNotifications}
+        userDetails={props.userDetails}
+        photoUrl={props.photoUrl}
+        setPhotoUrl={props.setPhotoUrl}
       ></LawyerSettingsPanel>
     </Grid>
   );

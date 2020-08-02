@@ -38,6 +38,8 @@ function PrivateRoute({
   lawyerIndex,
   survivorIndex,
   userDetails,
+  photoUrl,
+  setPhotoUrl,
   setLawyerIndex,
   setUnsentLawyers,
   setSentLawyers,
@@ -54,6 +56,8 @@ function PrivateRoute({
           <Component
             {...props}
             userDetails={userDetails}
+            photoUrl={photoUrl}
+            setPhotoUrl={setPhotoUrl}
             unsentRequests={unsentRequests}
             allRequests={allRequests}
             userId={userId}
@@ -224,6 +228,7 @@ class App extends Component {
       authenticated: false,
       loading: true,
       userDetails: undefined,
+      photoUrl: '',
       unsentRequests: [],
       allRequests: [],
       sentLawyers: [],
@@ -239,6 +244,7 @@ class App extends Component {
     this.setSurvivorIndex = this.setSurvivorIndex.bind(this);
     this.setUnsentSurvivors = this.setUnsentSurvivors.bind(this);
     this.setSentSurvivors = this.setSentSurvivors.bind(this);
+    this.setPhotoUrl = this.setPhotoUrl.bind(this);
   }
 
   setLawyerIndex(num) {
@@ -271,6 +277,10 @@ class App extends Component {
     });
   }
 
+  setPhotoUrl(url) {
+    this.setState({ photoUrl: url });
+  }
+
   componentDidMount() {
     if (auth().currentUser) {
       db.ref("users/" + auth().currentUser.uid).on("value", (snapshot) => {
@@ -295,6 +305,16 @@ class App extends Component {
             userDetails: snapshot.val(),
           });
         });
+
+        var storageRef = firebase.storage().ref();
+        var picture = '';
+        await storageRef.child('photos/' + user.uid).getDownloadURL().then(function (url) {
+          picture = url;
+        }).catch(function (error) {
+          // Handle any errors
+          console.log(error);
+        });
+        this.setState({ photoUrl: picture });
       } else {
         this.setState({
           authenticated: false,
@@ -423,6 +443,8 @@ class App extends Component {
               authenticated={this.state.authenticated}
               component={Settings}
               userDetails={this.state.userDetails}
+              photoUrl={this.state.photoUrl}
+              setPhotoUrl={this.setPhotoUrl}
             />
             <PublicRoute
               path="/sign_up"

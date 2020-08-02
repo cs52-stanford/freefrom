@@ -39,8 +39,9 @@ const useStyles = makeStyles((theme) => ({
     height: 140,
   },
   large: {
-    width: theme.spacing(14),
-    height: theme.spacing(14),
+    // width: theme.spacing(14),
+    // height: theme.spacing(14),
+    width: "50%",
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: "1rem",
@@ -48,12 +49,17 @@ const useStyles = makeStyles((theme) => ({
   contain: {
     display: "flex",
     justifyContent: "center",
+    flexDirection: "row",
     paddingTop: "2rem",
   },
   cardContentBox: {
     display: "flex",
-    flexDirection: "column",
+    flexDirection: "row",
     justifyContent: "center",
+  },
+  flex: {
+    display: "flex",
+    flexDirection: "column",
   },
   backButton: {
     marginTop: "2rem",
@@ -100,53 +106,55 @@ export default function MediaCard(props) {
               </Link>
             }
           </div>
-          <CardContent>
-            <Typography
-              gutterBottom
-              variant="h5"
-              component="h2"
-              align="center"
-            >
-              {lawyer.name}
-            </Typography>
-            <Avatar src={lawyer.photo} className={classes.large} />
-            {lawyer.status === "Meeting accepted" &&
+          <CardContent className={classes.cardContentBox}>
+            <img src={lawyer.photo} className={classes.large} />
+            <div className={classes.flex}>
               <Typography
+                gutterBottom
+                variant="h5"
+                component="h2"
+                align="center"
+              >
+                {lawyer.name}
+              </Typography>
+              {lawyer.status === "Meeting accepted" &&
+                <Typography
+                  variant="subtitle1"
+                  align="center"
+                  paragraph
+                >
+                  Meeting accepted! {lawyer.name} has received your contact information and should be reaching out shortly!
+              </Typography>
+              }
+              {lawyer.status === "Meeting declined" &&
+                <Typography
+                  variant="subtitle1"
+                  align="center"
+                  paragraph
+                >
+                  Unfortunately {lawyer.name} has chosen not to take a meeting about your case at this time. Try reaching out to other lawyers and make sure to check back often to see if you have any new matches!
+              </Typography>
+              }
+              {(lawyer.status === "Meeting declined" && lawyer.declineMessage) &&
+                <Typography
+                  variant="subtitle1"
+                  align="center"
+                  paragraph
+                >
+                  A message from {lawyer.name} as to why he/she chose to decline a meeting about your case: "{lawyer.declineMessage}"
+              </Typography>
+              }
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
                 variant="subtitle1"
                 align="center"
                 paragraph
               >
-                Meeting accepted! {lawyer.name} has received your contact information and should be reaching out shortly!
+                Bio: {lawyer.bio}
               </Typography>
-            }
-            {lawyer.status === "Meeting declined" &&
-              <Typography
-                variant="subtitle1"
-                align="center"
-                paragraph
-              >
-                Unfortunately {lawyer.name} has chosen not to take a meeting about your case at this time. Try reaching out to other lawyers and make sure to check back often to see if you have any new matches!
-              </Typography>
-            }
-            {(lawyer.status === "Meeting declined" && lawyer.declineMessage) &&
-              <Typography
-                variant="subtitle1"
-                align="center"
-                paragraph
-              >
-                A message from {lawyer.name} as to why he/she chose to decline a meeting about your case: "{lawyer.declineMessage}"
-              </Typography>
-            }
-            <Typography
-              variant="body2"
-              color="textSecondary"
-              component="p"
-              variant="subtitle1"
-              align="center"
-              paragraph
-            >
-              Bio: {lawyer.bio}
-            </Typography>
+            </div>
           </CardContent>
           <CardActions>
             {lawyer.status === "New Match!" &&

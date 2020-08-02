@@ -43,6 +43,7 @@ const SurvivorSettings = (props) => {
         weaponsInvolved={props.weaponsInvolved}
         emailNotifications={props.emailNotifications}
         extraInfo={props.extraInfo}
+        userDetails={props.userDetails}
       ></SurvivorSettingsPanel>
     </Grid>
   );

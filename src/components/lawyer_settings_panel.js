@@ -23,91 +23,94 @@ import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import Avatar from "@material-ui/core/Avatar";
 import { css } from "@emotion/core";
+import { auth, db } from "../services/firebase";
+import * as firebase from "firebase/app";
+import "firebase/storage";
 
-  const radioButtonStyle = {
-    color: "#616771",
-  };
+const radioButtonStyle = {
+  color: "#616771",
+};
 
 
 const themeA = createMuiTheme({
-    root: {
-      backgroundColor: "#e06d4f",
+  root: {
+    backgroundColor: "#e06d4f",
+  },
+
+  palette: {
+    primary: {
+      main: "#EB6548",
     },
-  
-    palette: {
-      primary: {
-        main: "#EB6548",
-      },
-      secondary: {
-        main: "#00cdcd",
-      },
+    secondary: {
+      main: "#00cdcd",
     },
-  });
+  },
+});
 
 
 const counties = [
-      "Alameda",
-      "Alpine",
-      "Amador",
-      "Butte",
-      "Calaveras",
-      "Colusa",
-      "Contra Costa",
-      "Del Norte",
-      "El Dorado",
-      "Fresno",
-      "Glenn",
-      "Humboldt",
-      "Imperial",
-      "Inyo",
-      "Kern",
-      "Kings",
-      "Lake",
-      "Lassen",
-      "Los Angeles",
-      "Madera",
-      "Marin",
-      "Mariposa",
-      "Mendocino",
-      "Merced",
-      "Modoc",
-      "Mono",
-      "Monterey",
-      "Napa",
-      "Nevada",
-      "Orange",
-      "Placer",
-      "Plumas",
-      "Riverside",
-      "Sacramento",
-      "San Benito",
-      "San Bernardino",
-      "San Diego",
-      "San Francisco",
-      "San Joaquin",
-      "San Luis Obispo",
-      "San Mateo",
-      "Santa Barbara",
-      "Santa Clara",
-      "Santa Cruz",
-      "Shasta",
-      "Sierra",
-      "Siskiyou",
-      "Solano",
-      "Sonoma",
-      "Stanislaus",
-      "Sutter",
-      "Tehama",
-      "Trinity",
-      "Tulare",
-      "Tuolumne",
-      "Ventura",
-      "Yolo",
-      "Yuba",
-    ];
+  "Alameda",
+  "Alpine",
+  "Amador",
+  "Butte",
+  "Calaveras",
+  "Colusa",
+  "Contra Costa",
+  "Del Norte",
+  "El Dorado",
+  "Fresno",
+  "Glenn",
+  "Humboldt",
+  "Imperial",
+  "Inyo",
+  "Kern",
+  "Kings",
+  "Lake",
+  "Lassen",
+  "Los Angeles",
+  "Madera",
+  "Marin",
+  "Mariposa",
+  "Mendocino",
+  "Merced",
+  "Modoc",
+  "Mono",
+  "Monterey",
+  "Napa",
+  "Nevada",
+  "Orange",
+  "Placer",
+  "Plumas",
+  "Riverside",
+  "Sacramento",
+  "San Benito",
+  "San Bernardino",
+  "San Diego",
+  "San Francisco",
+  "San Joaquin",
+  "San Luis Obispo",
+  "San Mateo",
+  "Santa Barbara",
+  "Santa Clara",
+  "Santa Cruz",
+  "Shasta",
+  "Sierra",
+  "Siskiyou",
+  "Solano",
+  "Sonoma",
+  "Stanislaus",
+  "Sutter",
+  "Tehama",
+  "Trinity",
+  "Tulare",
+  "Tuolumne",
+  "Ventura",
+  "Yolo",
+  "Yuba",
+];
 
-    const compensations = ["Pro bono", "Sliding scale", "Contingency agreement"];
-    const numbers = [1, 2, 3, 4, 5];
+const compensations = ["Pro bono", "Sliding scale", "Contingency agreement"];
+const numbers = [1, 2, 3, 4, 5];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -126,53 +129,194 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
   AccountInfoPanel: {
-      backgroundColor: "#eee",
+    backgroundColor: "#eee",
   },
   CaseInfoPanel: {
     backgroundColor: "#eee",
-},
-    SettingsText: {
-            color: "#ff6f00",
-    },
-    SubSettingsText: {
-        color: "#000000",
-    },
-    heroContent: {
-        backgroundColor: theme.palette.background.paper,
-        padding: theme.spacing(5, 0, 3),
-      },
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
-        backgroundColor: "#F8F8FF",
-      },
-      InputLabel: {
-        color: "#ff6f00",
-        fontSize: 20,
-      },
-      profilepic: {
-          height: "100%",
-          width: "100%",
-      },
-      profileupload: {
-          marginTop: 50,
-      }
+  },
+  SettingsText: {
+    color: "#ff6f00",
+  },
+  SubSettingsText: {
+    color: "#000000",
+  },
+  heroContent: {
+    backgroundColor: theme.palette.background.paper,
+    padding: theme.spacing(5, 0, 3),
+  },
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+    backgroundColor: "#F8F8FF",
+  },
+  InputLabel: {
+    color: "#ff6f00",
+    fontSize: 20,
+  },
+  profilepic: {
+    height: "70%",
+  },
+  profileupload: {
+    marginTop: 50,
+  },
+  AccountGrid: {
+    marginBottom: "1rem",
+  },
 }));
 
 const LawyerSettingsPanel = (props) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
+  const [updatedName, setName] = React.useState(props.userDetails.name);
+  const [updatedEmail, setEmail] = React.useState(props.userDetails.email);
+  const [updatedGender, setGender] = React.useState(props.userDetails.gender);
+  const [updatedCounty, setCounty] = React.useState(props.userDetails.practiceCounty);
+  const [updatedBio, setBio] = React.useState(props.userDetails.experience);
+  const [updatedPhoto, setPhoto] = React.useState(props.photoUrl);
+  const [updatedCompensation, setCompensation] = React.useState(props.userDetails.compensationRequest);
+  const [updatedNotifications, setNotifications] = React.useState(props.userDetails.numNotifications);
+
+  console.log("photo URL: ", props.photoUrl);
+  console.log("photo variable: ", updatedPhoto);
+
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);
   };
 
+  async function updateAccountInfo() {
+    await db.ref("users/" + auth().currentUser.uid).update({
+      name: updatedName,
+      email: updatedEmail,
+      gender: updatedGender,
+    });
+
+    var user = auth().currentUser;
+    await user.updateEmail(updatedEmail).then(function () {
+      // Update successful.
+      console.log("success updating email");
+    }).catch(function (error) {
+      // An error happened.
+      console.log("error updating email");
+    });
+  }
+
+  async function updateProfileInfo() {
+    // update profile info
+    await db.ref("users/" + auth().currentUser.uid).update({
+      practiceCounty: updatedCounty,
+      experience: updatedBio,
+      compensationRequest: updatedCompensation,
+      numNotifications: updatedNotifications,
+    });
+
+    // check if photo needs to be updated
+    if (updatedPhoto.name) {
+      // delete old profile picture
+      var storageRef = firebase.storage().ref('photos/' + auth().currentUser.uid);
+      var photoRef = firebase.storage().ref().child('photos/' + auth().currentUser.uid);
+      await photoRef.delete().then(function () {
+        // File deleted successfully
+      }).catch(function (error) {
+        // Uh-oh, an error occurred!
+      });
+      // upload new profile picture
+      const data = new FormData();
+      data.append('file', updatedPhoto);
+      await storageRef.put(updatedPhoto);
+      var storageReference = firebase.storage().ref();
+      await storageReference.child('photos/' + auth().currentUser.uid).getDownloadURL().then(function (url) {
+        console.log("url:", url);
+        props.setPhotoUrl(url);
+      })
+    }
+
+  }
+
+  const genderOptions = [
+    "Transgender",
+    "Genderqueer/Gender fluid",
+    "Gender non-conforming/Non-binary",
+    "Intersex",
+    "Agender",
+    "Two-spirit",
+    "Cisgender",
+    "Female/Femme",
+    "Male/Masculine",
+    "I prefer not to say",
+    "I prefer to self-describe",
+  ];
+
+  const counties = [
+    "Alameda",
+    "Alpine",
+    "Amador",
+    "Butte",
+    "Calaveras",
+    "Colusa",
+    "Contra Costa",
+    "Del Norte",
+    "El Dorado",
+    "Fresno",
+    "Glenn",
+    "Humboldt",
+    "Imperial",
+    "Inyo",
+    "Kern",
+    "Kings",
+    "Lake",
+    "Lassen",
+    "Los Angeles",
+    "Madera",
+    "Marin",
+    "Mariposa",
+    "Mendocino",
+    "Merced",
+    "Modoc",
+    "Mono",
+    "Monterey",
+    "Napa",
+    "Nevada",
+    "Orange",
+    "Placer",
+    "Plumas",
+    "Riverside",
+    "Sacramento",
+    "San Benito",
+    "San Bernardino",
+    "San Diego",
+    "San Francisco",
+    "San Joaquin",
+    "San Luis Obispo",
+    "San Mateo",
+    "Santa Barbara",
+    "Santa Clara",
+    "Santa Cruz",
+    "Shasta",
+    "Sierra",
+    "Siskiyou",
+    "Solano",
+    "Sonoma",
+    "Stanislaus",
+    "Sutter",
+    "Tehama",
+    "Trinity",
+    "Tulare",
+    "Tuolumne",
+    "Ventura",
+    "Yolo",
+    "Yuba",
+  ];
+
+  const compensations = ["Pro bono", "Sliding scale", "Contingency agreement"];
+  const numbers = [1, 2, 3, 4, 5];
+
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
-    <React.Fragment>
-      <CssBaseline />
-      <main>
-      <div className={classes.heroContent}>
+      <React.Fragment>
+        <CssBaseline />
+        <main>
+          <div className={classes.heroContent}>
             <Container maxWidth="md">
               <Typography
                 variant="h5"
@@ -184,32 +328,32 @@ const LawyerSettingsPanel = (props) => {
               </Typography>
             </Container>
           </div>
-    <Container className={classes.cardGrid} maxWidth="md">
-      <ExpansionPanel className={classes.AccountInfoPanel} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography variant="h4" className={classes.SettingsText}>Account Information</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-            <Grid 
-                container
-                direction="column"
-                justify="center"
-                alignItems="center"
+          <Container className={classes.cardGrid} maxWidth="md">
+            <ExpansionPanel className={classes.AccountInfoPanel} expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel1bh-content"
+                id="panel1bh-header"
+              >
+                <Typography variant="h4" className={classes.SettingsText}>Account Information</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <Grid
+                  container
+                  direction="column"
+                  justify="center"
+                  alignItems="center"
                 >
-                <Grid 
+                  <Grid
                     container
                     className={classes.AccountGrid}
                     direction="row"
                     spacing={3}
-                    >
+                  >
                     <Grid item><Typography className={classes.SubSettingsText} variant="h6" >Name</Typography></Grid>
                     <Grid item>
-                    <textarea
-                    className={css`
+                      <textarea
+                        className={css`
                         box-sizing: border-box;
                         height: calc(2.75em + 1.75rem + 2px);
                         display: block;
@@ -230,24 +374,24 @@ const LawyerSettingsPanel = (props) => {
                         border-image: initial;
                         border-radius: 0.25rem;
                         `}
-                placeholder={"name"}
-                value = {props.name}
-                onChange={(event) => {
-                    props.setName(event.target.value)
-                }}
-            ></textarea>
-            </Grid>
-            </Grid>
-            <Grid 
+                        placeholder={props.userDetails.name}
+                        value={updatedName}
+                        onChange={(event) => {
+                          setName(event.target.value)
+                        }}
+                      ></textarea>
+                    </Grid>
+                  </Grid>
+                  <Grid
                     container
-                    className={classes.Name}
+                    className={classes.AccountGrid}
                     direction="row"
                     spacing={3}
-                    >
+                  >
                     <Grid item><Typography className={classes.SubSettingsText} variant="h6" >Email</Typography></Grid>
                     <Grid item>
-                    <textarea
-                    className={css`
+                      <textarea
+                        className={css`
                         box-sizing: border-box;
                         height: calc(2.75em + 1.75rem + 2px);
                         display: block;
@@ -268,203 +412,183 @@ const LawyerSettingsPanel = (props) => {
                         border-image: initial;
                         border-radius: 0.25rem;
                         `}
-                placeholder={"email"}
-                value = {props.email}
-                onChange={(event) => {
-                    props.setEmail(event.target.value)
-                }}
-            ></textarea>
-            </Grid>
-            </Grid>
-            <Grid 
+                        placeholder={props.userDetails.email}
+                        value={updatedEmail}
+                        onChange={(event) => {
+                          setEmail(event.target.value)
+                        }}
+                      ></textarea>
+                    </Grid>
+                  </Grid>
+                  <Grid
                     container
-                    className={classes.Name}
+                    className={classes.AccountGrid}
                     direction="row"
                     spacing={3}
-                    >
-                    <Grid item><Typography className={classes.SubSettingsText} variant="h6" >Password</Typography></Grid>
-                    <Grid item>
-                    <textarea
-                    className={css`
-                        box-sizing: border-box;
-                        height: calc(2.75em + 1.75rem + 2px);
-                        display: block;
-                        font-size: 1rem;
-                        font-weight: 400;
-                        line-height: 1.5;
-                        color: rgb(73, 80, 87);
-                        background-color: rgb(255, 255, 255);
-                        background-clip: padding-box;
-                        margin-bottom: 1rem;
-                        margin-right: 0.5rem;
-                        margin-top: 0.5rem;
-                        width: 95%;
-                        padding: 0.75rem 0.75rem;
-                        border-width: 1px;
-                        border-style: solid;
-                        border-color: rgb(206, 212, 218);
-                        border-image: initial;
-                        border-radius: 0.25rem;
-                        `}
-                placeholder={"password"}
-                value = {props.password}
-                onChange={(event) => {
-                    props.setPassword(event.target.value)
-                }}
-            ></textarea>
-            </Grid>
-            </Grid>
-            <Grid 
-                    container
-                    className={classes.Name}
-                    direction="row"
-                    spacing={3}
-                    >
+                  >
                     <Grid item><Typography className={classes.SubSettingsText} variant="h6" >Gender</Typography></Grid>
                     <Grid item>
-                    <RadioGroup
-                direction="row"
-              aria-label="gender"
-              name="gender1"
-              value={props.gender}
-              onChange={(event) => {
-                  props.setGender(event.target.value)
-              }}
-            >
-              <FormControlLabel
-                value="female"
-                control={<Radio style={radioButtonStyle} />}
-                label="Female"
-              />
-              <FormControlLabel
-                value="male"
-                control={<Radio style={radioButtonStyle} />}
-                label="Male"
-              />
-              <FormControlLabel
-                value="other"
-                control={<Radio style={radioButtonStyle} />}
-                label="Other"
-              />
-            </RadioGroup>
-            </Grid>
-            </Grid>
-          </Grid>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel className={classes.CaseInfoPanel} expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2bh-content"
-          id="panel2bh-header"
-        >
-          <Typography variant="h4" className={classes.SettingsText}>Case Information</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-            <Grid 
+                      <FormControl className="formSize">
+                        <Select value={updatedGender} multiple onChange={(event) => {
+                          setGender(event.target.value)
+                        }}>
+                          {genderOptions.map((label, index) => (
+                            <MenuItem value={genderOptions[index]}>{label}</MenuItem>
+                          ))}
+                        </Select>
+                      </FormControl>
+                    </Grid>
+                  </Grid>
+                  <Grid
                     container
-                    className={classes.CaseGrid}
+                    className={classes.Name}
                     direction="row"
                     spacing={3}
+                  >
+                    <Grid item>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={updateAccountInfo}
+                      >
+                        Update account information
+                      </Button>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+            <ExpansionPanel className={classes.CaseInfoPanel} expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
+              <ExpansionPanelSummary
+                expandIcon={<ExpandMoreIcon />}
+                aria-controls="panel2bh-content"
+                id="panel2bh-header"
+              >
+                <Typography variant="h4" className={classes.SettingsText}>Profile Information</Typography>
+              </ExpansionPanelSummary>
+              <ExpansionPanelDetails>
+                <Grid
+                  container
+                  className={classes.AccountGrid}
+                  direction="row"
+                  spacing={3}
+                >
+                  <FormControl className={classes.formControl} fullWidth={true}>
+                    <InputLabel className={classes.InputLabel} id="demo-simple-select-label">
+                      Where do you practice?
+                      </InputLabel>
+                    <Select
+                      value={updatedCounty}
+                      multiple
+                      onChange={(event) => {
+                        setCounty(event.target.value)
+                      }}
                     >
-                        <FormControl className={classes.formControl} fullWidth={true}>
-                        <InputLabel className={classes.InputLabel} id="demo-simple-select-label">
-                            Where do you practice?
-                        </InputLabel>
-                        <Select
-                            value={props.practice}
-                            onChange={(event) => {
-                                props.setPracticeCounty(event.target.value)
-                            }}
-                        >
-                                {counties.map((label, index) => (
-                                <MenuItem value={counties[index]}>{label}</MenuItem>
-                            ))}
+                      {counties.map((label, index) => (
+                        <MenuItem value={counties[index]}>{label}</MenuItem>
+                      ))}
                     </Select>
-                    </FormControl>
-                    <Grid 
+                  </FormControl>
+                  <Grid
                     container
-                    className={classes.CaseGrid}
+                    className={classes.AccountGrid}
                     direction="row"
                     spacing={3}
-                    >
+                  >
                     <Grid item><Typography className={classes.SubSettingsText} variant="h6" >Brief description of legal history/experience:</Typography></Grid>
                     <Grid item>
-                    <TextField
+                      <TextField
                         id="outlined-multiline-static"
                         multiline
                         rows={4}
                         variant="outlined"
                         fullWidth={true}
-                        value={props.experience}
+                        value={updatedBio}
                         onChange={(event) => {
-                            props.setExperience(event.target.value)
+                          setBio(event.target.value)
                         }}
-                        />
+                      />
                     </Grid>
-                    </Grid>
-                    <Grid 
+                  </Grid>
+                  <Grid
                     container
-                    className={classes.CaseGrid}
+                    className={classes.AccountGrid}
                     direction="row"
                     spacing={3}
-                    >
+                  >
                     <Grid item><Typography className={classes.SubSettingsText} variant="h6" >Profile Picture</Typography></Grid>
                     <Grid item>
-                        <Avatar img className={classes.profilepic} src={props.photo}></Avatar>
+                      <Avatar img variant="square" className={classes.profilepic} src={props.photoUrl}></Avatar>
                     </Grid>
                     <Grid item>
-                    <Button className={classes.profileupload} variant="contained" color="primary" component="span">
+                      <Button className={classes.profileupload} variant="contained" color="primary" component="span">
                         <input
-                            accept="image/*"
-                            className={classes.input}
-                            id="contained-button-file"
-                            type="file"
-                            value={props.photo}
-                            onChange={(event) => {
-                                props.setPhoto(event.target.value)
-                            }}
+                          accept="image/*"
+                          className={classes.input}
+                          id="contained-button-file"
+                          type="file"
+                          onChange={(event) => {
+                            setPhoto(event.target.files[0]);
+                            console.log(updatedPhoto);
+                          }}
                         />
-                    <PhotoCamera />
-                        </Button>
+                        <PhotoCamera />
+                      </Button>
                     </Grid>
+                  </Grid>
+                  <FormControl className={classes.formControl} fullWidth={true}>
+                    <InputLabel className={classes.InputLabel} id="demo-simple-select-label">
+                      I am willing to work:
+                        </InputLabel>
+                    <Select
+                      value={updatedCompensation}
+                      multiple
+                      onChange={(event) => {
+                        setCompensation(event.target.value)
+                      }}
+                    >
+                      {compensations.map((label, index) => (
+                        <MenuItem value={compensations[index]}>{label}</MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                  <FormControl className={classes.formControl} fullWidth={true}>
+                    <InputLabel className={classes.InputLabel} id="demo-simple-select-label">
+                      Up to how many notifications would you like to receive about
+                      potential cases each week?
+                        </InputLabel>
+                    <Select
+                      value={updatedNotifications}
+                      onChange={(event) => {
+                        setNotifications(event.target.value)
+                      }}
+                    >
+                      {numbers.map((label, index) => (
+                        <MenuItem value={numbers[index]}>{label}</MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                  <Grid
+                    container
+                    className={classes.Name}
+                    direction="row"
+                    spacing={3}
+                  >
+                    <Grid item>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={updateProfileInfo}
+                      >
+                        Update profile information
+                      </Button>
                     </Grid>
-                    <FormControl className={classes.formControl} fullWidth={true}>
-                        <InputLabel className={classes.InputLabel} id="demo-simple-select-label">
-                        I am willing to work:
-                        </InputLabel>
-                         <Select
-                            value={props.compensationRequest}
-                            onChange={(event) => {
-                                props.setCompensationRequest(event.target.value)
-                            }}
-                        >
-                            {compensations.map((label, index) => (
-                            <MenuItem value={compensations[index]}>{label}</MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
-                    <FormControl className={classes.formControl} fullWidth={true}>
-                        <InputLabel className={classes.InputLabel} id="demo-simple-select-label">
-                        Up to how many notifications would you like to receive about
-                        potential cases each week?
-                        </InputLabel>
-                        <Select
-                            value={props.numNotifications}
-                            onChange={(event) => {
-                                props.setNumNotifications(event.target.value)
-                            }}
-                        >
-                            {numbers.map((label, index) => (
-                            <MenuItem value={numbers[index]}>{label}</MenuItem>
-                            ))}
-                        </Select>
-                        </FormControl>
-            </Grid>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      </Container>
-      </main>
+                  </Grid>
+                </Grid>
+              </ExpansionPanelDetails>
+            </ExpansionPanel>
+          </Container>
+        </main>
       </React.Fragment>
     </ThemeProvider>
   );
