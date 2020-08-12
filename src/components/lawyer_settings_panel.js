@@ -114,10 +114,11 @@ const numbers = [1, 2, 3, 4, 5];
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
+    width: '95%',
     height: 100,
     marginTop: 20,
-    padding: '30px 30px'
+    padding: '30px 30px',
+    backgroundColor: "white",
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -129,39 +130,68 @@ const useStyles = makeStyles((theme) => ({
     color: theme.palette.text.secondary,
   },
   AccountInfoPanel: {
-    backgroundColor: "#eee",
+    backgroundColor: "white",
   },
   CaseInfoPanel: {
-    backgroundColor: "#eee",
+    backgroundColor: "white",
   },
   SettingsText: {
     color: "#ff6f00",
   },
   SubSettingsText: {
     color: "#000000",
+    flexGrow: 1,
   },
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(5, 0, 3),
+  caseTextbox: {
+    flexGrow: 3,
   },
   formControl: {
     margin: theme.spacing(1),
     minWidth: 120,
-    backgroundColor: "#F8F8FF",
+    backgroundColor: "white",
   },
   InputLabel: {
-    color: "#ff6f00",
+    color: "black",
     fontSize: 20,
   },
-  profilepic: {
-    height: "70%",
+  cardGrid: {
+    paddingTop: theme.spacing(3),
+    paddingBottom: theme.spacing(8),
   },
-  profileupload: {
-    marginTop: 50,
+  heroContent: {
+    padding: theme.spacing(4, 0, 2),
+    paddingTop: 0,
   },
   AccountGrid: {
-    marginBottom: "1rem",
+    alignItems: "center",
   },
+  colorItem: {
+    marginTop: "1rem",
+    alignItems: "center",
+  },
+  flexbox: {
+    alignItems: "center",
+    display: "flex",
+  },
+  center: {
+    display: "flex",
+    justifyContent: "center",
+    marginBottom: "8px",
+  },
+  fullWidthItem: {
+    width: "100%",
+  },
+  profilePic: {
+    display: "flex",
+    backgroundColor: "inherit",
+    width: "80px",
+    height: "auto",
+    marginBottom: "14px",
+  },
+  cameraStuff: {
+    alignItems: "center",
+    justifyContent: "center",
+  }
 }));
 
 const LawyerSettingsPanel = (props) => {
@@ -324,7 +354,7 @@ const LawyerSettingsPanel = (props) => {
                 color="textSecondary"
                 paragraph
               >
-                Welcome to your Settings! Be sure to keep your account and case information up to date.
+                Welcome to your settings! Be sure to keep your account and profile information up to date.
               </Typography>
             </Container>
           </div>
@@ -341,8 +371,6 @@ const LawyerSettingsPanel = (props) => {
                 <Grid
                   container
                   direction="column"
-                  justify="center"
-                  alignItems="center"
                 >
                   <Grid
                     container
@@ -350,36 +378,17 @@ const LawyerSettingsPanel = (props) => {
                     direction="row"
                     spacing={3}
                   >
-                    <Grid item><Typography className={classes.SubSettingsText} variant="h6" >Name</Typography></Grid>
+                    <Grid item><Typography className={classes.SubSettingsText} variant="h6" align="center">Name</Typography></Grid>
                     <Grid item>
-                      <textarea
-                        className={css`
-                        box-sizing: border-box;
-                        height: calc(2.75em + 1.75rem + 2px);
-                        display: block;
-                        font-size: 1rem;
-                        font-weight: 400;
-                        line-height: 1.5;
-                        color: rgb(73, 80, 87);
-                        background-color: rgb(255, 255, 255);
-                        background-clip: padding-box;
-                        margin-bottom: 1rem;
-                        margin-right: 0.5rem;
-                        margin-top: 0.5rem;
-                        width: 95%;
-                        padding: 0.75rem 0.75rem;
-                        border-width: 1px;
-                        border-style: solid;
-                        border-color: rgb(206, 212, 218);
-                        border-image: initial;
-                        border-radius: 0.25rem;
-                        `}
-                        placeholder={props.userDetails.name}
+                      <TextField
+                        id="outlined-multiline-static"
+                        variant="outlined"
+                        fullWidth={true}
                         value={updatedName}
                         onChange={(event) => {
                           setName(event.target.value)
                         }}
-                      ></textarea>
+                      />
                     </Grid>
                   </Grid>
                   <Grid
@@ -390,34 +399,15 @@ const LawyerSettingsPanel = (props) => {
                   >
                     <Grid item><Typography className={classes.SubSettingsText} variant="h6" >Email</Typography></Grid>
                     <Grid item>
-                      <textarea
-                        className={css`
-                        box-sizing: border-box;
-                        height: calc(2.75em + 1.75rem + 2px);
-                        display: block;
-                        font-size: 1rem;
-                        font-weight: 400;
-                        line-height: 1.5;
-                        color: rgb(73, 80, 87);
-                        background-color: rgb(255, 255, 255);
-                        background-clip: padding-box;
-                        margin-bottom: 1rem;
-                        margin-right: 0.5rem;
-                        margin-top: 0.5rem;
-                        width: 95%;
-                        padding: 0.75rem 0.75rem;
-                        border-width: 1px;
-                        border-style: solid;
-                        border-color: rgb(206, 212, 218);
-                        border-image: initial;
-                        border-radius: 0.25rem;
-                        `}
-                        placeholder={props.userDetails.email}
+                      <TextField
+                        id="outlined-multiline-static"
+                        variant="outlined"
+                        fullWidth={true}
                         value={updatedEmail}
                         onChange={(event) => {
                           setEmail(event.target.value)
                         }}
-                      ></textarea>
+                      />
                     </Grid>
                   </Grid>
                   <Grid
@@ -441,7 +431,7 @@ const LawyerSettingsPanel = (props) => {
                   </Grid>
                   <Grid
                     container
-                    className={classes.Name}
+                    className={classes.center}
                     direction="row"
                     spacing={3}
                   >
@@ -496,13 +486,22 @@ const LawyerSettingsPanel = (props) => {
                     spacing={3}
                   >
                     <Grid item><Typography className={classes.SubSettingsText} variant="h6" >Brief description of legal history/experience:</Typography></Grid>
-                    <Grid item>
+                  </Grid>
+                  <Grid
+                    container
+                    className={classes.flexbox}
+                    direction="row"
+                    spacing={3}
+                  >
+                    <Grid item className={classes.fullWidthItem}>
                       <TextField
                         id="outlined-multiline-static"
+                        className={classes.caseTextbox}
                         multiline
+                        size="large"
+                        fullWidth={true}
                         rows={4}
                         variant="outlined"
-                        fullWidth={true}
                         value={updatedBio}
                         onChange={(event) => {
                           setBio(event.target.value)
@@ -512,13 +511,14 @@ const LawyerSettingsPanel = (props) => {
                   </Grid>
                   <Grid
                     container
-                    className={classes.AccountGrid}
+                    className={classes.cameraStuff}
                     direction="row"
+                    alignContent="center"
                     spacing={3}
                   >
-                    <Grid item><Typography className={classes.SubSettingsText} variant="h6" >Profile Picture</Typography></Grid>
+                    <Grid item><Typography className={classes.SubSettingsText} variant="h6" >Profile Picture:</Typography></Grid>
                     <Grid item>
-                      <Avatar img variant="square" className={classes.profilepic} src={props.photoUrl}></Avatar>
+                      <Avatar img variant="square" className={classes.profilePic} src={props.photoUrl}></Avatar>
                     </Grid>
                     <Grid item>
                       <Button className={classes.profileupload} variant="contained" color="primary" component="span">
@@ -570,7 +570,7 @@ const LawyerSettingsPanel = (props) => {
                   </FormControl>
                   <Grid
                     container
-                    className={classes.Name}
+                    className={classes.center}
                     direction="row"
                     spacing={3}
                   >

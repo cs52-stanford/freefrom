@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
   flex: {
     display: "flex",
     flexDirection: "column",
+    marginLeft: "15px",
   },
   backButton: {
     marginTop: "2rem",
@@ -149,7 +150,7 @@ export default function MediaCard(props) {
                 color="textSecondary"
                 component="p"
                 variant="subtitle1"
-                align="center"
+                align="justify"
                 paragraph
               >
                 Bio: {lawyer.bio}

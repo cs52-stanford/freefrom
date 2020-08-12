@@ -160,3 +160,19 @@ body {
 .MuiCardActions-root.MuiCardActions-spacing {
   justify-content: space-between;
 }
+
+.MuiExpansionPanelSummary-content {
+  justify-content: center;
+}
+
+.MuiSelect-root.MuiSelect-select.MuiSelect-selectMenu.MuiInputBase-input.MuiInput-input {
+  color: gray;
+}
+
+.MuiInputBase-root.MuiInput-root.MuiInput-underline.MuiInputBase-formControl.MuiInput-formControl {
+  margin-bottom: 5px;
+}
+
+.MuiGrid-root.MuiGrid-container.MuiGrid-spacing-xs-3 {
+  margin-top: .5rem;
+}
