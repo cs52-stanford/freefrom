@@ -171,7 +171,7 @@ export default function SignIn() {
             </form>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2" to="/">
+                <Link href="#" variant="body2" to="/forgot_password">
                   Forgot password?
                 </Link>
               </Grid>

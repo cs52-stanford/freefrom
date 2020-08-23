@@ -30,6 +30,12 @@
   align-self: center;
 }
 
+.forgot-password {
+  width: 576px;
+  padding-top: 5rem;
+  align-self: center; 
+}
+
 .two {
   display: flex;
   flex-direction: column;

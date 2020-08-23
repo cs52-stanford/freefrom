@@ -8,6 +8,7 @@ import Connections from "./components/connections.js";
 import ConfirmScreen from "./components/confirm_screen.js";
 import DeclineScreen from "./components/decline_screen.js";
 import DeleteScreen from "./components/delete_screen.js";
+import ForgotPassword from "./components/forgot_password.js";
 import Settings from "./components/settings.js";
 import {
   Route,
@@ -24,6 +25,8 @@ import ButtonAppBar from "./components/sign_up_nav_bar";
 
 import "./App.css";
 import matcher from "./components/matcher.js";
+
+import SendEmail from "./index.ts";
 
 function PrivateRoute({
   component: Component,
@@ -315,6 +318,8 @@ class App extends Component {
           console.log(error);
         });
         this.setState({ photoUrl: picture });
+        SendEmail();
+
       } else {
         this.setState({
           authenticated: false,
@@ -341,6 +346,11 @@ class App extends Component {
             <PublicRoute
               path="/sign_in"
               component={SignIn}
+              authenticated={this.state.authenticated}
+            />
+            <PublicRoute
+              path="/forgot_password"
+              component={ForgotPassword}
               authenticated={this.state.authenticated}
             />
             <PrivateRoute
