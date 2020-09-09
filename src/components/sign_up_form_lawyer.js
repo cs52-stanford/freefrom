@@ -96,6 +96,7 @@ export default function LawyerSignUpStepper(props) {
             email: email,
             practiceCounty: practiceCounty,
             experience: experience,
+            interest: interest,
             compensationRequest: compensationRequest,
             numNotifications: numNotifications,
             isLawyer: true,
@@ -124,6 +125,7 @@ export default function LawyerSignUpStepper(props) {
   const [password, setPassword] = React.useState("");
   const [practiceCounty, setPracticeCounty] = React.useState([]);
   const [experience, setExperience] = React.useState("");
+  const [interest, setInterest] = React.useState("");
   const [compensationRequest, setCompensationRequest] = React.useState([]);
   const [photo, setPhoto] = React.useState("");
   const [numNotifications, setNumNotifications] = React.useState("");
@@ -238,6 +240,8 @@ export default function LawyerSignUpStepper(props) {
                   setPracticeCounty={setPracticeCounty}
                   experience={experience}
                   setExperience={setExperience}
+                  interest={interest}
+                  setInterest={setInterest}
                   compensationRequest={compensationRequest}
                   setCompensationRequest={setCompensationRequest}
                   photo={photo}

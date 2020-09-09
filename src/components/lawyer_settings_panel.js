@@ -110,7 +110,6 @@ const counties = [
 ];
 
 const compensations = ["Pro bono", "Sliding scale", "Contingency agreement"];
-const numbers = [1, 2, 3, 4, 5];
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -339,7 +338,7 @@ const LawyerSettingsPanel = (props) => {
   ];
 
   const compensations = ["Pro bono", "Sliding scale", "Contingency agreement"];
-  const numbers = [1, 2, 3, 4, 5];
+  const email = ["Never", "Weekly", "Monthly", "For every new match"];
 
   return (
     <ThemeProvider theme={themeA} className="backgroundColor">
@@ -554,8 +553,7 @@ const LawyerSettingsPanel = (props) => {
                   </FormControl>
                   <FormControl className={classes.formControl} fullWidth={true}>
                     <InputLabel className={classes.InputLabel} id="demo-simple-select-label">
-                      Up to how many notifications would you like to receive about
-                      potential cases each week?
+                      How often, if at all, do you wish to recieve email notifications about new matches?
                         </InputLabel>
                     <Select
                       value={updatedNotifications}
@@ -563,8 +561,8 @@ const LawyerSettingsPanel = (props) => {
                         setNotifications(event.target.value)
                       }}
                     >
-                      {numbers.map((label, index) => (
-                        <MenuItem value={numbers[index]}>{label}</MenuItem>
+                      {email.map((label, index) => (
+                        <MenuItem value={email[index]}>{label}</MenuItem>
                       ))}
                     </Select>
                   </FormControl>

@@ -1,5 +1,6 @@
 import React from "react";
-import { db, auth } from "../services/firebase"
+import { db, auth } from "../services/firebase";
+import sendEmail from "./sendEmail.js";
 
 export default function Matcher(userDetails, userID) {
     if (auth().currentUser && userDetails.isLawyer) {
@@ -10,7 +11,10 @@ export default function Matcher(userDetails, userID) {
                 db.ref("users/" + newUserID).once("value").then(function (snapshot) {
                     if (snapshot.child("isSurvivor").val() === true) {
                         var location = snapshot.child("currentCounty").val();
-                        var finances = snapshot.child("financialCapability").val()
+                        var finances = snapshot.child("financialCapability").val();
+                        var notificationType = snapshot.child("emailNotifications").val();
+                        var name = snapshot.child("name").val();
+                        var email = snapshot.child("email").val();
                         if (userDetails.practiceCounty.includes(location)) {
                             if (finances === "I am able to pay the legal fees") {
                                 db.ref("requests/" + userID + newUserID).set({
@@ -22,6 +26,9 @@ export default function Matcher(userDetails, userID) {
                                     survivorContact: "",
                                     lawyerMessage: "",
                                 });
+                                if (notificationType === "For every new match") {
+                                    sendEmail('survivor', 'For every new match', name, email);
+                                }
                             }
 
                             if (userDetails.compensationRequest.includes("Pro bono")) {
@@ -35,6 +42,9 @@ export default function Matcher(userDetails, userID) {
                                         survivorContact: "",
                                         lawyerMessage: "",
                                     });
+                                    if (notificationType === "For every new match") {
+                                        sendEmail('survivor', 'For every new match', name, email);
+                                    }
                                 }
                             }
 
@@ -53,6 +63,9 @@ export default function Matcher(userDetails, userID) {
                     if (snapshot.child("isLawyer").val() === true) {
                         var locations = snapshot.child("practiceCounty").val();
                         var compensation = snapshot.child("compensationRequest").val();
+                        var notificationType = snapshot.child("numNotifications").val();
+                        var name = snapshot.child("name").val();
+                        var email = snapshot.child("email").val();
 
                         if (locations.includes(userDetails.currentCounty)) {
 
@@ -66,6 +79,9 @@ export default function Matcher(userDetails, userID) {
                                     survivorContact: "",
                                     lawyerMessage: "",
                                 });
+                                if (notificationType === "For every new match") {
+                                    sendEmail('lawyer', 'For every new match', name, email);
+                                }
                             }
 
                             if (compensation.includes("pro bono")) {
@@ -79,6 +95,9 @@ export default function Matcher(userDetails, userID) {
                                         survivorContact: "",
                                         lawyerMessage: "",
                                     });
+                                    if (notificationType === "For every new match") {
+                                        sendEmail('lawyer', 'For every new match', name, email);
+                                    }
                                 }
                             }
 

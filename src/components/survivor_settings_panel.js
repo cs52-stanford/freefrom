@@ -273,7 +273,7 @@ const SurvivorSettingsPanel = (props) => {
   ];
   const times = ["Within 6 months", "Within 1 year", "Over 1 year ago"];
   const weapons = ["Yes", "No", "Not sure"];
-  const email = ["Yes", "No"];
+  const email = ["Never", "Weekly", "Monthly", "For every new match"];
 
   const [updatedName, setName] = React.useState(props.userDetails.name);
   const [updatedEmail, setEmail] = React.useState(props.userDetails.email);
@@ -520,8 +520,8 @@ const SurvivorSettingsPanel = (props) => {
                   </FormControl>
                   <FormControl className={classes.formControl} fullWidth={true}>
                     <InputLabel className={classes.InputLabel} id="demo-simple-select-label">
-                      Do you wish to receive email notifications about new matches?
-                         </InputLabel>
+                      How often, if at all, do you wish to recieve email notifications about new matches?
+                        </InputLabel>
                     <Select
                       value={updatedNotifications}
                       onChange={(event) => {

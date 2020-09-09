@@ -1,3 +1,4 @@
+import cron from 'node-cron';
 import React, { Component } from "react";
 import SignIn from "./components/sign_in.js";
 import SignUp from "./components/sign_up.js";
@@ -24,9 +25,9 @@ import SurvivorSignUpStepper from "./components/sign_up_form_survivor.js";
 import ButtonAppBar from "./components/sign_up_nav_bar";
 
 import "./App.css";
+import sendEmail from "./components/sendEmail.js";
 import matcher from "./components/matcher.js";
 
-import SendEmail from "./index.ts";
 
 function PrivateRoute({
   component: Component,
@@ -149,6 +150,7 @@ async function populateData() {
   let names = [];
   let practiceCounties = [];
   let bios = [];
+  let interests = [];
   let abuseCounties = [];
   let colors = [];
   let currentCounties = [];
@@ -177,6 +179,7 @@ async function populateData() {
         names.push(snapshot.child("name").val());
         practiceCounties.push(snapshot.child("practiceCounty").val());
         bios.push(snapshot.child("experience").val());
+        interests.push(snapshot.child("interest").val());
       });
       await storageRef.child('photos/' + relevantIDs[lawyer]).getDownloadURL().then(function (url) {
         pictures.push(url);
@@ -210,11 +213,12 @@ async function populateData() {
       const name = names[index];
       let counties = practiceCounties[index].map((val, ind) => (ind !== (practiceCounties[index].length - 1) ? val + ", " : val));
       const bio = bios[index];
+      const interest = interests[index];
       const status = statuses[index];
       const userId = relevantIDs[index];
       const declineMessage = declines[index];
       const photo = pictures[index];
-      return { name, counties, bio, status, userId, declineMessage, photo };
+      return { name, counties, bio, interest, status, userId, declineMessage, photo };
     })
   }
   if (isLawyer) {
@@ -223,6 +227,54 @@ async function populateData() {
     return lawyers;
   }
 };
+
+// weekly emails
+cron.schedule('0 0 12 * * 7', () => {
+  console.log('weekly scheduled email thing');
+  db.ref("users/").once("value").then(function (snapshot) {
+    var keys = Object.keys(snapshot.val());
+    for (var i = 0; i < keys.length; i++) {
+      const newUserID = keys[i];
+      db.ref("users/" + newUserID).once("value").then(function (snapshot) {
+        var name = snapshot.child("name").val();
+        var email = snapshot.child("email").val();
+        if (snapshot.child("isLawyer").val()) {
+          if (snapshot.child("numNotifications").val() === "Weekly") {
+            sendEmail('survivor', 'Weekly', name, email);
+          }
+        } else {
+          if (snapshot.child("emailNotifications").val() === "Weekly") {
+            sendEmail('lawyer', 'Weekly', name, email);
+          }
+        }
+      });
+    }
+  });
+});
+
+// monthly emails
+cron.schedule('0 0 12 1 * *', () => {
+  console.log('monthly scheduled email thing');
+  db.ref("users/").once("value").then(function (snapshot) {
+    var keys = Object.keys(snapshot.val());
+    for (var i = 0; i < keys.length; i++) {
+      const newUserID = keys[i];
+      db.ref("users/" + newUserID).once("value").then(function (snapshot) {
+        var name = snapshot.child("name").val();
+        var email = snapshot.child("email").val();
+        if (snapshot.child("isLawyer").val()) {
+          if (snapshot.child("numNotifications").val() === "Monthly") {
+            sendEmail('survivor', 'Monthly', name, email);
+          }
+        } else {
+          if (snapshot.child("emailNotifications").val() === "Monthly") {
+            sendEmail('lawyer', 'Monthly', name, email);
+          }
+        }
+      });
+    }
+  });
+});
 
 class App extends Component {
   constructor(props) {
@@ -318,7 +370,19 @@ class App extends Component {
           console.log(error);
         });
         this.setState({ photoUrl: picture });
-        SendEmail();
+
+        // this.sendEmail();
+
+        // THINGS TO DO:
+        // 1. Make templates for lawyer & survivor weekly, monthly, every match
+        // 2. Make send email function that takes in lawyer/surivor and weekly/monthly/every match props to send appropriate email
+        // 3. Call that function from matcher function if user has selected 'every match' option
+
+        // 4. Call that function from App.js ? when day === 0 or something if user has selected 'weekly' or 'monthly' option
+
+        // * fix lawyer profile formatting
+        // *** add log-in page description/subtitle/something
+        // ******* fix notification options in settings
 
       } else {
         this.setState({

@@ -191,7 +191,7 @@ const ProfileCard = (props) => {
   ];
 
   const compensations = ["Pro bono", "Sliding scale", "Contingency agreement"];
-  const numbers = [1, 2, 3, 4, 5];
+  const notificationOptions = ["Never", "Weekly", "Monthly", "For every new match"];
   const [questionNumber, setQuestionNumber] = React.useState(1);
   const [bar, setBar] = React.useState("");
 
@@ -201,6 +201,9 @@ const ProfileCard = (props) => {
   const handleExperienceChange = (event) => {
     props.setExperience(event.target.value);
   };
+  const handleInterestChange = (event) => {
+    props.setInterest(event.target.value);
+  }
   const handleBarChange = (event) => {
     setBar(event.target.value);
   };
@@ -285,14 +288,24 @@ const ProfileCard = (props) => {
               last question
             </Button>
             <h5>Question {questionNumber} of 5 </h5>
-            <p>Brief description of legal history/experience:</p>
+            <h5>The following information will be used to help survivors determine who they would want to represent them.</h5>
+            <p>Brief description of relevant legal history/experience:</p>
             <TextField
               id="outlined-multiline-static"
               multiline
-              rows={4}
+              rows={3}
               variant="outlined"
               fullWidth={true}
               onChange={handleExperienceChange}
+            />
+            <p>Why you're interested in working with domestic abuse survivors:</p>
+            <TextField
+              id="outlined-multiline-static"
+              multiline
+              rows={3}
+              variant="outlined"
+              fullWidth={true}
+              onChange={handleInterestChange}
             />
             <p>Bar number:</p>
             <TextField
@@ -423,15 +436,14 @@ const ProfileCard = (props) => {
             <h5>Question {questionNumber} of 5 </h5>
             <FormControl className={classes.formControl} fullWidth={true}>
               <Typography>
-                Up to how many notifications would you like to receive about
-                potential cases each week?
+                How often, if at all, do you wish to recieve email notifications about new matches?
               </Typography>
               <Select
                 value={props.numNotifications}
                 onChange={handleNumNotificationsChange}
               >
-                {numbers.map((label, index) => (
-                  <MenuItem value={numbers[index]}>{label}</MenuItem>
+                {notificationOptions.map((label, index) => (
+                  <MenuItem value={notificationOptions[index]}>{label}</MenuItem>
                 ))}
               </Select>
             </FormControl>

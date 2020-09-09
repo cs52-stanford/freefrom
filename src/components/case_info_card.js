@@ -202,7 +202,7 @@ const CaseCard = (props) => {
   ];
   const times = ["Within 6 months", "Within 1 year", "Over 1 year ago"];
   const weapons = ["Yes", "No", "Not sure"];
-  const email = ["Yes", "No"];
+  const email = ["Never", "Weekly", "Monthly", "For every new match"];
   const [color, setColor] = useState("");
   const [questionNumber, setQuestionNumber] = React.useState(1);
 
@@ -473,7 +473,7 @@ const CaseCard = (props) => {
             <Typography>Question {questionNumber} of 7 </Typography>
             <FormControl className={classes.formControl} fullWidth={true}>
               <Typography>
-                Do you wish to recieve email notifications about new matches?
+                How often, if at all, do you wish to recieve email notifications about new matches?
               </Typography>
               <Select
                 value={props.emailNotifications}

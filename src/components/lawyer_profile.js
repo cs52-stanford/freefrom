@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
   large: {
     // width: theme.spacing(14),
     // height: theme.spacing(14),
-    width: "50%",
+    width: "70em",
     marginLeft: "auto",
     marginRight: "auto",
     marginBottom: "1rem",
@@ -154,6 +154,16 @@ export default function MediaCard(props) {
                 paragraph
               >
                 Bio: {lawyer.bio}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                component="p"
+                variant="subtitle1"
+                align="justify"
+                paragraph
+              >
+                Why he/she is interested in working with survivors: {lawyer.interest}
               </Typography>
             </div>
           </CardContent>
