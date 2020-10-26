@@ -7,7 +7,7 @@
 .baackground {
   background-color: #f1f1f1;
   width: 100%;
-  height: 100vh;  
+  height: 100vh;
 }
 
 .backgroundColor {
@@ -25,6 +25,16 @@
   font-family: "Proxima Nova Rg", Roboto, Helvetica, Arial, sans-serif;
 }
 
+.subtitle-text {
+  font-size: 125%;
+  font-family: sans-serif;
+  font-weight: 600;
+  font-style: italic;
+  margin: 0;
+  color: #1c8586;
+  text-align: center;
+}
+
 .one {
   width: 576px;
   align-self: center;
@@ -33,7 +43,7 @@
 .forgot-password {
   width: 576px;
   padding-top: 5rem;
-  align-self: center; 
+  align-self: center;
 }
 
 .two {

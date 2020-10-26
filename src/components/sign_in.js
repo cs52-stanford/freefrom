@@ -25,6 +25,7 @@ import {
 import { signin } from "../services/auth";
 import { auth, db } from "../services/firebase";
 import SignUp from "./sign_up.js";
+import "./sign_up.css";
 
 const backgroundStyle = {
   height: "100%",
@@ -113,8 +114,8 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={themeA}>
-      <Container style={backgroundStyle}>
-        <Container component="main" maxWidth="xs">
+      <Container style={backgroundStyle} maxWidth={false}>
+        <Container component="main" maxWidth="sm">
           <CssBaseline />
           <div className={classes.paper}>
             <Avatar
@@ -122,6 +123,7 @@ export default function SignIn() {
               src={Logo}
               variant="square"
             ></Avatar>
+            <p className="subtitle-text"> Connecting domestic violence survivors with lawyers </p>
             <form className={classes.form} noValidate>
               <TextField
                 variant="outlined"
@@ -171,12 +173,12 @@ export default function SignIn() {
             </form>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2" to="/forgot_password">
+                <Link style={{ color: "#1c8586" }} href="#" variant="body2" to="/forgot_password">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2" to="/sign_up">
+                <Link style={{ color: "#1c8586" }} href="#" variant="body2" to="/sign_up">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
