@@ -92,8 +92,8 @@ export default function SurvivorSignUpStepper(props) {
             color: color,
             isLawyer: false,
             isSurvivor: true,
+            firstLogin: true,
           });
-          // figure out photo
           db.ref("users/" + auth().currentUser.uid).once("value").then(function (snapshot) {
             matcher(snapshot.val(), auth().currentUser.uid);
           });

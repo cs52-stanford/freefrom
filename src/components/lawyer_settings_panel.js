@@ -135,7 +135,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
   },
   SettingsText: {
-    color: "#ff6f00",
+    color: "#ef6548",
   },
   SubSettingsText: {
     color: "#000000",
@@ -205,9 +205,6 @@ const LawyerSettingsPanel = (props) => {
   const [updatedPhoto, setPhoto] = React.useState(props.photoUrl);
   const [updatedCompensation, setCompensation] = React.useState(props.userDetails.compensationRequest);
   const [updatedNotifications, setNotifications] = React.useState(props.userDetails.numNotifications);
-
-  console.log("photo URL: ", props.photoUrl);
-  console.log("photo variable: ", updatedPhoto);
 
   const handleChange = (panel) => (event, isExpanded) => {
     setExpanded(isExpanded ? panel : false);

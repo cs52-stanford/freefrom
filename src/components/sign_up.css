@@ -102,7 +102,7 @@
   line-height: 1.5;
   cursor: pointer;
   text-transform: uppercase;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   display: block;
   font-weight: 300;
   text-align: center;
@@ -129,7 +129,7 @@
   line-height: 1.5;
   cursor: pointer;
   text-transform: uppercase;
-  font-size: 0.85rem;
+  font-size: 0.95rem;
   display: block;
   font-weight: 300;
   text-align: center;
@@ -196,6 +196,20 @@
 .spacing {
   padding-top: 1rem;
   padding-bottom: .25rem;
+  font-family: sans-serif;
+}
+
+.subheader-text {
+  font-family: sans-serif;
+}
+
+.first-question-text {
+  padding-bottom: 1em;
+}
+
+.question-text {
+  padding-bottom: 1em;
+  padding-top: 1em;
 }
 
 .spacing2 {

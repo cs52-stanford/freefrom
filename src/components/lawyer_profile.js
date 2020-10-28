@@ -29,7 +29,7 @@ const themeA = createMuiTheme({
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 600,
+    maxWidth: 800,
     minWidth: "30rem",
     padding: "1rem",
     paddingTop: 0,
@@ -39,12 +39,11 @@ const useStyles = makeStyles((theme) => ({
     height: 140,
   },
   large: {
-    // width: theme.spacing(14),
-    // height: theme.spacing(14),
     width: "70em",
     marginLeft: "auto",
     marginRight: "auto",
-    marginBottom: "1rem",
+    alignSelf: "center",
+    maxWidth: "350px",
   },
   contain: {
     display: "flex",
@@ -60,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   flex: {
     display: "flex",
     flexDirection: "column",
-    marginLeft: "15px",
+    marginLeft: "25px",
   },
   backButton: {
     marginTop: "2rem",
@@ -195,4 +194,3 @@ export default function MediaCard(props) {
     </ThemeProvider>
   );
 }
-

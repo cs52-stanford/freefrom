@@ -142,11 +142,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
   },
   SettingsText: {
-    color: "#ff6f00",
+    color: "#ef6548",
   },
   SubSettingsText: {
     color: "#000000",
     flexGrow: 1,
+    marginLeft: ".5em",
   },
   caseTextbox: {
     flexGrow: 3,

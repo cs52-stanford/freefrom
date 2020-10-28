@@ -132,7 +132,7 @@ export default function LawyerSignUpStepper(props) {
 
   return (
     <ThemeProvider theme={themeA}>
-      <div>
+      <div className="background">
         <NavBar></NavBar>
         <Stepper
           activeStep={activeStep}

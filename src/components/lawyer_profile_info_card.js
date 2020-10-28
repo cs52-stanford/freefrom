@@ -288,8 +288,8 @@ const ProfileCard = (props) => {
               last question
             </Button>
             <h5>Question {questionNumber} of 5 </h5>
-            <h5>The following information will be used to help survivors determine who they would want to represent them.</h5>
-            <p>Brief description of relevant legal history/experience:</p>
+            <h5 className="subheader-text">The following information will be used to help survivors determine who they would want to represent them.</h5>
+            <Typography className="first-question-text">Brief description of relevant legal history/experience:</Typography>
             <TextField
               id="outlined-multiline-static"
               multiline
@@ -298,7 +298,7 @@ const ProfileCard = (props) => {
               fullWidth={true}
               onChange={handleExperienceChange}
             />
-            <p>Why you're interested in working with domestic abuse survivors:</p>
+            <Typography className="question-text">Why you're interested in working with domestic abuse survivors:</Typography>
             <TextField
               id="outlined-multiline-static"
               multiline
@@ -307,7 +307,7 @@ const ProfileCard = (props) => {
               fullWidth={true}
               onChange={handleInterestChange}
             />
-            <p>Bar number:</p>
+            <Typography className="question-text">Bar number:</Typography>
             <TextField
               id="outlined-multiline-static"
               rows={1}

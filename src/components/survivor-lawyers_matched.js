@@ -83,6 +83,18 @@ export default function Album(props) {
   console.log(props.unsentRequests);
   const lawyers = props.unsentRequests;
 
+  let firstLogin = false;
+
+  db.ref("users/" + auth().currentUser.uid).once("value").then(function (snapshot) {
+      if (snapshot.child("firstLogin").val() === true) {
+        console.log("first login!");
+        db.ref("users/" + auth().currentUser.uid).set({ firstLogin: false }).then(() => window.location.reload(true));
+      } else {
+        console.log("not first login");
+      }
+  });
+
+
   return (
     <ThemeProvider theme={themeA}>
       <React.Fragment>

@@ -5,7 +5,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-/* import Link from "@material-ui/core/Link";*/
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -14,7 +13,7 @@ import Container from "@material-ui/core/Container";
 import Logo from "./counselCompassLogo.png";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
-/*import { withTheme } from "styled-components";*/
+
 import {
   Route,
   BrowserRouter as Router,
@@ -56,7 +55,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" to="/">
+      <Link style={{ textDecoration: "none", color: "rgba(0, 0, 0, 0.54)" }} color="inherit" to="/">
         CounselCompass
       </Link>{" "}
       {new Date().getFullYear()}
@@ -114,81 +113,83 @@ export default function SignIn() {
 
   return (
     <ThemeProvider theme={themeA}>
-      <Container style={backgroundStyle} maxWidth={false}>
-        <Container component="main" maxWidth="sm">
-          <CssBaseline />
-          <div className={classes.paper}>
-            <Avatar
-              className={classes.box}
-              src={Logo}
-              variant="square"
-            ></Avatar>
-            <p className="subtitle-text"> Connecting domestic violence survivors with lawyers </p>
-            <form className={classes.form} noValidate>
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-              <TextField
-                variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              <Grid container className={classes.check}>
+      <div className="background">
+        <Container style={backgroundStyle} maxWidth={false}>
+          <Container component="main" maxWidth="sm">
+            <CssBaseline />
+            <div className={classes.paper}>
+              <Avatar
+                className={classes.box}
+                src={Logo}
+                variant="square"
+              ></Avatar>
+              <p className="subtitle-text"> Connecting domestic violence survivors with lawyers </p>
+              <form className={classes.form} noValidate>
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  autoComplete="email"
+                  autoFocus
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <TextField
+                  variant="outlined"
+                  margin="normal"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <Grid container className={classes.check}>
+                  <Grid item>
+                    <FormControlLabel
+                      control={<Checkbox value="remember" color="primary" />}
+                      label="Remember me"
+                    />
+                  </Grid>
+                </Grid>
+
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+                  onClick={handleSubmit}
+                >
+                  Sign In
+                </Button>
+              </form>
+              <Grid container>
+                <Grid item xs>
+                  <Link style={{ color: "#1c8586" }} href="#" variant="body2" to="/forgot_password">
+                    Forgot password?
+                  </Link>
+                </Grid>
                 <Grid item>
-                  <FormControlLabel
-                    control={<Checkbox value="remember" color="primary" />}
-                    label="Remember me"
-                  />
+                  <Link style={{ color: "#1c8586" }} href="#" variant="body2" to="/sign_up">
+                    {"Don't have an account? Sign Up"}
+                  </Link>
                 </Grid>
               </Grid>
-
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-                onClick={handleSubmit}
-              >
-                Sign In
-              </Button>
-            </form>
-            <Grid container>
-              <Grid item xs>
-                <Link style={{ color: "#1c8586" }} href="#" variant="body2" to="/forgot_password">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link style={{ color: "#1c8586" }} href="#" variant="body2" to="/sign_up">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </div>
-          <Box mt={8}>
-            <Copyright />
-          </Box>
+            </div>
+            <Box mt={8}>
+              <Copyright />
+            </Box>
+          </Container>
         </Container>
-      </Container>
+      </div>
     </ThemeProvider>
   );
 }
