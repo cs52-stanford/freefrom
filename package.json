@@ -13,7 +13,7 @@
     "auto-bind": "^4.0.0",
     "emailjs-com": "^2.6.3",
     "eslint-plugin-react-hooks": "^4.0.2",
-    "firebase": "^7.14.5",
+    "firebase": "^10.9.0",
     "material-auto-rotating-carousel": "^3.0.2",
     "mdbreact": "^4.26.1",
     "node-cron": "^2.0.3",
